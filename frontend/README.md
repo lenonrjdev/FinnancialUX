@@ -13,6 +13,7 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - Fase 7: Categorias e orçamentos mensais
 - Fase 8: Metas e reservas financeiras
 - Fase 9: Dívidas, empréstimos e parcelamentos
+- Fase 10: Assinaturas e cobranças recorrentes
 
 ## Rotas implementadas
 
@@ -26,6 +27,7 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - `/orcamentos`
 - `/metas`
 - `/dividas`
+- `/assinaturas`
 
 As demais rotas da sidebar continuam preparadas como páginas temporárias até suas respectivas fases.
 

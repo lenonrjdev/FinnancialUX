@@ -1,3 +1,4 @@
+import { initialSubscriptions } from "@/data/assinaturas";
 import { initialCardInvoices, initialCreditCards } from "@/data/cartoes";
 import { initialPayables } from "@/data/contas-a-pagar";
 import { initialReceivables } from "@/data/recebimentos";
@@ -61,6 +62,23 @@ const invoiceEvents: FinancialCalendarEvent[] = initialCardInvoices.map((invoice
   };
 });
 
+
+const subscriptionEvents: FinancialCalendarEvent[] = initialSubscriptions
+  .filter((item) => item.status === "active" || item.status === "trial")
+  .map((item) => ({
+    id: `calendar-${item.id}`,
+    title: item.name,
+    type: "subscription",
+    status: item.nextChargeDate < calendarReferenceDate ? "overdue" : "scheduled",
+    amount: item.amount,
+    date: item.nextChargeDate,
+    category: "Assinaturas",
+    accountId: item.accountId,
+    recurrence: item.billingCycle === "weekly" ? "weekly" : item.billingCycle === "annual" ? "yearly" : "monthly",
+    source: "manual",
+    notes: item.notes,
+  }));
+
 const planningEvents: FinancialCalendarEvent[] = [
   {
     id: "calendar-transferencia-reserva-julho",
@@ -87,35 +105,12 @@ const planningEvents: FinancialCalendarEvent[] = [
     recurrence: "monthly",
     source: "manual",
   },
-  {
-    id: "calendar-assinatura-streaming",
-    title: "Streaming de filmes",
-    type: "subscription",
-    status: "completed",
-    amount: 39.9,
-    date: "2026-07-18",
-    category: "Assinaturas",
-    accountId: "nubank",
-    recurrence: "monthly",
-    source: "manual",
-  },
-  {
-    id: "calendar-assinatura-nuvem-agosto",
-    title: "Armazenamento em nuvem",
-    type: "subscription",
-    status: "scheduled",
-    amount: 34.9,
-    date: "2026-08-02",
-    category: "Assinaturas",
-    accountId: "nubank",
-    recurrence: "monthly",
-    source: "manual",
-  },
 ];
 
 export const initialCalendarEvents: FinancialCalendarEvent[] = [
   ...payableEvents,
   ...receivableEvents,
   ...invoiceEvents,
+  ...subscriptionEvents,
   ...planningEvents,
 ].sort((a, b) => a.date.localeCompare(b.date));
