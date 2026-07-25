@@ -141,6 +141,10 @@ export function InvestmentIcon(props: IconProps) {
   return <svg {...base} {...props}><path d="M4 20V10M10 20V14M16 20V6M22 20H2"/><path d="m5 7 5-3 5 2 5-4"/></svg>;
 }
 
+export function ChevronLeftIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="m15 18-6-6 6-6"/></svg>;
+}
+
 export function ChevronRightIcon(props: IconProps) {
   return <svg {...base} {...props}><path d="m9 18 6-6-6-6"/></svg>;
 }
