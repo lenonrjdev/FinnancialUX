@@ -9,6 +9,13 @@ const percentageFormatter = new Intl.NumberFormat("pt-BR", {
   maximumFractionDigits: 1,
 });
 
+const shortDateFormatter = new Intl.DateTimeFormat("pt-BR", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
 export function formatCurrency(value: number): string {
   return currencyFormatter.format(value);
 }
@@ -29,4 +36,8 @@ export function formatSignedCurrency(value: number): string {
 
 export function formatPercentage(value: number): string {
   return `${percentageFormatter.format(value)}%`;
+}
+
+export function formatShortDate(value: string): string {
+  return shortDateFormatter.format(new Date(`${value}T12:00:00Z`));
 }

@@ -1,25 +1,23 @@
-# Dashboard Financeira Pessoal — Fase 1
+# Dashboard Financeira Pessoal
 
-Projeto completo em Next.js, React, TypeScript e Tailwind CSS.
+Projeto em Next.js, React, TypeScript e Tailwind CSS para organização financeira pessoal.
 
-## Rotas
+## Fase atual
 
-- `/visao-geral`: dashboard implementada na Fase 1.
-- `/lancamentos`, `/contas`, `/cartoes`, `/contas-a-pagar`, `/recebimentos`, `/calendario`, `/orcamentos`, `/metas`, `/dividas`, `/assinaturas`, `/relatorios` e `/configuracoes`: módulos preparados com telas temporárias.
+**Fase 2 — Lançamentos**
 
-## Organização
+A aplicação já possui:
 
-```text
-app/                         páginas e rotas
-components/dashboard/        estrutura compartilhada da dashboard
-components/visao-geral/      componentes exclusivos da visão geral
-components/modulos/          componentes das telas temporárias dos módulos
-components/shared/           elementos reutilizáveis
-content/                     textos fixos, títulos, labels e navegação
-data/                        dados demonstrativos que serão substituídos pelo backend
-lib/                         funções utilitárias
-types/                       tipos compartilhados
-```
+- Visão geral financeira responsiva;
+- Sidebar com todos os módulos planejados;
+- Módulo de lançamentos com receitas, despesas e transferências;
+- Resumo financeiro do mês;
+- Busca e filtros funcionais;
+- Tabela desktop e cards para celular;
+- Formulário de novo lançamento com atualização imediata da interface;
+- Conteúdo fixo separado em `/content`;
+- Dados demonstrativos separados em `/data`;
+- Componentes organizados por página.
 
 ## Executar
 
@@ -28,4 +26,12 @@ npm install
 npm run dev
 ```
 
-A rota `/` redireciona automaticamente para `/visao-geral`.
+Acesse `http://localhost:3000`.
+
+## Validações
+
+```bash
+npm run typecheck
+npm run lint
+npm run build
+```

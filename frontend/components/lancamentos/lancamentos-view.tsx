@@ -1,0 +1,250 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { NewTransactionDialog } from "@/components/lancamentos/new-transaction-dialog";
+import {
+  TransactionsFilters,
+  type TransactionsFilterState,
+} from "@/components/lancamentos/transactions-filters";
+import { TransactionsHeading } from "@/components/lancamentos/transactions-heading";
+import { TransactionsList } from "@/components/lancamentos/transactions-list";
+import { TransactionsSummary } from "@/components/lancamentos/transactions-summary";
+import { CheckIcon } from "@/components/shared/icons";
+import { transactionsContent } from "@/content/lancamentos";
+import { transactionsData } from "@/data/lancamentos";
+import type {
+  FinancialTransaction,
+  NewTransactionInput,
+} from "@/types/lancamentos";
+
+const defaultFilters: TransactionsFilterState = {
+  query: "",
+  type: "all",
+  period: "current-month",
+  status: "all",
+  account: "all",
+};
+
+export default function LancamentosView() {
+  const [transactions, setTransactions] =
+    useState<FinancialTransaction[]>(transactionsData);
+  const [filters, setFilters] = useState(defaultFilters);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+
+  useEffect(() => {
+    if (window.location.hash === "#novo-lancamento") {
+      setDialogOpen(true);
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
+
+  const summary = useMemo(() => {
+    const currentMonthTransactions = transactions.filter((transaction) =>
+      transaction.date.startsWith("2026-07"),
+    );
+    const completed = currentMonthTransactions.filter(
+      (transaction) => transaction.status === "completed",
+    );
+    const income = completed
+      .filter((transaction) => transaction.type === "income")
+      .reduce((total, transaction) => total + transaction.amount, 0);
+    const expense = completed
+      .filter((transaction) => transaction.type === "expense")
+      .reduce((total, transaction) => total + transaction.amount, 0);
+    const pendingTransactions = transactions.filter(
+      (transaction) => transaction.status !== "completed",
+    );
+
+    return {
+      income,
+      expense,
+      result: income - expense,
+      pending: pendingTransactions.reduce(
+        (total, transaction) => total + transaction.amount,
+        0,
+      ),
+      pendingCount: pendingTransactions.length,
+    };
+  }, [transactions]);
+
+  const accounts = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          transactions.flatMap((transaction) => [
+            transaction.account,
+            ...(transaction.destinationAccount
+              ? [transaction.destinationAccount]
+              : []),
+          ]),
+        ),
+      ).sort((a, b) => a.localeCompare(b, "pt-BR")),
+    [transactions],
+  );
+
+  const filteredTransactions = useMemo(() => {
+    const normalizedQuery = filters.query.trim().toLocaleLowerCase("pt-BR");
+    const lastThirtyDaysStart = "2026-06-25";
+
+    return transactions
+      .filter((transaction) => {
+        if (
+          normalizedQuery &&
+          ![
+            transaction.description,
+            transaction.category,
+            transaction.account,
+            transaction.destinationAccount ?? "",
+          ]
+            .join(" ")
+            .toLocaleLowerCase("pt-BR")
+            .includes(normalizedQuery)
+        ) {
+          return false;
+        }
+
+        if (filters.type !== "all" && transaction.type !== filters.type) {
+          return false;
+        }
+
+        if (filters.status !== "all" && transaction.status !== filters.status) {
+          return false;
+        }
+
+        if (
+          filters.account !== "all" &&
+          transaction.account !== filters.account &&
+          transaction.destinationAccount !== filters.account
+        ) {
+          return false;
+        }
+
+        if (
+          filters.period === "current-month" &&
+          !transaction.date.startsWith("2026-07")
+        ) {
+          return false;
+        }
+
+        if (
+          filters.period === "last-30-days" &&
+          transaction.date < lastThirtyDaysStart
+        ) {
+          return false;
+        }
+
+        return true;
+      })
+      .sort((a, b) => b.date.localeCompare(a.date));
+  }, [filters, transactions]);
+
+  function showFeedback(message: string) {
+    setFeedbackMessage(message);
+    window.setTimeout(() => setFeedbackMessage(""), 2800);
+  }
+
+  function createTransaction(input: NewTransactionInput) {
+    setTransactions((current) => [
+      { ...input, id: `transaction-${Date.now()}` },
+      ...current,
+    ]);
+    showFeedback(transactionsContent.dialog.success);
+  }
+
+  function duplicateTransaction(transaction: FinancialTransaction) {
+    setTransactions((current) => [
+      {
+        ...transaction,
+        id: `transaction-copy-${Date.now()}`,
+        description: `${transaction.description} (cópia)`,
+      },
+      ...current,
+    ]);
+    showFeedback(transactionsContent.dialog.duplicateSuccess);
+  }
+
+  function deleteTransaction(transactionId: string) {
+    setTransactions((current) =>
+      current.filter((transaction) => transaction.id !== transactionId),
+    );
+    showFeedback(transactionsContent.dialog.deleteSuccess);
+  }
+
+  function exportTransactions() {
+    const columns = [
+      "Descrição",
+      "Tipo",
+      "Categoria",
+      "Conta",
+      "Conta de destino",
+      "Forma de pagamento",
+      "Data",
+      "Status",
+      "Valor",
+    ];
+    const escapeCell = (value: string | number) =>
+      `"${String(value).replaceAll('"', '""')}"`;
+    const rows = filteredTransactions.map((transaction) =>
+      [
+        transaction.description,
+        transactionsContent.types[transaction.type],
+        transaction.category,
+        transaction.account,
+        transaction.destinationAccount ?? "",
+        transaction.paymentMethod,
+        transaction.date,
+        transactionsContent.statuses[transaction.status],
+        transaction.amount.toFixed(2).replace(".", ","),
+      ]
+        .map(escapeCell)
+        .join(";"),
+    );
+    const csv = `\uFEFF${columns.map(escapeCell).join(";")}\n${rows.join("\n")}`;
+    const url = URL.createObjectURL(
+      new Blob([csv], { type: "text/csv;charset=utf-8" }),
+    );
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "lancamentos-financeiros.csv";
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+    showFeedback(transactionsContent.dialog.exportSuccess);
+  }
+
+  return (
+    <div className="transactions-page">
+      <TransactionsHeading
+        onCreate={() => setDialogOpen(true)}
+        onExport={exportTransactions}
+      />
+      <TransactionsSummary values={summary} />
+      <TransactionsFilters
+        filters={filters}
+        accounts={accounts}
+        onChange={setFilters}
+        onClear={() => setFilters(defaultFilters)}
+      />
+      <TransactionsList
+        transactions={filteredTransactions}
+        onDuplicate={duplicateTransaction}
+        onDelete={deleteTransaction}
+      />
+
+      <NewTransactionDialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        onCreate={createTransaction}
+      />
+
+      {feedbackMessage && (
+        <div className="transaction-feedback" role="status">
+          <CheckIcon />
+          {feedbackMessage}
+        </div>
+      )}
+    </div>
+  );
+}

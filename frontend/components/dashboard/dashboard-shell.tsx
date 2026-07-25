@@ -79,10 +79,10 @@ export default function DashboardShell({ children }: { children: React.ReactNode
           </div>
 
           <div className="top-actions">
-            <button className="new-entry-button" type="button">
+            <Link className="new-entry-button" href="/lancamentos#novo-lancamento">
               <PlusIcon />
               {dashboardContent.topbar.newEntry}
-            </button>
+            </Link>
             <button
               className="icon-button"
               type="button"
@@ -96,14 +96,14 @@ export default function DashboardShell({ children }: { children: React.ReactNode
         <header className="mobile-header">
           <Brand />
           <div className="mobile-header-actions">
-            <button
+            <Link
               className="mobile-entry-button"
-              type="button"
+              href="/lancamentos#novo-lancamento"
               aria-label={dashboardContent.topbar.newEntry}
             >
               <PlusIcon />
               <span>{dashboardContent.topbar.mobileNewEntry}</span>
-            </button>
+            </Link>
             <button
               className="icon-button"
               type="button"

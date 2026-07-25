@@ -104,3 +104,27 @@ export function MoreIcon(props: IconProps) {
 export function ShoppingBagIcon(props: IconProps) {
   return <svg {...base} {...props}><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>;
 }
+
+export function SearchIcon(props: IconProps) {
+  return <svg {...base} {...props}><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>;
+}
+
+export function DownloadIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>;
+}
+
+export function CloseIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="m6 6 12 12M18 6 6 18"/></svg>;
+}
+
+export function ArrowRightLeftIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M7 7h13"/><path d="m16 3 4 4-4 4"/><path d="M17 17H4"/><path d="m8 21-4-4 4-4"/></svg>;
+}
+
+export function CopyIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>;
+}
+
+export function TrashIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V4h6v3"/></svg>;
+}
