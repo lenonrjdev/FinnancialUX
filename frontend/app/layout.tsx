@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
+import { metadataContent } from "@/content/metadata";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Whale Loans Dashboard",
-  description: "Replica responsiva da dashboard Whale Loans",
-};
+export const metadata: Metadata = metadataContent;
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body>{children}</body>
     </html>
   );

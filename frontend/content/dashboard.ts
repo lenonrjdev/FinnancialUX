@@ -1,0 +1,56 @@
+import type { NavigationGroup } from "@/types/navigation";
+
+export const dashboardNavigation: NavigationGroup[] = [
+  {
+    label: "Organização",
+    items: [
+      { label: "Visão geral", href: "/visao-geral", icon: "dashboard" },
+      { label: "Lançamentos", href: "/lancamentos", icon: "transactions" },
+      { label: "Contas", href: "/contas", icon: "accounts" },
+      { label: "Cartões", href: "/cartoes", icon: "credit-card" },
+      { label: "Contas a pagar", href: "/contas-a-pagar", icon: "bills" },
+      { label: "Recebimentos", href: "/recebimentos", icon: "income" },
+    ],
+  },
+  {
+    label: "Planejamento",
+    items: [
+      { label: "Calendário", href: "/calendario", icon: "calendar" },
+      { label: "Orçamentos", href: "/orcamentos", icon: "budget" },
+      { label: "Metas", href: "/metas", icon: "target" },
+      { label: "Dívidas", href: "/dividas", icon: "debt" },
+      { label: "Assinaturas", href: "/assinaturas", icon: "subscription" },
+    ],
+  },
+  {
+    label: "Análises",
+    items: [
+      { label: "Relatórios", href: "/relatorios", icon: "reports" },
+      { label: "Configurações", href: "/configuracoes", icon: "settings" },
+    ],
+  },
+];
+
+export const dashboardContent = {
+  brand: {
+    name: "Finanças",
+    homeAriaLabel: "Ir para a visão geral",
+  },
+  accessibility: {
+    desktopNavigation: "Navegação principal",
+    mobileNavigation: "Navegação móvel",
+    openNavigation: "Abrir navegação",
+    closeNavigation: "Fechar navegação",
+    theme: "Alternar tema",
+  },
+  topbar: {
+    context: "Controle financeiro pessoal",
+    newEntry: "Novo lançamento",
+    mobileNewEntry: "Lançamento",
+  },
+  footer: {
+    copyright: "© 2026 Finanças pessoais",
+    privacy: "Dados privados",
+    personalUse: "Uso pessoal",
+  },
+} as const;
