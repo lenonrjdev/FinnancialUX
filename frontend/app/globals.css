@@ -4695,3 +4695,1087 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+/* Fase 5 — Contas a pagar e recebimentos */
+
+.financial-management-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.financial-management-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+
+.financial-management-heading > div {
+  min-width: 0;
+}
+
+.financial-management-heading h1 {
+  margin: 0;
+  font-size: clamp(27px, 2vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.financial-management-heading p {
+  max-width: 690px;
+  margin: 10px 0 0;
+  color: #9b99a1;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.commitment-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(250px, 1.25fr) repeat(4, minmax(145px, 0.72fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.commitment-summary-card {
+  min-width: 0;
+  min-height: 154px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.commitment-summary-card.featured {
+  border-color: #12111b;
+  background: #12111b;
+  color: #fff;
+}
+
+.commitment-summary-card.income-featured {
+  background: #15141d;
+}
+
+.commitment-summary-card-top {
+  min-height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.commitment-summary-icon {
+  width: 31px;
+  height: 31px;
+  border-radius: 6px;
+  background: #f6f5f7;
+  color: #312f38;
+  display: grid;
+  place-items: center;
+}
+
+.featured .commitment-summary-icon {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.commitment-summary-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.commitment-alert-badge {
+  min-width: 24px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 20px;
+  background: #f8eceb;
+  color: #945955;
+  display: grid;
+  place-items: center;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.commitment-summary-card > span {
+  color: #9d9ba3;
+  font-size: 9px;
+}
+
+.commitment-summary-card.featured > span {
+  color: #8c8994;
+}
+
+.commitment-summary-card > strong {
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: clamp(17px, 1.35vw, 22px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.commitment-summary-card > small {
+  margin-top: auto;
+  padding-top: 17px;
+  border-top: 1px solid #f1f0f2;
+  color: #aaa8af;
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.commitment-summary-card.featured > small {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  color: #777580;
+}
+
+.commitment-filters {
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  display: grid;
+  grid-template-columns: minmax(230px, 1.1fr) minmax(520px, 2fr) auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.commitment-filter-selects {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(105px, 1fr));
+  gap: 9px;
+}
+
+.commitment-filter-selects label {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.commitment-filter-selects label > span {
+  color: #9d9ba3;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.commitment-filter-selects select {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: #34323b;
+  outline: 0;
+  font-size: 9px;
+}
+
+.commitment-filter-selects select:focus {
+  border-color: #8d8a94;
+}
+
+.commitment-workspace-grid {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(285px, 0.55fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.commitment-list-card,
+.commitment-insight-panel {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.commitment-list-header {
+  min-height: 82px;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.commitment-list-header > div {
+  min-width: 0;
+}
+
+.commitment-list-header h2 {
+  margin: 5px 0 0;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+}
+
+.commitment-list-header > span {
+  color: #aaa8af;
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.commitment-table-wrap {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.commitment-table {
+  width: 100%;
+  min-width: 940px;
+  border-collapse: collapse;
+}
+
+.commitment-table th {
+  height: 43px;
+  padding: 0 13px;
+  border-bottom: 1px solid var(--line);
+  background: #fbfafb;
+  color: #aaa8af;
+  text-align: left;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.commitment-table th:first-child,
+.commitment-table td:first-child {
+  padding-left: 20px;
+}
+
+.commitment-table th:last-child,
+.commitment-table td:last-child {
+  padding-right: 20px;
+}
+
+.commitment-table td {
+  height: 72px;
+  padding: 10px 13px;
+  border-bottom: 1px solid #f0eff2;
+  color: #66646d;
+  font-size: 8px;
+  vertical-align: middle;
+}
+
+.commitment-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.commitment-table tbody tr:hover td {
+  background: #fdfcfd;
+}
+
+.commitment-description-cell {
+  min-width: 185px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.commitment-row-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #f7f1ee;
+  color: #7c5d50;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+}
+
+.commitment-row-icon.income {
+  background: #eff6f1;
+  color: #4f755d;
+}
+
+.commitment-row-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.commitment-description-cell > div {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.commitment-description-cell strong {
+  max-width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #2a2831;
+  font-size: 9px;
+}
+
+.commitment-description-cell span {
+  max-width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #aaa8af;
+  font-size: 7px;
+}
+
+.commitment-date-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.commitment-date-cell svg {
+  width: 12px;
+  height: 12px;
+  color: #a09ea6;
+}
+
+.commitment-status-badge {
+  min-width: 62px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.commitment-status-badge.pending {
+  background: #f7f2e8;
+  color: #846839;
+}
+
+.commitment-status-badge.overdue {
+  background: #f9eceb;
+  color: #985852;
+}
+
+.commitment-status-badge.partial {
+  background: #eeeef7;
+  color: #5e5d82;
+}
+
+.commitment-status-badge.paid,
+.commitment-status-badge.received {
+  background: #edf5ef;
+  color: #50705a;
+}
+
+.commitment-value-cell {
+  display: grid;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.commitment-value-cell strong {
+  color: #33313a;
+  font-size: 9px;
+}
+
+.commitment-value-cell.income strong {
+  color: #466954;
+}
+
+.commitment-value-cell span {
+  color: #aaa8af;
+  font-size: 7px;
+}
+
+.commitment-row-action {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: #4f4d56;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 7px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.commitment-row-action:hover:not(:disabled) {
+  border-color: #cbc9cf;
+  background: #faf9fa;
+}
+
+.commitment-row-action.income {
+  color: #466954;
+}
+
+.commitment-row-action.completed {
+  border-color: transparent;
+  background: #f2f6f3;
+  color: #6c8674;
+  cursor: default;
+}
+
+.commitment-row-action svg {
+  width: 12px;
+  height: 12px;
+}
+
+.commitment-empty-state {
+  min-height: 340px;
+  padding: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.commitment-empty-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f7f6f8;
+  color: #77757e;
+  display: grid;
+  place-items: center;
+}
+
+.commitment-empty-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.commitment-empty-state strong {
+  margin-top: 18px;
+  font-size: 12px;
+}
+
+.commitment-empty-state p {
+  max-width: 350px;
+  margin: 8px 0 0;
+  color: #9d9ba3;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.commitment-mobile-list {
+  display: none;
+}
+
+.commitment-insight-panel {
+  padding: 21px;
+  position: sticky;
+  top: 106px;
+}
+
+.commitment-insight-panel > header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.commitment-insight-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #17161f;
+  color: #fff;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+}
+
+.receivables-insight-panel .commitment-insight-icon {
+  background: #293b30;
+}
+
+.commitment-insight-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.commitment-insight-panel h2 {
+  margin: 4px 0 0;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.commitment-insight-panel > p {
+  margin: 17px 0 0;
+  color: #9d9ba3;
+  font-size: 8px;
+  line-height: 1.6;
+}
+
+.commitment-insight-total {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 7px;
+  background: #15141d;
+  color: #fff;
+  display: grid;
+  gap: 7px;
+}
+
+.receivables-insight-panel .commitment-insight-total {
+  background: #1f2d24;
+}
+
+.commitment-insight-total span {
+  color: #8e8b96;
+  font-size: 8px;
+}
+
+.commitment-insight-total strong {
+  font-size: 22px;
+  letter-spacing: -0.03em;
+}
+
+.commitment-insight-breakdown {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.commitment-insight-breakdown > div {
+  min-width: 0;
+  min-height: 90px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.commitment-insight-breakdown span,
+.commitment-insight-breakdown small {
+  color: #aaa8af;
+  font-size: 7px;
+}
+
+.commitment-insight-breakdown strong {
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.commitment-insight-breakdown small {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.commitment-progress-track {
+  height: 4px;
+  margin-top: 12px;
+  border-radius: 8px;
+  background: #efedf0;
+  overflow: hidden;
+}
+
+.commitment-progress-track span {
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: #201e27;
+}
+
+.commitment-progress-track.income span {
+  background: #476851;
+}
+
+.commitment-next-item {
+  margin-top: 21px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.commitment-next-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #f7f1ee;
+  color: #7c5d50;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+}
+
+.commitment-next-icon.income {
+  background: #eff6f1;
+  color: #4f755d;
+}
+
+.commitment-next-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.commitment-next-item > div {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.commitment-next-item span,
+.commitment-next-item small {
+  color: #aaa8af;
+  font-size: 7px;
+}
+
+.commitment-next-item strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 9px;
+}
+
+.commitment-attention-box {
+  margin-top: 19px;
+  padding: 13px;
+  border-radius: 6px;
+  background: #faf4ef;
+  color: #7d614d;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.commitment-attention-box.income {
+  background: #f0f6f2;
+  color: #4f725b;
+}
+
+.commitment-attention-box > svg {
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  flex: 0 0 auto;
+}
+
+.commitment-attention-box strong {
+  font-size: 8px;
+}
+
+.commitment-attention-box p {
+  margin: 6px 0 0;
+  color: #9b816e;
+  font-size: 7px;
+  line-height: 1.55;
+}
+
+.commitment-attention-box.income p {
+  color: #779180;
+}
+
+.commitment-dialog {
+  width: min(760px, 100%);
+}
+
+.commitment-payment-dialog {
+  width: min(590px, 100%);
+}
+
+.commitment-payment-summary {
+  margin-bottom: 19px;
+  padding: 4px;
+  border-radius: 7px;
+  background: #f7f6f8;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.commitment-payment-summary > div {
+  min-width: 0;
+  min-height: 78px;
+  padding: 12px;
+  border-radius: 5px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+}
+
+.commitment-payment-summary > div.featured {
+  background: #15141d;
+  color: #fff;
+}
+
+.receivable-payment-summary > div.featured {
+  background: #1f2d24;
+}
+
+.commitment-payment-summary span {
+  color: #aaa8af;
+  font-size: 7px;
+}
+
+.commitment-payment-summary strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.commitment-mobile-card {
+  padding: 17px;
+  border-top: 1px solid var(--line);
+}
+
+.commitment-mobile-card:first-child {
+  border-top: 0;
+}
+
+.commitment-mobile-card > header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.commitment-mobile-card > header > div {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.commitment-mobile-card > header strong,
+.commitment-mobile-card > header span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.commitment-mobile-card > header strong {
+  font-size: 10px;
+}
+
+.commitment-mobile-card > header > div span {
+  color: #aaa8af;
+  font-size: 8px;
+}
+
+.commitment-mobile-values {
+  margin-top: 16px;
+  padding: 4px;
+  border-radius: 6px;
+  background: #f8f7f9;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.commitment-mobile-values > div {
+  min-width: 0;
+  min-height: 64px;
+  padding: 11px;
+  border-radius: 5px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.commitment-mobile-values span {
+  color: #aaa8af;
+  font-size: 7px;
+}
+
+.commitment-mobile-values strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.commitment-mobile-meta {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 13px;
+}
+
+.commitment-mobile-meta span {
+  color: #88868f;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 7px;
+}
+
+.commitment-mobile-meta svg {
+  width: 11px;
+  height: 11px;
+}
+
+.commitment-mobile-action {
+  width: 100%;
+  min-height: 38px;
+  margin-top: 15px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: #4f4d56;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.commitment-mobile-action.income {
+  color: #466954;
+}
+
+.commitment-mobile-action.completed {
+  border-color: transparent;
+  background: #f2f6f3;
+  color: #6c8674;
+  cursor: default;
+}
+
+.commitment-mobile-action svg {
+  width: 13px;
+  height: 13px;
+}
+
+@media (max-width: 1380px) {
+  .commitment-summary-grid {
+    grid-template-columns: minmax(250px, 1.15fr) repeat(2, minmax(150px, 0.7fr));
+  }
+
+  .commitment-summary-card:nth-child(4),
+  .commitment-summary-card:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  .commitment-workspace-grid {
+    grid-template-columns: minmax(0, 1fr) 285px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .commitment-summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .commitment-summary-card.featured {
+    grid-column: span 2;
+  }
+
+  .commitment-filters {
+    grid-template-columns: 1fr auto;
+  }
+
+  .commitment-filters .transactions-search {
+    grid-column: 1 / -1;
+  }
+
+  .commitment-workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .commitment-insight-panel {
+    position: static;
+    display: grid;
+    grid-template-columns: minmax(230px, 0.85fr) repeat(2, minmax(180px, 0.75fr));
+    gap: 16px;
+    align-items: center;
+  }
+
+  .commitment-insight-panel > header,
+  .commitment-insight-panel > p,
+  .commitment-insight-total {
+    grid-column: 1;
+  }
+
+  .commitment-insight-panel > p {
+    margin-top: -4px;
+  }
+
+  .commitment-insight-total {
+    margin-top: 0;
+  }
+
+  .commitment-insight-breakdown {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin-top: 0;
+  }
+
+  .commitment-progress-track {
+    display: none;
+  }
+
+  .commitment-next-item,
+  .commitment-attention-box {
+    grid-column: 3;
+    margin-top: 0;
+  }
+
+  .commitment-next-item {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .financial-management-heading {
+    align-items: flex-end;
+  }
+
+  .commitment-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .commitment-summary-card.featured {
+    grid-column: 1 / -1;
+  }
+
+  .commitment-filter-selects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .commitment-insight-panel {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .commitment-insight-panel > header,
+  .commitment-insight-panel > p,
+  .commitment-insight-total {
+    grid-column: 1;
+  }
+
+  .commitment-insight-breakdown {
+    grid-column: 2;
+  }
+
+  .commitment-next-item,
+  .commitment-attention-box {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .financial-management-heading {
+    display: grid;
+    gap: 20px;
+  }
+
+  .financial-management-heading .primary-action-button {
+    width: 100%;
+  }
+
+  .commitment-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .commitment-summary-card.featured {
+    grid-column: auto;
+  }
+
+  .commitment-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .commitment-filter-selects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .commitment-filters .clear-filters-button {
+    justify-self: start;
+  }
+
+  .commitment-table-wrap {
+    display: none;
+  }
+
+  .commitment-mobile-list {
+    display: block;
+  }
+
+  .commitment-insight-panel {
+    display: block;
+  }
+
+  .commitment-insight-panel > p,
+  .commitment-insight-total,
+  .commitment-insight-breakdown,
+  .commitment-progress-track,
+  .commitment-next-item,
+  .commitment-attention-box {
+    margin-top: 18px;
+  }
+
+  .commitment-progress-track {
+    display: block;
+  }
+
+  .commitment-next-item {
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .commitment-payment-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .commitment-filter-selects,
+  .commitment-insight-breakdown,
+  .commitment-mobile-values {
+    grid-template-columns: 1fr;
+  }
+
+  .commitment-list-header {
+    min-height: 92px;
+    padding: 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .commitment-mobile-card {
+    padding: 16px;
+  }
+
+  .commitment-mobile-card > header {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .commitment-mobile-card > header .commitment-status-badge {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .commitment-insight-panel {
+    padding: 17px;
+  }
+
+  .transaction-dialog-backdrop {
+    padding: 12px;
+  }
+}
