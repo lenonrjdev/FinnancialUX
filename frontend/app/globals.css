@@ -3381,3 +3381,1317 @@ textarea {
     text-align: center;
   }
 }
+
+/* =========================================================
+   FASE 4 — CARTÕES, FATURAS E COMPRAS PARCELADAS
+========================================================= */
+
+.cards-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.cards-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+
+.cards-heading h1 {
+  margin: 0;
+  font-size: clamp(27px, 2vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.cards-heading p {
+  max-width: 680px;
+  margin: 10px 0 0;
+  color: #9b99a1;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.cards-heading-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cards-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.45fr) repeat(3, minmax(155px, 0.72fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.cards-limit-card,
+.card-summary-card {
+  min-width: 0;
+  min-height: 164px;
+  border-radius: 7px;
+}
+
+.cards-limit-card {
+  padding: 20px;
+  background: #12111b;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-limit-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  color: #8f8d97;
+  font-size: 8px;
+}
+
+.cards-limit-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.cards-limit-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.cards-limit-label {
+  margin-top: 19px;
+  color: #aaa8b1;
+  font-size: 8px;
+}
+
+.cards-limit-card > strong {
+  margin-top: 7px;
+  font-size: 24px;
+  letter-spacing: -0.03em;
+}
+
+.cards-limit-progress-copy {
+  margin-top: auto;
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: #8d8b95;
+  font-size: 8px;
+}
+
+.cards-limit-progress-copy b {
+  color: #fff;
+  font-size: 8px;
+}
+
+.cards-limit-track {
+  height: 4px;
+  margin-top: 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+
+.cards-limit-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #fff;
+}
+
+.card-summary-card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-summary-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  background: #f6f5f7;
+  color: #3b3942;
+  display: grid;
+  place-items: center;
+}
+
+.card-summary-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.card-summary-card > span:nth-child(2) {
+  margin-top: 17px;
+  color: #9a98a1;
+  font-size: 8px;
+}
+
+.card-summary-card > strong {
+  margin-top: 7px;
+  font-size: 18px;
+  letter-spacing: -0.025em;
+}
+
+.card-summary-card > small {
+  margin-top: auto;
+  padding-top: 14px;
+  color: #aaa8af;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.credit-cards-section,
+.invoice-panel,
+.installments-panel {
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+}
+
+.credit-cards-section {
+  margin-bottom: 18px;
+}
+
+.cards-section-heading,
+.invoice-panel-heading,
+.installments-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.cards-section-heading {
+  min-height: 72px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+
+.cards-section-heading > div > span,
+.invoice-panel-heading > div > span,
+.installments-heading > div > span {
+  color: #a5a3aa;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cards-section-heading h2,
+.invoice-panel-heading h2,
+.installments-heading h2 {
+  margin: 5px 0 0;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+}
+
+.cards-section-heading > small {
+  color: #aaa8af;
+  font-size: 8px;
+}
+
+.credit-cards-grid {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.credit-card-item {
+  min-width: 0;
+  border: 1px solid #eeedf1;
+  border-radius: 8px;
+  padding: 13px;
+  background: #fbfafb;
+  display: grid;
+  grid-template-columns: minmax(250px, 0.95fr) minmax(230px, 1.05fr);
+  gap: 18px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.credit-card-item:hover,
+.credit-card-item.selected {
+  border-color: #d8d6dc;
+  box-shadow: 0 12px 28px rgba(18, 17, 27, 0.055);
+}
+
+.credit-card-item.selected {
+  transform: translateY(-1px);
+}
+
+.credit-card-visual {
+  position: relative;
+  min-height: 198px;
+  padding: 20px;
+  border-radius: 11px;
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 14px 34px rgba(18, 17, 27, 0.18);
+}
+
+.credit-card-visual::before,
+.credit-card-visual::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.credit-card-visual::before {
+  width: 190px;
+  height: 190px;
+  right: -70px;
+  top: -90px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.credit-card-visual::after {
+  width: 120px;
+  height: 120px;
+  right: -20px;
+  bottom: -82px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.credit-card-visual.graphite {
+  background: linear-gradient(145deg, #0f0e16 0%, #23212b 100%);
+}
+
+.credit-card-visual.stone {
+  background: linear-gradient(145deg, #e4e0d9 0%, #c9c3ba 100%);
+  color: #242229;
+  box-shadow: 0 14px 34px rgba(71, 65, 56, 0.13);
+}
+
+.credit-card-visual.plum {
+  background: linear-gradient(145deg, #291a29 0%, #60415f 100%);
+}
+
+.credit-card-visual-top,
+.credit-card-visual-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.credit-card-visual-top > div,
+.credit-card-visual-bottom > div {
+  display: grid;
+  gap: 5px;
+}
+
+.credit-card-visual-top span,
+.credit-card-visual-bottom span {
+  color: currentColor;
+  opacity: 0.6;
+  font-size: 8px;
+}
+
+.credit-card-visual-top strong {
+  font-size: 11px;
+}
+
+.credit-card-chip {
+  width: 34px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  display: grid;
+  place-items: center;
+}
+
+.stone .credit-card-chip {
+  background: rgba(20, 19, 25, 0.08);
+}
+
+.credit-card-chip svg {
+  width: 16px;
+  height: 16px;
+}
+
+.credit-card-number {
+  position: relative;
+  z-index: 1;
+  margin: auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: start;
+  gap: 13px;
+  font-size: 14px;
+  letter-spacing: 0.09em;
+}
+
+.credit-card-number span {
+  opacity: 0.55;
+}
+
+.credit-card-number strong {
+  font-size: 13px;
+}
+
+.credit-card-visual-bottom {
+  align-items: flex-end;
+}
+
+.credit-card-visual-bottom strong,
+.credit-card-visual-bottom b {
+  font-size: 10px;
+}
+
+.credit-card-details {
+  min-width: 0;
+  padding: 6px 3px 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.credit-card-detail-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.credit-card-detail-heading > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.credit-card-detail-heading span,
+.credit-card-detail-heading small {
+  min-height: 23px;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: #f1f0f3;
+  color: #6f6d76;
+  display: inline-flex;
+  align-items: center;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.credit-card-detail-heading small {
+  background: #17161f;
+  color: #fff;
+}
+
+.credit-card-detail-heading i {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #17161f;
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.credit-card-detail-heading i svg {
+  width: 12px;
+  height: 12px;
+}
+
+.credit-card-limit-row {
+  margin-top: 25px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.credit-card-limit-row > div {
+  display: grid;
+  gap: 7px;
+}
+
+.credit-card-limit-row span,
+.credit-card-limit-row small {
+  color: #9f9da5;
+  font-size: 8px;
+}
+
+.credit-card-limit-row strong {
+  font-size: 17px;
+  letter-spacing: -0.025em;
+}
+
+.credit-card-limit-track,
+.installment-progress-track {
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 20px;
+  background: #eeedf0;
+  overflow: hidden;
+}
+
+.credit-card-limit-track span,
+.installment-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #17161f;
+}
+
+.credit-card-dates {
+  margin-top: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #88868f;
+  font-size: 8px;
+}
+
+.credit-card-dates span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.credit-card-dates svg {
+  width: 12px;
+  height: 12px;
+}
+
+.credit-card-details > button {
+  min-height: 35px;
+  margin-top: auto;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: #fff;
+  color: #4c4a53;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.credit-card-details > button svg {
+  width: 13px;
+  height: 13px;
+}
+
+.cards-empty-state,
+.invoice-empty-state,
+.installments-empty-state {
+  min-height: 220px;
+  padding: 32px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.cards-empty-state > span,
+.invoice-empty-state > span,
+.installments-empty-state > span {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f5f4f6;
+  color: #696771;
+  display: grid;
+  place-items: center;
+}
+
+.cards-empty-state svg,
+.invoice-empty-state svg,
+.installments-empty-state svg {
+  width: 17px;
+  height: 17px;
+}
+
+.cards-empty-state strong,
+.invoice-empty-state strong,
+.installments-empty-state strong {
+  margin-top: 13px;
+  font-size: 10px;
+}
+
+.cards-empty-state p,
+.invoice-empty-state p,
+.installments-empty-state p {
+  max-width: 360px;
+  margin: 7px 0 0;
+  color: #a09ea6;
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.cards-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.58fr) minmax(310px, 0.72fr);
+  align-items: start;
+  gap: 18px;
+}
+
+.invoice-panel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.invoice-panel-heading {
+  min-height: 92px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+
+.invoice-panel-heading p,
+.installments-heading p {
+  margin: 6px 0 0;
+  color: #a09ea6;
+  font-size: 8px;
+}
+
+.invoice-period-tabs {
+  max-width: 54%;
+  padding: 4px;
+  border-radius: 7px;
+  background: #f6f5f7;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+.invoice-period-tabs button {
+  min-width: 84px;
+  min-height: 42px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #8e8c95;
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.invoice-period-tabs button.active {
+  background: #fff;
+  color: #1d1c24;
+  box-shadow: 0 4px 12px rgba(18, 17, 27, 0.06);
+}
+
+.invoice-period-tabs span {
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.invoice-period-tabs small {
+  font-size: 7px;
+}
+
+.invoice-summary-strip {
+  min-height: 130px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+  background: #fbfafb;
+  display: grid;
+  grid-template-columns: minmax(180px, 1.2fr) repeat(2, minmax(120px, 0.72fr)) auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.invoice-total-block {
+  display: grid;
+  justify-items: start;
+}
+
+.invoice-total-block > span,
+.invoice-date-block > span {
+  color: #9b99a2;
+  font-size: 8px;
+}
+
+.invoice-total-block > strong {
+  margin-top: 8px;
+  font-size: 22px;
+  letter-spacing: -0.03em;
+}
+
+.invoice-status {
+  min-height: 22px;
+  margin-top: 9px;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: #edecef;
+  color: #77757e;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.invoice-status.open {
+  background: #f1ede5;
+  color: #806d4e;
+}
+
+.invoice-status.paid {
+  background: #eaf3ec;
+  color: #55765f;
+}
+
+.invoice-status svg {
+  width: 11px;
+  height: 11px;
+}
+
+.invoice-date-block {
+  display: grid;
+  gap: 8px;
+}
+
+.invoice-date-block > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.invoice-date-block svg {
+  width: 13px;
+  height: 13px;
+}
+
+.invoice-date-block strong {
+  font-size: 10px;
+}
+
+.invoice-pay-button {
+  min-width: 128px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid #12111b;
+  border-radius: 6px;
+  background: #12111b;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.invoice-pay-button.paid,
+.invoice-pay-button:disabled {
+  border-color: #e7e5e9;
+  background: #f3f2f4;
+  color: #85838c;
+  cursor: default;
+}
+
+.invoice-pay-button svg {
+  width: 13px;
+  height: 13px;
+}
+
+.invoice-purchases-heading {
+  min-height: 55px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f0eff2;
+}
+
+.invoice-purchases-heading > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.invoice-purchases-heading span {
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.invoice-purchases-heading small {
+  color: #aaa8af;
+  font-size: 8px;
+}
+
+.invoice-purchases-list {
+  display: grid;
+}
+
+.invoice-purchase-item {
+  min-width: 0;
+  min-height: 72px;
+  padding: 11px 22px;
+  border-top: 1px solid #f2f1f3;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(135px, auto) minmax(90px, auto);
+  align-items: center;
+  gap: 13px;
+}
+
+.invoice-purchase-item:first-child {
+  border-top: 0;
+}
+
+.invoice-purchase-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  background: #f5f4f6;
+  color: #4c4a53;
+  display: grid;
+  place-items: center;
+}
+
+.invoice-purchase-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.invoice-purchase-copy,
+.invoice-purchase-installment {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.invoice-purchase-copy strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 9px;
+}
+
+.invoice-purchase-copy span,
+.invoice-purchase-installment span,
+.invoice-purchase-installment small {
+  color: #a09ea6;
+  font-size: 8px;
+}
+
+.invoice-purchase-installment span {
+  color: #6e6c75;
+  font-weight: 700;
+}
+
+.invoice-purchase-value {
+  justify-self: end;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.installments-panel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.installments-heading {
+  min-height: 92px;
+  padding: 20px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+
+.installments-heading > div {
+  min-width: 0;
+}
+
+.installments-heading-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #17161f;
+  color: #fff;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+.installments-heading-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.installments-list {
+  display: grid;
+}
+
+.installment-item {
+  padding: 18px 20px;
+  border-top: 1px solid #f0eff2;
+}
+
+.installment-item:first-child {
+  border-top: 0;
+}
+
+.installment-item-top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+}
+
+.installment-card-icon {
+  width: 31px;
+  height: 31px;
+  border-radius: 6px;
+  background: #f4f3f5;
+  color: #4f4d56;
+  display: grid;
+  place-items: center;
+}
+
+.installment-card-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.installment-item-top > div {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.installment-item-top strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 9px;
+}
+
+.installment-item-top span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #a09ea6;
+  font-size: 7px;
+}
+
+.installment-item-top > b {
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.installment-progress-copy {
+  margin-top: 17px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #9f9da5;
+  font-size: 8px;
+}
+
+.installment-progress-copy strong {
+  color: #55535c;
+  font-size: 8px;
+}
+
+.installment-item-footer {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.installment-item-footer span {
+  padding: 10px;
+  border-radius: 6px;
+  background: #f8f7f9;
+  color: #aaa8af;
+  display: grid;
+  gap: 5px;
+  font-size: 7px;
+}
+
+.installment-item-footer strong {
+  color: #55535c;
+  font-size: 8px;
+}
+
+.card-dialog {
+  width: min(760px, 100%);
+}
+
+.card-style-field {
+  grid-column: 1 / -1;
+}
+
+.card-style-options {
+  padding: 4px;
+  border-radius: 7px;
+  background: #f6f5f7;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.card-style-options button {
+  min-height: 38px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #817f88;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.card-style-options button.active {
+  background: #fff;
+  color: #24232b;
+  box-shadow: 0 4px 14px rgba(18, 17, 27, 0.06);
+}
+
+.card-style-options i {
+  width: 16px;
+  height: 10px;
+  border-radius: 3px;
+  display: block;
+}
+
+.card-style-options .graphite i {
+  background: #1b1a22;
+}
+
+.card-style-options .stone i {
+  background: #d0cac1;
+}
+
+.card-style-options .plum i {
+  background: #543653;
+}
+
+.card-purchase-preview {
+  margin-top: 18px;
+  padding: 13px;
+  border-radius: 7px;
+  background: #f7f6f8;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.card-purchase-preview > div {
+  min-height: 54px;
+  padding: 0 12px;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.card-purchase-preview span {
+  color: #98969f;
+  font-size: 8px;
+}
+
+.card-purchase-preview strong {
+  font-size: 10px;
+}
+
+.card-purchase-preview .negative strong {
+  color: #9a4d4d;
+}
+
+.payment-dialog {
+  width: min(560px, 100%);
+}
+
+.invoice-payment-amount {
+  min-height: 110px;
+  margin-bottom: 18px;
+  padding: 18px;
+  border-radius: 7px;
+  background: #15141d;
+  color: #fff;
+  display: grid;
+  align-content: center;
+  gap: 7px;
+}
+
+.invoice-payment-amount span,
+.invoice-payment-amount small {
+  color: #96949e;
+  font-size: 8px;
+}
+
+.invoice-payment-amount strong {
+  font-size: 23px;
+  letter-spacing: -0.03em;
+}
+
+.invoice-payment-note {
+  margin: 16px 0 0;
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fbfafb;
+  color: #96949d;
+  font-size: 8px;
+  line-height: 1.55;
+}
+
+@media (max-width: 1320px) {
+  .cards-summary-grid {
+    grid-template-columns: minmax(300px, 1.25fr) repeat(3, minmax(145px, 0.75fr));
+  }
+
+  .credit-card-item {
+    grid-template-columns: 1fr;
+  }
+
+  .credit-card-visual {
+    min-height: 184px;
+  }
+
+  .credit-card-details {
+    min-height: 188px;
+  }
+
+  .cards-detail-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(290px, 0.7fr);
+  }
+}
+
+@media (max-width: 1080px) {
+  .cards-summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cards-limit-card {
+    grid-column: 1 / -1;
+  }
+
+  .cards-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .installments-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .installment-item:nth-child(2) {
+    border-top: 0;
+    border-left: 1px solid #f0eff2;
+  }
+}
+
+@media (max-width: 900px) {
+  .cards-heading {
+    align-items: flex-end;
+  }
+
+  .credit-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credit-card-item {
+    grid-template-columns: minmax(230px, 0.9fr) minmax(220px, 1.1fr);
+  }
+
+  .credit-card-details {
+    min-height: auto;
+  }
+
+  .invoice-panel-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .invoice-period-tabs {
+    max-width: none;
+  }
+
+  .invoice-summary-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .invoice-total-block {
+    grid-column: 1 / -1;
+  }
+
+  .invoice-pay-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .cards-heading {
+    display: grid;
+    gap: 20px;
+  }
+
+  .cards-heading-actions {
+    width: 100%;
+  }
+
+  .cards-heading-actions button {
+    flex: 1;
+  }
+
+  .cards-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cards-limit-card {
+    grid-column: auto;
+  }
+
+  .card-summary-card {
+    min-height: 138px;
+  }
+
+  .credit-cards-grid {
+    padding: 13px;
+  }
+
+  .credit-card-item {
+    grid-template-columns: 1fr;
+  }
+
+  .credit-card-visual {
+    min-height: 205px;
+  }
+
+  .invoice-summary-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .invoice-total-block {
+    grid-column: 1 / -1;
+  }
+
+  .invoice-pay-button {
+    grid-column: 1 / -1;
+  }
+
+  .invoice-purchase-item {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .invoice-purchase-installment {
+    grid-column: 2;
+  }
+
+  .invoice-purchase-value {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .installments-list {
+    grid-template-columns: 1fr;
+  }
+
+  .installment-item:nth-child(2) {
+    border-top: 1px solid #f0eff2;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .cards-heading-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .cards-heading-actions button {
+    width: 100%;
+  }
+
+  .cards-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .credit-card-visual {
+    min-height: 188px;
+    padding: 17px;
+  }
+
+  .credit-card-number {
+    gap: 9px;
+    font-size: 12px;
+  }
+
+  .credit-card-dates {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .invoice-panel-heading,
+  .invoice-summary-strip,
+  .invoice-purchases-heading {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .invoice-summary-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .invoice-total-block,
+  .invoice-pay-button {
+    grid-column: auto;
+  }
+
+  .invoice-purchase-item {
+    padding: 14px 16px;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .invoice-purchase-installment,
+  .invoice-purchase-value {
+    grid-column: 2;
+    grid-row: auto;
+    justify-self: start;
+  }
+
+  .card-purchase-preview,
+  .card-style-options {
+    grid-template-columns: 1fr;
+  }
+
+  .card-purchase-preview > div {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .installment-item-footer {
+    grid-template-columns: 1fr;
+  }
+}

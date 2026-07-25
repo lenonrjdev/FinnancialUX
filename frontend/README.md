@@ -1,43 +1,39 @@
 # Dashboard Financeira Pessoal
 
-Projeto em Next.js, React, TypeScript e Tailwind CSS para organização financeira pessoal.
+Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módulos.
 
-## Fase atual
+## Fases implementadas
 
-**Fase 3 — Contas, carteiras e transferências**
+- Fase 1: Visão geral e estrutura da dashboard
+- Fase 2: Lançamentos financeiros
+- Fase 3: Contas, carteiras e transferências
+- Fase 4: Cartões, limites, faturas e compras parceladas
 
-A aplicação já possui:
+## Rotas implementadas
 
-- Visão geral financeira responsiva;
-- Sidebar com todos os módulos planejados;
-- Módulo de lançamentos com receitas, despesas e transferências;
-- Módulo de contas e carteiras em `/contas`;
-- Resumo do saldo total, projetado, disponível e reservado;
-- Busca e filtros por tipo de conta;
-- Cadastro local de novas contas;
-- Transferências internas com atualização dos dois saldos;
-- Histórico de movimentações por conta;
-- Distribuição proporcional do patrimônio;
-- Layout completo para desktop, tablet e celular;
-- Textos fixos separados em `/content`;
-- Dados demonstrativos separados em `/data`;
-- Componentes organizados por página.
+- `/visao-geral`
+- `/lancamentos`
+- `/contas`
+- `/cartoes`
 
-## Executar
+As demais rotas da sidebar continuam preparadas como páginas temporárias até suas respectivas fases.
+
+## Organização
+
+- `app`: páginas e rotas
+- `components/<pagina>`: componentes pertencentes a cada página
+- `content`: textos fixos da interface
+- `data`: dados demonstrativos temporários
+- `types`: tipagens TypeScript
+- `lib`: utilitários compartilhados
+
+## Execução
 
 ```bash
 npm install
+npm run typecheck
+npm run build
 npm run dev
 ```
 
-Acesse `http://localhost:3000`.
-
-## Validações
-
-```bash
-npm run typecheck
-npm run lint
-npm run build
-```
-
-Os dados desta fase permanecem no estado local do React e serão persistidos no banco de dados na fase de integração.
+Os dados das fases atuais permanecem em estado local e demonstrativo. A persistência e a sincronização entre módulos serão adicionadas na fase de banco de dados e integração final.

@@ -144,3 +144,23 @@ export function InvestmentIcon(props: IconProps) {
 export function ChevronRightIcon(props: IconProps) {
   return <svg {...base} {...props}><path d="m9 18 6-6-6-6"/></svg>;
 }
+
+export function CardChipIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 5v14M16 5v14M4 10h16M4 14h16"/></svg>;
+}
+
+export function ClockIcon(props: IconProps) {
+  return <svg {...base} {...props}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>;
+}
+
+export function LockIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>;
+}
+
+export function ReceiptIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>;
+}
+
+export function TagIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="m3 12 9 9 9-9-9-9H3v9Z"/><circle cx="8" cy="8" r="1"/></svg>;
+}
