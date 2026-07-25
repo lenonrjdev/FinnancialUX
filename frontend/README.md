@@ -4,18 +4,22 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS para organização financei
 
 ## Fase atual
 
-**Fase 2 — Lançamentos**
+**Fase 3 — Contas, carteiras e transferências**
 
 A aplicação já possui:
 
 - Visão geral financeira responsiva;
 - Sidebar com todos os módulos planejados;
 - Módulo de lançamentos com receitas, despesas e transferências;
-- Resumo financeiro do mês;
-- Busca e filtros funcionais;
-- Tabela desktop e cards para celular;
-- Formulário de novo lançamento com atualização imediata da interface;
-- Conteúdo fixo separado em `/content`;
+- Módulo de contas e carteiras em `/contas`;
+- Resumo do saldo total, projetado, disponível e reservado;
+- Busca e filtros por tipo de conta;
+- Cadastro local de novas contas;
+- Transferências internas com atualização dos dois saldos;
+- Histórico de movimentações por conta;
+- Distribuição proporcional do patrimônio;
+- Layout completo para desktop, tablet e celular;
+- Textos fixos separados em `/content`;
 - Dados demonstrativos separados em `/data`;
 - Componentes organizados por página.
 
@@ -35,3 +39,5 @@ npm run typecheck
 npm run lint
 npm run build
 ```
+
+Os dados desta fase permanecem no estado local do React e serão persistidos no banco de dados na fase de integração.

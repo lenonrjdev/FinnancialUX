@@ -128,3 +128,19 @@ export function CopyIcon(props: IconProps) {
 export function TrashIcon(props: IconProps) {
   return <svg {...base} {...props}><path d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V4h6v3"/></svg>;
 }
+
+export function BankIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="m3 9 9-5 9 5"/><path d="M5 10h14M6 10v7M10 10v7M14 10v7M18 10v7M4 17h16M3 20h18"/></svg>;
+}
+
+export function SavingsIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M5 11a7 7 0 0 1 13.6-2.2L21 10v5l-2.3.8A7 7 0 0 1 12 20H8a3 3 0 0 1-3-3v-1H3v-4h2v-1Z"/><path d="M15 7.5h.01M8 20v2M17 19v3M8 10h4"/></svg>;
+}
+
+export function InvestmentIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M4 20V10M10 20V14M16 20V6M22 20H2"/><path d="m5 7 5-3 5 2 5-4"/></svg>;
+}
+
+export function ChevronRightIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="m9 18 6-6-6-6"/></svg>;
+}

@@ -121,13 +121,6 @@ export const transactionsContent = {
     differentAccounts: "Escolha contas diferentes para a transferência.",
   },
   options: {
-    accounts: [
-      "Conta principal",
-      "Nubank",
-      "Banco Inter",
-      "Carteira",
-      "Reserva de emergência",
-    ],
     paymentMethods: [
       "Pix",
       "Cartão de débito",

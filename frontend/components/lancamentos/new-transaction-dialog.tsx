@@ -8,6 +8,7 @@ import {
   TransactionsIcon,
 } from "@/components/shared/icons";
 import { transactionsContent } from "@/content/lancamentos";
+import { accountOptions } from "@/data/contas";
 import type {
   NewTransactionInput,
   TransactionStatus,
@@ -39,8 +40,8 @@ const initialForm: TransactionFormState = {
   amount: "",
   date: "2026-07-25",
   category: transactionsContent.options.categories.expense[0],
-  account: transactionsContent.options.accounts[0],
-  destinationAccount: transactionsContent.options.accounts[1],
+  account: accountOptions[0],
+  destinationAccount: accountOptions[1],
   paymentMethod: transactionsContent.options.paymentMethods[0],
   status: "completed" as TransactionStatus,
   note: "",
@@ -242,7 +243,7 @@ export function NewTransactionDialog({
                 value={form.account}
                 onChange={(event) => setForm({ ...form, account: event.target.value })}
               >
-                {transactionsContent.options.accounts.map((account) => (
+                {accountOptions.map((account) => (
                   <option value={account} key={account}>
                     {account}
                   </option>
@@ -259,7 +260,7 @@ export function NewTransactionDialog({
                     setForm({ ...form, destinationAccount: event.target.value })
                   }
                 >
-                  {transactionsContent.options.accounts.map((account) => (
+                  {accountOptions.map((account) => (
                     <option value={account} key={account}>
                       {account}
                     </option>
