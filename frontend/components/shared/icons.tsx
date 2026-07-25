@@ -168,3 +168,19 @@ export function ReceiptIcon(props: IconProps) {
 export function TagIcon(props: IconProps) {
   return <svg {...base} {...props}><path d="m3 12 9 9 9-9-9-9H3v9Z"/><circle cx="8" cy="8" r="1"/></svg>;
 }
+
+export function ShieldIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M12 3 5 6v5c0 4.8 2.8 8.1 7 10 4.2-1.9 7-5.2 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>;
+}
+
+export function PlaneIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M22 2 9.6 14.4"/><path d="m22 2-8 20-4.4-7.6L2 10l20-8Z"/></svg>;
+}
+
+export function HomeIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></svg>;
+}
+
+export function BookIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v18H7.5A3.5 3.5 0 0 0 4 23V5.5Z"/><path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H13v18h3.5A3.5 3.5 0 0 1 20 23V5.5Z"/></svg>;
+}

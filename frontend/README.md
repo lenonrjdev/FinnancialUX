@@ -11,6 +11,7 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - Fase 5: Contas a pagar e recebimentos
 - Fase 6: Calendário financeiro
 - Fase 7: Categorias e orçamentos mensais
+- Fase 8: Metas e reservas financeiras
 
 ## Rotas implementadas
 
@@ -22,6 +23,7 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - `/recebimentos`
 - `/calendario`
 - `/orcamentos`
+- `/metas`
 
 As demais rotas da sidebar continuam preparadas como páginas temporárias até suas respectivas fases.
 

@@ -63,9 +63,9 @@ export const overviewData = {
     budgetAvailable: 2000,
     goal: {
       name: "Reserva de emergência",
-      current: 7500,
+      current: 1500,
       target: 20000,
-      percentage: 37.5,
+      percentage: 7.5,
     },
   },
   bills: [
