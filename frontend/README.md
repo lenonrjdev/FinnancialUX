@@ -14,6 +14,7 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - Fase 8: Metas e reservas financeiras
 - Fase 9: Dívidas, empréstimos e parcelamentos
 - Fase 10: Assinaturas e cobranças recorrentes
+- Fase 11: Relatórios e projeção financeira
 
 ## Rotas implementadas
 
@@ -28,8 +29,26 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - `/metas`
 - `/dividas`
 - `/assinaturas`
+- `/relatorios`
 
-As demais rotas da sidebar continuam preparadas como páginas temporárias até suas respectivas fases.
+A rota de configurações continua preparada como página temporária até sua respectiva fase.
+
+## Fase 11
+
+O módulo de relatórios inclui:
+
+- comparação de receitas, despesas e resultado por período;
+- evolução mensal do fluxo financeiro;
+- despesas agrupadas por categoria;
+- comparação entre orçamento planejado e realizado;
+- distribuição do saldo entre contas;
+- leitura simplificada da saúde financeira;
+- projeção dos próximos 12 meses;
+- cenários conservador, realista e otimista;
+- composição dos compromissos mensais;
+- alertas de saldo e meses deficitários;
+- exportação dos dados em CSV;
+- visualização preparada para impressão.
 
 ## Organização
 
