@@ -9,7 +9,7 @@ import { UserMenu } from "@/components/dashboard/user-menu";
 import { WorkspaceSwitcher } from "@/components/dashboard/workspace-switcher";
 import { useAuth } from "@/components/providers/auth-provider";
 import { FinanceDataProvider } from "@/components/providers/finance-data-provider";
-import { CheckIcon, MenuIcon, MoonIcon, PlusIcon } from "@/components/shared/icons";
+import { CheckIcon, MenuIcon, MoonIcon, PlusIcon, SunIcon } from "@/components/shared/icons";
 import { accessContent } from "@/content/acessos";
 import { dashboardContent, dashboardNavigation } from "@/content/dashboard";
 import { integrationContent } from "@/content/integracao";
@@ -19,7 +19,9 @@ import { dashboardData } from "@/data/dashboard";
 import { createInitials, getStoredWorkspaceId, persistWorkspaceId } from "@/lib/access-control";
 import {
   applyAppearance,
-  cycleAppearance,
+  getOppositeAppearance,
+  getStoredAppearance,
+  persistAppearance,
   persistFinancialPreferences,
 } from "@/lib/settings";
 import type { SessionUser } from "@/types/acessos";
@@ -27,11 +29,13 @@ import type { FinancialPreferences, ProfileSettings } from "@/types/configuracoe
 
 export default function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { user, workspaces, loading, error } = useAuth();
+  const { user, workspaces, loading, error, refreshSession } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedWorkspaceId, setSelectedWorkspaceId] = useState("");
   const [displayUser, setDisplayUser] = useState<SessionUser | null>(null);
   const [preferences, setPreferences] = useState<FinancialPreferences>(initialFinancialPreferences);
+  const [resolvedAppearance, setResolvedAppearance] = useState<"light" | "dark">("light");
+  const [appearanceSaving, setAppearanceSaving] = useState(false);
   const allNavigationItems = useMemo(() => dashboardNavigation.flatMap((group) => group.items), []);
 
   useEffect(() => {
@@ -55,20 +59,22 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   useEffect(() => {
     if (preferences.appearance !== "system") return;
     const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleSystemAppearanceChange = () => applyAppearance("system");
+    const handleSystemAppearanceChange = () => setResolvedAppearance(applyAppearance("system"));
     media.addEventListener("change", handleSystemAppearanceChange);
     return () => media.removeEventListener("change", handleSystemAppearanceChange);
   }, [preferences.appearance]);
 
   useEffect(() => {
+    const serverAppearance = user?.preferences?.appearance ?? initialFinancialPreferences.appearance;
+    const cachedAppearance = getStoredAppearance(serverAppearance);
     const serverPreferences: FinancialPreferences = {
       ...initialFinancialPreferences,
-      appearance: user?.preferences?.appearance ?? initialFinancialPreferences.appearance,
+      appearance: cachedAppearance,
       hideBalancesOnOpen: user?.preferences?.hideBalancesOnOpen ?? initialFinancialPreferences.hideBalancesOnOpen,
       compactNumbers: user?.preferences?.compactLargeValues ?? initialFinancialPreferences.compactNumbers,
     };
     setPreferences(serverPreferences);
-    applyAppearance(serverPreferences.appearance);
+    setResolvedAppearance(persistAppearance(cachedAppearance));
 
     function handleProfileChange(event: Event) {
       const profile = (event as CustomEvent<ProfileSettings>).detail;
@@ -85,14 +91,23 @@ export default function DashboardShell({ children }: { children: React.ReactNode
       const next = (event as CustomEvent<FinancialPreferences>).detail;
       if (!next) return;
       setPreferences(next);
-      applyAppearance(next.appearance);
+      setResolvedAppearance(applyAppearance(next.appearance));
+    }
+
+    function handleAppearanceChange(event: Event) {
+      const detail = (event as CustomEvent<{ appearance: FinancialPreferences["appearance"]; resolved: "light" | "dark" }>).detail;
+      if (!detail) return;
+      setPreferences((current) => ({ ...current, appearance: detail.appearance }));
+      setResolvedAppearance(detail.resolved);
     }
 
     window.addEventListener("finance-profile-change", handleProfileChange);
     window.addEventListener("finance-preferences-change", handlePreferencesChange);
+    window.addEventListener("finance-appearance-change", handleAppearanceChange);
     return () => {
       window.removeEventListener("finance-profile-change", handleProfileChange);
       window.removeEventListener("finance-preferences-change", handlePreferencesChange);
+      window.removeEventListener("finance-appearance-change", handleAppearanceChange);
     };
   }, [user]);
 
@@ -114,11 +129,17 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   const isReadOnly = selectedWorkspace.role === "viewer";
 
   function toggleAppearance() {
-    const nextAppearance = cycleAppearance(preferences.appearance);
+    if (appearanceSaving) return;
+    const nextAppearance = getOppositeAppearance();
     const nextPreferences = { ...preferences, appearance: nextAppearance };
     setPreferences(nextPreferences);
+    setResolvedAppearance(nextAppearance);
     persistFinancialPreferences(nextPreferences);
-    void usersApi.updatePreferences({ appearance: nextAppearance }).catch(() => undefined);
+    setAppearanceSaving(true);
+    void usersApi.updatePreferences({ appearance: nextAppearance })
+      .then(() => refreshSession())
+      .catch(() => undefined)
+      .finally(() => setAppearanceSaving(false));
   }
 
   function selectWorkspace(workspaceId: string) {
@@ -165,7 +186,20 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             ) : (
               <Link className="new-entry-button" href="/lancamentos#novo-lancamento"><PlusIcon />{dashboardContent.topbar.newEntry}</Link>
             )}
-            <button className="icon-button" type="button" aria-label={dashboardContent.accessibility.theme} onClick={toggleAppearance} data-appearance={preferences.appearance}><MoonIcon /></button>
+            <button
+              className="icon-button theme-toggle-button"
+              type="button"
+              aria-label={resolvedAppearance === "dark" ? "Ativar tema claro" : "Ativar tema escuro"}
+              aria-pressed={resolvedAppearance === "dark"}
+              title={resolvedAppearance === "dark" ? "Ativar tema claro" : "Ativar tema escuro"}
+              onClick={toggleAppearance}
+              data-appearance={preferences.appearance}
+              data-resolved-theme={resolvedAppearance}
+              disabled={appearanceSaving}
+            >
+              {resolvedAppearance === "dark" ? <SunIcon /> : <MoonIcon />}
+              <span className="sr-only">{resolvedAppearance === "dark" ? "Tema escuro ativo" : "Tema claro ativo"}</span>
+            </button>
             <UserMenu user={displayUser} />
           </div>
         </header>
@@ -174,6 +208,20 @@ export default function DashboardShell({ children }: { children: React.ReactNode
           <Brand />
           <div className="mobile-header-actions">
             {!isReadOnly ? <Link className="mobile-entry-button" href="/lancamentos#novo-lancamento"><PlusIcon /><span>{dashboardContent.topbar.mobileNewEntry}</span></Link> : null}
+            <button
+              className="icon-button theme-toggle-button"
+              type="button"
+              aria-label={resolvedAppearance === "dark" ? "Ativar tema claro" : "Ativar tema escuro"}
+              aria-pressed={resolvedAppearance === "dark"}
+              title={resolvedAppearance === "dark" ? "Ativar tema claro" : "Ativar tema escuro"}
+              onClick={toggleAppearance}
+              data-appearance={preferences.appearance}
+              data-resolved-theme={resolvedAppearance}
+              disabled={appearanceSaving}
+            >
+              {resolvedAppearance === "dark" ? <SunIcon /> : <MoonIcon />}
+              <span className="sr-only">{resolvedAppearance === "dark" ? "Tema escuro ativo" : "Tema claro ativo"}</span>
+            </button>
             <UserMenu user={displayUser} />
             <button className="icon-button" type="button" onClick={() => setMobileOpen((open) => !open)} aria-label={mobileOpen ? dashboardContent.accessibility.closeNavigation : dashboardContent.accessibility.openNavigation} aria-expanded={mobileOpen}><MenuIcon /></button>
           </div>

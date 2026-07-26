@@ -19307,3 +19307,80 @@ html[data-theme="dark"] .footer {
 }
 
 
+
+/* Fase 15.4 — controle de tema persistente entre rotas. */
+.theme-toggle-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    opacity 160ms ease;
+}
+
+.theme-toggle-button::after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.42;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.theme-toggle-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.theme-toggle-button:hover:not(:disabled)::after {
+  opacity: 0.8;
+  transform: scale(1.12);
+}
+
+.theme-toggle-button svg {
+  transition: transform 180ms ease;
+}
+
+.theme-toggle-button:hover:not(:disabled) svg {
+  transform: rotate(10deg) scale(1.05);
+}
+
+.theme-toggle-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.theme-toggle-button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+.theme-toggle-button[data-resolved-theme="dark"] {
+  background: #211f29;
+  border-color: #3a3743;
+  color: #f3f0f6;
+}
+
+.theme-toggle-button[data-resolved-theme="light"] {
+  background: #fbfafb;
+  border-color: #dedce2;
+  color: #292730;
+}
+
+html[data-theme="dark"] .theme-toggle-button[data-resolved-theme="dark"] {
+  background: #26232e;
+  border-color: #46414f;
+  color: #fff6c9;
+}
+
+@media (max-width: 760px) {
+  .mobile-header .theme-toggle-button {
+    display: grid;
+  }
+}

@@ -29,7 +29,9 @@ import { usersApi } from "@/lib/api/users";
 import {
   applyAppearance,
   createSettingsBackup,
+  getStoredAppearance,
   downloadFullSettingsBackup,
+  persistAppearance,
   persistFinancialPreferences,
 } from "@/lib/settings";
 import type { FinancialAccount } from "@/types/contas";
@@ -79,11 +81,13 @@ export default function ConfiguracoesView() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    setPreferences(workspaceSettings.preferences);
+    setPreferences({
+      ...workspaceSettings.preferences,
+      appearance: getStoredAppearance(workspaceSettings.preferences.appearance),
+    });
     setNotifications(workspaceSettings.notifications);
     setSecurity(workspaceSettings.security);
     setBackupSettings(workspaceSettings.backupSettings);
-    applyAppearance(workspaceSettings.preferences.appearance);
   }, [workspaceSettings]);
 
   useEffect(() => {
@@ -97,13 +101,15 @@ export default function ConfiguracoesView() {
 
     void usersApi.getPreferences()
       .then((stored) => {
+        const appearance = getStoredAppearance(stored.appearance);
         setPreferences((current) => ({
           ...current,
-          appearance: stored.appearance,
+          appearance,
           defaultAccountId: stored.defaultAccountId ?? current.defaultAccountId,
           hideBalancesOnOpen: stored.hideBalancesOnOpen,
           compactNumbers: stored.compactLargeValues,
         }));
+        applyAppearance(appearance);
         setNotifications((current) => ({
           ...current,
           billsDue: stored.notifyUpcomingBills,
@@ -130,6 +136,16 @@ export default function ConfiguracoesView() {
   function showFeedback(message: string) {
     setFeedback(message);
     window.setTimeout(() => setFeedback(""), 2800);
+  }
+
+  function changePreferences(next: FinancialPreferences) {
+    if (next.appearance !== preferences.appearance) {
+      persistAppearance(next.appearance);
+      void usersApi.updatePreferences({ appearance: next.appearance })
+        .then(() => refreshSession())
+        .catch(() => undefined);
+    }
+    setPreferences(next);
   }
 
   async function saveCurrentView() {
@@ -231,7 +247,7 @@ export default function ConfiguracoesView() {
         <PreferencesPanel
           value={preferences}
           accounts={accounts}
-          onChange={(next) => { setPreferences(next); applyAppearance(next.appearance); }}
+          onChange={changePreferences}
         />
       ) : null}
       {view === "notifications" ? <NotificationsPanel value={notifications} onChange={setNotifications} /> : null}

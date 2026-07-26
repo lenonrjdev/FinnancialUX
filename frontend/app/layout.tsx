@@ -16,10 +16,12 @@ const appearanceBootstrap = `
     const resolved = preference === "system" ? (systemDark ? "dark" : "light") : preference;
     document.documentElement.dataset.theme = resolved;
     document.documentElement.dataset.appearancePreference = preference;
+    document.documentElement.style.colorScheme = resolved;
   } catch {
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     document.documentElement.dataset.theme = systemDark ? "dark" : "light";
     document.documentElement.dataset.appearancePreference = "system";
+    document.documentElement.style.colorScheme = systemDark ? "dark" : "light";
   }
 })();`;
 

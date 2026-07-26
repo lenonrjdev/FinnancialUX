@@ -11,31 +11,68 @@ import type {
 
 const APPEARANCE_STORAGE_KEY = "finance-dashboard-appearance";
 
+type ResolvedAppearance = Exclude<AppearanceMode, "system">;
+
+function isAppearanceMode(value: string | null): value is AppearanceMode {
+  return value === "light" || value === "dark" || value === "system";
+}
+
+export function getStoredAppearance(fallback: AppearanceMode = "system"): AppearanceMode {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const stored = window.localStorage.getItem(APPEARANCE_STORAGE_KEY);
+    return isAppearanceMode(stored) ? stored : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+export function resolveAppearance(mode: AppearanceMode): ResolvedAppearance {
+  if (mode !== "system") return mode;
+  if (typeof window === "undefined") return "light";
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+export function applyAppearance(mode: AppearanceMode): ResolvedAppearance {
+  const resolved = resolveAppearance(mode);
+  if (typeof document !== "undefined") {
+    document.documentElement.dataset.theme = resolved;
+    document.documentElement.dataset.appearancePreference = mode;
+    document.documentElement.style.colorScheme = resolved;
+  }
+  return resolved;
+}
+
+export function persistAppearance(mode: AppearanceMode): ResolvedAppearance {
+  if (typeof window !== "undefined") {
+    try {
+      window.localStorage.setItem(APPEARANCE_STORAGE_KEY, mode);
+    } catch {
+      // O backend ainda mantém a preferência; o armazenamento local evita troca de tema entre rotas.
+    }
+  }
+
+  const resolved = applyAppearance(mode);
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("finance-appearance-change", {
+      detail: { appearance: mode, resolved },
+    }));
+  }
+  return resolved;
+}
+
 export function persistFinancialPreferences(value: FinancialPreferences): void {
+  persistAppearance(value.appearance);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new CustomEvent("finance-preferences-change", { detail: value }));
   }
-  applyAppearance(value.appearance);
 }
 
-export function applyAppearance(mode: AppearanceMode): void {
-  if (typeof document === "undefined") return;
-  const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
-  const resolved = mode === "system" ? (systemDark ? "dark" : "light") : mode;
-  document.documentElement.dataset.theme = resolved;
-  document.documentElement.dataset.appearancePreference = mode;
-
-  try {
-    window.localStorage.setItem(APPEARANCE_STORAGE_KEY, mode);
-  } catch {
-    // A preferência continua persistida pelo backend; o cache local é apenas visual.
+export function getOppositeAppearance(): ResolvedAppearance {
+  if (typeof document !== "undefined" && document.documentElement.dataset.theme === "dark") {
+    return "light";
   }
-}
-
-export function cycleAppearance(current: AppearanceMode): AppearanceMode {
-  if (current === "light") return "dark";
-  if (current === "dark") return "system";
-  return "light";
+  return "dark";
 }
 
 export function formatSettingsDateTime(value: string): string {
