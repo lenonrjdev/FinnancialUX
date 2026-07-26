@@ -27,6 +27,12 @@ export const dashboardNavigation: NavigationGroup[] = [
     items: [
       { label: "Relatórios", href: "/relatorios", icon: "reports" },
       { label: "Dados e automações", href: "/dados-e-automacoes", icon: "data-tools" },
+    ],
+  },
+  {
+    label: "Conta",
+    items: [
+      { label: "Pessoas e acessos", href: "/acessos", icon: "access" },
       { label: "Configurações", href: "/configuracoes", icon: "settings" },
     ],
   },
@@ -43,11 +49,23 @@ export const dashboardContent = {
     openNavigation: "Abrir navegação",
     closeNavigation: "Fechar navegação",
     theme: "Alternar tema",
+    workspaceMenu: "Selecionar espaço financeiro",
+    accountMenu: "Abrir menu da conta",
   },
   topbar: {
-    context: "Controle financeiro pessoal",
+    context: "Período atual",
     newEntry: "Novo lançamento",
     mobileNewEntry: "Lançamento",
+    readOnly: "Somente leitura",
+    workspaceLabel: "Espaço financeiro",
+    manageAccess: "Gerenciar pessoas e acessos",
+  },
+  accountMenu: {
+    account: "Minha conta",
+    manageAccess: "Pessoas e acessos",
+    settings: "Configurações",
+    logout: "Sair",
+    demo: "Sessão demonstrativa",
   },
   footer: {
     copyright: "© 2026 Finanças pessoais",

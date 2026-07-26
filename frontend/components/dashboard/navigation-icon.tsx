@@ -16,6 +16,7 @@ import {
   SubscriptionIcon,
   TargetIcon,
   TransactionsIcon,
+  UsersIcon,
 } from "@/components/shared/icons";
 
 const icons: Record<NavigationIconName, ComponentType<IconProps>> = {
@@ -32,6 +33,7 @@ const icons: Record<NavigationIconName, ComponentType<IconProps>> = {
   subscription: SubscriptionIcon,
   reports: ReportsIcon,
   "data-tools": DatabaseIcon,
+  access: UsersIcon,
   settings: SettingsIcon,
 };
 

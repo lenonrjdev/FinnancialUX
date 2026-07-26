@@ -16,8 +16,18 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - Fase 10: Assinaturas e cobranças recorrentes
 - Fase 11: Relatórios e projeção financeira
 - Fase 12: Importação, exportação avançada e regras automáticas
+- Fase 13: Autenticação, compartilhamento e permissões
 
 ## Rotas implementadas
+
+### Autenticação
+
+- `/login`
+- `/registro`
+- `/recuperar-senha`
+- `/convite/[token]`
+
+### Dashboard
 
 - `/visao-geral`
 - `/lancamentos`
@@ -32,23 +42,31 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - `/assinaturas`
 - `/relatorios`
 - `/dados-e-automacoes`
+- `/acessos`
 
-A rota de configurações continua preparada como página temporária até sua respectiva fase.
+A rota `/` direciona para `/login`. As rotas da dashboard continuam acessíveis diretamente durante a fase demonstrativa.
 
-## Fase 12
+## Fase 13
 
-O módulo de dados e automações inclui:
+A fase de autenticação, compartilhamento e permissões inclui:
 
-- importação de extratos CSV e OFX diretamente no navegador;
-- detecção automática de colunas e ajuste manual do mapeamento;
-- prévia editável antes da confirmação;
-- identificação de linhas incompletas e possíveis duplicidades;
-- aplicação de regras automáticas durante a importação;
-- exportação em CSV ou JSON por módulo e período;
-- backup completo dos dados demonstrativos;
-- criação, edição, pausa, exclusão e ordenação de regras;
-- teste das regras nos lançamentos atuais;
-- histórico das importações realizadas na sessão.
+- páginas responsivas de login, registro e recuperação de senha;
+- alternativa visual para entrar ou criar conta com Google;
+- fluxo demonstrativo de aceitação de convite;
+- seletor de espaços financeiros no cabeçalho da dashboard;
+- espaços pessoais e compartilhados sem mistura visual de contexto;
+- identificação do papel atual no espaço selecionado;
+- modo somente leitura ao selecionar um espaço no qual o usuário é visualizador;
+- criação de espaços compartilhados;
+- convite de pessoas por e-mail;
+- permissões de proprietário, editor e somente leitura;
+- alteração e remoção de participantes;
+- reenvio e cancelamento de convites;
+- matriz completa das permissões de cada papel;
+- menu da conta com acesso às pessoas, configurações e saída;
+- navegação lateral atualizada com o módulo Pessoas e acessos.
+
+Nesta fase, autenticação, sessão, convites e permissões funcionam em modo demonstrativo no navegador. A proteção real das rotas, o envio de e-mails, o login Google e a persistência segura serão conectados ao backend e ao banco de dados na Fase 15.
 
 ## Organização
 

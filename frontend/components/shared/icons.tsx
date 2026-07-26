@@ -208,3 +208,35 @@ export function WarningIcon(props: IconProps) {
 export function EditIcon(props: IconProps) {
   return <svg {...base} {...props}><path d="M4 20h4l11-11-4-4L4 16v4Z"/><path d="m13 7 4 4"/></svg>;
 }
+
+export function UsersIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
+}
+
+export function UserPlusIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M15 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8" cy="7" r="4"/><path d="M19 8v6M16 11h6"/></svg>;
+}
+
+export function EyeIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>;
+}
+
+export function MailIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>;
+}
+
+export function LogOutIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M10 17l5-5-5-5M15 12H3"/><path d="M14 4h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5"/></svg>;
+}
+
+export function KeyIcon(props: IconProps) {
+  return <svg {...base} {...props}><circle cx="8" cy="15" r="4"/><path d="m11 12 8-8M17 4h3v3M14 7l3 3"/></svg>;
+}
+
+export function GoogleIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M21 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.1a4.4 4.4 0 0 1-1.9 2.9v2.5h3.1c1.8-1.7 2.7-4.1 2.7-7.2Z"/><path d="M12 21c2.6 0 4.8-.9 6.3-2.3l-3.1-2.5c-.9.6-2 1-3.2 1-2.5 0-4.7-1.7-5.4-4H3.4v2.6A9.5 9.5 0 0 0 12 21Z"/><path d="M6.6 13.2a5.7 5.7 0 0 1 0-3.6V7H3.4A9.5 9.5 0 0 0 3.4 16l3.2-2.8Z"/><path d="M12 5.8c1.4 0 2.7.5 3.7 1.4l2.8-2.8A9.4 9.4 0 0 0 3.4 7l3.2 2.6c.7-2.3 2.9-3.8 5.4-3.8Z"/></svg>;
+}
+
+export function WorkspaceIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M8 9h13M12 13h5M12 16h3"/></svg>;
+}

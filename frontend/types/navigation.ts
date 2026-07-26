@@ -12,6 +12,7 @@ export type NavigationIconName =
   | "subscription"
   | "reports"
   | "data-tools"
+  | "access"
   | "settings";
 
 export type NavigationItem = {
