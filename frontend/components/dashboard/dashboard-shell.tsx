@@ -16,14 +16,25 @@ import {
 import { accessContent } from "@/content/acessos";
 import { dashboardContent, dashboardNavigation } from "@/content/dashboard";
 import { demoSessionUser, initialWorkspaces } from "@/data/acessos";
+import { initialFinancialPreferences, initialProfileSettings } from "@/data/configuracoes";
 import { dashboardData } from "@/data/dashboard";
-import { getStoredWorkspaceId, persistWorkspaceId } from "@/lib/access-control";
+import { createInitials, getStoredWorkspaceId, persistWorkspaceId } from "@/lib/access-control";
+import {
+  applyAppearance,
+  cycleAppearance,
+  getStoredFinancialPreferences,
+  getStoredProfile,
+  persistFinancialPreferences,
+} from "@/lib/settings";
+import type { FinancialPreferences, ProfileSettings } from "@/types/configuracoes";
 
 export default function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [workspaces, setWorkspaces] = useState(initialWorkspaces);
   const [selectedWorkspaceId, setSelectedWorkspaceId] = useState(initialWorkspaces[0].id);
+  const [profile, setProfile] = useState<ProfileSettings>(initialProfileSettings);
+  const [preferences, setPreferences] = useState<FinancialPreferences>(initialFinancialPreferences);
   const allNavigationItems = useMemo(
     () => dashboardNavigation.flatMap((group) => group.items),
     [],
@@ -31,6 +42,11 @@ export default function DashboardShell({ children }: { children: React.ReactNode
 
   useEffect(() => {
     const storedId = getStoredWorkspaceId(initialWorkspaces[0].id);
+    const storedProfile = getStoredProfile(initialProfileSettings);
+    const storedPreferences = getStoredFinancialPreferences(initialFinancialPreferences);
+    setProfile(storedProfile);
+    setPreferences(storedPreferences);
+    applyAppearance(storedPreferences.appearance);
     if (initialWorkspaces.some((workspace) => workspace.id === storedId)) {
       setSelectedWorkspaceId(storedId);
     }
@@ -38,6 +54,19 @@ export default function DashboardShell({ children }: { children: React.ReactNode
     function handleWorkspaceChange(event: Event) {
       const customEvent = event as CustomEvent<string>;
       if (customEvent.detail) setSelectedWorkspaceId(customEvent.detail);
+    }
+
+    function handleProfileChange(event: Event) {
+      const customEvent = event as CustomEvent<ProfileSettings>;
+      if (customEvent.detail) setProfile(customEvent.detail);
+    }
+
+    function handlePreferencesChange(event: Event) {
+      const customEvent = event as CustomEvent<FinancialPreferences>;
+      if (customEvent.detail) {
+        setPreferences(customEvent.detail);
+        applyAppearance(customEvent.detail.appearance);
+      }
     }
 
     function handleWorkspacesChange(event: Event) {
@@ -49,14 +78,31 @@ export default function DashboardShell({ children }: { children: React.ReactNode
 
     window.addEventListener("finance-workspace-change", handleWorkspaceChange);
     window.addEventListener("finance-workspaces-change", handleWorkspacesChange);
+    window.addEventListener("finance-profile-change", handleProfileChange);
+    window.addEventListener("finance-preferences-change", handlePreferencesChange);
     return () => {
       window.removeEventListener("finance-workspace-change", handleWorkspaceChange);
       window.removeEventListener("finance-workspaces-change", handleWorkspacesChange);
+      window.removeEventListener("finance-profile-change", handleProfileChange);
+      window.removeEventListener("finance-preferences-change", handlePreferencesChange);
     };
   }, []);
 
   const selectedWorkspace = workspaces.find((workspace) => workspace.id === selectedWorkspaceId) ?? workspaces[0];
   const isReadOnly = selectedWorkspace.role === "viewer";
+  const sessionUser = useMemo(() => ({
+    ...demoSessionUser,
+    name: profile.name,
+    email: profile.email,
+    initials: createInitials(profile.name) || demoSessionUser.initials,
+  }), [profile]);
+
+  function toggleAppearance() {
+    const nextAppearance = cycleAppearance(preferences.appearance);
+    const nextPreferences = { ...preferences, appearance: nextAppearance };
+    setPreferences(nextPreferences);
+    persistFinancialPreferences(nextPreferences);
+  }
 
   function selectWorkspace(workspaceId: string) {
     setSelectedWorkspaceId(workspaceId);
@@ -99,10 +145,10 @@ export default function DashboardShell({ children }: { children: React.ReactNode
 
         <div className="sidebar-account">
           <span className="account-avatar account-initials" aria-hidden="true">
-            {demoSessionUser.initials}
+            {sessionUser.initials}
           </span>
           <span className="account-copy">
-            <strong>{demoSessionUser.name}</strong>
+            <strong>{sessionUser.name}</strong>
             <small>{accessContent.roles[selectedWorkspace.role]}</small>
           </span>
         </div>
@@ -140,10 +186,12 @@ export default function DashboardShell({ children }: { children: React.ReactNode
               className="icon-button"
               type="button"
               aria-label={dashboardContent.accessibility.theme}
+              onClick={toggleAppearance}
+              data-appearance={preferences.appearance}
             >
               <MoonIcon />
             </button>
-            <UserMenu user={demoSessionUser} />
+            <UserMenu user={sessionUser} />
           </div>
         </header>
 
@@ -160,7 +208,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
                 <span>{dashboardContent.topbar.mobileNewEntry}</span>
               </Link>
             ) : null}
-            <UserMenu user={demoSessionUser} />
+            <UserMenu user={sessionUser} />
             <button
               className="icon-button"
               type="button"

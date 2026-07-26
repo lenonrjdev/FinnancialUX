@@ -240,3 +240,55 @@ export function GoogleIcon(props: IconProps) {
 export function WorkspaceIcon(props: IconProps) {
   return <svg {...base} {...props}><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M8 9h13M12 13h5M12 16h3"/></svg>;
 }
+
+export function SaveIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M5 3h11l3 3v15H5V3Z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></svg>;
+}
+
+export function InfoIcon(props: IconProps) {
+  return <svg {...base} {...props}><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg>;
+}
+
+export function BellIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>;
+}
+
+export function MonitorIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>;
+}
+
+export function DesktopIcon(props: IconProps) {
+  return <MonitorIcon {...props} />;
+}
+
+export function MobileIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>;
+}
+
+export function TabletIcon(props: IconProps) {
+  return <svg {...base} {...props}><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg>;
+}
+
+export function HistoryIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>;
+}
+
+export function ArchiveIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M4 7h16v13H4V7Z"/><path d="M3 3h18v4H3V3ZM9 11h6"/></svg>;
+}
+
+export function PaletteIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M12 3a9 9 0 0 0 0 18h1.5a2.5 2.5 0 0 0 0-5H12a2 2 0 0 1 0-4h3a6 6 0 0 0 0-12h-3Z"/><circle cx="7.5" cy="9" r=".8" fill="currentColor" stroke="none"/><circle cx="10" cy="6.5" r=".8" fill="currentColor" stroke="none"/><circle cx="14" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>;
+}
+
+export function EyeOffIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 4.2A11.4 11.4 0 0 1 12 4c6.5 0 10 8 10 8a17.7 17.7 0 0 1-2.2 3.4M6.2 6.2C3.6 8 2 12 2 12s3.5 8 10 8a10.8 10.8 0 0 0 4.1-.8"/></svg>;
+}
+
+export function FileCheckIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v5h5M9 15l2 2 4-4"/></svg>;
+}
+
+export function RefreshIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M20 7v5h-5"/><path d="M4 17v-5h5"/><path d="M6.1 8A7 7 0 0 1 18.5 6L20 8M4 16l1.5 2A7 7 0 0 0 18 16"/></svg>;
+}

@@ -1,6 +1,6 @@
 # Dashboard Financeira Pessoal
 
-Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módulos.
+Projeto em Next.js 16, React 19, TypeScript e Tailwind CSS para organização financeira pessoal.
 
 ## Fases implementadas
 
@@ -16,19 +16,15 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - Fase 10: Assinaturas e cobranças recorrentes
 - Fase 11: Relatórios e projeção financeira
 - Fase 12: Importação, exportação avançada e regras automáticas
-- Fase 13: Autenticação, compartilhamento e permissões
+- Fase 13: Autenticação, espaços compartilhados e permissões
+- Fase 14: Configurações, segurança, histórico e backups
 
 ## Rotas implementadas
-
-### Autenticação
 
 - `/login`
 - `/registro`
 - `/recuperar-senha`
 - `/convite/[token]`
-
-### Dashboard
-
 - `/visao-geral`
 - `/lancamentos`
 - `/contas`
@@ -43,30 +39,27 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - `/relatorios`
 - `/dados-e-automacoes`
 - `/acessos`
+- `/configuracoes`
 
-A rota `/` direciona para `/login`. As rotas da dashboard continuam acessíveis diretamente durante a fase demonstrativa.
+## Fase 14
 
-## Fase 13
+O módulo de configurações inclui:
 
-A fase de autenticação, compartilhamento e permissões inclui:
-
-- páginas responsivas de login, registro e recuperação de senha;
-- alternativa visual para entrar ou criar conta com Google;
-- fluxo demonstrativo de aceitação de convite;
-- seletor de espaços financeiros no cabeçalho da dashboard;
-- espaços pessoais e compartilhados sem mistura visual de contexto;
-- identificação do papel atual no espaço selecionado;
-- modo somente leitura ao selecionar um espaço no qual o usuário é visualizador;
-- criação de espaços compartilhados;
-- convite de pessoas por e-mail;
-- permissões de proprietário, editor e somente leitura;
-- alteração e remoção de participantes;
-- reenvio e cancelamento de convites;
-- matriz completa das permissões de cada papel;
-- menu da conta com acesso às pessoas, configurações e saída;
-- navegação lateral atualizada com o módulo Pessoas e acessos.
-
-Nesta fase, autenticação, sessão, convites e permissões funcionam em modo demonstrativo no navegador. A proteção real das rotas, o envio de e-mails, o login Google e a persistência segura serão conectados ao backend e ao banco de dados na Fase 15.
+- edição de nome, e-mail, telefone e fuso horário;
+- atualização imediata da identidade exibida no cabeçalho e na sidebar;
+- moeda em real brasileiro, formato de data e início do mês financeiro;
+- conta padrão e preferências de privacidade visual;
+- aparência clara, escura ou sincronizada com o sistema;
+- alertas de contas, recebimentos, orçamento, saldo e segurança;
+- resumos semanais e mensais;
+- alteração demonstrativa de senha e verificação em duas etapas;
+- controle de tempo de sessão e proteção de exportações;
+- listagem e encerramento de dispositivos conectados;
+- histórico pesquisável e exportável de atividades;
+- criação e download de backup completo em JSON;
+- configuração de backups automáticos e retenção;
+- validação de arquivo para restauração;
+- solicitação demonstrativa de exclusão da conta.
 
 ## Organização
 
@@ -75,7 +68,7 @@ Nesta fase, autenticação, sessão, convites e permissões funcionam em modo de
 - `content`: textos fixos da interface
 - `data`: dados demonstrativos temporários
 - `types`: tipagens TypeScript
-- `lib`: utilitários compartilhados
+- `lib`: regras e utilitários compartilhados
 
 ## Execução
 
@@ -86,4 +79,4 @@ npm run build
 npm run dev
 ```
 
-Os dados das fases atuais permanecem em estado local e demonstrativo. A persistência e a sincronização entre módulos serão adicionadas na fase de banco de dados e integração final.
+As configurações são mantidas no `localStorage` para demonstração. Autenticação real, banco de dados, proteção de rotas, armazenamento de backups e persistência entre módulos serão finalizados na Fase 15.
