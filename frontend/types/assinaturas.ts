@@ -44,6 +44,7 @@ export interface SubscriptionCharge {
   amount: number;
   accountId: string;
   status: ChargeStatus;
+  paidAmount?: number;
   note: string;
 }
 

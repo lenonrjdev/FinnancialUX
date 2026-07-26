@@ -4,16 +4,19 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { CloseIcon } from "@/components/shared/icons";
 import { cardsContent } from "@/content/cartoes";
 import { formatCurrency } from "@/lib/formatters";
+import { getReferenceDate } from "@/lib/reference-date";
 import type { CreditCard, NewCardPurchaseInput } from "@/types/cartoes";
 
-const initialForm = {
-  cardId: "",
-  description: "",
-  category: cardsContent.categories[0],
-  date: "2026-07-25",
-  amount: "",
-  installments: "1",
-};
+function createInitialForm() {
+  return {
+    cardId: "",
+    description: "",
+    category: cardsContent.categories[0],
+    date: getReferenceDate(),
+    amount: "",
+    installments: "1",
+  };
+}
 
 export function NewPurchaseDialog({
   open,
@@ -28,7 +31,7 @@ export function NewPurchaseDialog({
   onClose: () => void;
   onCreate: (input: NewCardPurchaseInput) => void;
 }) {
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState(createInitialForm);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -36,6 +39,7 @@ export function NewPurchaseDialog({
 
     setForm((current) => ({
       ...current,
+      date: getReferenceDate(),
       cardId: preferredCardId || cards[0]?.id || "",
     }));
 
@@ -93,7 +97,7 @@ export function NewPurchaseDialog({
       installments,
     });
 
-    setForm(initialForm);
+    setForm(createInitialForm());
     setError("");
     onClose();
   }

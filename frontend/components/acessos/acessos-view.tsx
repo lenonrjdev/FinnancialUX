@@ -14,6 +14,7 @@ import { WorkspacesPanel } from "@/components/acessos/workspaces-panel";
 import { useAuth } from "@/components/providers/auth-provider";
 import { CheckIcon } from "@/components/shared/icons";
 import { accessContent } from "@/content/acessos";
+import { matchesSearch } from "@/lib/search";
 import { integrationContent } from "@/content/integracao";
 import { getStoredWorkspaceId, persistWorkspaceId, roleCan } from "@/lib/access-control";
 import { workspacesApi } from "@/lib/api/workspaces";
@@ -62,12 +63,11 @@ export default function AcessosView() {
   const currentRole = selectedWorkspace?.role ?? "viewer";
   const canManage = roleCan(currentRole, "manage-members");
 
-  const selectedMembers = useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase("pt-BR");
-    return members.filter((member) => !normalizedQuery
-      || member.name.toLocaleLowerCase("pt-BR").includes(normalizedQuery)
-      || member.email.toLocaleLowerCase("pt-BR").includes(normalizedQuery));
-  }, [members, query]);
+  const selectedMembers = useMemo(() => members.filter((member) => matchesSearch(query, [
+    member.name,
+    member.email,
+    member.role,
+  ])), [members, query]);
 
   const pendingInvitationsCount = invitations.filter((invitation) => invitation.status === "pending").length;
 

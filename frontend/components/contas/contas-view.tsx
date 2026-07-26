@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { CheckIcon } from "@/components/shared/icons";
-import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { AccountMovements } from "@/components/contas/account-movements";
 import { AccountsDistribution } from "@/components/contas/accounts-distribution";
 import { AccountsFilters } from "@/components/contas/accounts-filters";
@@ -15,10 +14,11 @@ import {
 import { NewAccountDialog } from "@/components/contas/new-account-dialog";
 import { TransferDialog } from "@/components/contas/transfer-dialog";
 import { accountsContent } from "@/content/contas";
-import { initialAccountMovements, initialAccounts } from "@/data/contas";
+import { getReferenceDate } from "@/lib/reference-date";
+import { formatSearchDate, matchesSearch } from "@/lib/search";
+import { useFinancialIntelligence } from "@/lib/use-financial-intelligence";
 import type {
   AccountFilter,
-  AccountMovement,
   AccountTransferInput,
   FinancialAccount,
   NewAccountInput,
@@ -40,11 +40,12 @@ function createAccountId(name: string): string {
 }
 
 export default function ContasView() {
-  const [accounts, setAccounts] = useFinanceDataState<FinancialAccount[]>("accounts", initialAccounts);
-  const [movements, setMovements] = useFinanceDataState<AccountMovement[]>(
-    "account-movements",
-    initialAccountMovements,
-  );
+  const {
+    accounts,
+    setAccounts,
+    accountMovements: movements,
+    recordManualTransaction,
+  } = useFinancialIntelligence();
   const [filter, setFilter] = useState<AccountFilter>("all");
   const [search, setSearch] = useState("");
   const [selectedAccountId, setSelectedAccountId] = useState(
@@ -94,19 +95,33 @@ export default function ContasView() {
     [accounts],
   );
 
-  const filteredAccounts = useMemo(() => {
-    const normalizedSearch = normalize(search.trim());
+  const filteredAccounts = useMemo(() => accounts.filter((account) => {
+    const matchesFilter = filter === "all" || account.group === filter;
+    const accountMovements = movements.filter((movement) => (
+      movement.accountId === account.id || movement.destinationAccountId === account.id
+    ));
+    const matchesQuery = matchesSearch(search, [
+      account.name,
+      account.institution,
+      account.balance,
+      account.projectedBalance,
+      account.createdAt,
+      formatSearchDate(account.createdAt),
+      accountsContent.accountTypes[account.type],
+      accountsContent.accountGroups[account.group],
+      account.includeInTotal ? accountsContent.accounts.included : accountsContent.accounts.excluded,
+      ...accountMovements.flatMap((movement) => [
+        movement.description,
+        movement.category,
+        movement.amount,
+        movement.date,
+        formatSearchDate(movement.date),
+        accountsContent.movements.types[movement.type],
+      ]),
+    ]);
 
-    return accounts.filter((account) => {
-      const matchesFilter = filter === "all" || account.group === filter;
-      const matchesSearch =
-        !normalizedSearch ||
-        normalize(account.name).includes(normalizedSearch) ||
-        normalize(account.institution).includes(normalizedSearch);
-
-      return matchesFilter && matchesSearch;
-    });
-  }, [accounts, filter, search]);
+    return matchesFilter && matchesQuery;
+  }), [accounts, filter, movements, search]);
 
   const selectedAccount = accounts.find(
     (account) => account.id === selectedAccountId,
@@ -139,41 +154,21 @@ export default function ContasView() {
   }
 
   function transferBetweenAccounts(input: AccountTransferInput) {
-    setAccounts((current) =>
-      current.map((account) => {
-        if (account.id === input.sourceAccountId) {
-          return {
-            ...account,
-            balance: account.balance - input.amount,
-            projectedBalance: account.projectedBalance - input.amount,
-          };
-        }
+    const source = accounts.find((account) => account.id === input.sourceAccountId);
+    const destination = accounts.find((account) => account.id === input.destinationAccountId);
+    if (!source || !destination) return;
 
-        if (account.id === input.destinationAccountId) {
-          return {
-            ...account,
-            balance: account.balance + input.amount,
-            projectedBalance: account.projectedBalance + input.amount,
-          };
-        }
-
-        return account;
-      }),
-    );
-
-    setMovements((current) => [
-      {
-        id: `transfer-${Date.now()}`,
-        accountId: input.sourceAccountId,
-        destinationAccountId: input.destinationAccountId,
-        description: input.description,
-        category: "Transferência entre contas",
-        date: input.date,
-        amount: input.amount,
-        type: "transfer",
-      },
-      ...current,
-    ]);
+    recordManualTransaction({
+      description: input.description,
+      category: "Transferência entre contas",
+      account: source.name,
+      destinationAccount: destination.name,
+      paymentMethod: "Transferência interna",
+      date: input.date || getReferenceDate(),
+      amount: input.amount,
+      type: "transfer",
+      status: "completed",
+    });
     setSelectedAccountId(input.sourceAccountId);
     showFeedback(accountsContent.transferDialog.success);
   }

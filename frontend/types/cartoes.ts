@@ -32,6 +32,7 @@ export type CardInvoice = {
   dueDate: string;
   amount: number;
   status: InvoiceStatus;
+  paidAmount?: number;
   paymentDate?: string;
 };
 

@@ -4,6 +4,12 @@ export type PayableRecurrence = "none" | "weekly" | "monthly" | "yearly";
 
 export type PayableValueType = "fixed" | "variable";
 
+export type PayableOccurrencePayment = {
+  paidAmount: number;
+  paidAt?: string;
+  accountId?: string;
+};
+
 export type Payable = {
   id: string;
   description: string;
@@ -18,6 +24,7 @@ export type Payable = {
   notes?: string;
   createdAt: string;
   paidAt?: string;
+  occurrencePayments?: Record<string, PayableOccurrencePayment>;
 };
 
 export type NewPayableInput = {

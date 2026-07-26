@@ -10,12 +10,11 @@ import { TransactionsHeading } from "@/components/lancamentos/transactions-headi
 import { TransactionsList } from "@/components/lancamentos/transactions-list";
 import { TransactionsSummary } from "@/components/lancamentos/transactions-summary";
 import { CheckIcon } from "@/components/shared/icons";
-import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { transactionsContent } from "@/content/lancamentos";
-import { transactionsData } from "@/data/lancamentos";
-import { initialAccounts } from "@/data/contas";
+import { financialIntelligenceContent } from "@/content/financial-intelligence";
 import { getReferenceDate, getReferenceMonth } from "@/lib/reference-date";
-import type { FinancialAccount } from "@/types/contas";
+import { formatSearchDate, matchesSearch } from "@/lib/search";
+import { useFinancialIntelligence } from "@/lib/use-financial-intelligence";
 import type {
   FinancialTransaction,
   NewTransactionInput,
@@ -24,15 +23,18 @@ import type {
 const defaultFilters: TransactionsFilterState = {
   query: "",
   type: "all",
-  period: "current-month",
+  period: "all",
   status: "all",
   account: "all",
 };
 
 export default function LancamentosView() {
-  const [transactions, setTransactions] =
-    useFinanceDataState<FinancialTransaction[]>("transactions", transactionsData);
-  const [financialAccounts] = useFinanceDataState<FinancialAccount[]>("accounts", initialAccounts);
+  const {
+    transactions,
+    accounts: financialAccounts,
+    recordManualTransaction,
+    removeManualTransaction,
+  } = useFinancialIntelligence();
   const [filters, setFilters] = useState(defaultFilters);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -84,63 +86,46 @@ export default function LancamentosView() {
         transaction.account,
         ...(transaction.destinationAccount ? [transaction.destinationAccount] : []),
       ]),
-    ])).sort((a, b) => a.localeCompare(b, "pt-BR")),
+    ])).filter(Boolean).sort((a, b) => a.localeCompare(b, "pt-BR")),
     [accountOptions, transactions],
   );
 
   const filteredTransactions = useMemo(() => {
-    const normalizedQuery = filters.query.trim().toLocaleLowerCase("pt-BR");
     const referenceDate = new Date(`${getReferenceDate()}T12:00:00-03:00`);
     referenceDate.setDate(referenceDate.getDate() - 30);
     const lastThirtyDaysStart = getReferenceDate(referenceDate);
 
     return transactions
       .filter((transaction) => {
+        const matchesQuery = matchesSearch(filters.query, [
+          transaction.description,
+          transaction.category,
+          transaction.account,
+          transaction.destinationAccount,
+          transaction.paymentMethod,
+          transaction.note,
+          transaction.amount,
+          transaction.date,
+          formatSearchDate(transaction.date),
+          transactionsContent.types[transaction.type],
+          transactionsContent.statuses[transaction.status],
+        ]);
+        if (!matchesQuery) return false;
+        if (filters.type !== "all" && transaction.type !== filters.type) return false;
+        if (filters.status !== "all" && transaction.status !== filters.status) return false;
         if (
-          normalizedQuery &&
-          ![
-            transaction.description,
-            transaction.category,
-            transaction.account,
-            transaction.destinationAccount ?? "",
-          ]
-            .join(" ")
-            .toLocaleLowerCase("pt-BR")
-            .includes(normalizedQuery)
-        ) {
-          return false;
-        }
-
-        if (filters.type !== "all" && transaction.type !== filters.type) {
-          return false;
-        }
-
-        if (filters.status !== "all" && transaction.status !== filters.status) {
-          return false;
-        }
-
+          filters.account !== "all"
+          && transaction.account !== filters.account
+          && transaction.destinationAccount !== filters.account
+        ) return false;
         if (
-          filters.account !== "all" &&
-          transaction.account !== filters.account &&
-          transaction.destinationAccount !== filters.account
-        ) {
-          return false;
-        }
-
+          filters.period === "current-month"
+          && !transaction.date.startsWith(getReferenceMonth())
+        ) return false;
         if (
-          filters.period === "current-month" &&
-          !transaction.date.startsWith(getReferenceMonth())
-        ) {
-          return false;
-        }
-
-        if (
-          filters.period === "last-30-days" &&
-          transaction.date < lastThirtyDaysStart
-        ) {
-          return false;
-        }
-
+          filters.period === "last-30-days"
+          && transaction.date < lastThirtyDaysStart
+        ) return false;
         return true;
       })
       .sort((a, b) => b.date.localeCompare(a.date));
@@ -152,30 +137,35 @@ export default function LancamentosView() {
   }
 
   function createTransaction(input: NewTransactionInput) {
-    setTransactions((current) => [
-      { ...input, id: `transaction-${Date.now()}` },
-      ...current,
-    ]);
-    showFeedback(transactionsContent.dialog.success);
+    recordManualTransaction(input);
+    showFeedback(financialIntelligenceContent.feedback.transactionSaved);
   }
 
   function duplicateTransaction(transaction: FinancialTransaction) {
-    setTransactions((current) => [
-      {
-        ...transaction,
-        id: `transaction-copy-${Date.now()}`,
-        description: `${transaction.description} (cópia)`,
-      },
-      ...current,
-    ]);
+    const duplicate: NewTransactionInput = {
+      description: `${transaction.description} (cópia)`,
+      category: transaction.category,
+      account: transaction.account,
+      destinationAccount: transaction.destinationAccount,
+      paymentMethod: transaction.paymentMethod,
+      date: transaction.date,
+      amount: transaction.amount,
+      type: transaction.type,
+      status: transaction.status,
+      note: transaction.note,
+    };
+    recordManualTransaction(duplicate);
     showFeedback(transactionsContent.dialog.duplicateSuccess);
   }
 
   function deleteTransaction(transactionId: string) {
-    setTransactions((current) =>
-      current.filter((transaction) => transaction.id !== transactionId),
-    );
-    showFeedback(transactionsContent.dialog.deleteSuccess);
+    const transaction = transactions.find((item) => item.id === transactionId);
+    if (transaction?.sourceType && transaction.sourceType !== "manual-transaction") {
+      showFeedback(financialIntelligenceContent.feedback.automaticTransactionProtected);
+      return;
+    }
+    if (!removeManualTransaction(transactionId)) return;
+    showFeedback(financialIntelligenceContent.feedback.transactionRemoved);
   }
 
   function exportTransactions() {
@@ -203,9 +193,7 @@ export default function LancamentosView() {
         transaction.date,
         transactionsContent.statuses[transaction.status],
         transaction.amount.toFixed(2).replace(".", ","),
-      ]
-        .map(escapeCell)
-        .join(";"),
+      ].map(escapeCell).join(";"),
     );
     const csv = `\uFEFF${columns.map(escapeCell).join(";")}\n${rows.join("\n")}`;
     const url = URL.createObjectURL(
@@ -247,12 +235,12 @@ export default function LancamentosView() {
         onCreate={createTransaction}
       />
 
-      {feedbackMessage && (
+      {feedbackMessage ? (
         <div className="transaction-feedback" role="status">
           <CheckIcon />
           {feedbackMessage}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

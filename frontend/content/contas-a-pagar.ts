@@ -9,7 +9,7 @@ export const payablesContent = {
     eyebrow: "Compromissos financeiros",
     title: "Contas a pagar",
     description:
-      "Organize vencimentos, recorrências e pagamentos para saber exatamente o que ainda compromete o seu mês.",
+      "Organize somente as cobranças reais, identifique quais costumam se repetir e acompanhe o que ainda compromete o seu mês.",
     newAction: "Nova conta",
   },
   summary: {
@@ -77,7 +77,7 @@ export const payablesContent = {
     eyebrow: "Novo compromisso",
     title: "Adicionar conta a pagar",
     description:
-      "Cadastre uma obrigação futura e deixe o planejamento mensal mais previsível.",
+      "Cadastre apenas a cobrança que você já recebeu. A frequência identifica o padrão da conta, mas não cria valores nem vencimentos futuros.",
     closeAriaLabel: "Fechar cadastro de conta a pagar",
     fields: {
       description: "Descrição",
@@ -86,8 +86,8 @@ export const payablesContent = {
       amount: "Valor",
       dueDate: "Data de vencimento",
       account: "Conta de pagamento",
-      recurrence: "Recorrência",
-      valueType: "Tipo de valor",
+      recurrence: "Frequência da conta",
+      valueType: "Comportamento do valor",
       notes: "Observações",
       notesPlaceholder: "Informações opcionais sobre este compromisso",
     },
@@ -121,14 +121,14 @@ export const payablesContent = {
     paid: "Paga",
   } satisfies Record<PayableStatus, string>,
   recurrences: {
-    none: "Sem recorrência",
+    none: "Avulsa",
     weekly: "Semanal",
     monthly: "Mensal",
     yearly: "Anual",
   } satisfies Record<PayableRecurrence, string>,
   valueTypes: {
-    fixed: "Valor fixo",
-    variable: "Valor variável",
+    fixed: "Normalmente fixo",
+    variable: "Varia a cada cobrança",
   } satisfies Record<PayableValueType, string>,
   categories: [
     "Moradia",

@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { ArrowRightLeftIcon, CloseIcon } from "@/components/shared/icons";
 import { accountsContent } from "@/content/contas";
 import { formatCurrency } from "@/lib/formatters";
+import { getReferenceDate } from "@/lib/reference-date";
 import type { AccountTransferInput, FinancialAccount } from "@/types/contas";
 
 type TransferForm = {
@@ -19,7 +20,7 @@ function createInitialForm(accounts: FinancialAccount[]): TransferForm {
     sourceAccountId: accounts[0]?.id ?? "",
     destinationAccountId: accounts[1]?.id ?? accounts[0]?.id ?? "",
     amount: "",
-    date: "2026-07-25",
+    date: getReferenceDate(),
     description: "",
   };
 }

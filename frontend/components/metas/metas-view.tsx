@@ -12,6 +12,7 @@ import { GoalsToolbar } from "@/components/metas/goals-toolbar";
 import { CheckIcon } from "@/components/shared/icons";
 import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { goalsContent } from "@/content/metas";
+import { formatSearchDate, matchesSearch } from "@/lib/search";
 import { initialAccounts } from "@/data/contas";
 import {
   emergencyCoverageTarget,
@@ -80,15 +81,24 @@ export default function MetasView() {
 
   const goalRows = useMemo(() => goals.map(computeGoal), [goals]);
   const filteredGoals = useMemo(() => goalRows.filter((goal) => {
-    const query = search.trim().toLocaleLowerCase("pt-BR");
-    const matchesSearch = !query
-      || goal.name.toLocaleLowerCase("pt-BR").includes(query)
-      || goal.description.toLocaleLowerCase("pt-BR").includes(query)
-      || goalsContent.categories[goal.category].toLocaleLowerCase("pt-BR").includes(query);
+    const matchesQuery = matchesSearch(search, [
+      goal.name,
+      goal.description,
+      goal.targetAmount,
+      goal.currentAmount,
+      goal.monthlyContribution,
+      goal.targetDate,
+      formatSearchDate(goal.targetDate),
+      goalsContent.categories[goal.category],
+      goalsContent.priorities[goal.priority],
+      goalsContent.statuses[goal.computedStatus],
+      goal.kind === "reserve" ? goalsContent.list.reserve : goalsContent.list.goal,
+      accountNames[goal.accountId],
+    ]);
     const matchesType = type === "all" || goal.kind === type;
     const matchesStatus = status === "all" || goal.status === status;
-    return matchesSearch && matchesType && matchesStatus;
-  }), [goalRows, search, status, type]);
+    return matchesQuery && matchesType && matchesStatus;
+  }), [accountNames, goalRows, search, status, type]);
 
   const filteredGoalIds = useMemo(() => new Set(filteredGoals.map((goal) => goal.id)), [filteredGoals]);
   const filteredContributions = useMemo(() => contributions

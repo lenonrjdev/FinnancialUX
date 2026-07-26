@@ -11,6 +11,7 @@ import {
   WorkspaceIcon,
 } from "@/components/shared/icons";
 import { settingsContent } from "@/content/configuracoes";
+import { formatSearchDate, matchesSearch } from "@/lib/search";
 import { exportActivityHistory, formatSettingsDateTime } from "@/lib/settings";
 import type { ActivityLogEntry, ActivityStatus, ActivityType } from "@/types/configuracoes";
 
@@ -28,13 +29,21 @@ export function ActivityPanel({ entries }: { entries: ActivityLogEntry[] }) {
   const [type, setType] = useState<"all" | ActivityType>("all");
   const [status, setStatus] = useState<"all" | ActivityStatus>("all");
 
-  const filteredEntries = useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase("pt-BR");
-    return entries.filter((entry) => {
-      const matchesQuery = !normalizedQuery || [entry.title, entry.description, entry.actor, entry.device].some((field) => field.toLocaleLowerCase("pt-BR").includes(normalizedQuery));
-      return matchesQuery && (type === "all" || entry.type === type) && (status === "all" || entry.status === status);
-    });
-  }, [entries, query, status, type]);
+  const filteredEntries = useMemo(() => entries.filter((entry) => {
+    const matchesQuery = matchesSearch(query, [
+      entry.title,
+      entry.description,
+      entry.actor,
+      entry.device,
+      entry.type,
+      settingsContent.activity.types[entry.type],
+      entry.status,
+      settingsContent.activity.statuses[entry.status],
+      entry.occurredAt,
+      formatSearchDate(entry.occurredAt.slice(0, 10)),
+    ]);
+    return matchesQuery && (type === "all" || entry.type === type) && (status === "all" || entry.status === status);
+  }), [entries, query, status, type]);
 
   return (
     <section className="settings-panel activity-settings-panel">

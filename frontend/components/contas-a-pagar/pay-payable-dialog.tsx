@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CloseIcon } from "@/components/shared/icons";
 import { payablesContent } from "@/content/contas-a-pagar";
 import { formatCurrency } from "@/lib/formatters";
+import { getReferenceDate } from "@/lib/reference-date";
 import type { FinancialAccount } from "@/types/contas";
 import type { Payable, PayablePaymentInput } from "@/types/contas-a-pagar";
 
@@ -22,7 +23,7 @@ export function PayPayableDialog({ payable, accounts, onClose, onSubmit }: PayPa
   const remaining = Math.max(0, payable.amount - payable.paidAmount);
   const [form, setForm] = useState({
     amount: remaining.toFixed(2).replace(".", ","),
-    paymentDate: "2026-07-25",
+    paymentDate: getReferenceDate(),
     accountId: payable.accountId,
   });
   const [error, setError] = useState("");

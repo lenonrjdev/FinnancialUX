@@ -19773,3 +19773,60 @@ body > div {
     display: none;
   }
 }
+
+/* Fase 15.7 — inteligência financeira e busca unificada */
+.cards-smart-search {
+  width: min(100%, 560px);
+  margin: 0 0 18px auto;
+  background: var(--app-surface-muted, #f7f5f7);
+}
+
+.calendar-search-field {
+  width: min(100%, 330px);
+  min-width: 230px;
+  background: var(--app-surface-muted, #f7f5f7);
+}
+
+.smart-source-badge {
+  width: fit-content;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 8px;
+  border: 1px solid var(--app-border, #ecebf0);
+  border-radius: 999px;
+  background: var(--app-surface-muted, #f7f5f7);
+  color: var(--muted, #77747f);
+  font-size: 10.4px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.form-field-helper {
+  display: block;
+  max-width: 42ch;
+  white-space: normal;
+}
+
+html[data-theme="dark"] .cards-smart-search,
+html[data-theme="dark"] .calendar-search-field,
+html[data-theme="dark"] .smart-source-badge {
+  border-color: var(--app-border);
+  background: var(--app-surface-muted);
+  color: var(--muted);
+}
+
+@media (max-width: 980px) {
+  .calendar-search-field {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .cards-smart-search {
+    width: 100%;
+    margin-left: 0;
+  }
+}

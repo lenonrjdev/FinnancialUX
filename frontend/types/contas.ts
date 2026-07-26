@@ -36,6 +36,8 @@ export type AccountMovement = {
   date: string;
   amount: number;
   type: AccountMovementType;
+  sourceType?: string;
+  sourceId?: string;
 };
 
 export type NewAccountInput = {

@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { CloseIcon } from "@/components/shared/icons";
 import { cardsContent } from "@/content/cartoes";
 import { formatCurrency } from "@/lib/formatters";
+import { getReferenceDate } from "@/lib/reference-date";
 import type { FinancialAccount } from "@/types/contas";
 import type { CardInvoice, InvoicePaymentInput } from "@/types/cartoes";
 
@@ -23,12 +24,13 @@ export function PayInvoiceDialog({
   onPay: (input: InvoicePaymentInput) => void;
 }) {
   const [accountId, setAccountId] = useState(defaultAccountId);
-  const [paymentDate, setPaymentDate] = useState("2026-07-25");
+  const [paymentDate, setPaymentDate] = useState(() => getReferenceDate());
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (!open) return;
     setAccountId(defaultAccountId || accounts[0]?.id || "");
+    setPaymentDate(getReferenceDate());
 
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();

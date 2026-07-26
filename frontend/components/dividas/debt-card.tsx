@@ -1,6 +1,7 @@
 import { DebtTypeIcon } from "@/components/dividas/debt-icon";
 import { MoreIcon, ReceiptIcon } from "@/components/shared/icons";
 import { debtsContent } from "@/content/dividas";
+import { financialIntelligenceContent } from "@/content/financial-intelligence";
 import { formatCurrency, formatPercentage, formatShortDate } from "@/lib/formatters";
 import type { DebtRow } from "@/types/dividas";
 
@@ -38,9 +39,13 @@ export function DebtCard({
             <p>{debt.creditor}</p>
           </div>
         </div>
-        <button className="debt-menu-button" type="button" aria-label={`${debtsContent.accessibility.debtActions}: ${debt.name}`} onClick={(event) => { event.stopPropagation(); onEdit(); }}>
-          <MoreIcon />
-        </button>
+        {!debt.generated ? (
+          <button className="debt-menu-button" type="button" aria-label={`${debtsContent.accessibility.debtActions}: ${debt.name}`} onClick={(event) => { event.stopPropagation(); onEdit(); }}>
+            <MoreIcon />
+          </button>
+        ) : (
+          <span className="smart-source-badge">{financialIntelligenceContent.recurring.automatic}</span>
+        )}
       </header>
 
       <div className="debt-balance-block">
@@ -70,7 +75,9 @@ export function DebtCard({
           {debtsContent.list.pay}
         </button>
         <div>
-          <button type="button" onClick={(event) => { event.stopPropagation(); onEdit(); }}>{debtsContent.list.edit}</button>
+          {!debt.generated ? (
+            <button type="button" onClick={(event) => { event.stopPropagation(); onEdit(); }}>{debtsContent.list.edit}</button>
+          ) : null}
           {!isPaid ? <button type="button" onClick={(event) => { event.stopPropagation(); onSettle(); }}>{debtsContent.list.settle}</button> : null}
         </div>
       </footer>

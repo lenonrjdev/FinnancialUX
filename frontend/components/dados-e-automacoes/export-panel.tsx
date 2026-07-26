@@ -1,5 +1,6 @@
 import { DatabaseIcon, DownloadIcon, FileIcon } from "@/components/shared/icons";
 import { dataToolsContent } from "@/content/dados-e-automacoes";
+import { getReferenceDate } from "@/lib/reference-date";
 import type {
   ExportConfiguration,
   ExportDataset,
@@ -21,7 +22,7 @@ export function ExportPanel({
 }) {
   const hasDates = configuration.dataset !== "accounts" && configuration.dataset !== "budgets" && configuration.dataset !== "full-backup";
   const extension = configuration.dataset === "full-backup" ? "json" : configuration.format;
-  const fileName = `${preview?.fileBase ?? "backup-financeiro"}-2026-07-25.${extension}`;
+  const fileName = `${preview?.fileBase ?? "backup-financeiro"}-${getReferenceDate()}.${extension}`;
 
   return (
     <section className="export-layout">

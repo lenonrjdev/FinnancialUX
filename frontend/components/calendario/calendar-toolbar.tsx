@@ -3,8 +3,10 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   TransactionsIcon,
+  SearchIcon,
 } from "@/components/shared/icons";
 import { calendarContent } from "@/content/calendario";
+import { financialIntelligenceContent } from "@/content/financial-intelligence";
 import { formatMonthLabel } from "@/lib/calendar";
 import type { FinancialAccount } from "@/types/contas";
 import type {
@@ -56,6 +58,16 @@ export function CalendarToolbar({
       </div>
 
       <div className="calendar-toolbar-right">
+        <label className="transactions-search calendar-search-field">
+          <SearchIcon />
+          <span className="sr-only">{financialIntelligenceContent.calendar.searchLabel}</span>
+          <input
+            value={filters.search}
+            onChange={(event) => onFiltersChange({ ...filters, search: event.target.value })}
+            placeholder={financialIntelligenceContent.calendar.searchPlaceholder}
+          />
+        </label>
+
         <div className="calendar-filter-selects">
           <label>
             <span>{calendarContent.toolbar.typeLabel}</span>

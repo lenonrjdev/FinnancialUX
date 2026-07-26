@@ -9,13 +9,11 @@ import { ReceivablesInsightPanel } from "@/components/recebimentos/receivables-i
 import { ReceivablesList } from "@/components/recebimentos/receivables-list";
 import { ReceivablesSummary } from "@/components/recebimentos/receivables-summary";
 import { CheckIcon } from "@/components/shared/icons";
-import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { receivablesContent } from "@/content/recebimentos";
-import { initialAccounts } from "@/data/contas";
-import {
-  initialReceivables,
-  receivablesReferenceDate,
-} from "@/data/recebimentos";
+import { financialIntelligenceContent } from "@/content/financial-intelligence";
+import { addDaysToDate } from "@/lib/financial-intelligence";
+import { formatSearchDate, matchesSearch } from "@/lib/search";
+import { useFinancialIntelligence } from "@/lib/use-financial-intelligence";
 import type {
   NewReceivableInput,
   Receivable,
@@ -32,75 +30,119 @@ const initialFilters: ReceivableFilters = {
   accountId: "all",
 };
 
-function normalize(value: string): string {
-  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
-}
-
 function createId(value: string): string {
-  return `${normalize(value).replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "recebimento"}-${Date.now()}`;
+  const slug = value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+  return `${slug || "recebimento"}-${Date.now()}`;
 }
 
-function addDays(value: string, days: number): string {
-  const date = new Date(`${value}T12:00:00Z`);
-  date.setUTCDate(date.getUTCDate() + days);
-  return date.toISOString().slice(0, 10);
-}
-
-function getAutomaticStatus(item: Receivable): ReceivableStatus {
-  if (item.receivedAmount >= item.amount) return "received";
+function getAutomaticStatus(item: Receivable, referenceDate: string): ReceivableStatus {
+  if (item.receivedAmount >= item.amount - 0.001) return "received";
   if (item.receivedAmount > 0) return "partial";
-  if (item.expectedDate < receivablesReferenceDate) return "overdue";
+  if (item.expectedDate < referenceDate) return "overdue";
   return "pending";
 }
 
 export default function RecebimentosView() {
-  const [receivables, setReceivables] = useFinanceDataState<Receivable[]>("receivables", initialReceivables);
+  const {
+    referenceDate,
+    accounts,
+    accountNames,
+    receivables,
+    setReceivables,
+    recordReceivableReceipt,
+  } = useFinancialIntelligence();
   const [filters, setFilters] = useState<ReceivableFilters>(initialFilters);
   const [newDialogOpen, setNewDialogOpen] = useState(false);
   const [receiptReceivableId, setReceiptReceivableId] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
-  const [accounts] = useFinanceDataState("accounts", initialAccounts);
-  const month = receivablesReferenceDate.slice(0, 7);
-  const sevenDaysLimit = addDays(receivablesReferenceDate, 7);
+  const month = referenceDate.slice(0, 7);
+  const sevenDaysLimit = addDaysToDate(referenceDate, 7);
+
+  const normalizedReceivables = useMemo(
+    () => receivables.map((item) => ({
+      ...item,
+      status: getAutomaticStatus(item, referenceDate),
+    })),
+    [receivables, referenceDate],
+  );
 
   const summary = useMemo(() => {
-    const received = receivables.filter((item) => item.receivedAt?.startsWith(month) || (item.status === "partial" && item.receivedAmount > 0)).reduce((total, item) => total + item.receivedAmount, 0);
-    const expected = receivables.reduce((total, item) => total + Math.max(0, item.amount - item.receivedAmount), 0);
-    const nextSevenDays = receivables.filter((item) => item.expectedDate >= receivablesReferenceDate && item.expectedDate <= sevenDaysLimit && item.status !== "received").reduce((total, item) => total + Math.max(0, item.amount - item.receivedAmount), 0);
-    const overdueItems = receivables.filter((item) => getAutomaticStatus(item) === "overdue");
-    const overdue = overdueItems.reduce((total, item) => total + Math.max(0, item.amount - item.receivedAmount), 0);
-    const recurring = receivables.filter((item) => item.recurrence !== "none").reduce((total, item) => total + item.amount, 0);
+    const received = normalizedReceivables
+      .filter((item) => item.receivedAt?.startsWith(month) || (item.status === "partial" && item.receivedAmount > 0))
+      .reduce((total, item) => total + item.receivedAmount, 0);
+    const expected = normalizedReceivables
+      .reduce((total, item) => total + Math.max(0, item.amount - item.receivedAmount), 0);
+    const nextSevenDays = normalizedReceivables
+      .filter((item) => (
+        item.expectedDate >= referenceDate
+        && item.expectedDate <= sevenDaysLimit
+        && item.status !== "received"
+      ))
+      .reduce((total, item) => total + Math.max(0, item.amount - item.receivedAmount), 0);
+    const overdueItems = normalizedReceivables.filter((item) => item.status === "overdue");
+    const overdue = overdueItems
+      .reduce((total, item) => total + Math.max(0, item.amount - item.receivedAmount), 0);
+    const recurring = normalizedReceivables
+      .filter((item) => item.recurrence !== "none")
+      .reduce((total, item) => total + item.amount, 0);
 
-    return { received, expected, nextSevenDays, overdue, recurring, overdueCount: overdueItems.length };
-  }, [month, receivables, sevenDaysLimit]);
+    return {
+      received,
+      expected,
+      nextSevenDays,
+      overdue,
+      recurring,
+      overdueCount: overdueItems.length,
+    };
+  }, [month, normalizedReceivables, referenceDate, sevenDaysLimit]);
 
-  const filteredReceivables = useMemo(() => {
-    const search = normalize(filters.search);
+  const filteredReceivables = useMemo(() => normalizedReceivables
+    .filter((item) => {
+      const matchesQuery = matchesSearch(filters.search, [
+        item.description,
+        item.source,
+        item.payer,
+        item.category,
+        item.notes,
+        item.amount,
+        item.receivedAmount,
+        item.expectedDate,
+        formatSearchDate(item.expectedDate),
+        accountNames[item.accountId],
+        receivablesContent.statuses[item.status],
+        receivablesContent.recurrences[item.recurrence],
+      ]);
+      const matchesStatus = filters.status === "all" || item.status === filters.status;
+      const matchesCategory = filters.category === "all" || item.category === filters.category;
+      const matchesAccount = filters.accountId === "all" || item.accountId === filters.accountId;
+      const matchesPeriod = filters.period === "all"
+        || (filters.period === "today" && item.expectedDate === referenceDate)
+        || (filters.period === "seven-days" && item.expectedDate >= referenceDate && item.expectedDate <= sevenDaysLimit)
+        || (filters.period === "month" && item.expectedDate.startsWith(month))
+        || (filters.period === "overdue" && item.status === "overdue");
 
-    return receivables
-      .map((item) => ({ ...item, status: getAutomaticStatus(item) }))
-      .filter((item) => {
-        const matchesSearch = !search || normalize(`${item.description} ${item.source} ${item.payer ?? ""} ${item.category}`).includes(search);
-        const matchesStatus = filters.status === "all" || item.status === filters.status;
-        const matchesCategory = filters.category === "all" || item.category === filters.category;
-        const matchesAccount = filters.accountId === "all" || item.accountId === filters.accountId;
-        const matchesPeriod = filters.period === "all"
-          || (filters.period === "today" && item.expectedDate === receivablesReferenceDate)
-          || (filters.period === "seven-days" && item.expectedDate >= receivablesReferenceDate && item.expectedDate <= sevenDaysLimit)
-          || (filters.period === "month" && item.expectedDate.startsWith(month))
-          || (filters.period === "overdue" && item.status === "overdue");
+      return matchesQuery && matchesStatus && matchesCategory && matchesAccount && matchesPeriod;
+    })
+    .sort((a, b) => {
+      const statusOrder = { overdue: 0, pending: 1, partial: 2, received: 3 } as const;
+      return statusOrder[a.status] - statusOrder[b.status]
+        || a.expectedDate.localeCompare(b.expectedDate);
+    }), [accountNames, filters, month, normalizedReceivables, referenceDate, sevenDaysLimit]);
 
-        return matchesSearch && matchesStatus && matchesCategory && matchesAccount && matchesPeriod;
-      })
-      .sort((a, b) => {
-        const statusOrder = { overdue: 0, pending: 1, partial: 2, received: 3 } as const;
-        return statusOrder[a.status] - statusOrder[b.status] || a.expectedDate.localeCompare(b.expectedDate);
-      });
-  }, [filters, month, receivables, sevenDaysLimit]);
-
-  const categories = [...new Set(receivables.map((item) => item.category))].sort();
-  const selectedReceivable = receivables.find((item) => item.id === receiptReceivableId);
+  const categories = useMemo(
+    () => [...new Set(normalizedReceivables.map((item) => item.category))]
+      .sort((a, b) => a.localeCompare(b, "pt-BR")),
+    [normalizedReceivables],
+  );
+  const selectedReceivable = normalizedReceivables.find(
+    (item) => item.id === receiptReceivableId,
+  );
 
   function showFeedback(message: string) {
     setFeedbackMessage(message);
@@ -112,44 +154,60 @@ export default function RecebimentosView() {
       id: createId(input.description),
       ...input,
       receivedAmount: 0,
-      status: input.expectedDate < receivablesReferenceDate ? "overdue" : "pending",
-      createdAt: receivablesReferenceDate,
+      status: input.expectedDate < referenceDate ? "overdue" : "pending",
+      createdAt: referenceDate,
     };
     setReceivables((current) => [receivable, ...current]);
     showFeedback(receivablesContent.newDialog.success);
   }
 
   function registerReceipt(input: ReceivableReceiptInput) {
-    const receivable = receivables.find((item) => item.id === input.receivableId);
-    if (!receivable) return;
-    const nextReceivedAmount = Math.min(receivable.amount, receivable.receivedAmount + input.amount);
-    const isReceived = nextReceivedAmount >= receivable.amount - 0.001;
-
-    setReceivables((current) => current.map((item) => item.id === input.receivableId ? {
-      ...item,
-      accountId: input.accountId,
-      receivedAmount: nextReceivedAmount,
-      status: isReceived ? "received" : "partial",
-      receivedAt: isReceived ? input.receivedDate : item.receivedAt,
-    } : item));
-    showFeedback(isReceived ? receivablesContent.receiptDialog.successFull : receivablesContent.receiptDialog.successPartial);
+    const result = recordReceivableReceipt(input);
+    if (!result.amount) return;
+    showFeedback(result.received
+      ? financialIntelligenceContent.feedback.receiptSaved
+      : receivablesContent.receiptDialog.successPartial);
   }
 
   return (
     <div className="financial-management-page">
       <ReceivablesHeading onNew={() => setNewDialogOpen(true)} />
       <ReceivablesSummary {...summary} />
-      <ReceivablesFilters filters={filters} categories={categories} accounts={accounts} onChange={setFilters} />
+      <ReceivablesFilters
+        filters={filters}
+        categories={categories}
+        accounts={accounts}
+        onChange={setFilters}
+      />
 
       <div className="commitment-workspace-grid">
-        <ReceivablesList receivables={filteredReceivables} accounts={accounts} onReceive={setReceiptReceivableId} />
-        <ReceivablesInsightPanel receivables={receivables} referenceDate={receivablesReferenceDate} />
+        <ReceivablesList
+          receivables={filteredReceivables}
+          accounts={accounts}
+          onReceive={setReceiptReceivableId}
+        />
+        <ReceivablesInsightPanel receivables={normalizedReceivables} referenceDate={referenceDate} />
       </div>
 
-      {newDialogOpen ? <NewReceivableDialog accounts={accounts} onClose={() => setNewDialogOpen(false)} onSubmit={createReceivable} /> : null}
-      {selectedReceivable ? <ReceiveReceivableDialog receivable={selectedReceivable} accounts={accounts} onClose={() => setReceiptReceivableId("")} onSubmit={registerReceipt} /> : null}
+      {newDialogOpen ? (
+        <NewReceivableDialog
+          accounts={accounts}
+          onClose={() => setNewDialogOpen(false)}
+          onSubmit={createReceivable}
+        />
+      ) : null}
+      {selectedReceivable ? (
+        <ReceiveReceivableDialog
+          receivable={selectedReceivable}
+          accounts={accounts}
+          onClose={() => setReceiptReceivableId("")}
+          onSubmit={registerReceipt}
+        />
+      ) : null}
 
-      {feedbackMessage ? <div className="transaction-feedback"><CheckIcon /> {feedbackMessage}</div> : null}
+      {feedbackMessage ? (
+        <div className="transaction-feedback"><CheckIcon /> {feedbackMessage}</div>
+      ) : null}
     </div>
   );
 }

@@ -2,14 +2,11 @@
 
 import { useMemo } from "react";
 import { useFinanceDataState } from "@/components/providers/finance-data-provider";
-import { initialPayables } from "@/data/contas-a-pagar";
-import { initialAccounts } from "@/data/contas";
-import { transactionsData } from "@/data/lancamentos";
 import { initialGoals } from "@/data/metas";
 import { initialMonthlyBudgets } from "@/data/orcamentos";
+import { endOfMonth } from "@/lib/financial-intelligence";
 import { getReferenceDate, getReferenceMonth } from "@/lib/reference-date";
-import type { Payable } from "@/types/contas-a-pagar";
-import type { FinancialAccount } from "@/types/contas";
+import { useFinancialIntelligence } from "@/lib/use-financial-intelligence";
 import type { FinancialTransaction } from "@/types/lancamentos";
 import type { FinancialGoal } from "@/types/metas";
 import type { MonthlyBudget } from "@/types/orcamentos";
@@ -86,9 +83,15 @@ function transactionIcon(transaction: FinancialTransaction): OverviewIconName {
 }
 
 export function useFinancialOverviewData(): FinancialOverviewData {
-  const [accounts] = useFinanceDataState<FinancialAccount[]>("accounts", initialAccounts);
-  const [transactions] = useFinanceDataState<FinancialTransaction[]>("transactions", transactionsData);
-  const [payables] = useFinanceDataState<Payable[]>("payables", initialPayables);
+  const {
+    accounts,
+    transactions,
+    unifiedPayables,
+    cards,
+    receivables,
+    subscriptions,
+    debts,
+  } = useFinancialIntelligence();
   const [budgets] = useFinanceDataState<MonthlyBudget[]>("monthly-budgets", initialMonthlyBudgets);
   const [goals] = useFinanceDataState<FinancialGoal[]>("goals", initialGoals);
 
@@ -108,7 +111,10 @@ export function useFinancialOverviewData(): FinancialOverviewData {
     const result = income - expense;
     const includedAccounts = accounts.filter((account) => account.includeInTotal);
     const totalBalance = includedAccounts.reduce((total, account) => total + account.balance, 0);
-    const pendingPayables = payables.filter((payable) => payable.status !== "paid");
+    const commitmentLimit = endOfMonth(referenceDate);
+    const pendingPayables = unifiedPayables.filter((payable) => (
+      payable.status !== "paid" && payable.dueDate <= commitmentLimit
+    ));
     const pendingTotal = pendingPayables.reduce(
       (total, payable) => total + Math.max(payable.amount - payable.paidAmount, 0),
       0,
@@ -141,7 +147,11 @@ export function useFinancialOverviewData(): FinancialOverviewData {
       .slice(0, 3);
     const hasFinancialData = accounts.length > 0
       || transactions.length > 0
-      || payables.length > 0
+      || unifiedPayables.length > 0
+      || cards.length > 0
+      || receivables.length > 0
+      || subscriptions.length > 0
+      || debts.length > 0
       || budgets.length > 0
       || goals.length > 0;
 
@@ -227,5 +237,5 @@ export function useFinancialOverviewData(): FinancialOverviewData {
         kind: transaction.type as TransactionKind,
       })),
     };
-  }, [accounts, budgets, goals, payables, transactions]);
+  }, [accounts, budgets, cards, debts, goals, receivables, subscriptions, transactions, unifiedPayables]);
 }

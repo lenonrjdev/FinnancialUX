@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CloseIcon } from "@/components/shared/icons";
 import { receivablesContent } from "@/content/recebimentos";
+import { getReferenceDate } from "@/lib/reference-date";
 import type { FinancialAccount } from "@/types/contas";
 import type {
   NewReceivableInput,
@@ -26,7 +27,7 @@ export function NewReceivableDialog({ accounts, onClose, onSubmit }: NewReceivab
     payer: "",
     category: receivablesContent.categories[0],
     amount: "",
-    expectedDate: "2026-07-26",
+    expectedDate: getReferenceDate(),
     accountId: accounts[0]?.id ?? "",
     recurrence: "none" as ReceivableRecurrence,
     notes: "",

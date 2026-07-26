@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CloseIcon } from "@/components/shared/icons";
 import { receivablesContent } from "@/content/recebimentos";
 import { formatCurrency } from "@/lib/formatters";
+import { getReferenceDate } from "@/lib/reference-date";
 import type { FinancialAccount } from "@/types/contas";
 import type {
   Receivable,
@@ -25,7 +26,7 @@ export function ReceiveReceivableDialog({ receivable, accounts, onClose, onSubmi
   const remaining = Math.max(0, receivable.amount - receivable.receivedAmount);
   const [form, setForm] = useState({
     amount: remaining.toFixed(2).replace(".", ","),
-    receivedDate: "2026-07-25",
+    receivedDate: getReferenceDate(),
     accountId: receivable.accountId,
   });
   const [error, setError] = useState("");

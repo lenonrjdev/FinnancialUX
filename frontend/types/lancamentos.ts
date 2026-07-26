@@ -16,6 +16,8 @@ export type FinancialTransaction = {
   type: TransactionType;
   status: TransactionStatus;
   note?: string;
+  sourceType?: string;
+  sourceId?: string;
 };
 
 export type NewTransactionInput = Omit<FinancialTransaction, "id">;

@@ -14,6 +14,8 @@ export type CalendarEventSource =
   | "payable"
   | "receivable"
   | "invoice"
+  | "subscription"
+  | "debt"
   | "manual";
 
 export type FinancialCalendarEvent = {
@@ -42,6 +44,7 @@ export type NewCalendarEventInput = {
 };
 
 export type CalendarFilters = {
+  search: string;
   type: "all" | CalendarEventType;
   status: "all" | CalendarEventStatus;
   accountId: "all" | string;

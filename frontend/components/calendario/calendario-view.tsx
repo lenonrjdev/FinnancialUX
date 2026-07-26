@@ -10,11 +10,10 @@ import { MonthCalendar } from "@/components/calendario/month-calendar";
 import { MonthProjection } from "@/components/calendario/month-projection";
 import { NewCalendarEventDialog } from "@/components/calendario/new-calendar-event-dialog";
 import { CheckIcon } from "@/components/shared/icons";
-import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { calendarContent } from "@/content/calendario";
-import { calendarReferenceDate, initialCalendarEvents } from "@/data/calendario";
-import { initialAccounts } from "@/data/contas";
 import { getMonthKey, shiftMonth } from "@/lib/calendar";
+import { formatSearchDate, matchesSearch } from "@/lib/search";
+import { useFinancialIntelligence } from "@/lib/use-financial-intelligence";
 import type {
   CalendarFilters,
   CalendarViewMode,
@@ -23,6 +22,7 @@ import type {
 } from "@/types/calendario";
 
 const initialFilters: CalendarFilters = {
+  search: "",
   type: "all",
   status: "all",
   accountId: "all",
@@ -46,35 +46,52 @@ function isOutflow(event: FinancialCalendarEvent): boolean {
 }
 
 export default function CalendarioView() {
-  const [events, setEvents] = useFinanceDataState<FinancialCalendarEvent[]>("calendar-events", initialCalendarEvents);
-  const [monthKey, setMonthKey] = useState(getMonthKey(calendarReferenceDate));
-  const [selectedDate, setSelectedDate] = useState(calendarReferenceDate);
+  const {
+    referenceDate,
+    accounts,
+    accountNames,
+    calendarEvents,
+    setManualCalendarEvents,
+    completeCalendarEvent,
+  } = useFinancialIntelligence();
+  const [monthKey, setMonthKey] = useState(getMonthKey(referenceDate));
+  const [selectedDate, setSelectedDate] = useState(referenceDate);
   const [filters, setFilters] = useState<CalendarFilters>(initialFilters);
   const [viewMode, setViewMode] = useState<CalendarViewMode>("month");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
-  const [accounts] = useFinanceDataState("accounts", initialAccounts);
-
   const monthEvents = useMemo(
-    () => events.filter((event) => event.date.startsWith(monthKey)),
-    [events, monthKey],
+    () => calendarEvents.filter((event) => event.date.startsWith(monthKey)),
+    [calendarEvents, monthKey],
   );
 
   const filteredMonthEvents = useMemo(
     () => monthEvents.filter((event) => {
+      const matchesQuery = matchesSearch(filters.search, [
+        event.title,
+        event.category,
+        event.notes,
+        event.sourceLabel,
+        accountNames[event.accountId ?? ""],
+        event.amount,
+        event.date,
+        formatSearchDate(event.date),
+        calendarContent.types[event.type],
+        calendarContent.statuses[event.status],
+      ]);
       const matchesType = filters.type === "all" || event.type === filters.type;
       const matchesStatus = filters.status === "all" || event.status === filters.status;
       const matchesAccount = filters.accountId === "all" || event.accountId === filters.accountId;
-      return matchesType && matchesStatus && matchesAccount;
+      return matchesQuery && matchesType && matchesStatus && matchesAccount;
     }),
-    [filters, monthEvents],
+    [accountNames, filters, monthEvents],
   );
 
   const selectedDayEvents = useMemo(
     () => filteredMonthEvents
       .filter((event) => event.date === selectedDate)
-      .sort((a, b) => a.status.localeCompare(b.status) || a.title.localeCompare(b.title)),
+      .sort((a, b) => a.status.localeCompare(b.status) || a.title.localeCompare(b.title, "pt-BR")),
     [filteredMonthEvents, selectedDate],
   );
 
@@ -116,8 +133,8 @@ export default function CalendarioView() {
   }
 
   function goToToday() {
-    setMonthKey(getMonthKey(calendarReferenceDate));
-    setSelectedDate(calendarReferenceDate);
+    setMonthKey(getMonthKey(referenceDate));
+    setSelectedDate(referenceDate);
   }
 
   function selectDate(date: string) {
@@ -130,18 +147,20 @@ export default function CalendarioView() {
     const nextEvent: FinancialCalendarEvent = {
       id: createId(input.title),
       ...input,
-      status: input.date < calendarReferenceDate ? "overdue" : "scheduled",
+      status: input.date < referenceDate ? "overdue" : "scheduled",
       source: "manual",
     };
 
-    setEvents((current) => [...current, nextEvent].sort((a, b) => a.date.localeCompare(b.date)));
+    setManualCalendarEvents((current) => [...current, nextEvent]
+      .sort((a, b) => a.date.localeCompare(b.date)));
     setMonthKey(getMonthKey(input.date));
     setSelectedDate(input.date);
     showFeedback(calendarContent.dialog.success);
   }
 
   function completeEvent(eventId: string) {
-    setEvents((current) => current.map((event) => event.id === eventId ? { ...event, status: "completed" } : event));
+    const event = calendarEvents.find((item) => item.id === eventId);
+    if (!event || !completeCalendarEvent(event)) return;
     showFeedback(calendarContent.feedback.completed);
   }
 
@@ -167,7 +186,7 @@ export default function CalendarioView() {
             monthKey={monthKey}
             events={filteredMonthEvents}
             selectedDate={selectedDate}
-            referenceDate={calendarReferenceDate}
+            referenceDate={referenceDate}
             onSelectDate={selectDate}
           />
           <div className="calendar-side-column">

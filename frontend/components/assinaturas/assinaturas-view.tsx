@@ -10,16 +10,14 @@ import { SubscriptionsList } from "@/components/assinaturas/subscriptions-list";
 import { SubscriptionsSummary } from "@/components/assinaturas/subscriptions-summary";
 import { SubscriptionsToolbar } from "@/components/assinaturas/subscriptions-toolbar";
 import { CheckIcon } from "@/components/shared/icons";
-import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { subscriptionsContent } from "@/content/assinaturas";
-import { initialSubscriptions, initialSubscriptionCharges, subscriptionsReferenceDate } from "@/data/assinaturas";
-import { initialAccounts } from "@/data/contas";
+import { formatSearchDate, matchesSearch } from "@/lib/search";
+import { useFinancialIntelligence } from "@/lib/use-financial-intelligence";
 import type {
   BillingCycle,
   PersonalSubscription,
   SubscriptionAccountFilter,
   SubscriptionCategoryFilter,
-  SubscriptionCharge,
   SubscriptionChargeInput,
   SubscriptionFormInput,
   SubscriptionRow,
@@ -55,21 +53,16 @@ function differenceInDays(value: string, reference: string): number {
   return Math.round((date - base) / 86400000);
 }
 
-function addBillingCycle(value: string, cycle: BillingCycle): string {
-  const date = new Date(`${value}T12:00:00Z`);
-  if (cycle === "weekly") date.setUTCDate(date.getUTCDate() + 7);
-  if (cycle === "monthly") date.setUTCMonth(date.getUTCMonth() + 1);
-  if (cycle === "quarterly") date.setUTCMonth(date.getUTCMonth() + 3);
-  if (cycle === "semiannual") date.setUTCMonth(date.getUTCMonth() + 6);
-  if (cycle === "annual") date.setUTCFullYear(date.getUTCFullYear() + 1);
-  return date.toISOString().slice(0, 10);
-}
-
-function computeSubscription(subscription: PersonalSubscription): SubscriptionRow {
+function computeSubscription(
+  subscription: PersonalSubscription,
+  referenceDate: string,
+): SubscriptionRow {
   const monthly = monthlyEquivalent(subscription.amount, subscription.billingCycle);
   const annual = annualEquivalent(subscription.amount, subscription.billingCycle);
-  const daysUntilCharge = differenceInDays(subscription.nextChargeDate, subscriptionsReferenceDate);
-  const priceDifference = subscription.previousAmount ? Math.max(subscription.amount - subscription.previousAmount, 0) : 0;
+  const daysUntilCharge = differenceInDays(subscription.nextChargeDate, referenceDate);
+  const priceDifference = subscription.previousAmount
+    ? Math.max(subscription.amount - subscription.previousAmount, 0)
+    : 0;
   const priceChangePercentage = subscription.previousAmount && priceDifference > 0
     ? (priceDifference / subscription.previousAmount) * 100
     : 0;
@@ -94,11 +87,19 @@ function computeSubscription(subscription: PersonalSubscription): SubscriptionRo
 }
 
 export default function AssinaturasView() {
-  const [storedAccounts] = useFinanceDataState("accounts", initialAccounts);
-  const accounts = useMemo(() => storedAccounts.map((account) => ({ id: account.id, name: account.name })), [storedAccounts]);
-  const accountNames = useMemo(() => Object.fromEntries(accounts.map((account) => [account.id, account.name])), [accounts]);
-  const [subscriptions, setSubscriptions] = useFinanceDataState<PersonalSubscription[]>("subscriptions", initialSubscriptions);
-  const [charges, setCharges] = useFinanceDataState<SubscriptionCharge[]>("subscription-charges", initialSubscriptionCharges);
+  const {
+    referenceDate,
+    accounts: storedAccounts,
+    accountNames,
+    subscriptions,
+    setSubscriptions,
+    subscriptionCharges: charges,
+    recordSubscriptionCharge,
+  } = useFinancialIntelligence();
+  const accounts = useMemo(
+    () => storedAccounts.map((account) => ({ id: account.id, name: account.name })),
+    [storedAccounts],
+  );
   const [view, setView] = useState<SubscriptionView>("subscriptions");
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<SubscriptionCategoryFilter>("all");
@@ -118,25 +119,41 @@ export default function AssinaturasView() {
     }
   }, [selectedId, subscriptions]);
 
-  const subscriptionRows = useMemo(() => subscriptions.map(computeSubscription), [subscriptions]);
+  const subscriptionRows = useMemo(
+    () => subscriptions.map((subscription) => computeSubscription(subscription, referenceDate)),
+    [referenceDate, subscriptions],
+  );
   const filteredSubscriptions = useMemo(() => subscriptionRows.filter((subscription) => {
-    const query = search.trim().toLocaleLowerCase("pt-BR");
-    const matchesSearch = !query
-      || subscription.name.toLocaleLowerCase("pt-BR").includes(query)
-      || subscription.provider.toLocaleLowerCase("pt-BR").includes(query)
-      || subscription.notes.toLocaleLowerCase("pt-BR").includes(query);
+    const matchesQuery = matchesSearch(search, [
+      subscription.name,
+      subscription.provider,
+      subscription.notes,
+      subscription.amount,
+      subscription.nextChargeDate,
+      formatSearchDate(subscription.nextChargeDate),
+      subscriptionsContent.categories[subscription.category],
+      subscriptionsContent.statuses[subscription.status],
+      subscriptionsContent.billingCycles[subscription.billingCycle],
+      accountNames[subscription.accountId],
+      subscription.autoRenew ? "renovação automática" : "renovação manual",
+    ]);
     const matchesCategory = category === "all" || subscription.category === category;
     const matchesStatus = status === "all" || subscription.status === status;
     const matchesAccount = accountId === "all" || subscription.accountId === accountId;
-    return matchesSearch && matchesCategory && matchesStatus && matchesAccount;
-  }), [accountId, category, search, status, subscriptionRows]);
+    return matchesQuery && matchesCategory && matchesStatus && matchesAccount;
+  }), [accountId, accountNames, category, search, status, subscriptionRows]);
 
-  const filteredIds = useMemo(() => new Set(filteredSubscriptions.map((item) => item.id)), [filteredSubscriptions]);
+  const filteredIds = useMemo(
+    () => new Set(filteredSubscriptions.map((item) => item.id)),
+    [filteredSubscriptions],
+  );
   const filteredCharges = useMemo(() => charges
     .filter((charge) => filteredIds.has(charge.subscriptionId))
     .sort((a, b) => b.date.localeCompare(a.date)), [charges, filteredIds]);
   const selected = subscriptionRows.find((item) => item.id === selectedId) ?? subscriptionRows[0];
-  const activeSubscriptions = subscriptionRows.filter((item) => item.status === "active" || item.status === "trial");
+  const activeSubscriptions = subscriptionRows.filter(
+    (item) => item.status === "active" || item.status === "trial",
+  );
 
   const summary = useMemo(() => {
     const monthly = activeSubscriptions.reduce((total, item) => total + item.monthlyEquivalent, 0);
@@ -147,7 +164,13 @@ export default function AssinaturasView() {
     const savings = activeSubscriptions
       .filter((item) => item.usage === "low" || item.status === "trial")
       .reduce((total, item) => total + item.monthlyEquivalent, 0);
-    return { monthly, annual, nextThirtyDays, savings, activeCount: activeSubscriptions.length };
+    return {
+      monthly,
+      annual,
+      nextThirtyDays,
+      savings,
+      activeCount: activeSubscriptions.length,
+    };
   }, [activeSubscriptions]);
 
   function showFeedback(message: string) {
@@ -172,13 +195,15 @@ export default function AssinaturasView() {
 
   function submitSubscription(input: SubscriptionFormInput) {
     if (editingSubscription) {
-      setSubscriptions((current) => current.map((item) => item.id === editingSubscription.id ? { ...item, ...input } : item));
+      setSubscriptions((current) => current.map((item) => item.id === editingSubscription.id
+        ? { ...item, ...input }
+        : item));
       showFeedback(subscriptionsContent.subscriptionDialog.successEdit);
     } else {
       const next: PersonalSubscription = {
         id: `subscription-${Date.now()}`,
         ...input,
-        createdAt: subscriptionsReferenceDate,
+        createdAt: referenceDate,
       };
       setSubscriptions((current) => [...current, next]);
       setSelectedId(next.id);
@@ -189,36 +214,26 @@ export default function AssinaturasView() {
   }
 
   function submitCharge(input: SubscriptionChargeInput) {
-    const subscription = subscriptionRows.find((item) => item.id === input.subscriptionId);
-    if (!subscription) return;
-
-    const nextCharge: SubscriptionCharge = {
-      id: `subscription-charge-${Date.now()}`,
-      ...input,
-    };
-    setCharges((current) => [nextCharge, ...current]);
-
-    if ((input.status === "paid" || input.status === "skipped") && input.date >= subscription.nextChargeDate) {
-      setSubscriptions((current) => current.map((item) => item.id === subscription.id ? {
-        ...item,
-        nextChargeDate: addBillingCycle(item.nextChargeDate, item.billingCycle),
-        status: item.status === "trial" && input.status === "paid" ? "active" : item.status,
-      } : item));
-    }
-
-    setSelectedId(subscription.id);
+    if (!recordSubscriptionCharge(input)) return;
+    setSelectedId(input.subscriptionId);
     setChargeDialogOpen(false);
     showFeedback(subscriptionsContent.chargeDialog.success);
   }
 
   function togglePause(subscription: SubscriptionRow) {
     const nextStatus = subscription.status === "paused" ? "active" : "paused";
-    setSubscriptions((current) => current.map((item) => item.id === subscription.id ? { ...item, status: nextStatus } : item));
-    showFeedback(nextStatus === "paused" ? subscriptionsContent.feedback.paused : subscriptionsContent.feedback.resumed);
+    setSubscriptions((current) => current.map((item) => item.id === subscription.id
+      ? { ...item, status: nextStatus }
+      : item));
+    showFeedback(nextStatus === "paused"
+      ? subscriptionsContent.feedback.paused
+      : subscriptionsContent.feedback.resumed);
   }
 
   function cancelSubscription(subscription: SubscriptionRow) {
-    setSubscriptions((current) => current.map((item) => item.id === subscription.id ? { ...item, status: "cancelled", autoRenew: false } : item));
+    setSubscriptions((current) => current.map((item) => item.id === subscription.id
+      ? { ...item, status: "cancelled", autoRenew: false }
+      : item));
     showFeedback(subscriptionsContent.feedback.cancelled);
   }
 
@@ -244,7 +259,12 @@ export default function AssinaturasView() {
         onCategoryChange={setCategory}
         onStatusChange={setStatus}
         onAccountChange={setAccountId}
-        onClear={() => { setSearch(""); setCategory("all"); setStatus("all"); setAccountId("all"); }}
+        onClear={() => {
+          setSearch("");
+          setCategory("all");
+          setStatus("all");
+          setAccountId("all");
+        }}
       />
 
       {view === "subscriptions" ? (
@@ -262,7 +282,11 @@ export default function AssinaturasView() {
           <SubscriptionInsights subscriptions={subscriptionRows} selected={selected} />
         </div>
       ) : (
-        <ChargesList charges={filteredCharges} subscriptions={subscriptions} accountNames={accountNames} />
+        <ChargesList
+          charges={filteredCharges}
+          subscriptions={subscriptions}
+          accountNames={accountNames}
+        />
       )}
 
       {subscriptionDialogOpen ? (
@@ -270,8 +294,11 @@ export default function AssinaturasView() {
           key={editingSubscription?.id ?? "new-subscription"}
           editing={editingSubscription}
           accounts={accounts}
-          referenceDate={subscriptionsReferenceDate}
-          onClose={() => { setSubscriptionDialogOpen(false); setEditingSubscription(null); }}
+          referenceDate={referenceDate}
+          onClose={() => {
+            setSubscriptionDialogOpen(false);
+            setEditingSubscription(null);
+          }}
           onSubmit={submitSubscription}
         />
       ) : null}
@@ -282,7 +309,7 @@ export default function AssinaturasView() {
           subscriptions={subscriptionRows}
           accounts={accounts}
           initialSubscriptionId={chargeSubscriptionId}
-          referenceDate={subscriptionsReferenceDate}
+          referenceDate={referenceDate}
           onClose={() => setChargeDialogOpen(false)}
           onSubmit={submitCharge}
         />

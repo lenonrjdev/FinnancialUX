@@ -9,16 +9,12 @@ import { InvoicePanel } from "@/components/cartoes/invoice-panel";
 import { NewCardDialog } from "@/components/cartoes/new-card-dialog";
 import { NewPurchaseDialog } from "@/components/cartoes/new-purchase-dialog";
 import { PayInvoiceDialog } from "@/components/cartoes/pay-invoice-dialog";
-import { CheckIcon } from "@/components/shared/icons";
-import { useFinanceDataState } from "@/components/providers/finance-data-provider";
+import { CheckIcon, SearchIcon } from "@/components/shared/icons";
 import { cardsContent } from "@/content/cartoes";
-import { initialAccounts } from "@/data/contas";
-import {
-  initialCardInvoices,
-  initialCardPurchases,
-  initialCreditCards,
-  initialInstallmentPlans,
-} from "@/data/cartoes";
+import { financialIntelligenceContent } from "@/content/financial-intelligence";
+import { getReferenceDate, getReferenceMonth } from "@/lib/reference-date";
+import { formatSearchDate, matchesSearch } from "@/lib/search";
+import { useFinancialIntelligence } from "@/lib/use-financial-intelligence";
 import type {
   CardInvoice,
   CardPurchase,
@@ -46,8 +42,7 @@ function createId(value: string): string {
   const slug = normalize(value)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
-
-  return `${slug || "cartao"}-${Date.now()}`;
+  return `${slug || "cartao"}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
 function getReferenceLabel(reference: string): string {
@@ -62,7 +57,9 @@ function addMonths(reference: string, months: number): string {
 }
 
 function buildDate(reference: string, day: number): string {
-  return `${reference}-${String(day).padStart(2, "0")}`;
+  const [year, month] = reference.split("-").map(Number);
+  const lastDay = new Date(Date.UTC(year, month, 0, 12)).getUTCDate();
+  return `${reference}-${String(Math.min(Math.max(day, 1), lastDay)).padStart(2, "0")}`;
 }
 
 function findFirstOpenInvoice(invoices: CardInvoice[], cardId: string): CardInvoice | undefined {
@@ -72,14 +69,19 @@ function findFirstOpenInvoice(invoices: CardInvoice[], cardId: string): CardInvo
 }
 
 export default function CartoesView() {
-  const [accounts] = useFinanceDataState("accounts", initialAccounts);
-  const [cards, setCards] = useFinanceDataState<CreditCard[]>("credit-cards", initialCreditCards);
-  const [invoices, setInvoices] = useFinanceDataState<CardInvoice[]>("card-invoices", initialCardInvoices);
-  const [purchases, setPurchases] = useFinanceDataState<CardPurchase[]>("card-purchases", initialCardPurchases);
-  const [installmentPlans, setInstallmentPlans] = useFinanceDataState<InstallmentPlan[]>(
-    "installment-plans",
-    initialInstallmentPlans,
-  );
+  const {
+    accounts,
+    cards,
+    setCards,
+    invoices,
+    setInvoices,
+    cardPurchases: purchases,
+    setCardPurchases: setPurchases,
+    installmentPlans,
+    setInstallmentPlans,
+    recordInvoicePayment,
+  } = useFinancialIntelligence();
+  const [search, setSearch] = useState("");
   const [selectedCardId, setSelectedCardId] = useState("");
   const [selectedInvoiceId, setSelectedInvoiceId] = useState("");
   const [newCardOpen, setNewCardOpen] = useState(false);
@@ -87,37 +89,107 @@ export default function CartoesView() {
   const [paymentInvoiceId, setPaymentInvoiceId] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
+  const visibleCards = useMemo(() => cards.filter((card) => {
+    const cardInvoices = invoices.filter((invoice) => invoice.cardId === card.id);
+    const cardPurchases = purchases.filter((purchase) => purchase.cardId === card.id);
+    const cardPlans = installmentPlans.filter((plan) => plan.cardId === card.id);
+    return matchesSearch(search, [
+      card.name,
+      card.institution,
+      card.lastFourDigits,
+      card.brand,
+      card.status,
+      card.limit,
+      card.usedLimit,
+      ...cardInvoices.flatMap((invoice) => [
+        invoice.referenceLabel,
+        invoice.reference,
+        invoice.amount,
+        invoice.status,
+        invoice.dueDate,
+        formatSearchDate(invoice.dueDate),
+      ]),
+      ...cardPurchases.flatMap((purchase) => [
+        purchase.description,
+        purchase.category,
+        purchase.totalAmount,
+        purchase.installmentAmount,
+        purchase.date,
+        formatSearchDate(purchase.date),
+      ]),
+      ...cardPlans.flatMap((plan) => [plan.description, plan.category, plan.totalAmount]),
+    ]);
+  }), [cards, installmentPlans, invoices, purchases, search]);
+
   useEffect(() => {
-    const nextCardId = cards.some((card) => card.id === selectedCardId)
+    const availableCards = search ? visibleCards : cards;
+    const nextCardId = availableCards.some((card) => card.id === selectedCardId)
       ? selectedCardId
-      : cards[0]?.id ?? "";
+      : availableCards[0]?.id ?? "";
     if (nextCardId !== selectedCardId) setSelectedCardId(nextCardId);
 
     const cardInvoices = invoices.filter((invoice) => invoice.cardId === nextCardId);
     if (!cardInvoices.some((invoice) => invoice.id === selectedInvoiceId)) {
-      setSelectedInvoiceId(findFirstOpenInvoice(invoices, nextCardId)?.id ?? cardInvoices[0]?.id ?? "");
+      setSelectedInvoiceId(
+        findFirstOpenInvoice(invoices, nextCardId)?.id
+        ?? cardInvoices[0]?.id
+        ?? "",
+      );
     }
-  }, [cards, invoices, selectedCardId, selectedInvoiceId]);
+  }, [cards, invoices, search, selectedCardId, selectedInvoiceId, visibleCards]);
 
   const selectedCard = cards.find((card) => card.id === selectedCardId);
   const selectedInvoice = invoices.find((invoice) => invoice.id === paymentInvoiceId);
+  const selectedCardMatches = selectedCard ? matchesSearch(search, [
+    selectedCard.name,
+    selectedCard.institution,
+    selectedCard.lastFourDigits,
+    selectedCard.brand,
+    selectedCard.status,
+  ]) : false;
   const selectedCardInvoices = invoices
     .filter((invoice) => invoice.cardId === selectedCardId)
+    .filter((invoice) => {
+      if (!search || selectedCardMatches) return true;
+      const invoicePurchases = purchases.filter((purchase) => purchase.invoiceId === invoice.id);
+      return matchesSearch(search, [
+        invoice.reference,
+        invoice.referenceLabel,
+        invoice.amount,
+        invoice.status,
+        invoice.dueDate,
+        formatSearchDate(invoice.dueDate),
+        ...invoicePurchases.flatMap((purchase) => [
+          purchase.description,
+          purchase.category,
+          purchase.totalAmount,
+          purchase.installmentAmount,
+        ]),
+      ]);
+    })
     .sort((a, b) => {
       const statusOrder = { open: 0, closed: 1, paid: 2 } as const;
-      const statusDifference = statusOrder[a.status] - statusOrder[b.status];
-      return statusDifference || a.reference.localeCompare(b.reference);
+      return statusOrder[a.status] - statusOrder[b.status]
+        || a.reference.localeCompare(b.reference);
     });
+  const visibleInstallmentPlans = installmentPlans.filter((plan) => (
+    !search
+    || matchesSearch(search, [
+      plan.description,
+      plan.category,
+      plan.totalAmount,
+      plan.installmentAmount,
+      cards.find((card) => card.id === plan.cardId)?.name,
+    ])
+  ));
 
   const summary = useMemo(() => {
     const activeCards = cards.filter((card) => card.status === "active");
     const totalLimit = activeCards.reduce((total, card) => total + card.limit, 0);
     const usedLimit = activeCards.reduce((total, card) => total + card.usedLimit, 0);
-    const currentOpenInvoices = activeCards.map((card) =>
-      findFirstOpenInvoice(invoices, card.id),
-    );
+    const currentOpenInvoices = activeCards.map((card) => findFirstOpenInvoice(invoices, card.id));
     const openInvoices = currentOpenInvoices.reduce(
-      (total, invoice) => total + (invoice?.amount ?? 0),
+      (total, invoice) => total + Math.max(0, (invoice?.amount ?? 0) - (invoice?.paidAmount ?? 0)),
       0,
     );
     const futureInstallments = installmentPlans.reduce((total, plan) => {
@@ -144,7 +216,8 @@ export default function CartoesView() {
 
   function selectCard(cardId: string) {
     setSelectedCardId(cardId);
-    const invoice = findFirstOpenInvoice(invoices, cardId) ?? invoices.find((item) => item.cardId === cardId);
+    const invoice = findFirstOpenInvoice(invoices, cardId)
+      ?? invoices.find((item) => item.cardId === cardId);
     setSelectedInvoiceId(invoice?.id ?? "");
   }
 
@@ -155,9 +228,9 @@ export default function CartoesView() {
       ...input,
       usedLimit: 0,
       status: "active",
-      createdAt: "2026-07-25",
+      createdAt: getReferenceDate(),
     };
-    const currentReference = "2026-08";
+    const currentReference = getReferenceMonth();
     const invoice: CardInvoice = {
       id: `${cardId}-${currentReference}`,
       cardId,
@@ -166,6 +239,7 @@ export default function CartoesView() {
       closingDate: buildDate(currentReference, input.closingDay),
       dueDate: buildDate(currentReference, input.dueDay),
       amount: 0,
+      paidAmount: 0,
       status: "open",
     };
 
@@ -173,6 +247,7 @@ export default function CartoesView() {
     setInvoices((current) => [...current, invoice]);
     setSelectedCardId(cardId);
     setSelectedInvoiceId(invoice.id);
+    setSearch("");
     showFeedback(cardsContent.newCardDialog.success);
   }
 
@@ -181,15 +256,14 @@ export default function CartoesView() {
     if (!card) return;
 
     const cardOpenInvoices = invoices
-      .filter(
-        (invoice) =>
-          invoice.cardId === card.id &&
-          invoice.status !== "paid" &&
-          invoice.closingDate >= input.date,
-      )
+      .filter((invoice) => (
+        invoice.cardId === card.id
+        && invoice.status !== "paid"
+        && invoice.closingDate >= input.date
+      ))
       .sort((a, b) => a.closingDate.localeCompare(b.closingDate));
     const firstInvoice = cardOpenInvoices[0] ?? findFirstOpenInvoice(invoices, card.id);
-    const firstReference = firstInvoice?.reference ?? "2026-08";
+    const firstReference = firstInvoice?.reference ?? (input.date.slice(0, 7) || getReferenceMonth());
     const installmentAmount = input.amount / input.installments;
     const newInvoices: CardInvoice[] = [];
     const newPurchases: CardPurchase[] = [];
@@ -209,6 +283,7 @@ export default function CartoesView() {
           closingDate: buildDate(reference, card.closingDay),
           dueDate: buildDate(reference, card.dueDay),
           amount: 0,
+          paidAmount: 0,
           status: "open",
         };
         newInvoices.push(invoice);
@@ -228,13 +303,9 @@ export default function CartoesView() {
       });
     }
 
-    setCards((current) =>
-      current.map((item) =>
-        item.id === card.id
-          ? { ...item, usedLimit: item.usedLimit + input.amount }
-          : item,
-      ),
-    );
+    setCards((current) => current.map((item) => item.id === card.id
+      ? { ...item, usedLimit: item.usedLimit + input.amount }
+      : item));
     setInvoices((current) => {
       const allInvoices = [...current, ...newInvoices];
       return allInvoices.map((invoice) => {
@@ -247,53 +318,28 @@ export default function CartoesView() {
     setPurchases((current) => [...newPurchases, ...current]);
 
     if (input.installments > 1) {
-      setInstallmentPlans((current) => [
-        {
-          id: createId(`${input.description}-parcelamento`),
-          cardId: card.id,
-          description: input.description,
-          category: input.category,
-          totalAmount: input.amount,
-          installmentAmount,
-          paidInstallments: 0,
-          totalInstallments: input.installments,
-          nextChargeDate: newPurchases[0]?.date ?? input.date,
-        },
-        ...current,
-      ]);
+      const plan: InstallmentPlan = {
+        id: createId(`${input.description}-parcelamento`),
+        cardId: card.id,
+        description: input.description,
+        category: input.category,
+        totalAmount: input.amount,
+        installmentAmount,
+        paidInstallments: 0,
+        totalInstallments: input.installments,
+        nextChargeDate: newPurchases[0]?.date ?? input.date,
+      };
+      setInstallmentPlans((current) => [plan, ...current]);
     }
 
     setSelectedCardId(card.id);
     setSelectedInvoiceId(newPurchases[0]?.invoiceId ?? firstInvoice?.id ?? "");
+    setSearch("");
     showFeedback(cardsContent.newPurchaseDialog.success);
   }
 
   function payInvoice(input: InvoicePaymentInput) {
-    const invoice = invoices.find((item) => item.id === input.invoiceId);
-    if (!invoice) return;
-
-    setInvoices((current) =>
-      current.map((item) =>
-        item.id === input.invoiceId
-          ? { ...item, status: "paid", paymentDate: input.paymentDate }
-          : item,
-      ),
-    );
-    setCards((current) =>
-      current.map((card) =>
-        card.id === invoice.cardId
-          ? { ...card, usedLimit: Math.max(0, card.usedLimit - invoice.amount) }
-          : card,
-      ),
-    );
-    setInstallmentPlans((current) =>
-      current.map((plan) => {
-        if (plan.cardId !== invoice.cardId || plan.paidInstallments >= plan.totalInstallments) {
-          return plan;
-        }
-        return { ...plan, paidInstallments: plan.paidInstallments + 1 };
-      }),
-    );
+    if (!recordInvoicePayment(input)) return;
     setPaymentInvoiceId("");
     showFeedback(cardsContent.paymentDialog.success);
   }
@@ -305,8 +351,19 @@ export default function CartoesView() {
         onNewCard={() => setNewCardOpen(true)}
       />
       <CardsSummary values={summary} />
+
+      <label className="transactions-search cards-smart-search">
+        <SearchIcon />
+        <span className="sr-only">{financialIntelligenceContent.search.cardsLabel}</span>
+        <input
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder={financialIntelligenceContent.search.cardsPlaceholder}
+        />
+      </label>
+
       <CreditCardsSection
-        cards={cards}
+        cards={visibleCards}
         selectedCardId={selectedCardId}
         onSelect={selectCard}
       />
@@ -320,7 +377,7 @@ export default function CartoesView() {
           onInvoiceSelect={setSelectedInvoiceId}
           onPay={setPaymentInvoiceId}
         />
-        <InstallmentsPanel plans={installmentPlans} cards={cards} />
+        <InstallmentsPanel plans={visibleInstallmentPlans} cards={cards} />
       </div>
 
       <NewCardDialog
@@ -346,12 +403,12 @@ export default function CartoesView() {
         onPay={payInvoice}
       />
 
-      {feedbackMessage && (
+      {feedbackMessage ? (
         <div className="transaction-feedback" role="status">
           <CheckIcon />
           {feedbackMessage}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

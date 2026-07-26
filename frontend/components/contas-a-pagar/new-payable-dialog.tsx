@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { CloseIcon } from "@/components/shared/icons";
 import { payablesContent } from "@/content/contas-a-pagar";
+import { financialIntelligenceContent } from "@/content/financial-intelligence";
+import { getReferenceDate } from "@/lib/reference-date";
 import type { FinancialAccount } from "@/types/contas";
 import type {
   NewPayableInput,
@@ -26,7 +28,7 @@ export function NewPayableDialog({ accounts, onClose, onSubmit }: NewPayableDial
     description: "",
     category: payablesContent.categories[0],
     amount: "",
-    dueDate: "2026-07-26",
+    dueDate: getReferenceDate(),
     accountId: accounts[0]?.id ?? "",
     recurrence: "none" as PayableRecurrence,
     valueType: "fixed" as PayableValueType,
@@ -124,6 +126,7 @@ export function NewPayableDialog({ accounts, onClose, onSubmit }: NewPayableDial
               <select value={form.recurrence} onChange={(event) => setForm({ ...form, recurrence: event.target.value as PayableRecurrence })}>
                 {Object.entries(payablesContent.recurrences).map(([value, label]) => <option value={value} key={value}>{label}</option>)}
               </select>
+              <small className="form-field-helper">{financialIntelligenceContent.recurring.explanation}</small>
             </label>
 
             <label className="form-field">

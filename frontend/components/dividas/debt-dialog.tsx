@@ -1,25 +1,30 @@
 import { useState } from "react";
 import { CloseIcon } from "@/components/shared/icons";
 import { debtsContent } from "@/content/dividas";
+import { addMonthsToDate } from "@/lib/financial-intelligence";
+import { getReferenceDate } from "@/lib/reference-date";
 import type { DebtFormInput, FinancialDebt } from "@/types/dividas";
 
-const emptyForm: DebtFormInput = {
-  name: "",
-  creditor: "",
-  type: "personal-loan",
-  originalAmount: 0,
-  currentBalance: 0,
-  annualInterestRate: 0,
-  totalInstallments: 1,
-  paidInstallments: 0,
-  installmentAmount: 0,
-  nextDueDate: "2026-08-10",
-  startDate: "2026-07-25",
-  accountId: "conta-principal",
-  status: "active",
-  priority: "medium",
-  notes: "",
-};
+function createEmptyForm(accounts: Array<{ id: string; name: string }>): DebtFormInput {
+  const startDate = getReferenceDate();
+  return {
+    name: "",
+    creditor: "",
+    type: "personal-loan",
+    originalAmount: 0,
+    currentBalance: 0,
+    annualInterestRate: 0,
+    totalInstallments: 1,
+    paidInstallments: 0,
+    installmentAmount: 0,
+    nextDueDate: addMonthsToDate(startDate, 1),
+    startDate,
+    accountId: accounts[0]?.id ?? "",
+    status: "active",
+    priority: "medium",
+    notes: "",
+  };
+}
 
 export function DebtDialog({
   editing,
@@ -48,7 +53,7 @@ export function DebtDialog({
     status: editing.status,
     priority: editing.priority,
     notes: editing.notes,
-  } : emptyForm);
+  } : createEmptyForm(accounts));
   const [error, setError] = useState("");
 
   function update<K extends keyof DebtFormInput>(key: K, value: DebtFormInput[K]) {

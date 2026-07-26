@@ -18,6 +18,7 @@ import {
   initialMonthlyBudgets,
 } from "@/data/orcamentos";
 import { transactionsData } from "@/data/lancamentos";
+import { matchesSearch } from "@/lib/search";
 import type {
   BudgetFormInput,
   BudgetRow,
@@ -104,12 +105,19 @@ export default function OrcamentosView() {
     .sort((a, b) => b.usage - a.usage), [budgets, categories, monthKey, spentByCategory]);
 
   const filteredRows = useMemo(() => rows.filter((row) => {
-    const query = search.trim().toLocaleLowerCase("pt-BR");
-    const matchesSearch = !query
-      || row.category.name.toLocaleLowerCase("pt-BR").includes(query)
-      || row.category.description.toLocaleLowerCase("pt-BR").includes(query);
+    const matchesQuery = matchesSearch(search, [
+      row.category.name,
+      row.category.description,
+      row.limit,
+      row.spent,
+      row.available,
+      row.usage,
+      budgetsContent.status[row.status],
+      row.category.type,
+      row.category.active ? budgetsContent.categories.active : budgetsContent.categories.inactive,
+    ]);
     const matchesStatus = status === "all" || row.status === status;
-    return matchesSearch && matchesStatus;
+    return matchesQuery && matchesStatus;
   }), [rows, search, status]);
 
   const summary = useMemo(() => {

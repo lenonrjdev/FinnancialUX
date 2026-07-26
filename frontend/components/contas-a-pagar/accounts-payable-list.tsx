@@ -6,12 +6,13 @@ import {
   WalletIcon,
 } from "@/components/shared/icons";
 import { payablesContent } from "@/content/contas-a-pagar";
+import { financialIntelligenceContent } from "@/content/financial-intelligence";
 import { formatCurrency, formatShortDate } from "@/lib/formatters";
 import type { FinancialAccount } from "@/types/contas";
-import type { Payable } from "@/types/contas-a-pagar";
+import type { UnifiedPayable } from "@/types/financial-intelligence";
 
 type AccountsPayableListProps = {
-  payables: Payable[];
+  payables: UnifiedPayable[];
   accounts: FinancialAccount[];
   onPay: (payableId: string) => void;
 };
@@ -68,7 +69,7 @@ export function AccountsPayableList({
                           <div>
                             <strong>{payable.description}</strong>
                             <span>
-                              {payable.recurrence !== "none"
+                              {payable.sourceLabel} · {payable.recurrence !== "none"
                                 ? `${payablesContent.list.recurring} · ${payablesContent.recurrences[payable.recurrence]}`
                                 : payablesContent.valueTypes[payable.valueType]}
                             </span>
@@ -121,7 +122,7 @@ export function AccountsPayableList({
                     <span className="commitment-row-icon"><BillsIcon /></span>
                     <div>
                       <strong>{payable.description}</strong>
-                      <span>{payable.category}</span>
+                      <span>{payable.category} · {payable.sourceLabel}</span>
                     </div>
                     <span className={`commitment-status-badge ${payable.status}`}>
                       {payablesContent.statuses[payable.status]}
@@ -142,6 +143,9 @@ export function AccountsPayableList({
                   <div className="commitment-mobile-meta">
                     <span><CalendarIcon /> {formatShortDate(payable.dueDate)}</span>
                     <span><WalletIcon /> {accountName(accounts, payable.accountId)}</span>
+                    <span className="smart-source-badge">
+                      {payable.generated ? financialIntelligenceContent.recurring.automatic : payable.sourceLabel}
+                    </span>
                     {payable.recurrence !== "none" ? (
                       <span><ClockIcon /> {payablesContent.recurrences[payable.recurrence]}</span>
                     ) : null}

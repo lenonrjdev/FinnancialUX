@@ -14,6 +14,12 @@ export type DebtTypeFilter = "all" | DebtType;
 export type DebtStatusFilter = "all" | DebtStatus;
 export type DebtPriorityFilter = "all" | DebtPriority;
 
+export interface DebtInstallmentPayment {
+  paidAmount: number;
+  paidAt?: string;
+  accountId?: string;
+}
+
 export interface FinancialDebt {
   id: string;
   name: string;
@@ -32,6 +38,10 @@ export interface FinancialDebt {
   priority: DebtPriority;
   notes: string;
   createdAt: string;
+  origin?: "manual" | "payable" | "card-invoice" | "subscription";
+  originCommitmentId?: string;
+  generated?: boolean;
+  installmentPayments?: Record<string, DebtInstallmentPayment>;
 }
 
 export interface DebtPayment {
