@@ -1,8 +1,0 @@
-frontend/app/globals.css
-frontend/app/layout.tsx
-frontend/components/configuracoes/configuracoes-view.tsx
-frontend/components/dashboard/dashboard-shell.tsx
-frontend/components/shared/icons.tsx
-frontend/lib/settings.ts
-FASE_15_4_TEMA_PERSISTENTE.md
-FASE_15_4_ARQUIVOS_ALTERADOS.txt

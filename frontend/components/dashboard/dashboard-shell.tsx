@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Brand } from "@/components/dashboard/brand";
+import { DashboardLoadingSkeleton } from "@/components/dashboard/dashboard-loading-skeleton";
 import { NavigationIcon } from "@/components/dashboard/navigation-icon";
 import { UserMenu } from "@/components/dashboard/user-menu";
 import { WorkspaceSwitcher } from "@/components/dashboard/workspace-switcher";
@@ -27,7 +28,21 @@ import {
 import type { SessionUser } from "@/types/acessos";
 import type { FinancialPreferences, ProfileSettings } from "@/types/configuracoes";
 
+const DashboardShellBoundary = createContext(false);
+
 export default function DashboardShell({ children }: { children: React.ReactNode }) {
+  const isAlreadyInsideShell = useContext(DashboardShellBoundary);
+
+  if (isAlreadyInsideShell) return <>{children}</>;
+
+  return (
+    <DashboardShellBoundary.Provider value>
+      <DashboardShellFrame>{children}</DashboardShellFrame>
+    </DashboardShellBoundary.Provider>
+  );
+}
+
+function DashboardShellFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, workspaces, loading, error, refreshSession } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -36,11 +51,23 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   const [preferences, setPreferences] = useState<FinancialPreferences>(initialFinancialPreferences);
   const [resolvedAppearance, setResolvedAppearance] = useState<"light" | "dark">("light");
   const [appearanceSaving, setAppearanceSaving] = useState(false);
+  const [showLoadingSkeleton, setShowLoadingSkeleton] = useState(false);
   const allNavigationItems = useMemo(() => dashboardNavigation.flatMap((group) => group.items), []);
 
   useEffect(() => {
     if (!loading && !user) window.location.assign("/login");
   }, [loading, user]);
+
+  useEffect(() => {
+    const waitingForDashboard = loading || Boolean(user && workspaces.length && !selectedWorkspaceId);
+    if (!waitingForDashboard) {
+      setShowLoadingSkeleton(false);
+      return;
+    }
+
+    const timer = window.setTimeout(() => setShowLoadingSkeleton(true), 160);
+    return () => window.clearTimeout(timer);
+  }, [loading, selectedWorkspaceId, user, workspaces.length]);
 
   useEffect(() => {
     if (!user) return;
@@ -112,7 +139,9 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   }, [user]);
 
   if (loading) {
-    return <div className="backend-loading-screen"><span className="backend-loading-dot" />{integrationContent.loading}</div>;
+    return showLoadingSkeleton
+      ? <DashboardLoadingSkeleton variant="shell" label={integrationContent.loading} />
+      : <div className="theme-loading-guard" aria-hidden="true" />;
   }
 
   if (!user || !displayUser) return null;
@@ -122,7 +151,9 @@ export default function DashboardShell({ children }: { children: React.ReactNode
   }
 
   if (!selectedWorkspaceId) {
-    return <div className="backend-loading-screen"><span className="backend-loading-dot" />{integrationContent.loading}</div>;
+    return showLoadingSkeleton
+      ? <DashboardLoadingSkeleton variant="shell" label={integrationContent.loading} />
+      : <div className="theme-loading-guard" aria-hidden="true" />;
   }
 
   const selectedWorkspace = workspaces.find((workspace) => workspace.id === selectedWorkspaceId) ?? workspaces[0];

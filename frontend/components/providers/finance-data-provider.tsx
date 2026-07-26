@@ -11,6 +11,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { DashboardLoadingSkeleton } from "@/components/dashboard/dashboard-loading-skeleton";
 import { financeDataApi } from "@/lib/api/finance-data";
 
 export type FinanceDataModule =
@@ -66,6 +67,7 @@ export function FinanceDataProvider({
   const [documents, setDocuments] = useState<Record<string, unknown>>({});
   const [loading, setLoading] = useState(true);
   const [savingCount, setSavingCount] = useState(0);
+  const [showLoadingSkeleton, setShowLoadingSkeleton] = useState(false);
   const [error, setError] = useState("");
   const queues = useRef<Record<string, Promise<unknown>>>({});
   const documentsRef = useRef<Record<string, unknown>>({});
@@ -107,6 +109,16 @@ export function FinanceDataProvider({
   useEffect(() => {
     void reload();
   }, [reload]);
+
+  useEffect(() => {
+    if (!loading) {
+      setShowLoadingSkeleton(false);
+      return;
+    }
+
+    const timer = window.setTimeout(() => setShowLoadingSkeleton(true), 160);
+    return () => window.clearTimeout(timer);
+  }, [loading]);
 
   const updateDocument = useCallback(<T,>(
     module: FinanceDataModule,
@@ -162,10 +174,9 @@ export function FinanceDataProvider({
   return (
     <FinanceDataContext.Provider value={value}>
       {loading ? (
-        <div className="financial-data-loading" role="status">
-          <span className="backend-loading-dot" />
-          Carregando seus dados financeiros...
-        </div>
+        showLoadingSkeleton
+          ? <DashboardLoadingSkeleton variant="page" label="Carregando seus dados financeiros..." />
+          : <div className="financial-data-loading-guard" aria-hidden="true" />
       ) : initialLoadFailed ? (
         <div className="financial-data-load-error" role="alert">
           <strong>Não foi possível carregar seus dados.</strong>

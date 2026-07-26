@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/components/providers/auth-provider";
+import { AppRouteShell } from "@/components/providers/app-route-shell";
 import { metadataContent } from "@/content/metadata";
 import "./globals.css";
 
@@ -34,7 +35,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: appearanceBootstrap }} />
       </head>
       <body>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider><AppRouteShell>{children}</AppRouteShell></AuthProvider>
       </body>
     </html>
   );

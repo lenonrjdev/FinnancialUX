@@ -1,6 +1,0 @@
-frontend/app/globals.css
-frontend/app/layout.tsx
-frontend/components/dashboard/dashboard-shell.tsx
-frontend/lib/settings.ts
-FASE_15_3_TEMA_ESCURO_TIPOGRAFIA.md
-FASE_15_3_ARQUIVOS_ALTERADOS.txt
