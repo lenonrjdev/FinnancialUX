@@ -167,7 +167,7 @@ export const accessContent = {
 
 export const authContent = {
   brand: {
-    name: "Finanças",
+    name: "FinnacialUX",
     tagline: "Sua vida financeira organizada em um só lugar.",
   },
   panel: {

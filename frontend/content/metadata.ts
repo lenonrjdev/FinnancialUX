@@ -1,5 +1,5 @@
 export const metadataContent = {
-  title: "Finanças | Controle financeiro pessoal",
+  title: "FinnacialUX | Controle financeiro pessoal",
   description:
     "Dashboard pessoal para organizar contas, recebimentos, cartões, metas e despesas.",
 } as const;

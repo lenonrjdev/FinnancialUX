@@ -1,10 +1,19 @@
 import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { AppRouteShell } from "@/components/providers/app-route-shell";
 import { metadataContent } from "@/content/metadata";
 import "./globals.css";
 
 export const metadata: Metadata = metadataContent;
+
+const poppins = Poppins({
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  style: ["normal"],
+  display: "swap",
+  variable: "--font-poppins",
+});
 
 const appearanceBootstrap = `
 (() => {
@@ -30,7 +39,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="pt-BR" className={poppins.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: appearanceBootstrap }} />
       </head>

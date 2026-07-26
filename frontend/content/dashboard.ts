@@ -40,8 +40,8 @@ export const dashboardNavigation: NavigationGroup[] = [
 
 export const dashboardContent = {
   brand: {
-    name: "Finanças",
-    homeAriaLabel: "Ir para a visão geral",
+    name: "FinnacialUX",
+    homeAriaLabel: "Ir para a visão geral da FinnacialUX",
   },
   accessibility: {
     desktopNavigation: "Navegação principal",
@@ -68,7 +68,7 @@ export const dashboardContent = {
     demo: "Sessão demonstrativa",
   },
   footer: {
-    copyright: "© 2026 Finanças pessoais",
+    copyright: "© 2026 FinnacialUX",
     privacy: "Dados privados",
     personalUse: "Uso pessoal",
   },
