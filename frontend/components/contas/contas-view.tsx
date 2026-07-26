@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { AccountMovements } from "@/components/contas/account-movements";
 import { AccountsDistribution } from "@/components/contas/accounts-distribution";
 import { AccountsFilters } from "@/components/contas/accounts-filters";
@@ -39,18 +40,26 @@ function createAccountId(name: string): string {
 }
 
 export default function ContasView() {
-  const [accounts, setAccounts] = useState<FinancialAccount[]>(initialAccounts);
-  const [movements, setMovements] = useState<AccountMovement[]>(
+  const [accounts, setAccounts] = useFinanceDataState<FinancialAccount[]>("accounts", initialAccounts);
+  const [movements, setMovements] = useFinanceDataState<AccountMovement[]>(
+    "account-movements",
     initialAccountMovements,
   );
   const [filter, setFilter] = useState<AccountFilter>("all");
   const [search, setSearch] = useState("");
   const [selectedAccountId, setSelectedAccountId] = useState(
-    initialAccounts[0]?.id ?? "",
+    "",
   );
   const [newAccountOpen, setNewAccountOpen] = useState(false);
   const [transferOpen, setTransferOpen] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
+
+  useEffect(() => {
+    if (!selectedAccountId && accounts[0]) setSelectedAccountId(accounts[0].id);
+    if (selectedAccountId && !accounts.some((account) => account.id === selectedAccountId)) {
+      setSelectedAccountId(accounts[0]?.id ?? "");
+    }
+  }, [accounts, selectedAccountId]);
 
   const summary = useMemo<AccountsSummaryValues>(() => {
     const includedAccounts = accounts.filter((account) => account.includeInTotal);
@@ -119,7 +128,7 @@ export default function ContasView() {
       balance: input.initialBalance,
       projectedBalance: input.initialBalance,
       includeInTotal: input.includeInTotal,
-      createdAt: "2026-07-25",
+      createdAt: new Date().toISOString().slice(0, 10),
     };
 
     setAccounts((current) => [...current, account]);

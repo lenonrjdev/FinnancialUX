@@ -26,7 +26,8 @@ export function selectSnapshots(
   snapshots: MonthlyFinancialSnapshot[],
   period: ReportPeriod,
 ): MonthlyFinancialSnapshot[] {
-  const currentYear = snapshots.filter((item) => item.month.startsWith("2026-"));
+  const latestYear = snapshots.at(-1)?.month.slice(0, 4);
+  const currentYear = latestYear ? snapshots.filter((item) => item.month.startsWith(`${latestYear}-`)) : [];
   if (period === "current-month") return snapshots.slice(-1);
   if (period === "last-3-months") return snapshots.slice(-3);
   if (period === "last-6-months") return snapshots.slice(-6);

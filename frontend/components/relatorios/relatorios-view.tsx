@@ -15,6 +15,7 @@ import { ReportsHeading } from "@/components/relatorios/reports-heading";
 import { ReportsSummary } from "@/components/relatorios/reports-summary";
 import { ReportsToolbar } from "@/components/relatorios/reports-toolbar";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { reportsContent } from "@/content/relatorios";
 import { initialSubscriptions } from "@/data/assinaturas";
 import { initialInstallmentPlans } from "@/data/cartoes";
@@ -22,16 +23,14 @@ import { initialPayables } from "@/data/contas-a-pagar";
 import { initialAccounts } from "@/data/contas";
 import { initialDebts } from "@/data/dividas";
 import { transactionsData } from "@/data/lancamentos";
-import { emergencyCoverageTarget, essentialMonthlyCost, initialGoals } from "@/data/metas";
+import { emergencyCoverageTarget, initialGoals } from "@/data/metas";
 import { initialCategories, initialMonthlyBudgets } from "@/data/orcamentos";
 import {
-  monthlyFinancialHistory,
   projectionScenarioSettings,
-  projectionVariableExpenseBaseline,
   reportsReferenceMonth,
 } from "@/data/relatorios";
 import { formatCurrency, formatPercentage } from "@/lib/formatters";
-import { buildProjection, selectSnapshots } from "@/lib/reports";
+import { addMonths, buildProjection, monthLabel, selectSnapshots } from "@/lib/reports";
 import type {
   AccountReportRow,
   BudgetReportRow,
@@ -83,10 +82,19 @@ export default function RelatoriosView() {
   const [period, setPeriod] = useState<ReportPeriod>("last-6-months");
   const [scenario, setScenario] = useState<ProjectionScenario>("realistic");
   const [feedback, setFeedback] = useState("");
+  const [transactions] = useFinanceDataState("transactions", transactionsData);
+  const [accounts] = useFinanceDataState("accounts", initialAccounts);
+  const [payables] = useFinanceDataState("payables", initialPayables);
+  const [subscriptions] = useFinanceDataState("subscriptions", initialSubscriptions);
+  const [goals] = useFinanceDataState("goals", initialGoals);
+  const [debts] = useFinanceDataState("debts", initialDebts);
+  const [installmentPlans] = useFinanceDataState("installment-plans", initialInstallmentPlans);
+  const [categories] = useFinanceDataState("categories", initialCategories);
+  const [monthlyBudgets] = useFinanceDataState("monthly-budgets", initialMonthlyBudgets);
 
   const completedTransactions = useMemo(
-    () => transactionsData.filter((transaction) => transaction.status === "completed"),
-    [],
+    () => transactions.filter((transaction) => transaction.status === "completed"),
+    [transactions],
   );
 
   const currentIncome = useMemo(
@@ -104,10 +112,22 @@ export default function RelatoriosView() {
   );
 
   const history = useMemo(
-    () => monthlyFinancialHistory.map((snapshot) => snapshot.month === reportsReferenceMonth
-      ? { ...snapshot, income: currentIncome, expenses: currentExpenses }
-      : snapshot),
-    [currentExpenses, currentIncome],
+    () => Array.from({ length: 12 }, (_, index) => {
+      const month = addMonths(reportsReferenceMonth, index - 11);
+      const labels = monthLabel(month);
+      const monthTransactions = completedTransactions.filter((transaction) => transaction.date.startsWith(month));
+      return {
+        month,
+        ...labels,
+        income: monthTransactions
+          .filter((transaction) => transaction.type === "income")
+          .reduce((total, transaction) => total + transaction.amount, 0),
+        expenses: monthTransactions
+          .filter((transaction) => transaction.type === "expense")
+          .reduce((total, transaction) => total + transaction.amount, 0),
+      };
+    }),
+    [completedTransactions],
   );
 
   const selectedSnapshots = useMemo(() => selectSnapshots(history, period), [history, period]);
@@ -151,10 +171,10 @@ export default function RelatoriosView() {
         expenseAmounts.set(key, (expenseAmounts.get(key) ?? 0) + transaction.amount);
       });
 
-    return initialMonthlyBudgets
+    return monthlyBudgets
       .filter((budget) => budget.month === reportsReferenceMonth)
       .map((budget) => {
-        const category = initialCategories.find((item) => item.id === budget.categoryId);
+        const category = categories.find((item) => item.id === budget.categoryId);
         const categoryName = category?.name ?? budget.categoryId;
         const actual = expenseAmounts.get(normalizeText(categoryName)) ?? 0;
         const usage = budget.limit > 0 ? (actual / budget.limit) * 100 : 0;
@@ -173,10 +193,10 @@ export default function RelatoriosView() {
         };
       })
       .sort((a, b) => b.usage - a.usage);
-  }, [completedTransactions]);
+  }, [categories, completedTransactions, monthlyBudgets]);
 
   const accountRows = useMemo<AccountReportRow[]>(() => {
-    const included = initialAccounts.filter((account) => account.includeInTotal);
+    const included = accounts.filter((account) => account.includeInTotal);
     const total = included.reduce((sum, account) => sum + account.balance, 0);
     return included
       .map((account) => ({
@@ -187,37 +207,42 @@ export default function RelatoriosView() {
         percentage: total > 0 ? (account.balance / total) * 100 : 0,
       }))
       .sort((a, b) => b.balance - a.balance);
-  }, []);
+  }, [accounts]);
 
   const startingBalance = useMemo(
-    () => initialAccounts.filter((account) => account.includeInTotal).reduce((sum, account) => sum + account.balance, 0),
-    [],
+    () => accounts.filter((account) => account.includeInTotal).reduce((sum, account) => sum + account.balance, 0),
+    [accounts],
   );
 
   const essentialExpenses = useMemo(
-    () => initialPayables
+    () => payables
       .filter((payable) => payable.recurrence === "monthly")
       .reduce((sum, payable) => sum + payable.amount, 0),
-    [],
+    [payables],
   );
 
   const subscriptionExpenses = useMemo(
-    () => initialSubscriptions
+    () => subscriptions
       .filter((subscription) => subscription.status === "active" || subscription.status === "trial")
       .reduce((sum, subscription) => sum + monthlySubscriptionAmount(subscription.amount, subscription.billingCycle), 0),
-    [],
+    [subscriptions],
   );
 
   const goalsContribution = useMemo(
-    () => initialGoals
+    () => goals
       .filter((goal) => goal.status === "active")
       .reduce((sum, goal) => sum + goal.monthlyContribution, 0),
-    [],
+    [goals],
   );
 
   const averageProjectionIncome = useMemo(() => {
     const lastThree = history.slice(-3);
     return lastThree.reduce((sum, item) => sum + item.income, 0) / Math.max(lastThree.length, 1);
+  }, [history]);
+
+  const variableExpenseBaseline = useMemo(() => {
+    const expenseMonths = history.slice(-3);
+    return expenseMonths.reduce((sum, item) => sum + item.expenses, 0) / Math.max(expenseMonths.length, 1);
   }, [history]);
 
   const projection = useMemo(() => buildProjection({
@@ -227,11 +252,11 @@ export default function RelatoriosView() {
     essentialExpenses,
     subscriptionExpenses,
     goals: goalsContribution,
-    variableExpenses: projectionVariableExpenseBaseline,
-    debts: initialDebts,
-    installments: initialInstallmentPlans,
+    variableExpenses: variableExpenseBaseline,
+    debts,
+    installments: installmentPlans,
     scenario: projectionScenarioSettings[scenario],
-  }), [averageProjectionIncome, essentialExpenses, goalsContribution, scenario, startingBalance, subscriptionExpenses]);
+  }), [averageProjectionIncome, debts, essentialExpenses, goalsContribution, installmentPlans, scenario, startingBalance, subscriptionExpenses, variableExpenseBaseline]);
 
   const projectionSummary = useMemo(() => {
     const totalIncome = projection.reduce((sum, row) => sum + row.income, 0);
@@ -259,8 +284,8 @@ export default function RelatoriosView() {
       + commitments.debts
       + commitments.installments;
     const commitmentRate = averageProjectionIncome > 0 ? (firstMonthFixed / averageProjectionIncome) * 100 : 0;
-    const reserve = initialGoals.find((goal) => goal.category === "emergency")?.currentAmount ?? 0;
-    const coverage = essentialMonthlyCost > 0 ? reserve / essentialMonthlyCost : 0;
+    const reserve = goals.find((goal) => goal.category === "emergency")?.currentAmount ?? 0;
+    const coverage = essentialExpenses > 0 ? reserve / essentialExpenses : 0;
     const totalBudget = budgetRows.reduce((sum, row) => sum + row.planned, 0);
     const totalActual = budgetRows.reduce((sum, row) => sum + row.actual, 0);
     const budgetUsage = totalBudget > 0 ? (totalActual / totalBudget) * 100 : 0;
@@ -296,7 +321,7 @@ export default function RelatoriosView() {
         status: budgetUsage <= 80 ? "positive" : budgetUsage <= 100 ? "attention" : "critical",
       },
     ];
-  }, [averageProjectionIncome, budgetRows, commitments, currentExpenses, currentIncome]);
+  }, [averageProjectionIncome, budgetRows, commitments, currentExpenses, currentIncome, essentialExpenses, goals]);
 
   function showFeedback(message: string) {
     setFeedback(message);

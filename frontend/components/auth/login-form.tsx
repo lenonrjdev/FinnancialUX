@@ -2,29 +2,36 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { GoogleIcon, LockIcon, MailIcon } from "@/components/shared/icons";
+import { LockIcon, MailIcon } from "@/components/shared/icons";
+import { useAuth } from "@/components/providers/auth-provider";
 import { authContent } from "@/content/acessos";
-import { isValidEmail, persistDemoSession } from "@/lib/access-control";
+import { integrationContent } from "@/content/integracao";
+import { isValidEmail } from "@/lib/access-control";
 
 export function LoginForm() {
+  const { login } = useAuth();
   const [email, setEmail] = useState("lenon@ateliux.com.br");
   const [password, setPassword] = useState("financeiro2026");
   const [remember, setRemember] = useState(true);
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  function enter(emailValue: string) {
-    persistDemoSession(emailValue);
-    window.location.assign("/visao-geral");
-  }
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!isValidEmail(email) || password.length < 8) {
       setError(authContent.login.invalid);
       return;
     }
+    setSubmitting(true);
     setError("");
-    enter(email);
+    try {
+      await login(email, password, remember);
+      window.location.assign("/visao-geral");
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : authContent.login.invalid);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -34,13 +41,6 @@ export function LoginForm() {
         <h2>{authContent.login.title}</h2>
         <p>{authContent.login.description}</p>
       </header>
-
-      <button className="auth-google-button" type="button" onClick={() => enter(email)}>
-        <GoogleIcon />
-        {authContent.login.google}
-      </button>
-
-      <div className="auth-divider"><span>{authContent.login.divider}</span></div>
 
       <form className="auth-form" onSubmit={handleSubmit}>
         <label>
@@ -85,15 +85,15 @@ export function LoginForm() {
 
         {error ? <p className="auth-form-error">{error}</p> : null}
 
-        <button className="auth-submit-button" type="submit">
-          {authContent.login.submit}
+        <button className="auth-submit-button" type="submit" disabled={submitting}>
+          {submitting ? integrationContent.login.submitting : authContent.login.submit}
         </button>
       </form>
 
       <p className="auth-switch-copy">
         {authContent.login.noAccount} <Link href="/registro">{authContent.login.register}</Link>
       </p>
-      <small className="auth-demo-note">{authContent.login.demoNote}</small>
+      <small className="auth-demo-note">{integrationContent.login.backendNote}</small>
     </div>
   );
 }

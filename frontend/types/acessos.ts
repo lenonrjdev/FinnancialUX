@@ -2,7 +2,7 @@ export type WorkspaceRole = "owner" | "editor" | "viewer";
 
 export type WorkspaceKind = "personal" | "shared";
 
-export type InvitationStatus = "pending" | "accepted" | "expired";
+export type InvitationStatus = "pending" | "accepted" | "expired" | "revoked";
 
 export type PermissionKey =
   | "view-dashboard"
@@ -51,7 +51,8 @@ export type AccessInvitation = {
   sentAt: string;
   expiresAt: string;
   status: InvitationStatus;
-  token: string;
+  token?: string;
+  invitationUrl?: string;
 };
 
 export type PermissionDefinition = {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ContributionDialog } from "@/components/metas/contribution-dialog";
 import { ContributionsList } from "@/components/metas/contributions-list";
 import { GoalDialog } from "@/components/metas/goal-dialog";
@@ -10,6 +10,7 @@ import { GoalsInsightPanel } from "@/components/metas/goals-insight-panel";
 import { GoalsSummary } from "@/components/metas/goals-summary";
 import { GoalsToolbar } from "@/components/metas/goals-toolbar";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { goalsContent } from "@/content/metas";
 import { initialAccounts } from "@/data/contas";
 import {
@@ -54,20 +55,28 @@ function computeGoal(goal: FinancialGoal): GoalRow {
 }
 
 export default function MetasView() {
-  const accounts = useMemo(() => initialAccounts.map((account) => ({ id: account.id, name: account.name })), []);
+  const [storedAccounts] = useFinanceDataState("accounts", initialAccounts);
+  const accounts = useMemo(() => storedAccounts.map((account) => ({ id: account.id, name: account.name })), [storedAccounts]);
   const accountNames = useMemo(() => Object.fromEntries(accounts.map((account) => [account.id, account.name])), [accounts]);
-  const [goals, setGoals] = useState<FinancialGoal[]>(initialGoals);
-  const [contributions, setContributions] = useState<GoalContribution[]>(initialGoalContributions);
+  const [goals, setGoals] = useFinanceDataState<FinancialGoal[]>("goals", initialGoals);
+  const [contributions, setContributions] = useFinanceDataState<GoalContribution[]>("goal-contributions", initialGoalContributions);
   const [view, setView] = useState<GoalView>("goals");
   const [search, setSearch] = useState("");
   const [type, setType] = useState<GoalFilter>("all");
   const [status, setStatus] = useState<GoalStatusFilter>("all");
-  const [selectedGoalId, setSelectedGoalId] = useState(initialGoals[0]?.id ?? "");
+  const [selectedGoalId, setSelectedGoalId] = useState("");
   const [editingGoal, setEditingGoal] = useState<FinancialGoal | null>(null);
   const [goalDialogOpen, setGoalDialogOpen] = useState(false);
   const [contributionDialogOpen, setContributionDialogOpen] = useState(false);
   const [contributionGoalId, setContributionGoalId] = useState<string | undefined>();
   const [feedback, setFeedback] = useState("");
+
+  useEffect(() => {
+    if (!selectedGoalId && goals[0]) setSelectedGoalId(goals[0].id);
+    if (selectedGoalId && !goals.some((goal) => goal.id === selectedGoalId)) {
+      setSelectedGoalId(goals[0]?.id ?? "");
+    }
+  }, [goals, selectedGoalId]);
 
   const goalRows = useMemo(() => goals.map(computeGoal), [goals]);
   const filteredGoals = useMemo(() => goalRows.filter((goal) => {

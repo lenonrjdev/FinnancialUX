@@ -9,6 +9,7 @@ import { NewPayableDialog } from "@/components/contas-a-pagar/new-payable-dialog
 import { PayPayableDialog } from "@/components/contas-a-pagar/pay-payable-dialog";
 import { PayablesInsightPanel } from "@/components/contas-a-pagar/payables-insight-panel";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { payablesContent } from "@/content/contas-a-pagar";
 import { initialPayables, payablesReferenceDate } from "@/data/contas-a-pagar";
 import { initialAccounts } from "@/data/contas";
@@ -50,13 +51,13 @@ function getAutomaticStatus(item: Payable): PayableStatus {
 }
 
 export default function ContasAPagarView() {
-  const [payables, setPayables] = useState<Payable[]>(initialPayables);
+  const [payables, setPayables] = useFinanceDataState<Payable[]>("payables", initialPayables);
   const [filters, setFilters] = useState<PayableFilters>(initialFilters);
   const [newDialogOpen, setNewDialogOpen] = useState(false);
   const [paymentPayableId, setPaymentPayableId] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
-  const accounts = initialAccounts;
+  const [accounts] = useFinanceDataState("accounts", initialAccounts);
   const month = payablesReferenceDate.slice(0, 7);
   const sevenDaysLimit = addDays(payablesReferenceDate, 7);
 

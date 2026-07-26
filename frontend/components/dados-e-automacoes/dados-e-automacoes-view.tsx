@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DataToolsHeading } from "@/components/dados-e-automacoes/data-tools-heading";
 import { DataToolsSummary } from "@/components/dados-e-automacoes/data-tools-summary";
 import { DataToolsToolbar } from "@/components/dados-e-automacoes/data-tools-toolbar";
@@ -11,10 +11,18 @@ import { ImportPreview } from "@/components/dados-e-automacoes/import-preview";
 import { RuleDialog } from "@/components/dados-e-automacoes/rule-dialog";
 import { RulesPanel } from "@/components/dados-e-automacoes/rules-panel";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { dataToolsContent } from "@/content/dados-e-automacoes";
 import { initialAccounts } from "@/data/contas";
+import { transactionsData } from "@/data/lancamentos";
+import { initialCreditCards, initialCardInvoices, initialCardPurchases } from "@/data/cartoes";
+import { initialPayables } from "@/data/contas-a-pagar";
+import { initialReceivables } from "@/data/recebimentos";
+import { initialGoals, initialGoalContributions } from "@/data/metas";
+import { initialDebts, initialDebtPayments } from "@/data/dividas";
+import { initialSubscriptions, initialSubscriptionCharges } from "@/data/assinaturas";
 import { dataToolsReferenceDate, initialAutomationRules, initialImportHistory } from "@/data/dados-e-automacoes";
-import { initialCategories } from "@/data/orcamentos";
+import { initialCategories, initialMonthlyBudgets } from "@/data/orcamentos";
 import {
   buildExportTable,
   buildFullBackup,
@@ -38,15 +46,29 @@ import type {
   ImportTransactionRow,
   RuleTestResult,
 } from "@/types/dados-e-automacoes";
+import type { FinancialTransaction } from "@/types/lancamentos";
 
 export default function DadosEAutomacoesView() {
   const [view, setView] = useState<DataToolsView>("import");
   const [parsed, setParsed] = useState<ImportParseResult | null>(null);
   const [mapping, setMapping] = useState<CsvMapping>({});
   const [rows, setRows] = useState<ImportTransactionRow[]>([]);
-  const [rules, setRules] = useState<AutomationRule[]>(initialAutomationRules);
-  const [history, setHistory] = useState<ImportHistoryItem[]>(initialImportHistory);
-  const [testResults, setTestResults] = useState<RuleTestResult[]>(() => testAutomationRules(initialAutomationRules));
+  const [rules, setRules] = useFinanceDataState<AutomationRule[]>("automation-rules", initialAutomationRules);
+  const [history, setHistory] = useFinanceDataState<ImportHistoryItem[]>("import-history", initialImportHistory);
+  const [transactions, setTransactions] = useFinanceDataState<FinancialTransaction[]>("transactions", transactionsData);
+  const [cards] = useFinanceDataState("credit-cards", initialCreditCards);
+  const [cardInvoices] = useFinanceDataState("card-invoices", initialCardInvoices);
+  const [cardPurchases] = useFinanceDataState("card-purchases", initialCardPurchases);
+  const [payables] = useFinanceDataState("payables", initialPayables);
+  const [receivables] = useFinanceDataState("receivables", initialReceivables);
+  const [goals] = useFinanceDataState("goals", initialGoals);
+  const [goalContributions] = useFinanceDataState("goal-contributions", initialGoalContributions);
+  const [debts] = useFinanceDataState("debts", initialDebts);
+  const [debtPayments] = useFinanceDataState("debt-payments", initialDebtPayments);
+  const [subscriptions] = useFinanceDataState("subscriptions", initialSubscriptions);
+  const [subscriptionCharges] = useFinanceDataState("subscription-charges", initialSubscriptionCharges);
+  const [monthlyBudgets] = useFinanceDataState("monthly-budgets", initialMonthlyBudgets);
+  const [testResults, setTestResults] = useState<RuleTestResult[]>([]);
   const [editingRule, setEditingRule] = useState<AutomationRule | null>(null);
   const [ruleDialogOpen, setRuleDialogOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
@@ -59,12 +81,35 @@ export default function DadosEAutomacoesView() {
     includeHeaders: true,
   });
 
-  const categories = useMemo(() => initialCategories.filter((item) => item.active).map((item) => item.name), []);
-  const accounts = useMemo(() => initialAccounts.map((item) => item.name), []);
+  const [storedCategories] = useFinanceDataState("categories", initialCategories);
+  const [storedAccounts] = useFinanceDataState("accounts", initialAccounts);
+  const categories = useMemo(() => storedCategories.filter((item) => item.active).map((item) => item.name), [storedCategories]);
+  const accounts = useMemo(() => storedAccounts.map((item) => item.name), [storedAccounts]);
+  const financialData = useMemo(() => ({
+    transactions,
+    accounts: storedAccounts,
+    cards,
+    cardInvoices,
+    cardPurchases,
+    payables,
+    receivables,
+    categories: storedCategories,
+    monthlyBudgets,
+    goals,
+    goalContributions,
+    debts,
+    debtPayments,
+    subscriptions,
+    subscriptionCharges,
+  }), [cardInvoices, cardPurchases, cards, debtPayments, debts, goalContributions, goals, monthlyBudgets, payables, receivables, storedAccounts, storedCategories, subscriptionCharges, subscriptions, transactions]);
   const activeRules = rules.filter((rule) => rule.active).length;
   const exportPreview = useMemo(() => exportConfiguration.dataset === "full-backup"
     ? null
-    : buildExportTable(exportConfiguration.dataset, exportConfiguration.startDate, exportConfiguration.endDate), [exportConfiguration]);
+    : buildExportTable(exportConfiguration.dataset, exportConfiguration.startDate, exportConfiguration.endDate, financialData), [exportConfiguration, financialData]);
+
+  useEffect(() => {
+    setTestResults(testAutomationRules(rules, rows, transactions));
+  }, [rows, rules, transactions]);
 
   function showFeedback(message: string) {
     setFeedback(message);
@@ -72,7 +117,7 @@ export default function DadosEAutomacoesView() {
   }
 
   function updateRows(nextParsed: ImportParseResult, nextMapping: CsvMapping, nextRules = rules) {
-    setRows(buildImportRows(nextParsed.records, nextMapping, nextRules));
+    setRows(buildImportRows(nextParsed.records, nextMapping, nextRules, transactions));
   }
 
   function handleParsed(result: ImportParseResult) {
@@ -101,7 +146,7 @@ export default function DadosEAutomacoesView() {
 
   function updateRow(id: string, patch: Partial<ImportTransactionRow>) {
     setRows((current) => current.map((row) => row.id === id
-      ? reviewImportRow({ ...row, ...patch, selected: true })
+      ? reviewImportRow({ ...row, ...patch, selected: true }, transactions)
       : row));
   }
 
@@ -114,11 +159,26 @@ export default function DadosEAutomacoesView() {
     }
     const duplicateRows = rows.filter((row) => row.status === "duplicate").length;
     const ignoredRows = rows.length - selectedRows.length - duplicateRows;
+    const importedAt = new Date().toISOString();
+    const importedTransactions: FinancialTransaction[] = selectedRows.map((row, index) => ({
+      id: `imported-${Date.now()}-${index}`,
+      description: row.description,
+      category: row.category,
+      account: row.account,
+      paymentMethod: "Importação",
+      date: row.date,
+      amount: row.amount,
+      type: row.type,
+      status: "completed",
+      note: `Importado de ${parsed.fileName}`,
+    }));
+    setTransactions((current) => [...importedTransactions, ...current]);
+
     const nextHistory: ImportHistoryItem = {
       id: `import-${Date.now()}`,
       fileName: parsed.fileName,
       sourceType: parsed.sourceType,
-      importedAt: new Date().toISOString(),
+      importedAt,
       importedRows: selectedRows.length,
       ignoredRows: Math.max(ignoredRows, 0),
       duplicateRows,
@@ -132,9 +192,9 @@ export default function DadosEAutomacoesView() {
   function exportData(forceBackup = false) {
     const configuration = forceBackup ? { ...exportConfiguration, dataset: "full-backup" as const, format: "json" as const } : exportConfiguration;
     if (configuration.dataset === "full-backup") {
-      downloadTextFile(JSON.stringify(buildFullBackup(), null, 2), `backup-financeiro-${dataToolsReferenceDate}.json`, "application/json;charset=utf-8");
+      downloadTextFile(JSON.stringify(buildFullBackup(financialData), null, 2), `backup-financeiro-${dataToolsReferenceDate}.json`, "application/json;charset=utf-8");
     } else {
-      const table = buildExportTable(configuration.dataset, configuration.startDate, configuration.endDate);
+      const table = buildExportTable(configuration.dataset, configuration.startDate, configuration.endDate, financialData);
       if (configuration.format === "csv") {
         downloadTextFile(tableToCsv(table, configuration.separator, configuration.includeHeaders), `${table.fileBase}-${dataToolsReferenceDate}.csv`, "text/csv;charset=utf-8");
       } else {
@@ -165,7 +225,7 @@ export default function DadosEAutomacoesView() {
       showFeedback(dataToolsContent.feedback.ruleCreated);
     }
     setRules(nextRules);
-    setTestResults(testAutomationRules(nextRules, rows));
+    setTestResults(testAutomationRules(nextRules, rows, transactions));
     if (parsed) updateRows(parsed, mapping, nextRules);
     setRuleDialogOpen(false);
     setEditingRule(null);
@@ -174,14 +234,14 @@ export default function DadosEAutomacoesView() {
   function toggleRule(rule: AutomationRule) {
     const nextRules = rules.map((item) => item.id === rule.id ? { ...item, active: !item.active } : item);
     setRules(nextRules);
-    setTestResults(testAutomationRules(nextRules, rows));
+    setTestResults(testAutomationRules(nextRules, rows, transactions));
     if (parsed) updateRows(parsed, mapping, nextRules);
   }
 
   function deleteRule(rule: AutomationRule) {
     const nextRules = rules.filter((item) => item.id !== rule.id).map((item, index) => ({ ...item, priority: index + 1 }));
     setRules(nextRules);
-    setTestResults(testAutomationRules(nextRules, rows));
+    setTestResults(testAutomationRules(nextRules, rows, transactions));
     if (parsed) updateRows(parsed, mapping, nextRules);
     showFeedback(dataToolsContent.feedback.ruleRemoved);
   }
@@ -198,7 +258,7 @@ export default function DadosEAutomacoesView() {
   }
 
   function runRuleTest() {
-    setTestResults(testAutomationRules(rules, rows));
+    setTestResults(testAutomationRules(rules, rows, transactions));
     showFeedback(dataToolsContent.feedback.rulesTested);
   }
 

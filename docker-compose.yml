@@ -1,0 +1,77 @@
+name: dashboard-financeira
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: dashboard-financeira-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: finance_dashboard
+      POSTGRES_USER: finance_user
+      POSTGRES_PASSWORD: finance_local_password
+      TZ: America/Sao_Paulo
+    ports:
+      - "5434:5432"
+    volumes:
+      - finance_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finance_user -d finance_dashboard"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    networks:
+      - finance_network
+
+  backend:
+    profiles: ["api"]
+    build:
+      context: ./backend
+      target: development
+    container_name: dashboard-financeira-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      API_PREFIX: api/v1
+      FRONTEND_URL: http://localhost:3000
+      DATABASE_URL: postgresql://finance_user:finance_local_password@postgres:5432/finance_dashboard?schema=public
+      JWT_ACCESS_SECRET: troque-esta-chave-access-local-com-mais-de-32-caracteres
+      JWT_REFRESH_SECRET: troque-esta-chave-refresh-local-com-mais-de-32-caracteres
+      JWT_ACCESS_TTL_SECONDS: 900
+      JWT_REFRESH_TTL_DAYS: 30
+      COOKIE_SECURE: "false"
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: sh -c "npm run prisma:deploy && npm run start:dev"
+    networks:
+      - finance_network
+
+  pgadmin:
+    profiles: ["tools"]
+    image: dpage/pgadmin4:latest
+    container_name: dashboard-financeira-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@ateliux.local
+      PGADMIN_DEFAULT_PASSWORD: financeiro2026
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - finance_pgadmin_data:/var/lib/pgadmin
+    networks:
+      - finance_network
+
+volumes:
+  finance_postgres_data:
+  finance_pgadmin_data:
+
+networks:
+  finance_network:
+    driver: bridge

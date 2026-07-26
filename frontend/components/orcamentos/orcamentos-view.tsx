@@ -10,6 +10,7 @@ import { BudgetsToolbar } from "@/components/orcamentos/budgets-toolbar";
 import { CategoriesManager } from "@/components/orcamentos/categories-manager";
 import { CategoryDialog } from "@/components/orcamentos/category-dialog";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { budgetsContent } from "@/content/orcamentos";
 import {
   budgetReferenceDate,
@@ -59,8 +60,9 @@ function resolveStatus(usage: number, threshold: number): BudgetRow["status"] {
 
 export default function OrcamentosView() {
   const referenceMonth = budgetReferenceDate.slice(0, 7);
-  const [categories, setCategories] = useState<FinancialCategory[]>(initialCategories);
-  const [budgets, setBudgets] = useState<MonthlyBudget[]>(initialMonthlyBudgets);
+  const [categories, setCategories] = useFinanceDataState<FinancialCategory[]>("categories", initialCategories);
+  const [budgets, setBudgets] = useFinanceDataState<MonthlyBudget[]>("monthly-budgets", initialMonthlyBudgets);
+  const [transactions] = useFinanceDataState("transactions", transactionsData);
   const [monthKey, setMonthKey] = useState(referenceMonth);
   const [view, setView] = useState<BudgetView>("budgets");
   const [search, setSearch] = useState("");
@@ -72,7 +74,7 @@ export default function OrcamentosView() {
 
   const spentByCategory = useMemo(() => {
     const totals = new Map<string, number>();
-    transactionsData
+    transactions
       .filter((transaction) => transaction.type === "expense" && transaction.status === "completed" && transaction.date.startsWith(monthKey))
       .forEach((transaction) => {
         const category = categories.find((item) => slugify(item.name) === slugify(transaction.category));
@@ -80,7 +82,7 @@ export default function OrcamentosView() {
         totals.set(category.id, (totals.get(category.id) ?? 0) + transaction.amount);
       });
     return totals;
-  }, [categories, monthKey]);
+  }, [categories, monthKey, transactions]);
 
   const rows = useMemo<BudgetRow[]>(() => budgets
     .filter((budget) => budget.month === monthKey)

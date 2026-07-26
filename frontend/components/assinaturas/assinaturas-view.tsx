@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ChargeDialog } from "@/components/assinaturas/charge-dialog";
 import { ChargesList } from "@/components/assinaturas/charges-list";
 import { SubscriptionDialog } from "@/components/assinaturas/subscription-dialog";
@@ -10,6 +10,7 @@ import { SubscriptionsList } from "@/components/assinaturas/subscriptions-list";
 import { SubscriptionsSummary } from "@/components/assinaturas/subscriptions-summary";
 import { SubscriptionsToolbar } from "@/components/assinaturas/subscriptions-toolbar";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { subscriptionsContent } from "@/content/assinaturas";
 import { initialSubscriptions, initialSubscriptionCharges, subscriptionsReferenceDate } from "@/data/assinaturas";
 import { initialAccounts } from "@/data/contas";
@@ -93,21 +94,29 @@ function computeSubscription(subscription: PersonalSubscription): SubscriptionRo
 }
 
 export default function AssinaturasView() {
-  const accounts = useMemo(() => initialAccounts.map((account) => ({ id: account.id, name: account.name })), []);
+  const [storedAccounts] = useFinanceDataState("accounts", initialAccounts);
+  const accounts = useMemo(() => storedAccounts.map((account) => ({ id: account.id, name: account.name })), [storedAccounts]);
   const accountNames = useMemo(() => Object.fromEntries(accounts.map((account) => [account.id, account.name])), [accounts]);
-  const [subscriptions, setSubscriptions] = useState<PersonalSubscription[]>(initialSubscriptions);
-  const [charges, setCharges] = useState<SubscriptionCharge[]>(initialSubscriptionCharges);
+  const [subscriptions, setSubscriptions] = useFinanceDataState<PersonalSubscription[]>("subscriptions", initialSubscriptions);
+  const [charges, setCharges] = useFinanceDataState<SubscriptionCharge[]>("subscription-charges", initialSubscriptionCharges);
   const [view, setView] = useState<SubscriptionView>("subscriptions");
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<SubscriptionCategoryFilter>("all");
   const [status, setStatus] = useState<SubscriptionStatusFilter>("all");
   const [accountId, setAccountId] = useState<SubscriptionAccountFilter>("all");
-  const [selectedId, setSelectedId] = useState(initialSubscriptions[0]?.id ?? "");
+  const [selectedId, setSelectedId] = useState("");
   const [editingSubscription, setEditingSubscription] = useState<PersonalSubscription | null>(null);
   const [subscriptionDialogOpen, setSubscriptionDialogOpen] = useState(false);
   const [chargeDialogOpen, setChargeDialogOpen] = useState(false);
   const [chargeSubscriptionId, setChargeSubscriptionId] = useState<string | undefined>();
   const [feedback, setFeedback] = useState("");
+
+  useEffect(() => {
+    if (!selectedId && subscriptions[0]) setSelectedId(subscriptions[0].id);
+    if (selectedId && !subscriptions.some((subscription) => subscription.id === selectedId)) {
+      setSelectedId(subscriptions[0]?.id ?? "");
+    }
+  }, [selectedId, subscriptions]);
 
   const subscriptionRows = useMemo(() => subscriptions.map(computeSubscription), [subscriptions]);
   const filteredSubscriptions = useMemo(() => subscriptionRows.filter((subscription) => {

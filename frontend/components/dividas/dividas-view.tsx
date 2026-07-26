@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DebtDetailsPanel } from "@/components/dividas/debt-details-panel";
 import { DebtDialog } from "@/components/dividas/debt-dialog";
 import { DebtPaymentDialog } from "@/components/dividas/debt-payment-dialog";
@@ -12,6 +12,7 @@ import { DebtsSummary } from "@/components/dividas/debts-summary";
 import { DebtsToolbar } from "@/components/dividas/debts-toolbar";
 import { PayoffSimulator } from "@/components/dividas/payoff-simulator";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { debtsContent } from "@/content/dividas";
 import { initialAccounts } from "@/data/contas";
 import { debtsReferenceDate, initialDebtPayments, initialDebts, monthlyIncomeReference } from "@/data/dividas";
@@ -54,22 +55,30 @@ function formatDebtFreeDate(months: number): string {
 }
 
 export default function DividasView() {
-  const accounts = useMemo(() => initialAccounts.map((account) => ({ id: account.id, name: account.name })), []);
+  const [storedAccounts] = useFinanceDataState("accounts", initialAccounts);
+  const accounts = useMemo(() => storedAccounts.map((account) => ({ id: account.id, name: account.name })), [storedAccounts]);
   const accountNames = useMemo(() => Object.fromEntries(accounts.map((account) => [account.id, account.name])), [accounts]);
-  const [debts, setDebts] = useState<FinancialDebt[]>(initialDebts);
-  const [payments, setPayments] = useState<DebtPayment[]>(initialDebtPayments);
+  const [debts, setDebts] = useFinanceDataState<FinancialDebt[]>("debts", initialDebts);
+  const [payments, setPayments] = useFinanceDataState<DebtPayment[]>("debt-payments", initialDebtPayments);
   const [view, setView] = useState<DebtView>("debts");
   const [search, setSearch] = useState("");
   const [type, setType] = useState<DebtTypeFilter>("all");
   const [status, setStatus] = useState<DebtStatusFilter>("all");
   const [priority, setPriority] = useState<DebtPriorityFilter>("all");
-  const [selectedDebtId, setSelectedDebtId] = useState(initialDebts[0]?.id ?? "");
+  const [selectedDebtId, setSelectedDebtId] = useState("");
   const [editingDebt, setEditingDebt] = useState<FinancialDebt | null>(null);
   const [debtDialogOpen, setDebtDialogOpen] = useState(false);
   const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
   const [paymentDebtId, setPaymentDebtId] = useState<string | undefined>();
   const [settleMode, setSettleMode] = useState(false);
   const [feedback, setFeedback] = useState("");
+
+  useEffect(() => {
+    if (!selectedDebtId && debts[0]) setSelectedDebtId(debts[0].id);
+    if (selectedDebtId && !debts.some((debt) => debt.id === selectedDebtId)) {
+      setSelectedDebtId(debts[0]?.id ?? "");
+    }
+  }, [debts, selectedDebtId]);
 
   const debtRows = useMemo(() => debts.map(computeDebt), [debts]);
   const filteredDebts = useMemo(() => debtRows.filter((debt) => {

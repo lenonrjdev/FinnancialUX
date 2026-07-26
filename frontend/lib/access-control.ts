@@ -52,19 +52,6 @@ export function persistWorkspaceId(workspaceId: string): void {
   window.dispatchEvent(new CustomEvent("finance-workspace-change", { detail: workspaceId }));
 }
 
-export function persistDemoSession(email: string): void {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(
-    "finance-demo-session",
-    JSON.stringify({ email, authenticatedAt: new Date().toISOString() }),
-  );
-}
-
-export function clearDemoSession(): void {
-  if (typeof window === "undefined") return;
-  window.localStorage.removeItem("finance-demo-session");
-}
-
 const accessDateFormatter = new Intl.DateTimeFormat("pt-BR", {
   day: "2-digit",
   month: "short",

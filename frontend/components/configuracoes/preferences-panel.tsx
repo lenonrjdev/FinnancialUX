@@ -1,13 +1,15 @@
 import { EyeOffIcon, PaletteIcon } from "@/components/shared/icons";
 import { settingsContent } from "@/content/configuracoes";
-import { initialAccounts } from "@/data/contas";
+import type { FinancialAccount } from "@/types/contas";
 import type { AppearanceMode, DateFormat, FinancialPreferences } from "@/types/configuracoes";
 
 export function PreferencesPanel({
   value,
+  accounts,
   onChange,
 }: {
   value: FinancialPreferences;
+  accounts: FinancialAccount[];
   onChange: (value: FinancialPreferences) => void;
 }) {
   return (
@@ -53,7 +55,8 @@ export function PreferencesPanel({
           <label className="form-field settings-field full">
             <span>{settingsContent.preferences.defaultAccount}</span>
             <select value={value.defaultAccountId} onChange={(event) => onChange({ ...value, defaultAccountId: event.target.value })}>
-              {initialAccounts.map((account) => <option value={account.id} key={account.id}>{account.name}</option>)}
+              <option value="">Nenhuma conta padrão</option>
+              {accounts.map((account) => <option value={account.id} key={account.id}>{account.name}</option>)}
             </select>
           </label>
         </div>

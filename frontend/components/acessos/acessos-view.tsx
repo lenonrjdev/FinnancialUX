@@ -11,45 +11,52 @@ import { MembersPanel } from "@/components/acessos/members-panel";
 import { PermissionMatrix } from "@/components/acessos/permission-matrix";
 import { WorkspaceDialog } from "@/components/acessos/workspace-dialog";
 import { WorkspacesPanel } from "@/components/acessos/workspaces-panel";
+import { useAuth } from "@/components/providers/auth-provider";
 import { CheckIcon } from "@/components/shared/icons";
 import { accessContent } from "@/content/acessos";
-import {
-  demoSessionUser,
-  initialAccessInvitations,
-  initialWorkspaceMembers,
-  initialWorkspaces,
-} from "@/data/acessos";
-import {
-  getStoredWorkspaceId,
-  persistWorkspaceId,
-  roleCan,
-} from "@/lib/access-control";
+import { integrationContent } from "@/content/integracao";
+import { getStoredWorkspaceId, persistWorkspaceId, roleCan } from "@/lib/access-control";
+import { workspacesApi } from "@/lib/api/workspaces";
 import type {
   AccessInvitation,
   CreateWorkspaceInput,
-  FinancialWorkspace,
   InviteMemberInput,
   WorkspaceMember,
   WorkspaceRole,
 } from "@/types/acessos";
 
 export default function AcessosView() {
-  const [workspaces, setWorkspaces] = useState<FinancialWorkspace[]>(initialWorkspaces);
-  const [members, setMembers] = useState<WorkspaceMember[]>(initialWorkspaceMembers);
-  const [invitations, setInvitations] = useState<AccessInvitation[]>(initialAccessInvitations);
-  const [selectedWorkspaceId, setSelectedWorkspaceId] = useState(initialWorkspaces[0].id);
+  const { workspaces, refreshWorkspaces } = useAuth();
+  const [members, setMembers] = useState<WorkspaceMember[]>([]);
+  const [invitations, setInvitations] = useState<AccessInvitation[]>([]);
+  const [selectedWorkspaceId, setSelectedWorkspaceId] = useState("");
   const [query, setQuery] = useState("");
   const [inviteOpen, setInviteOpen] = useState(false);
   const [workspaceDialogOpen, setWorkspaceDialogOpen] = useState(false);
   const [editingMember, setEditingMember] = useState<WorkspaceMember | null>(null);
   const [feedback, setFeedback] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedId = getStoredWorkspaceId(initialWorkspaces[0].id);
-    if (initialWorkspaces.some((workspace) => workspace.id === storedId)) {
-      setSelectedWorkspaceId(storedId);
-    }
-  }, []);
+    if (!workspaces.length) return;
+    const storedId = getStoredWorkspaceId(workspaces[0].id);
+    setSelectedWorkspaceId(workspaces.some((workspace) => workspace.id === storedId) ? storedId : workspaces[0].id);
+  }, [workspaces]);
+
+  useEffect(() => {
+    if (!selectedWorkspaceId) return;
+    setLoading(true);
+    Promise.all([
+      workspacesApi.members(selectedWorkspaceId),
+      workspacesApi.invitations(selectedWorkspaceId),
+    ])
+      .then(([nextMembers, nextInvitations]) => {
+        setMembers(nextMembers);
+        setInvitations(nextInvitations);
+      })
+      .catch((caught) => showFeedback(caught instanceof Error ? caught.message : integrationContent.workspaceLoadError))
+      .finally(() => setLoading(false));
+  }, [selectedWorkspaceId]);
 
   const selectedWorkspace = workspaces.find((workspace) => workspace.id === selectedWorkspaceId) ?? workspaces[0];
   const currentRole = selectedWorkspace?.role ?? "viewer";
@@ -57,19 +64,16 @@ export default function AcessosView() {
 
   const selectedMembers = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("pt-BR");
-    return members
-      .filter((member) => member.workspaceId === selectedWorkspaceId)
-      .filter((member) => !normalizedQuery
-        || member.name.toLocaleLowerCase("pt-BR").includes(normalizedQuery)
-        || member.email.toLocaleLowerCase("pt-BR").includes(normalizedQuery));
-  }, [members, query, selectedWorkspaceId]);
+    return members.filter((member) => !normalizedQuery
+      || member.name.toLocaleLowerCase("pt-BR").includes(normalizedQuery)
+      || member.email.toLocaleLowerCase("pt-BR").includes(normalizedQuery));
+  }, [members, query]);
 
-  const selectedInvitations = invitations.filter((invitation) => invitation.workspaceId === selectedWorkspaceId);
   const pendingInvitationsCount = invitations.filter((invitation) => invitation.status === "pending").length;
 
   function showFeedback(message: string) {
     setFeedback(message);
-    window.setTimeout(() => setFeedback(""), 2800);
+    window.setTimeout(() => setFeedback(""), 3200);
   }
 
   function selectWorkspace(workspaceId: string) {
@@ -79,156 +83,114 @@ export default function AcessosView() {
     showFeedback(accessContent.feedback.workspaceChanged);
   }
 
-  function inviteMember(input: InviteMemberInput) {
+  async function inviteMember(input: InviteMemberInput) {
     if (!selectedWorkspace) return;
-    const now = new Date();
-    const expiresAt = new Date(now);
-    expiresAt.setDate(expiresAt.getDate() + 7);
-    const invitation: AccessInvitation = {
-      id: `invite-${Date.now()}`,
-      workspaceId: selectedWorkspace.id,
-      email: input.email,
-      role: input.role,
-      invitedBy: demoSessionUser.name,
-      sentAt: now.toISOString(),
-      expiresAt: expiresAt.toISOString(),
-      status: "pending",
-      token: `${selectedWorkspace.id}-${Date.now()}`,
-    };
-    setInvitations((current) => [invitation, ...current]);
-    setInviteOpen(false);
-    showFeedback(accessContent.feedback.invited);
+    try {
+      const invitation = await workspacesApi.invite(selectedWorkspace.id, input);
+      setInvitations((current) => [invitation, ...current]);
+      setInviteOpen(false);
+      try {
+        await navigator.clipboard.writeText(invitation.invitationUrl ?? "");
+        showFeedback(integrationContent.inviteCopied);
+      } catch {
+        showFeedback(integrationContent.inviteCreated);
+      }
+    } catch (caught) {
+      showFeedback(caught instanceof Error ? caught.message : integrationContent.unexpectedError);
+    }
   }
 
-  function createWorkspace(input: CreateWorkspaceInput) {
-    const workspaceId = `workspace-${Date.now()}`;
-    const now = new Date().toISOString();
-    const workspace: FinancialWorkspace = {
-      id: workspaceId,
-      name: input.name,
-      description: input.description,
-      kind: "shared",
-      role: "owner",
-      membersCount: 1,
-      createdAt: now,
-      lastActivityAt: now,
-    };
-    const member: WorkspaceMember = {
-      id: `member-${Date.now()}`,
-      workspaceId,
-      name: demoSessionUser.name,
-      email: demoSessionUser.email,
-      initials: demoSessionUser.initials,
-      role: "owner",
-      joinedAt: now,
-      lastAccessAt: now,
-      isCurrentUser: true,
-    };
-    const nextWorkspaces = [...workspaces, workspace];
-    setWorkspaces(nextWorkspaces);
-    window.dispatchEvent(new CustomEvent("finance-workspaces-change", { detail: nextWorkspaces }));
-    setMembers((current) => [...current, member]);
-    setSelectedWorkspaceId(workspaceId);
-    persistWorkspaceId(workspaceId);
-    setWorkspaceDialogOpen(false);
-    showFeedback(accessContent.feedback.workspaceCreated);
+  async function createWorkspace(input: CreateWorkspaceInput) {
+    try {
+      const workspace = await workspacesApi.create(input);
+      await refreshWorkspaces();
+      setSelectedWorkspaceId(workspace.id);
+      persistWorkspaceId(workspace.id);
+      setWorkspaceDialogOpen(false);
+      showFeedback(accessContent.feedback.workspaceCreated);
+    } catch (caught) {
+      showFeedback(caught instanceof Error ? caught.message : integrationContent.unexpectedError);
+    }
   }
 
-  function changeMemberRole(role: Exclude<WorkspaceRole, "owner">) {
-    if (!editingMember) return;
-    setMembers((current) => current.map((member) => member.id === editingMember.id ? { ...member, role } : member));
-    setEditingMember(null);
-    showFeedback(accessContent.feedback.roleChanged);
+  async function changeMemberRole(role: Exclude<WorkspaceRole, "owner">) {
+    if (!editingMember || !selectedWorkspace) return;
+    try {
+      const updated = await workspacesApi.updateMemberRole(selectedWorkspace.id, editingMember.id, role);
+      setMembers((current) => current.map((member) => member.id === updated.id ? updated : member));
+      setEditingMember(null);
+      showFeedback(accessContent.feedback.roleChanged);
+    } catch (caught) {
+      showFeedback(caught instanceof Error ? caught.message : integrationContent.unexpectedError);
+    }
   }
 
-  function removeMember(member: WorkspaceMember) {
-    setMembers((current) => current.filter((item) => item.id !== member.id));
-    setWorkspaces((current) => current.map((workspace) => workspace.id === member.workspaceId
-      ? { ...workspace, membersCount: Math.max(1, workspace.membersCount - 1) }
-      : workspace));
-    showFeedback(accessContent.feedback.memberRemoved);
+  async function removeMember(member: WorkspaceMember) {
+    if (!selectedWorkspace) return;
+    try {
+      await workspacesApi.removeMember(selectedWorkspace.id, member.id);
+      setMembers((current) => current.filter((item) => item.id !== member.id));
+      await refreshWorkspaces();
+      showFeedback(accessContent.feedback.memberRemoved);
+    } catch (caught) {
+      showFeedback(caught instanceof Error ? caught.message : integrationContent.unexpectedError);
+    }
   }
 
-  function resendInvitation(invitation: AccessInvitation) {
-    const now = new Date();
-    const expiresAt = new Date(now);
-    expiresAt.setDate(expiresAt.getDate() + 7);
-    setInvitations((current) => current.map((item) => item.id === invitation.id
-      ? { ...item, sentAt: now.toISOString(), expiresAt: expiresAt.toISOString(), status: "pending" }
-      : item));
-    showFeedback(accessContent.feedback.invitationResent);
+  async function resendInvitation(invitation: AccessInvitation) {
+    if (!selectedWorkspace) return;
+    try {
+      const updated = await workspacesApi.resendInvitation(selectedWorkspace.id, invitation.id);
+      setInvitations((current) => current.map((item) => item.id === updated.id ? updated : item));
+      try { await navigator.clipboard.writeText(updated.invitationUrl ?? ""); } catch {}
+      showFeedback(accessContent.feedback.invitationResent);
+    } catch (caught) {
+      showFeedback(caught instanceof Error ? caught.message : integrationContent.unexpectedError);
+    }
   }
 
-  function cancelInvitation(invitation: AccessInvitation) {
-    setInvitations((current) => current.filter((item) => item.id !== invitation.id));
-    showFeedback(accessContent.feedback.invitationCanceled);
+  async function cancelInvitation(invitation: AccessInvitation) {
+    if (!selectedWorkspace) return;
+    try {
+      await workspacesApi.cancelInvitation(selectedWorkspace.id, invitation.id);
+      setInvitations((current) => current.filter((item) => item.id !== invitation.id));
+      showFeedback(accessContent.feedback.invitationCanceled);
+    } catch (caught) {
+      showFeedback(caught instanceof Error ? caught.message : integrationContent.unexpectedError);
+    }
   }
 
   const unavailableEmails = [
-    ...members.filter((member) => member.workspaceId === selectedWorkspaceId).map((member) => member.email.toLowerCase()),
-    ...invitations.filter((invitation) => invitation.workspaceId === selectedWorkspaceId && invitation.status === "pending").map((invitation) => invitation.email.toLowerCase()),
+    ...members.map((member) => member.email.toLowerCase()),
+    ...invitations.filter((invitation) => invitation.status === "pending").map((invitation) => invitation.email.toLowerCase()),
   ];
+
+  if (!selectedWorkspace) return <div className="backend-loading-screen">{integrationContent.loading}</div>;
 
   return (
     <div className="financial-management-page access-page">
-      <AccessHeading
-        onInvite={() => setInviteOpen(true)}
-        onCreateWorkspace={() => setWorkspaceDialogOpen(true)}
-        canInvite={canManage}
-      />
-      <AccessSummary
-        workspacesCount={workspaces.length}
-        membersCount={members.length}
-        invitationsCount={pendingInvitationsCount}
-        currentRole={currentRole}
-      />
+      <AccessHeading onInvite={() => setInviteOpen(true)} onCreateWorkspace={() => setWorkspaceDialogOpen(true)} canInvite={canManage} />
+      <AccessSummary workspacesCount={workspaces.length} membersCount={members.length} invitationsCount={pendingInvitationsCount} currentRole={currentRole} />
 
       <div className="access-main-grid">
         <WorkspacesPanel workspaces={workspaces} selectedWorkspaceId={selectedWorkspaceId} onSelect={selectWorkspace} />
         <AccessOverviewPanel />
       </div>
 
-      <MembersPanel
-        members={selectedMembers}
-        query={query}
-        canManage={canManage}
-        onQueryChange={setQuery}
-        onEdit={setEditingMember}
-        onRemove={removeMember}
-      />
-
-      <InvitationsPanel
-        invitations={selectedInvitations}
-        canManage={canManage}
-        onResend={resendInvitation}
-        onCancel={cancelInvitation}
-      />
+      {loading ? <div className="backend-inline-loading">{integrationContent.loading}</div> : (
+        <>
+          <MembersPanel members={selectedMembers} query={query} canManage={canManage} onQueryChange={setQuery} onEdit={setEditingMember} onRemove={removeMember} />
+          <InvitationsPanel invitations={invitations} canManage={canManage} onResend={resendInvitation} onCancel={cancelInvitation} />
+        </>
+      )}
 
       <PermissionMatrix />
 
-      {inviteOpen && selectedWorkspace ? (
-        <InviteDialog
-          workspace={selectedWorkspace}
-          unavailableEmails={unavailableEmails}
-          onClose={() => setInviteOpen(false)}
-          onSubmit={inviteMember}
-        />
-      ) : null}
+      {inviteOpen ? <InviteDialog workspace={selectedWorkspace} unavailableEmails={unavailableEmails} onClose={() => setInviteOpen(false)} onSubmit={inviteMember} /> : null}
+      {workspaceDialogOpen ? <WorkspaceDialog onClose={() => setWorkspaceDialogOpen(false)} onSubmit={createWorkspace} /> : null}
+      {editingMember ? <MemberRoleDialog member={editingMember} onClose={() => setEditingMember(null)} onSubmit={changeMemberRole} /> : null}
 
-      {workspaceDialogOpen ? (
-        <WorkspaceDialog onClose={() => setWorkspaceDialogOpen(false)} onSubmit={createWorkspace} />
-      ) : null}
-
-      {editingMember ? (
-        <MemberRoleDialog member={editingMember} onClose={() => setEditingMember(null)} onSubmit={changeMemberRole} />
-      ) : null}
-
-      {feedback ? (
-        <div className="transaction-feedback access-feedback" role="status">
-          <CheckIcon />
-          {feedback}
-        </div>
-      ) : null}
+      {feedback ? <div className="transaction-feedback access-feedback" role="status"><CheckIcon />{feedback}</div> : null}
     </div>
   );
 }

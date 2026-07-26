@@ -9,6 +9,7 @@ import { ReceivablesInsightPanel } from "@/components/recebimentos/receivables-i
 import { ReceivablesList } from "@/components/recebimentos/receivables-list";
 import { ReceivablesSummary } from "@/components/recebimentos/receivables-summary";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { receivablesContent } from "@/content/recebimentos";
 import { initialAccounts } from "@/data/contas";
 import {
@@ -53,13 +54,13 @@ function getAutomaticStatus(item: Receivable): ReceivableStatus {
 }
 
 export default function RecebimentosView() {
-  const [receivables, setReceivables] = useState<Receivable[]>(initialReceivables);
+  const [receivables, setReceivables] = useFinanceDataState<Receivable[]>("receivables", initialReceivables);
   const [filters, setFilters] = useState<ReceivableFilters>(initialFilters);
   const [newDialogOpen, setNewDialogOpen] = useState(false);
   const [receiptReceivableId, setReceiptReceivableId] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
-  const accounts = initialAccounts;
+  const [accounts] = useFinanceDataState("accounts", initialAccounts);
   const month = receivablesReferenceDate.slice(0, 7);
   const sevenDaysLimit = addDays(receivablesReferenceDate, 7);
 

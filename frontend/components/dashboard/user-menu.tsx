@@ -3,16 +3,19 @@
 import Link from "next/link";
 import { useState } from "react";
 import { LogOutIcon, SettingsIcon, ShieldIcon, UsersIcon } from "@/components/shared/icons";
+import { useAuth } from "@/components/providers/auth-provider";
 import { dashboardContent } from "@/content/dashboard";
-import { clearDemoSession } from "@/lib/access-control";
+import { integrationContent } from "@/content/integracao";
 import type { SessionUser } from "@/types/acessos";
 
 export function UserMenu({ user }: { user: SessionUser }) {
+  const { logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const [leaving, setLeaving] = useState(false);
 
-  function logout() {
-    clearDemoSession();
-    window.location.assign("/login");
+  async function handleLogout() {
+    setLeaving(true);
+    await logout();
   }
 
   return (
@@ -32,11 +35,11 @@ export function UserMenu({ user }: { user: SessionUser }) {
             <span>{user.initials}</span>
             <div><strong>{user.name}</strong><small>{user.email}</small></div>
           </header>
-          <div className="dashboard-user-demo"><ShieldIcon /> {dashboardContent.accountMenu.demo}</div>
+          <div className="dashboard-user-demo"><ShieldIcon /> {integrationContent.accountMenu.protectedSession}</div>
           <nav>
             <Link href="/acessos" onClick={() => setOpen(false)}><UsersIcon /> {dashboardContent.accountMenu.manageAccess}</Link>
             <Link href="/configuracoes" onClick={() => setOpen(false)}><SettingsIcon /> {dashboardContent.accountMenu.settings}</Link>
-            <button type="button" onClick={logout}><LogOutIcon /> {dashboardContent.accountMenu.logout}</button>
+            <button type="button" onClick={handleLogout} disabled={leaving}><LogOutIcon /> {leaving ? integrationContent.accountMenu.leaving : dashboardContent.accountMenu.logout}</button>
           </nav>
         </div>
       ) : null}

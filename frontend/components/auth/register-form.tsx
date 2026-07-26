@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { GoogleIcon, LockIcon, MailIcon, UserIcon } from "@/components/shared/icons";
+import { LockIcon, MailIcon, UserIcon } from "@/components/shared/icons";
+import { useAuth } from "@/components/providers/auth-provider";
 import { authContent } from "@/content/acessos";
-import { isValidEmail, persistDemoSession } from "@/lib/access-control";
+import { integrationContent } from "@/content/integracao";
+import { isValidEmail } from "@/lib/access-control";
 import type { RegisterInput } from "@/types/acessos";
 
 const initialForm: RegisterInput = {
@@ -16,19 +18,16 @@ const initialForm: RegisterInput = {
 };
 
 export function RegisterForm() {
+  const { register } = useAuth();
   const [form, setForm] = useState<RegisterInput>(initialForm);
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   function update<K extends keyof RegisterInput>(key: K, value: RegisterInput[K]) {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
-  function complete(email: string) {
-    persistDemoSession(email || "conta-google@financas.local");
-    window.location.assign("/visao-geral");
-  }
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!form.name.trim() || !isValidEmail(form.email) || form.password.length < 8 || !form.acceptedTerms) {
       setError(authContent.register.invalid);
@@ -38,8 +37,16 @@ export function RegisterForm() {
       setError(authContent.register.passwordMismatch);
       return;
     }
+    setSubmitting(true);
     setError("");
-    complete(form.email);
+    try {
+      await register(form.name, form.email, form.password);
+      window.location.assign("/visao-geral");
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : authContent.register.invalid);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -49,13 +56,6 @@ export function RegisterForm() {
         <h2>{authContent.register.title}</h2>
         <p>{authContent.register.description}</p>
       </header>
-
-      <button className="auth-google-button" type="button" onClick={() => complete(form.email)}>
-        <GoogleIcon />
-        {authContent.register.google}
-      </button>
-
-      <div className="auth-divider"><span>{authContent.register.divider}</span></div>
 
       <form className="auth-form" onSubmit={handleSubmit}>
         <label>
@@ -127,8 +127,8 @@ export function RegisterForm() {
 
         {error ? <p className="auth-form-error">{error}</p> : null}
 
-        <button className="auth-submit-button" type="submit">
-          {authContent.register.submit}
+        <button className="auth-submit-button" type="submit" disabled={submitting}>
+          {submitting ? integrationContent.register.submitting : authContent.register.submit}
         </button>
       </form>
 

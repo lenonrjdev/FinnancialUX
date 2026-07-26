@@ -217,7 +217,7 @@ a:focus-visible {
 .nav-group-label {
   padding: 0 12px;
   color: #b0aeb5;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -232,7 +232,7 @@ a:focus-visible {
   min-height: 38px;
   border-radius: 6px;
   color: #8c8a92;
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .finance-side-nav .side-link:hover {
@@ -283,13 +283,13 @@ a:focus-visible {
 }
 
 .account-copy strong {
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1;
 }
 
 .account-copy small {
   color: #aaa8af;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .finance-topbar {
@@ -317,12 +317,12 @@ a:focus-visible {
 
 .topbar-context span {
   color: #aaa8af;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .topbar-context strong {
   color: #33313a;
-  font-size: 11px;
+  font-size: 14.3px;
   font-weight: 700;
 }
 
@@ -344,7 +344,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .new-entry-button svg {
@@ -358,7 +358,7 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .mobile-entry-button svg {
@@ -367,7 +367,7 @@ a:focus-visible {
 }
 
 .finance-footer {
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .finance-page-content {
@@ -392,7 +392,7 @@ a:focus-visible {
   display: inline-block;
   margin-bottom: 8px;
   color: #aaa8af;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 700;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -410,7 +410,7 @@ a:focus-visible {
 .overview-heading p {
   margin: 10px 0 0;
   color: #9b99a1;
-  font-size: 11px;
+  font-size: 14.3px;
   line-height: 1.55;
 }
 
@@ -448,7 +448,7 @@ a:focus-visible {
 
 .available-balance-card > div span {
   color: #85838e;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .available-balance-card strong {
@@ -459,7 +459,7 @@ a:focus-visible {
 
 .available-balance-card small {
   color: #777580;
-  font-size: 8px;
+  font-size: 10.4px;
   white-space: nowrap;
 }
 
@@ -521,7 +521,7 @@ a:focus-visible {
 
 .summary-label {
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .summary-card > strong {
@@ -541,11 +541,11 @@ a:focus-visible {
 
 .summary-footer > span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .summary-trend {
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .summary-trend.positive {
@@ -591,7 +591,7 @@ a:focus-visible {
   display: block;
   margin-bottom: 6px;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -611,7 +611,7 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 8px;
+  font-size: 10.4px;
   cursor: pointer;
 }
 
@@ -634,7 +634,7 @@ a:focus-visible {
 
 .chart-summary span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .chart-summary strong {
@@ -699,7 +699,7 @@ a:focus-visible {
 
 .chart-month {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   text-align: center;
 }
 
@@ -709,7 +709,7 @@ a:focus-visible {
   justify-content: flex-end;
   gap: 17px;
   color: #8e8c94;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .chart-legend span {
@@ -762,7 +762,7 @@ a:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .monthly-label-row svg {
@@ -802,7 +802,7 @@ a:focus-visible {
 .monthly-panel-block > small {
   margin-top: 9px;
   color: #777580;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.45;
 }
 
@@ -829,12 +829,12 @@ a:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-row b {
   color: #d8d6dd;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .overview-lists-grid {
@@ -856,7 +856,7 @@ a:focus-visible {
   border: 0;
   background: transparent;
   color: #77757e;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -901,12 +901,12 @@ a:focus-visible {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .list-copy span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .list-value,
@@ -920,13 +920,13 @@ a:focus-visible {
 
 .list-value strong,
 .transaction-value strong {
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .list-value span,
 .transaction-value span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .transaction-value.income strong {
@@ -967,13 +967,13 @@ a:focus-visible {
 }
 
 .monthly-insight strong {
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .monthly-insight p {
   margin: 5px 0 0;
   color: #99979f;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.45;
 }
 
@@ -985,7 +985,7 @@ a:focus-visible {
   border-radius: 5px;
   background: #12111b;
   color: #fff;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -1002,7 +1002,7 @@ a:focus-visible {
 .module-placeholder-copy p {
   margin: 10px 0 0;
   color: #9b99a1;
-  font-size: 11px;
+  font-size: 14.3px;
   line-height: 1.6;
 }
 
@@ -1034,14 +1034,14 @@ a:focus-visible {
 }
 
 .module-placeholder-card strong {
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .module-placeholder-card p {
   max-width: 630px;
   margin: 7px 0 0;
   color: #99979f;
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.55;
 }
 
@@ -1054,7 +1054,7 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -1130,7 +1130,7 @@ a:focus-visible {
   }
 
   .brand {
-    font-size: 11px;
+    font-size: 14.3px;
     gap: 8px;
   }
 
@@ -1142,7 +1142,7 @@ a:focus-visible {
   .finance-side-nav .side-link {
     padding-left: 9px;
     padding-right: 9px;
-    font-size: 10px;
+    font-size: 13px;
   }
 
   .finance-side-nav .side-link svg {
@@ -1212,7 +1212,7 @@ a:focus-visible {
   }
 
   .mobile-header .brand {
-    font-size: 11px;
+    font-size: 14.3px;
     gap: 8px;
   }
 
@@ -1266,7 +1266,7 @@ a:focus-visible {
     padding: 0 10px;
     border-radius: 5px;
     color: #77757e;
-    font-size: 11px;
+    font-size: 14.3px;
   }
 
   .finance-mobile-menu a.active {
@@ -1347,7 +1347,7 @@ a:focus-visible {
 
   .overview-heading p {
     max-width: 94%;
-    font-size: 10px;
+    font-size: 13px;
   }
 
   .available-balance-card {
@@ -1488,7 +1488,7 @@ textarea {
   max-width: 620px;
   margin: 10px 0 0;
   color: #9b99a1;
-  font-size: 11px;
+  font-size: 14.3px;
   line-height: 1.55;
 }
 
@@ -1508,7 +1508,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -1592,13 +1592,13 @@ textarea {
   color: #8b6336;
   display: grid;
   place-items: center;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
 }
 
 .transaction-summary-card > span {
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .featured > span {
@@ -1617,7 +1617,7 @@ textarea {
   padding-top: 17px;
   border-top: 1px solid #f1f0f2;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .featured > small {
@@ -1662,7 +1662,7 @@ textarea {
   outline: 0;
   background: transparent;
   color: #26242d;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .transactions-search input::placeholder {
@@ -1687,7 +1687,7 @@ textarea {
 .form-field > span,
 .transaction-type-selector legend {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -1703,7 +1703,7 @@ textarea {
   background: #fff;
   color: #34323b;
   outline: 0;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .transactions-filter-selects select,
@@ -1728,7 +1728,7 @@ textarea {
   border: 0;
   background: transparent;
   color: #77757e;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
@@ -1760,7 +1760,7 @@ textarea {
 
 .transactions-count {
   color: #9e9ca4;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .transactions-table-wrap {
@@ -1780,7 +1780,7 @@ textarea {
   border-bottom: 1px solid var(--line);
   background: #fbfafb;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
   text-align: left;
 }
@@ -1807,7 +1807,7 @@ textarea {
   padding: 0 16px;
   border-bottom: 1px solid #f0eff2;
   color: #7e7c84;
-  font-size: 8px;
+  font-size: 10.4px;
   vertical-align: middle;
 }
 
@@ -1836,7 +1836,7 @@ textarea {
 .transaction-description-cell strong,
 .transaction-account-cell strong {
   color: #323039;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 650;
 }
 
@@ -1847,7 +1847,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .transaction-type-icon {
@@ -1887,7 +1887,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 650;
 }
 
@@ -1907,7 +1907,7 @@ textarea {
 }
 
 .transaction-table-value {
-  font-size: 9px;
+  font-size: 11.7px;
   white-space: nowrap;
 }
 
@@ -1946,7 +1946,7 @@ textarea {
   max-width: 350px;
   margin: 8px 0 0;
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.5;
 }
 
@@ -2005,7 +2005,7 @@ textarea {
 .transaction-dialog-header p {
   margin: 8px 0 0;
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.5;
 }
 
@@ -2059,7 +2059,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 650;
   cursor: pointer;
 }
@@ -2100,7 +2100,7 @@ textarea {
 
 .currency-input b {
   color: #77757e;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .currency-input input {
@@ -2113,7 +2113,7 @@ textarea {
 .transaction-form-error {
   margin: 14px 0 0;
   color: #9a4d4d;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .transaction-dialog-footer {
@@ -2139,7 +2139,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .transaction-feedback svg {
@@ -2250,12 +2250,12 @@ textarea {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 9px;
+    font-size: 11.7px;
   }
 
   .transaction-mobile-copy span {
     color: #aaa8af;
-    font-size: 8px;
+    font-size: 10.4px;
   }
 
   .transaction-mobile-meta {
@@ -2267,7 +2267,7 @@ textarea {
     justify-content: space-between;
     gap: 12px;
     color: #898790;
-    font-size: 8px;
+    font-size: 10.4px;
   }
 
   .transaction-dialog-backdrop {
@@ -2339,7 +2339,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 8px;
+  font-size: 10.4px;
   text-align: left;
   cursor: pointer;
 }
@@ -2396,7 +2396,7 @@ textarea {
   max-width: 640px;
   margin: 10px 0 0;
   color: #9b99a1;
-  font-size: 11px;
+  font-size: 14.3px;
   line-height: 1.55;
 }
 
@@ -2439,7 +2439,7 @@ textarea {
 
 .accounts-total-card-top > span:last-child {
   color: #777580;
-  font-size: 8px;
+  font-size: 10.4px;
   text-align: right;
 }
 
@@ -2459,7 +2459,7 @@ textarea {
 
 .accounts-total-label {
   color: #898792;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .accounts-total-card > strong {
@@ -2486,11 +2486,11 @@ textarea {
 
 .accounts-projection-row span {
   color: #777580;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .accounts-projection-row strong {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .accounts-projection-track {
@@ -2534,7 +2534,7 @@ textarea {
 
 .account-summary-card > span:not(.account-summary-icon) {
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .account-summary-card > strong {
@@ -2549,7 +2549,7 @@ textarea {
   padding-top: 16px;
   border-top: 1px solid #f1f0f2;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.45;
 }
 
@@ -2587,7 +2587,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 650;
   cursor: pointer;
   white-space: nowrap;
@@ -2602,7 +2602,7 @@ textarea {
   color: #77757e;
   display: grid;
   place-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .accounts-filter-tabs button.active {
@@ -2643,7 +2643,7 @@ textarea {
   outline: 0;
   background: transparent;
   color: #26242d;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .accounts-search input::placeholder {
@@ -2679,7 +2679,7 @@ textarea {
 .accounts-section-heading span,
 .accounts-panel-heading span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .accounts-section-heading h2,
@@ -2692,7 +2692,7 @@ textarea {
 .accounts-section-heading small,
 .accounts-panel-heading small {
   color: #9e9ca4;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .accounts-grid {
@@ -2775,7 +2775,7 @@ textarea {
   color: #6d6a74;
   display: inline-flex;
   align-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -2801,7 +2801,7 @@ textarea {
 
 .account-card-copy > span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .account-card-copy h3 {
@@ -2819,7 +2819,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .account-card-balance {
@@ -2831,7 +2831,7 @@ textarea {
 .account-card-balance span,
 .account-card-footer span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .account-card-balance strong {
@@ -2857,7 +2857,7 @@ textarea {
 
 .account-card-footer > div strong {
   color: #5f5d66;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .account-card-footer button {
@@ -2870,7 +2870,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -2915,7 +2915,7 @@ textarea {
   max-width: 350px;
   margin: 8px 0 0;
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.5;
 }
 
@@ -2994,7 +2994,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #323039;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .account-movement-copy span {
@@ -3002,7 +3002,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .account-movement-value {
@@ -3012,7 +3012,7 @@ textarea {
 
 .account-movement-value strong {
   color: #34323b;
-  font-size: 9px;
+  font-size: 11.7px;
   white-space: nowrap;
 }
 
@@ -3022,7 +3022,7 @@ textarea {
 
 .account-movement-value span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .account-movements-empty {
@@ -3043,7 +3043,7 @@ textarea {
   max-width: 340px;
   margin: 8px 0 0;
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.5;
 }
 
@@ -3054,7 +3054,7 @@ textarea {
 .accounts-distribution-description {
   margin: 18px 22px 0;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.55;
 }
 
@@ -3086,12 +3086,12 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #77757e;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .accounts-distribution-item > div:first-child strong {
   color: #34323b;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .accounts-distribution-track {
@@ -3111,7 +3111,7 @@ textarea {
 .accounts-distribution-item small {
   min-width: 34px;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   text-align: right;
 }
 
@@ -3127,11 +3127,11 @@ textarea {
 
 .accounts-distribution-total span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .accounts-distribution-total strong {
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .account-dialog {
@@ -3149,7 +3149,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 8px;
+  font-size: 10.4px;
   cursor: pointer;
 }
 
@@ -3178,7 +3178,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #34323b;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 700;
 }
 
@@ -3216,11 +3216,11 @@ textarea {
 
 .account-source-balance span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .account-source-balance strong {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 @media (max-width: 1280px) {
@@ -3410,7 +3410,7 @@ textarea {
   max-width: 680px;
   margin: 10px 0 0;
   color: #9b99a1;
-  font-size: 11px;
+  font-size: 14.3px;
   line-height: 1.55;
 }
 
@@ -3449,7 +3449,7 @@ textarea {
   justify-content: space-between;
   gap: 18px;
   color: #8f8d97;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .cards-limit-icon {
@@ -3470,7 +3470,7 @@ textarea {
 .cards-limit-label {
   margin-top: 19px;
   color: #aaa8b1;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .cards-limit-card > strong {
@@ -3486,12 +3486,12 @@ textarea {
   justify-content: space-between;
   gap: 14px;
   color: #8d8b95;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .cards-limit-progress-copy b {
   color: #fff;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .cards-limit-track {
@@ -3535,7 +3535,7 @@ textarea {
 .card-summary-card > span:nth-child(2) {
   margin-top: 17px;
   color: #9a98a1;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .card-summary-card > strong {
@@ -3548,7 +3548,7 @@ textarea {
   margin-top: auto;
   padding-top: 14px;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.45;
 }
 
@@ -3584,7 +3584,7 @@ textarea {
 .invoice-panel-heading > div > span,
 .installments-heading > div > span {
   color: #a5a3aa;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3600,7 +3600,7 @@ textarea {
 
 .cards-section-heading > small {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .credit-cards-grid {
@@ -3702,11 +3702,11 @@ textarea {
 .credit-card-visual-bottom span {
   color: currentColor;
   opacity: 0.6;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .credit-card-visual-top strong {
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .credit-card-chip {
@@ -3753,7 +3753,7 @@ textarea {
 
 .credit-card-visual-bottom strong,
 .credit-card-visual-bottom b {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .credit-card-details {
@@ -3784,7 +3784,7 @@ textarea {
   color: #6f6d76;
   display: inline-flex;
   align-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -3824,7 +3824,7 @@ textarea {
 .credit-card-limit-row span,
 .credit-card-limit-row small {
   color: #9f9da5;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .credit-card-limit-row strong {
@@ -3856,7 +3856,7 @@ textarea {
   justify-content: space-between;
   gap: 12px;
   color: #88868f;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .credit-card-dates span {
@@ -3882,7 +3882,7 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -3926,7 +3926,7 @@ textarea {
 .invoice-empty-state strong,
 .installments-empty-state strong {
   margin-top: 13px;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .cards-empty-state p,
@@ -3935,7 +3935,7 @@ textarea {
   max-width: 360px;
   margin: 7px 0 0;
   color: #a09ea6;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.5;
 }
 
@@ -3962,7 +3962,7 @@ textarea {
 .installments-heading p {
   margin: 6px 0 0;
   color: #a09ea6;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .invoice-period-tabs {
@@ -3998,12 +3998,12 @@ textarea {
 }
 
 .invoice-period-tabs span {
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
 }
 
 .invoice-period-tabs small {
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .invoice-summary-strip {
@@ -4025,7 +4025,7 @@ textarea {
 .invoice-total-block > span,
 .invoice-date-block > span {
   color: #9b99a2;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .invoice-total-block > strong {
@@ -4044,7 +4044,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -4080,7 +4080,7 @@ textarea {
 }
 
 .invoice-date-block strong {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .invoice-pay-button {
@@ -4095,7 +4095,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -4130,13 +4130,13 @@ textarea {
 }
 
 .invoice-purchases-heading span {
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 700;
 }
 
 .invoice-purchases-heading small {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .invoice-purchases-list {
@@ -4184,14 +4184,14 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .invoice-purchase-copy span,
 .invoice-purchase-installment span,
 .invoice-purchase-installment small {
   color: #a09ea6;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .invoice-purchase-installment span {
@@ -4201,7 +4201,7 @@ textarea {
 
 .invoice-purchase-value {
   justify-self: end;
-  font-size: 9px;
+  font-size: 11.7px;
   white-space: nowrap;
 }
 
@@ -4282,7 +4282,7 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .installment-item-top span {
@@ -4290,11 +4290,11 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #a09ea6;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .installment-item-top > b {
-  font-size: 9px;
+  font-size: 11.7px;
   white-space: nowrap;
 }
 
@@ -4304,12 +4304,12 @@ textarea {
   justify-content: space-between;
   gap: 12px;
   color: #9f9da5;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .installment-progress-copy strong {
   color: #55535c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .installment-item-footer {
@@ -4326,12 +4326,12 @@ textarea {
   color: #aaa8af;
   display: grid;
   gap: 5px;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .installment-item-footer strong {
   color: #55535c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .card-dialog {
@@ -4362,7 +4362,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -4415,11 +4415,11 @@ textarea {
 
 .card-purchase-preview span {
   color: #98969f;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .card-purchase-preview strong {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .card-purchase-preview .negative strong {
@@ -4445,7 +4445,7 @@ textarea {
 .invoice-payment-amount span,
 .invoice-payment-amount small {
   color: #96949e;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .invoice-payment-amount strong {
@@ -4460,7 +4460,7 @@ textarea {
   border-radius: 6px;
   background: #fbfafb;
   color: #96949d;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.55;
 }
 
@@ -4726,7 +4726,7 @@ textarea {
   max-width: 690px;
   margin: 10px 0 0;
   color: #9b99a1;
-  font-size: 11px;
+  font-size: 14.3px;
   line-height: 1.55;
 }
 
@@ -4795,13 +4795,13 @@ textarea {
   color: #945955;
   display: grid;
   place-items: center;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
 }
 
 .commitment-summary-card > span {
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .commitment-summary-card.featured > span {
@@ -4823,7 +4823,7 @@ textarea {
   padding-top: 17px;
   border-top: 1px solid #f1f0f2;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.4;
 }
 
@@ -4859,7 +4859,7 @@ textarea {
 
 .commitment-filter-selects label > span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -4873,7 +4873,7 @@ textarea {
   background: #fff;
   color: #34323b;
   outline: 0;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .commitment-filter-selects select:focus {
@@ -4919,7 +4919,7 @@ textarea {
 
 .commitment-list-header > span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   white-space: nowrap;
 }
 
@@ -4941,7 +4941,7 @@ textarea {
   background: #fbfafb;
   color: #aaa8af;
   text-align: left;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -4962,7 +4962,7 @@ textarea {
   padding: 10px 13px;
   border-bottom: 1px solid #f0eff2;
   color: #66646d;
-  font-size: 8px;
+  font-size: 10.4px;
   vertical-align: middle;
 }
 
@@ -5014,7 +5014,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #2a2831;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .commitment-description-cell span {
@@ -5023,7 +5023,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .commitment-date-cell {
@@ -5047,7 +5047,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -5081,7 +5081,7 @@ textarea {
 
 .commitment-value-cell strong {
   color: #33313a;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .commitment-value-cell.income strong {
@@ -5090,7 +5090,7 @@ textarea {
 
 .commitment-value-cell span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .commitment-row-action {
@@ -5104,7 +5104,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
@@ -5165,7 +5165,7 @@ textarea {
   max-width: 350px;
   margin: 8px 0 0;
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.5;
 }
 
@@ -5214,7 +5214,7 @@ textarea {
 .commitment-insight-panel > p {
   margin: 17px 0 0;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.6;
 }
 
@@ -5234,7 +5234,7 @@ textarea {
 
 .commitment-insight-total span {
   color: #8e8b96;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .commitment-insight-total strong {
@@ -5262,7 +5262,7 @@ textarea {
 .commitment-insight-breakdown span,
 .commitment-insight-breakdown small {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .commitment-insight-breakdown strong {
@@ -5270,7 +5270,7 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .commitment-insight-breakdown small {
@@ -5336,14 +5336,14 @@ textarea {
 .commitment-next-item span,
 .commitment-next-item small {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .commitment-next-item strong {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .commitment-attention-box {
@@ -5370,13 +5370,13 @@ textarea {
 }
 
 .commitment-attention-box strong {
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .commitment-attention-box p {
   margin: 6px 0 0;
   color: #9b816e;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -5425,14 +5425,14 @@ textarea {
 
 .commitment-payment-summary span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .commitment-payment-summary strong {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .commitment-mobile-card {
@@ -5465,12 +5465,12 @@ textarea {
 }
 
 .commitment-mobile-card > header strong {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .commitment-mobile-card > header > div span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .commitment-mobile-values {
@@ -5497,14 +5497,14 @@ textarea {
 
 .commitment-mobile-values span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .commitment-mobile-values strong {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .commitment-mobile-meta {
@@ -5519,7 +5519,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .commitment-mobile-meta svg {
@@ -5539,7 +5539,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -5856,7 +5856,7 @@ textarea {
 .calendar-summary-card > span:not(.calendar-summary-card-top) {
   margin-top: 17px;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .calendar-summary-card > strong {
@@ -5871,7 +5871,7 @@ textarea {
 .calendar-summary-card > small {
   margin-top: 7px;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.45;
 }
 
@@ -5927,7 +5927,7 @@ textarea {
 
 .calendar-month-navigation > div span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .calendar-month-navigation > div strong {
@@ -5943,7 +5943,7 @@ textarea {
   border-radius: 6px;
   background: #fff;
   color: #5a5861;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -5971,7 +5971,7 @@ textarea {
 .calendar-filter-selects label > span {
   padding-left: 2px;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .calendar-filter-selects select {
@@ -5982,7 +5982,7 @@ textarea {
   border-radius: 6px;
   background: #fbfafb;
   color: #67656e;
-  font-size: 8px;
+  font-size: 10.4px;
   outline: 0;
 }
 
@@ -6006,7 +6006,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -6055,7 +6055,7 @@ textarea {
   align-items: center;
   padding: 0 12px;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -6118,7 +6118,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 700;
 }
 
@@ -6127,7 +6127,7 @@ textarea {
   border-radius: 4px;
   background: #15141d;
   color: #fff;
-  font-size: 6px;
+  font-size: 7.8px;
   font-weight: 700;
 }
 
@@ -6145,7 +6145,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 650;
 }
 
@@ -6215,7 +6215,7 @@ textarea {
 .calendar-more-events {
   padding-left: 4px;
   color: #96949d;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 650;
 }
 
@@ -6268,14 +6268,14 @@ textarea {
 
 .day-agenda-totals span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .day-agenda-totals strong {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .day-agenda-totals .day-agenda-result {
@@ -6348,25 +6348,25 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #2b2932;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .day-agenda-event-copy small {
   color: currentColor;
   opacity: 0.72;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .day-agenda-event-copy p {
   margin: 1px 0 0;
   color: #76747d;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.5;
 }
 
 .day-agenda-event > strong {
   color: #2f2d35;
-  font-size: 8px;
+  font-size: 10.4px;
   white-space: nowrap;
 }
 
@@ -6377,7 +6377,7 @@ textarea {
   border-radius: 4px;
   display: inline-flex;
   align-items: center;
-  font-size: 6px;
+  font-size: 7.8px;
   font-weight: 750;
 }
 
@@ -6405,7 +6405,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -6444,20 +6444,20 @@ textarea {
   color: #c0bec5;
   display: grid;
   place-items: center;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .day-agenda-empty strong {
   margin-top: 13px;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .day-agenda-empty p {
   max-width: 230px;
   margin: 7px 0 0;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -6474,7 +6474,7 @@ textarea {
 .calendar-projection-panel header p {
   margin: 7px 0 0;
   color: #9c9aa2;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -6492,7 +6492,7 @@ textarea {
 
 .calendar-projection-result span {
   color: #94929c;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .calendar-projection-result strong {
@@ -6522,11 +6522,11 @@ textarea {
 
 .calendar-projection-lines span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .calendar-projection-lines strong {
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .calendar-projection-progress {
@@ -6574,7 +6574,7 @@ textarea {
 
 .calendar-agenda-list > header > span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .calendar-agenda-groups {
@@ -6607,13 +6607,13 @@ textarea {
 }
 
 .calendar-agenda-group > button strong {
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.45;
 }
 
 .calendar-agenda-group > button span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .calendar-agenda-group > div {
@@ -6648,7 +6648,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #2d2b34;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .calendar-agenda-row > div small {
@@ -6656,12 +6656,12 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #8e8c94;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .calendar-agenda-row > strong {
   color: #2d2b34;
-  font-size: 9px;
+  font-size: 11.7px;
   white-space: nowrap;
 }
 
@@ -6676,13 +6676,13 @@ textarea {
 }
 
 .calendar-agenda-empty strong {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .calendar-agenda-empty p {
   margin: 8px 0 0;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 @media (max-width: 1480px) {
@@ -6909,7 +6909,7 @@ textarea {
 
 .budget-summary-card > span {
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .budget-summary-card.featured > span {
@@ -6928,7 +6928,7 @@ textarea {
   padding-top: 17px;
   border-top: 1px solid #f1f0f2;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .budget-summary-card.featured > small {
@@ -6945,7 +6945,7 @@ textarea {
   color: #945955;
   display: grid;
   place-items: center;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
 }
 
@@ -6977,12 +6977,12 @@ textarea {
 
 .budget-month-navigation span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .budget-month-navigation strong {
   color: #302e37;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .budget-month-arrow,
@@ -7008,7 +7008,7 @@ textarea {
 
 .budget-current-month {
   padding: 0 10px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -7029,7 +7029,7 @@ textarea {
   border-radius: 5px;
   background: transparent;
   color: #8f8d95;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -7056,7 +7056,7 @@ textarea {
 
 .budget-status-filter > span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -7070,7 +7070,7 @@ textarea {
   background: #fff;
   color: #34323b;
   outline: 0;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .budget-copy-button {
@@ -7115,7 +7115,7 @@ textarea {
 
 .budget-list-header > span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   white-space: nowrap;
 }
 
@@ -7157,7 +7157,7 @@ textarea {
 
 .budget-category-main strong {
   color: #2c2a33;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .budget-category-main span:not(.budget-category-icon) {
@@ -7165,7 +7165,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .budget-category-icon {
@@ -7204,7 +7204,7 @@ textarea {
 
 .budget-category-values span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .budget-category-values strong {
@@ -7212,7 +7212,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #3b3942;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .budget-category-values .negative strong {
@@ -7233,7 +7233,7 @@ textarea {
 
 .budget-progress-heading > strong {
   color: #4d4b54;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .budget-status-badge {
@@ -7243,7 +7243,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -7316,7 +7316,7 @@ textarea {
   max-width: 350px;
   margin: 8px 0 0;
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.5;
 }
 
@@ -7369,7 +7369,7 @@ textarea {
 .budget-insight-panel > p {
   margin: 17px 0 0;
   color: #8d8a95;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.6;
 }
 
@@ -7388,11 +7388,11 @@ textarea {
 
 .budget-pace-comparison span {
   color: #8e8b96;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .budget-pace-comparison strong {
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .budget-pace-comparison .budget-pace-track {
@@ -7428,14 +7428,14 @@ textarea {
 
 .budget-insight-stats span {
   color: #777580;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .budget-insight-stats strong {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .budget-pace-message {
@@ -7457,13 +7457,13 @@ textarea {
 }
 
 .budget-pace-message strong {
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .budget-pace-message p {
   margin: 5px 0 0;
   color: #85828e;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -7479,7 +7479,7 @@ textarea {
 .budget-allocation-panel header p {
   margin: 7px 0 0;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.5;
 }
 
@@ -7499,12 +7499,12 @@ textarea {
 
 .budget-allocation-list span {
   color: #66646d;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .budget-allocation-list strong {
   color: #37353e;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .budget-allocation-track > span {
@@ -7534,7 +7534,7 @@ textarea {
   max-width: 620px;
   margin: 8px 0 0;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.55;
 }
 
@@ -7561,7 +7561,7 @@ textarea {
   display: block;
   margin-top: 5px;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .category-manager-grid {
@@ -7600,7 +7600,7 @@ textarea {
   border-radius: 20px;
   display: inline-flex;
   align-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -7609,13 +7609,13 @@ textarea {
 
 .category-manager-card > strong {
   margin-top: 14px;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .category-manager-card > p {
   margin: 7px 0 0;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -7631,14 +7631,14 @@ textarea {
 
 .category-manager-card > footer span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .category-manager-card > footer button {
   border: 0;
   background: transparent;
   color: #57555e;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -7666,7 +7666,7 @@ textarea {
 
 .form-field small {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.45;
 }
 
@@ -7685,7 +7685,7 @@ textarea {
 .category-tone-selector legend {
   margin-bottom: 8px;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -7951,7 +7951,7 @@ textarea {
 
 .goal-summary-card > span:not(.goal-summary-icon) {
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .goal-summary-card.featured > span:not(.goal-summary-icon) {
@@ -7973,7 +7973,7 @@ textarea {
   padding-top: 17px;
   border-top: 1px solid #f1f0f2;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-summary-card.featured > small {
@@ -8010,7 +8010,7 @@ textarea {
   border-radius: 5px;
   background: transparent;
   color: #8f8d95;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -8029,7 +8029,7 @@ textarea {
 
 .goal-filter-field > span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -8042,7 +8042,7 @@ textarea {
   border-radius: 6px;
   background: #fff;
   color: #4d4b54;
-  font-size: 8px;
+  font-size: 10.4px;
   outline: 0;
 }
 
@@ -8081,7 +8081,7 @@ textarea {
 
 .goals-list-header > span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goals-card-grid {
@@ -8173,7 +8173,7 @@ textarea {
   border-radius: 20px;
   display: inline-flex;
   align-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -8189,7 +8189,7 @@ textarea {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 11px;
+  font-size: 14.3px;
   letter-spacing: -.01em;
 }
 
@@ -8215,7 +8215,7 @@ textarea {
   min-height: 35px;
   margin: 16px 0 0;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.55;
 }
 
@@ -8239,7 +8239,7 @@ textarea {
 .goal-card-details span,
 .goal-movement-row > div > span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .goal-card-value-row strong {
@@ -8263,7 +8263,7 @@ textarea {
 
 .goal-progress-heading > strong {
   color: #4b4952;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-status-badge.on-track { background: #edf5ef; color: #52705b; }
@@ -8312,7 +8312,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #4f4d56;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-card-footer {
@@ -8335,7 +8335,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -8361,7 +8361,7 @@ textarea {
   border: 0;
   background: transparent;
   color: #77757e;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -8415,7 +8415,7 @@ textarea {
 .goal-emergency-panel > p {
   margin: 17px 0 0;
   color: #8d8a95;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.6;
 }
 
@@ -8427,7 +8427,7 @@ textarea {
 
 .goal-emergency-value > span {
   color: #777580;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .goal-emergency-value > strong {
@@ -8437,7 +8437,7 @@ textarea {
 
 .goal-emergency-value > small {
   color: #85828e;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .goal-coverage-track {
@@ -8473,14 +8473,14 @@ textarea {
 
 .goal-emergency-stats span {
   color: #777580;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .goal-emergency-stats strong {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .goal-protection-message {
@@ -8502,13 +8502,13 @@ textarea {
 }
 
 .goal-protection-message strong {
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-protection-message p {
   margin: 5px 0 0;
   color: #85828e;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -8526,7 +8526,7 @@ textarea {
 .goal-monthly-plan-panel > header p {
   margin: 7px 0 0;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.5;
 }
 
@@ -8558,7 +8558,7 @@ textarea {
 .goal-plan-total span,
 .goal-plan-total small {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .goal-plan-total strong {
@@ -8585,12 +8585,12 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #66646d;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-plan-list strong {
   color: #37353e;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-plan-track > span {
@@ -8600,7 +8600,7 @@ textarea {
 .goal-plan-empty {
   margin: 18px 0 0;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-movements-panel {
@@ -8625,12 +8625,12 @@ textarea {
 .goal-movements-header p {
   margin: 6px 0 0;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-movements-header > span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-movement-list {
@@ -8681,7 +8681,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #45434c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .goal-movement-main > span {
@@ -8689,7 +8689,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .goal-movement-amount {
@@ -8994,13 +8994,13 @@ textarea {
   color: #945d42;
   display: inline-flex;
   align-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 750;
 }
 
 .debt-summary-card > span:not(.debt-summary-icon) {
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .debt-summary-card.featured > span:not(.debt-summary-icon) {
@@ -9019,7 +9019,7 @@ textarea {
   padding-top: 17px;
   border-top: 1px solid #f1f0f2;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-summary-card.featured > small {
@@ -9057,7 +9057,7 @@ textarea {
   border-radius: 5px;
   background: transparent;
   color: #8b8992;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
@@ -9082,7 +9082,7 @@ textarea {
 
 .debt-filter-field > span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -9095,7 +9095,7 @@ textarea {
   background: #fff;
   color: #34323b;
   outline: 0;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .debt-filter-field select:focus {
@@ -9146,7 +9146,7 @@ textarea {
 .debts-list-header > span,
 .debt-payments-header > span {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   white-space: nowrap;
 }
 
@@ -9251,7 +9251,7 @@ textarea {
   border-radius: 20px;
   display: inline-flex;
   align-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 750;
 }
 
@@ -9266,14 +9266,14 @@ textarea {
 .debt-card h3 {
   margin: 0;
   color: #33313a;
-  font-size: 11px;
+  font-size: 14.3px;
   line-height: 1.25;
 }
 
 .debt-card-header p {
   margin: 4px 0 0;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-menu-button {
@@ -9304,7 +9304,7 @@ textarea {
 .debt-card-details span,
 .debt-card-account {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-balance-block > strong {
@@ -9315,7 +9315,7 @@ textarea {
 
 .debt-balance-block > small {
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-progress-block {
@@ -9332,7 +9332,7 @@ textarea {
 
 .debt-progress-block strong {
   color: #55535c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-progress-track {
@@ -9373,7 +9373,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #4a4851;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-card-footer {
@@ -9395,7 +9395,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -9420,7 +9420,7 @@ textarea {
   border: 0;
   background: transparent;
   color: #77757e;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -9466,7 +9466,7 @@ textarea {
 
 .debts-empty-state strong {
   margin-top: 15px;
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .debts-empty-state p,
@@ -9474,7 +9474,7 @@ textarea {
   max-width: 330px;
   margin: 7px 0 0;
   color: #aaa8af;
-  font-size: 9px;
+  font-size: 11.7px;
   line-height: 1.55;
 }
 
@@ -9501,7 +9501,7 @@ textarea {
 .debt-panel-header p {
   margin: 4px 0 0;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-detail-balance {
@@ -9517,7 +9517,7 @@ textarea {
 .debt-detail-balance > span,
 .debt-detail-balance > small {
   color: #85828d;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-detail-balance > strong {
@@ -9572,13 +9572,13 @@ textarea {
 .debt-timeline-heading span,
 .debt-timeline-heading small {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .debt-detail-metrics strong,
 .debt-contract-data strong {
   color: #4b4952;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-contract-data {
@@ -9621,7 +9621,7 @@ textarea {
   color: #aaa8af;
   display: grid;
   place-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -9633,7 +9633,7 @@ textarea {
   display: block;
   margin-top: 8px;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
   text-align: right;
 }
 
@@ -9643,7 +9643,7 @@ textarea {
   border-radius: 6px;
   background: #f8f7f9;
   color: #8d8b94;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.55;
 }
 
@@ -9676,7 +9676,7 @@ textarea {
 .debt-strategy-panel > p {
   margin: 12px 0 16px;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.55;
 }
 
@@ -9709,11 +9709,11 @@ textarea {
 .payoff-plan-comparison span,
 .payoff-results-grid span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .payoff-plan-comparison strong {
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .payoff-results-grid {
@@ -9738,14 +9738,14 @@ textarea {
 
 .payoff-results-grid strong {
   color: #4a4851;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .payoff-no-savings {
   display: block;
   margin-top: 10px;
   color: #a08f79;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.45;
 }
 
@@ -9782,7 +9782,7 @@ textarea {
   color: #77757e;
   display: grid;
   place-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -9806,17 +9806,17 @@ textarea {
 
 .debt-strategy-list strong {
   color: #4a4851;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-strategy-list small {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .debt-strategy-list b {
   color: #55535c;
-  font-size: 8px;
+  font-size: 10.4px;
   white-space: nowrap;
 }
 
@@ -9838,7 +9838,7 @@ textarea {
   background: #fbfafb;
   color: #aaa8af;
   text-align: left;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .04em;
@@ -9849,7 +9849,7 @@ textarea {
   padding: 10px 14px;
   border-bottom: 1px solid #f1f0f2;
   color: #77757e;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-payments-table tr:last-child td {
@@ -9867,13 +9867,13 @@ textarea {
 
 .debt-payments-table td:nth-child(2) strong {
   color: #45434c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .debt-payments-table td:nth-child(2) small {
   margin-top: 5px;
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .debt-payment-total {
@@ -9930,12 +9930,12 @@ textarea {
   outline: 0;
   background: transparent;
   color: #34323b;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .debt-percentage-input b {
   color: #77757e;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .debt-payment-dialog {
@@ -9963,7 +9963,7 @@ textarea {
 
 .debt-payment-preview span {
   color: #aaa8af;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .debt-payment-preview strong {
@@ -9971,7 +9971,7 @@ textarea {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #4b4952;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 @media (max-width: 1500px) {
@@ -10233,13 +10233,13 @@ textarea {
   color: #8b6336;
   display: inline-flex;
   align-items: center;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
 }
 
 .subscription-summary-card > span {
   color: #9d9ba3;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .subscription-summary-card.featured > span {
@@ -10258,7 +10258,7 @@ textarea {
   padding-top: 17px;
   border-top: 1px solid #f1f0f2;
   color: #aaa8af;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.4;
 }
 
@@ -10295,7 +10295,7 @@ textarea {
   border-radius: 5px;
   background: transparent;
   color: #8a8891;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
@@ -10315,7 +10315,7 @@ textarea {
 
 .subscription-filter-field > span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -10328,7 +10328,7 @@ textarea {
   background: #fff;
   color: #45434c;
   outline: 0;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscriptions-workspace-grid {
@@ -10365,7 +10365,7 @@ textarea {
 
 .subscriptions-list-header > span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscriptions-card-grid {
@@ -10474,7 +10474,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 750;
 }
 
@@ -10501,7 +10501,7 @@ textarea {
 .subscription-card-identity p {
   margin: 4px 0 0;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.4;
 }
 
@@ -10548,7 +10548,7 @@ textarea {
 .subscription-card-value-row > div:first-child span,
 .subscription-monthly-equivalent span {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscription-monthly-equivalent {
@@ -10559,7 +10559,7 @@ textarea {
 
 .subscription-monthly-equivalent strong {
   color: #595761;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .subscription-card-details {
@@ -10577,13 +10577,13 @@ textarea {
 
 .subscription-card-details span {
   color: #a4a2a9;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .subscription-card-details strong {
   overflow: hidden;
   color: #57555e;
-  font-size: 8px;
+  font-size: 10.4px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -10600,13 +10600,13 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 650;
 }
 
 .subscription-price-alert small {
   color: #a38a68;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 500;
 }
 
@@ -10624,7 +10624,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscription-renewal-line svg {
@@ -10645,7 +10645,7 @@ textarea {
   min-height: 31px;
   padding: 0 9px;
   border-radius: 5px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -10675,7 +10675,7 @@ textarea {
 
 .subscription-cancelled-label {
   color: #88858e;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 650;
 }
 
@@ -10721,7 +10721,7 @@ textarea {
 .subscription-selected-heading p {
   margin: 4px 0 0;
   color: #8f8d96;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscription-selected-value {
@@ -10740,7 +10740,7 @@ textarea {
 
 .subscription-selected-value span {
   color: #85838d;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscription-selected-data {
@@ -10757,12 +10757,12 @@ textarea {
 
 .subscription-selected-data span {
   color: #77757f;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .subscription-selected-data strong {
   color: #d7d5dc;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscription-selected-note {
@@ -10771,7 +10771,7 @@ textarea {
   border-radius: 6px;
   background: rgba(255,255,255,.05);
   color: #9e9ca5;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.5;
 }
 
@@ -10821,7 +10821,7 @@ textarea {
 .subscription-opportunity-list strong {
   overflow: hidden;
   color: #4b4952;
-  font-size: 8px;
+  font-size: 10.4px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -10830,14 +10830,14 @@ textarea {
 .subscription-upcoming-list small,
 .subscription-opportunity-list small {
   color: #a3a1a8;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .subscription-breakdown-row > b,
 .subscription-upcoming-list > div > b,
 .subscription-opportunity-list > div > b {
   color: #4c4a53;
-  font-size: 8px;
+  font-size: 10.4px;
   white-space: nowrap;
 }
 
@@ -10878,7 +10878,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   text-align: center;
 }
@@ -10904,7 +10904,7 @@ textarea {
 
 .subscription-opportunity-list footer span {
   color: #8f8d95;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscription-opportunity-list footer strong {
@@ -10915,7 +10915,7 @@ textarea {
 .subscription-panel-empty {
   margin: 18px 0 0;
   color: #a3a1a8;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.5;
 }
 
@@ -10947,7 +10947,7 @@ textarea {
   max-width: 300px;
   margin: 7px 0 0;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.5;
 }
 
@@ -10966,7 +10966,7 @@ textarea {
   padding: 14px 18px;
   border-bottom: 1px solid #f0eff1;
   color: #76747d;
-  font-size: 8px;
+  font-size: 10.4px;
   text-align: left;
   white-space: nowrap;
 }
@@ -10974,7 +10974,7 @@ textarea {
 .subscription-charges-table th {
   background: #fbfafb;
   color: #a09ea6;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -10982,7 +10982,7 @@ textarea {
 
 .subscription-charges-table td strong {
   color: #3f3d46;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscription-charges-table th:last-child,
@@ -11044,12 +11044,12 @@ textarea {
 
 .subscription-renewal-toggle strong {
   color: #55535c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .subscription-renewal-toggle small {
   color: #9d9ba3;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .subscription-charge-dialog {
@@ -11078,12 +11078,12 @@ textarea {
 
 .subscription-charge-preview span {
   color: #9d9ba3;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .subscription-charge-preview strong {
   color: #4a4851;
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 @media (max-width: 1280px) {
@@ -11310,7 +11310,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -11334,7 +11334,7 @@ textarea {
 
 .reports-control-field > span {
   color: #9c9aa2;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -11348,13 +11348,13 @@ textarea {
   border-radius: 6px;
   background: #fff;
   color: #4f4d56;
-  font-size: 9px;
+  font-size: 11.7px;
   outline: none;
 }
 
 .reports-control-field small {
   color: #aaa8b0;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.4;
 }
 
@@ -11374,14 +11374,14 @@ textarea {
 
 .reports-period-caption span {
   color: #a09ea6;
-  font-size: 8px;
+  font-size: 10.4px;
   text-transform: uppercase;
   letter-spacing: .08em;
 }
 
 .reports-period-caption strong {
   color: #47454f;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .reports-summary-grid {
@@ -11442,7 +11442,7 @@ textarea {
 .reports-summary-card > span:not(.reports-summary-icon),
 .projection-summary-card > span:not(.projection-summary-icon) {
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .reports-summary-card.featured > span:not(.reports-summary-icon),
@@ -11467,7 +11467,7 @@ textarea {
   margin-top: auto;
   padding-top: 10px;
   color: #aaa8b0;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.45;
 }
 
@@ -11514,7 +11514,7 @@ textarea {
   max-width: 540px;
   margin: 6px 0 0;
   color: #aaa8b0;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.5;
 }
 
@@ -11527,7 +11527,7 @@ textarea {
 
 .report-total-caption span {
   color: #aaa8b0;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .report-total-caption strong {
@@ -11540,7 +11540,7 @@ textarea {
   align-items: center;
   gap: 14px;
   color: #8f8d96;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .cash-flow-legend span {
@@ -11603,11 +11603,11 @@ textarea {
 
 .cash-flow-column > strong {
   color: #55535c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .cash-flow-column > small {
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .cash-flow-column > small.positive,
@@ -11638,17 +11638,17 @@ textarea {
 
 .cash-flow-highlights span {
   color: #aaa8b0;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .cash-flow-highlights strong {
   color: #4a4851;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .cash-flow-highlights small {
   color: #5f7e68;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .financial-health-list {
@@ -11705,7 +11705,7 @@ textarea {
 
 .financial-health-item span:not(.financial-health-icon) {
   color: #a09ea6;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .financial-health-item strong {
@@ -11715,7 +11715,7 @@ textarea {
 
 .financial-health-item small {
   color: #99979f;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.45;
 }
 
@@ -11728,7 +11728,7 @@ textarea {
 }
 
 .financial-recommendations > strong {
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .financial-recommendations ul {
@@ -11737,7 +11737,7 @@ textarea {
   color: #b6b4bd;
   display: grid;
   gap: 7px;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.5;
 }
 
@@ -11772,7 +11772,7 @@ textarea {
   color: #77757e;
   display: grid;
   place-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -11791,12 +11791,12 @@ textarea {
 
 .category-report-copy strong {
   color: #4d4b54;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .category-report-copy span {
   color: #aaa8b0;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .category-report-track,
@@ -11817,7 +11817,7 @@ textarea {
 
 .category-report-value {
   color: #45434c;
-  font-size: 9px;
+  font-size: 11.7px;
   white-space: nowrap;
 }
 
@@ -11842,7 +11842,7 @@ textarea {
 
 .budget-performance-title > strong {
   color: #4b4952;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .report-status {
@@ -11850,7 +11850,7 @@ textarea {
   border-radius: 99px;
   background: #f4f3f5;
   color: #8a8890;
-  font-size: 6px;
+  font-size: 7.8px;
   font-weight: 700;
 }
 
@@ -11874,12 +11874,12 @@ textarea {
 
 .budget-performance-values {
   color: #aaa8b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .budget-performance-values strong {
   color: #65636c;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .account-distribution-row {
@@ -11919,12 +11919,12 @@ textarea {
 
 .account-distribution-row > div > strong {
   color: #4a4851;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .account-distribution-row small {
   color: #aaa8b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .account-distribution-share {
@@ -11935,19 +11935,19 @@ textarea {
 
 .account-distribution-share strong {
   color: #44424b;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .account-distribution-share span {
   color: #aaa8b0;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .report-empty-state {
   margin: 0;
   padding: 28px 18px;
   color: #aaa8b0;
-  font-size: 8px;
+  font-size: 10.4px;
   text-align: center;
 }
 
@@ -12019,12 +12019,12 @@ textarea {
 
 .projection-balance-column > strong {
   color: #56545d;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .projection-balance-column > small {
   color: #99979f;
-  font-size: 6px;
+  font-size: 7.8px;
   white-space: nowrap;
 }
 
@@ -12073,7 +12073,7 @@ textarea {
 .projection-risk-list p {
   margin: 2px 0 0;
   color: #77757d;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.5;
 }
 
@@ -12114,17 +12114,17 @@ textarea {
 
 .projection-commitment-row > div strong {
   color: #55535c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .projection-commitment-row > div span {
   color: #aaa8b0;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .projection-commitment-row > strong {
   color: #45434c;
-  font-size: 9px;
+  font-size: 11.7px;
   white-space: nowrap;
 }
 
@@ -12156,7 +12156,7 @@ textarea {
 .projection-table th {
   color: #aaa8b0;
   background: #fbfafb;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -12164,12 +12164,12 @@ textarea {
 
 .projection-table td {
   color: #77757e;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .projection-table td strong {
   color: #45434c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .reports-feedback {
@@ -12445,7 +12445,7 @@ textarea {
 
 .data-tools-summary-card > span:not(.data-tools-summary-icon) {
   color: #9d9aa3;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -12462,7 +12462,7 @@ textarea {
   margin-top: auto;
   padding-top: 10px;
   color: #aaa7b0;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.45;
 }
 
@@ -12498,7 +12498,7 @@ textarea {
   justify-content: center;
   gap: 8px;
   font: inherit;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -12563,7 +12563,7 @@ textarea {
   max-width: 650px;
   margin: 0;
   color: #929099;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.55;
 }
 
@@ -12622,19 +12622,19 @@ textarea {
 
 .file-drop-zone strong {
   color: #44424b;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .file-drop-zone p {
   margin: 6px 0 16px;
   color: #98969f;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .file-drop-zone small {
   margin-top: 12px;
   color: #b0adb5;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .selected-import-file {
@@ -12672,14 +12672,14 @@ textarea {
 
 .selected-import-file small {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
   text-transform: uppercase;
   letter-spacing: .05em;
 }
 
 .selected-import-file strong {
   color: #48464f;
-  font-size: 9px;
+  font-size: 11.7px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -12688,7 +12688,7 @@ textarea {
 .selected-import-file p {
   margin: 0;
   color: #93919a;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .selected-import-file > button {
@@ -12701,7 +12701,7 @@ textarea {
   align-items: center;
   gap: 5px;
   font: inherit;
-  font-size: 7px;
+  font-size: 9.1px;
   cursor: pointer;
 }
 
@@ -12720,7 +12720,7 @@ textarea {
   border-radius: 6px;
   background: #fff1f1;
   color: #a45b5b;
-  font-size: 7.5px;
+  font-size: 9.8px;
   line-height: 1.5;
 }
 
@@ -12736,13 +12736,13 @@ textarea {
 .data-tool-subheading h3 {
   margin: 0 0 3px;
   color: #504e57;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .data-tool-subheading p {
   margin: 0;
   color: #a09da6;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .column-mapping-grid {
@@ -12759,7 +12759,7 @@ textarea {
 
 .column-mapping-grid label > span {
   color: #77757e;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -12780,7 +12780,7 @@ textarea {
   background: #fff;
   color: #5b5962;
   font: inherit;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .column-mapping-grid select:focus,
@@ -12811,7 +12811,7 @@ textarea {
 
 .import-privacy-note p {
   margin: 0;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -12830,7 +12830,7 @@ textarea {
   display: grid;
   justify-items: end;
   gap: 2px;
-  font-size: 6.5px;
+  font-size: 8.5px;
   white-space: nowrap;
 }
 
@@ -12868,7 +12868,7 @@ textarea {
 .data-tools-empty-copy {
   margin: 0;
   color: #9d9aa3;
-  font-size: 8px;
+  font-size: 10.4px;
   line-height: 1.55;
   text-align: center;
 }
@@ -12896,7 +12896,7 @@ textarea {
   background: #fff;
   color: #77747e;
   font: inherit;
-  font-size: 7px;
+  font-size: 9.1px;
   cursor: pointer;
 }
 
@@ -12906,7 +12906,7 @@ textarea {
 
 .import-preview-actions small {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .import-preview-table-scroll {
@@ -12933,7 +12933,7 @@ textarea {
   height: 39px;
   background: #fbfafb;
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 700;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -12954,7 +12954,7 @@ textarea {
 .import-preview-table td:last-child {
   width: 100px;
   color: #77757e;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
   text-align: right;
   white-space: nowrap;
@@ -12967,7 +12967,7 @@ textarea {
   margin-top: 4px;
   color: #a45b5b;
   display: block;
-  font-size: 6px;
+  font-size: 7.8px;
   line-height: 1.4;
 }
 
@@ -12987,7 +12987,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 700;
 }
 
@@ -13023,7 +13023,7 @@ textarea {
 
 .import-preview-footer > span {
   color: #8e8b95;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -13054,7 +13054,7 @@ textarea {
   align-items: center;
   gap: 8px;
   color: #6f6d76;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .export-period-note {
@@ -13064,7 +13064,7 @@ textarea {
   border-radius: 6px;
   background: #f7f6f8;
   color: #8f8c96;
-  font-size: 7.5px;
+  font-size: 9.8px;
   line-height: 1.55;
 }
 
@@ -13108,12 +13108,12 @@ textarea {
 
 .export-preview-file small {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .export-preview-file strong {
   color: #4d4a54;
-  font-size: 8px;
+  font-size: 10.4px;
   overflow-wrap: anywhere;
 }
 
@@ -13134,13 +13134,13 @@ textarea {
 
 .export-preview-details dt {
   color: #9f9ca5;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .export-preview-details dd {
   margin: 0;
   color: #514f58;
-  font-size: 7.5px;
+  font-size: 9.8px;
   font-weight: 700;
   text-align: right;
 }
@@ -13221,7 +13221,7 @@ textarea {
 
 .rule-priority-control strong {
   color: #686670;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .automation-rule-icon {
@@ -13265,7 +13265,7 @@ textarea {
 
 .automation-rule-title-row strong {
   color: #47454e;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .automation-rule-title-row span {
@@ -13274,7 +13274,7 @@ textarea {
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
-  font-size: 6px;
+  font-size: 7.8px;
   font-weight: 700;
 }
 
@@ -13290,7 +13290,7 @@ textarea {
 
 .automation-rule-title-row small {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .automation-rule-definition {
@@ -13309,7 +13309,7 @@ textarea {
 .automation-rule-definition span {
   color: #aaa7b0;
   display: block;
-  font-size: 6px;
+  font-size: 7.8px;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
@@ -13317,7 +13317,7 @@ textarea {
 .automation-rule-definition p {
   margin: 4px 0 0;
   color: #74717b;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.5;
 }
 
@@ -13329,7 +13329,7 @@ textarea {
 .rule-match-count {
   margin: 0;
   color: #8b8892;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .automation-rule-actions {
@@ -13350,7 +13350,7 @@ textarea {
   justify-content: center;
   gap: 4px;
   font: inherit;
-  font-size: 6.5px;
+  font-size: 8.5px;
   cursor: pointer;
 }
 
@@ -13412,18 +13412,18 @@ textarea {
 
 .rule-test-results strong {
   color: #4c4953;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .rule-test-results small {
   color: #8e8b95;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .rule-test-results p {
   margin: 2px 0 0;
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
   line-height: 1.45;
 }
 
@@ -13451,7 +13451,7 @@ textarea {
 .rule-actions-section h3 {
   margin: 0 0 10px;
   color: #55525c;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .rule-form-grid.actions {
@@ -13468,7 +13468,7 @@ textarea {
   align-items: center;
   gap: 8px;
   color: #67646e;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .import-history-table-scroll {
@@ -13494,14 +13494,14 @@ textarea {
   height: 42px;
   background: #fbfafb;
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
 
 .import-history-table td {
   color: #77747e;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .import-history-table td:first-child {
@@ -13534,12 +13534,12 @@ textarea {
 
 .import-history-table td:first-child strong {
   color: #4d4a54;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .import-history-table td:first-child small {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .history-status {
@@ -13550,7 +13550,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 700;
 }
 
@@ -13808,13 +13808,13 @@ button:disabled {
 
 .workspace-switcher-copy small {
   color: #aaa8af;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .workspace-switcher-copy strong {
   overflow: hidden;
   color: #3b3943;
-  font-size: 10px;
+  font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -13877,14 +13877,14 @@ button:disabled {
 .workspace-switcher-menu button strong {
   overflow: hidden;
   color: #44414b;
-  font-size: 9px;
+  font-size: 11.7px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .workspace-switcher-menu button small {
   color: #aaa7b0;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .workspace-switcher-menu button > svg {
@@ -13912,7 +13912,7 @@ button:disabled {
   color: #fff;
   display: grid;
   place-items: center;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -13945,7 +13945,7 @@ button:disabled {
   color: #fff;
   display: grid;
   place-items: center;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 800;
 }
 
@@ -13957,13 +13957,13 @@ button:disabled {
 
 .dashboard-user-dropdown header strong {
   color: #45434c;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .dashboard-user-dropdown header small {
   overflow: hidden;
   color: #aaa7b0;
-  font-size: 7px;
+  font-size: 9.1px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -13978,7 +13978,7 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 700;
 }
 
@@ -14008,7 +14008,7 @@ button:disabled {
   align-items: center;
   gap: 9px;
   font: inherit;
-  font-size: 8px;
+  font-size: 10.4px;
   text-align: left;
   cursor: pointer;
 }
@@ -14024,7 +14024,7 @@ button:disabled {
 }
 
 .account-initials {
-  font-size: 7.5px;
+  font-size: 9.8px;
   font-weight: 800;
 }
 
@@ -14111,7 +14111,7 @@ button:disabled {
   display: inline-block;
   margin-bottom: 17px;
   color: #8f8c98;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 800;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -14144,7 +14144,7 @@ button:disabled {
   align-items: center;
   gap: 10px;
   color: #d8d6dd;
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .auth-benefits svg {
@@ -14160,7 +14160,7 @@ button:disabled {
   align-items: center;
   gap: 9px;
   color: #74717e;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .auth-privacy-note svg {
@@ -14196,7 +14196,7 @@ button:disabled {
   display: inline-block;
   margin-bottom: 9px;
   color: #aaa7b0;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 800;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -14213,7 +14213,7 @@ button:disabled {
 .auth-card-heading p {
   margin: 11px 0 0;
   color: #8f8c96;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.65;
 }
 
@@ -14228,7 +14228,7 @@ a.auth-submit-button {
   justify-content: center;
   gap: 9px;
   font: inherit;
-  font-size: 9px;
+  font-size: 11.7px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -14276,7 +14276,7 @@ a.auth-submit-button {
   padding: 0 12px;
   background: #fff;
   color: #b0adb5;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .auth-form {
@@ -14293,7 +14293,7 @@ a.auth-submit-button {
 .auth-form > label > span,
 .auth-form-columns label > span {
   color: #77747e;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 700;
 }
 
@@ -14326,7 +14326,7 @@ a.auth-submit-button {
   outline: 0;
   background: transparent;
   color: #37343e;
-  font-size: 9px;
+  font-size: 11.7px;
 }
 
 .auth-input-wrap input::placeholder {
@@ -14349,7 +14349,7 @@ a.auth-submit-button {
 .auth-form-options > a,
 .auth-back-link {
   color: #56535e;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 800;
 }
 
@@ -14359,7 +14359,7 @@ a.auth-submit-button {
   align-items: flex-start;
   gap: 8px !important;
   color: #85828c;
-  font-size: 7.5px;
+  font-size: 9.8px;
   line-height: 1.55;
   cursor: pointer;
 }
@@ -14385,14 +14385,14 @@ a.auth-submit-button {
   border-radius: 6px;
   background: #faf0f2;
   color: #9b6670;
-  font-size: 7.5px;
+  font-size: 9.8px;
   line-height: 1.45;
 }
 
 .auth-switch-copy {
   margin: 22px 0 0;
   color: #9a97a0;
-  font-size: 8px;
+  font-size: 10.4px;
   text-align: center;
 }
 
@@ -14405,7 +14405,7 @@ a.auth-submit-button {
   display: block;
   margin-top: 18px;
   color: #b2afb7;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.5;
   text-align: center;
 }
@@ -14482,7 +14482,7 @@ a.auth-submit-button {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .invitation-details dt svg {
@@ -14493,7 +14493,7 @@ a.auth-submit-button {
 .invitation-details dd {
   margin: 0;
   color: #4c4953;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 800;
   text-align: right;
 }
@@ -14559,7 +14559,7 @@ a.auth-submit-button {
 
 .access-summary-card > span:nth-child(2) {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 800;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -14588,7 +14588,7 @@ a.auth-submit-button {
   margin-top: auto;
   padding-top: 10px;
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .access-main-grid {
@@ -14619,13 +14619,13 @@ a.auth-submit-button {
 .access-panel-header h2 {
   margin: 0;
   color: #46434d;
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .access-panel-header p {
   margin: 6px 0 0;
   color: #a09da6;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -14698,14 +14698,14 @@ a.auth-submit-button {
 
 .workspace-access-card-top > div > span {
   color: #aaa7b0;
-  font-size: 6px;
+  font-size: 7.8px;
 }
 
 .workspace-access-card h3 {
   margin: 0;
   overflow: hidden;
   color: #4b4852;
-  font-size: 8.5px;
+  font-size: 11.1px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -14722,7 +14722,7 @@ a.auth-submit-button {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 6px;
+  font-size: 7.8px;
   font-weight: 800;
 }
 
@@ -14734,7 +14734,7 @@ a.auth-submit-button {
 .workspace-access-card > p {
   margin: 13px 0 0;
   color: #97949e;
-  font-size: 6.5px;
+  font-size: 8.5px;
   line-height: 1.55;
 }
 
@@ -14743,7 +14743,7 @@ a.auth-submit-button {
   display: grid;
   gap: 6px;
   color: #aaa7b0;
-  font-size: 6px;
+  font-size: 7.8px;
 }
 
 .workspace-access-meta span {
@@ -14766,7 +14766,7 @@ a.auth-submit-button {
   background: #fff;
   color: #66636d;
   font: inherit;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -14840,13 +14840,13 @@ a.auth-submit-button {
 
 .access-overview-list strong {
   color: #f8f7fa;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .access-overview-list p {
   margin: 0;
   color: #85828d;
-  font-size: 6.5px;
+  font-size: 8.5px;
   line-height: 1.55;
 }
 
@@ -14878,7 +14878,7 @@ a.auth-submit-button {
   outline: 0;
   background: transparent;
   color: #55525c;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .members-table-scroll,
@@ -14907,7 +14907,7 @@ a.auth-submit-button {
   height: 42px;
   background: #fbfafb;
   color: #aaa7b0;
-  font-size: 6px;
+  font-size: 7.8px;
   letter-spacing: .05em;
   text-transform: uppercase;
 }
@@ -14915,7 +14915,7 @@ a.auth-submit-button {
 .members-table td {
   height: 68px;
   color: #77747e;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .members-table td:first-child {
@@ -14933,7 +14933,7 @@ a.auth-submit-button {
   color: #55525c;
   display: grid;
   place-items: center;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 800;
   flex-shrink: 0;
 }
@@ -14946,18 +14946,18 @@ a.auth-submit-button {
 
 .members-table td:first-child strong {
   color: #4d4a54;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .members-table td:first-child strong small {
   margin-left: 5px;
   color: #7b8f80;
-  font-size: 6px;
+  font-size: 7.8px;
 }
 
 .members-table td:first-child span:not(.member-avatar) {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .role-badge,
@@ -14968,7 +14968,7 @@ a.auth-submit-button {
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
-  font-size: 6px;
+  font-size: 7.8px;
   font-weight: 800;
 }
 
@@ -15061,7 +15061,7 @@ a.auth-submit-button {
 .invitation-main-copy strong {
   overflow: hidden;
   color: #4d4a54;
-  font-size: 8px;
+  font-size: 10.4px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -15069,12 +15069,12 @@ a.auth-submit-button {
 .invitation-main-copy span,
 .invitation-date-copy span {
   color: #aaa7b0;
-  font-size: 6px;
+  font-size: 7.8px;
 }
 
 .invitation-date-copy strong {
   color: #77747e;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .invitation-status.pending {
@@ -15108,7 +15108,7 @@ a.auth-submit-button {
   align-items: center;
   gap: 5px;
   font: inherit;
-  font-size: 6px;
+  font-size: 7.8px;
   cursor: pointer;
 }
 
@@ -15146,13 +15146,13 @@ a.auth-submit-button {
 
 .permission-table td:first-child strong {
   color: #4d4a54;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .permission-table td:first-child span {
   margin-top: 5px;
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .permission-state {
@@ -15190,7 +15190,7 @@ a.auth-submit-button {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  font-size: 7px;
+  font-size: 9.1px;
   text-align: center;
 }
 
@@ -15250,12 +15250,12 @@ a.auth-submit-button {
 
 .access-dialog-workspace small {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .access-dialog-workspace strong {
   color: #4d4a54;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .access-role-selector {
@@ -15271,7 +15271,7 @@ a.auth-submit-button {
   grid-column: 1 / -1;
   margin-bottom: 7px;
   color: #9d9ba3;
-  font-size: 8px;
+  font-size: 10.4px;
   font-weight: 600;
 }
 
@@ -15309,12 +15309,12 @@ a.auth-submit-button {
 
 .access-role-selector strong {
   color: #4d4a54;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .access-role-selector small {
   color: #9d9aa4;
-  font-size: 6.5px;
+  font-size: 8.5px;
   line-height: 1.45;
 }
 
@@ -15391,7 +15391,7 @@ a.auth-submit-button {
 
   .auth-mobile-brand small {
     color: #aaa7b0;
-    font-size: 7px;
+    font-size: 9.1px;
   }
 
   .access-heading,
@@ -15583,7 +15583,7 @@ a.auth-submit-button {
 
 .settings-summary-card > span:nth-child(2) {
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 800;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -15610,7 +15610,7 @@ a.auth-submit-button {
   padding-top: 10px;
   overflow: hidden;
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -15639,7 +15639,7 @@ a.auth-submit-button {
   justify-content: center;
   gap: 7px;
   font: inherit;
-  font-size: 7px;
+  font-size: 9.1px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -15685,14 +15685,14 @@ a.auth-submit-button {
 .settings-panel-header h2 {
   margin: 3px 0 0;
   color: #46434d;
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .settings-panel-header p {
   margin: 6px 0 0;
   max-width: 720px;
   color: #a09da6;
-  font-size: 7px;
+  font-size: 9.1px;
   line-height: 1.55;
 }
 
@@ -15737,7 +15737,7 @@ a.auth-submit-button {
 
 .settings-field > span {
   color: #716e78;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 800;
 }
 
@@ -15756,7 +15756,7 @@ a.auth-submit-button {
   background: #fff;
   color: #55525c;
   font: inherit;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .settings-field input:focus,
@@ -15780,7 +15780,7 @@ a.auth-submit-button {
 .settings-field small {
   margin-top: 5px;
   color: #aaa7b0;
-  font-size: 6px;
+  font-size: 7.8px;
   line-height: 1.4;
 }
 
@@ -15818,13 +15818,13 @@ a.auth-submit-button {
 
 .profile-identity-card > strong {
   margin-top: 13px;
-  font-size: 11px;
+  font-size: 14.3px;
 }
 
 .profile-identity-card > small {
   margin-top: 4px;
   color: #96939e;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .profile-identity-card dl {
@@ -15845,13 +15845,13 @@ a.auth-submit-button {
 
 .profile-identity-card dt {
   color: #85828d;
-  font-size: 6px;
+  font-size: 7.8px;
 }
 
 .profile-identity-card dd {
   margin: 0;
   color: #fff;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 800;
 }
 
@@ -15869,7 +15869,7 @@ a.auth-submit-button {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 6.5px;
+  font-size: 8.5px;
   line-height: 1.5;
 }
 
@@ -15895,13 +15895,13 @@ a.auth-submit-button {
 .settings-subheading h3 {
   margin: 0;
   color: #55525c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .settings-subheading p {
   margin: 5px 0 0;
   color: #aaa7b0;
-  font-size: 6.5px;
+  font-size: 8.5px;
 }
 
 .settings-subheading > svg {
@@ -15935,7 +15935,7 @@ a.auth-submit-button {
   gap: 8px;
   color: #66636d;
   font: inherit;
-  font-size: 7px;
+  font-size: 9.1px;
   cursor: pointer;
 }
 
@@ -16021,12 +16021,12 @@ a.auth-submit-button {
 
 .settings-toggle-row strong {
   color: #5d5a64;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .settings-toggle-row small {
   color: #aaa7b0;
-  font-size: 6.3px;
+  font-size: 8.2px;
   line-height: 1.45;
 }
 
@@ -16114,7 +16114,7 @@ a.auth-submit-button {
 
 .notification-inline-control > span {
   color: #9b98a2;
-  font-size: 6.3px;
+  font-size: 8.2px;
   line-height: 1.4;
 }
 
@@ -16125,7 +16125,7 @@ a.auth-submit-button {
 .notification-inline-control small {
   grid-column: 2;
   color: #85818c;
-  font-size: 6px;
+  font-size: 7.8px;
   text-align: right;
 }
 
@@ -16149,7 +16149,7 @@ a.auth-submit-button {
 .notification-group-card h3 {
   margin: 0;
   color: #55525c;
-  font-size: 8px;
+  font-size: 10.4px;
 }
 
 .notification-channel-row {
@@ -16171,7 +16171,7 @@ a.auth-submit-button {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .notification-channel-row svg {
@@ -16230,12 +16230,12 @@ a.auth-submit-button {
 
 .security-toggle-row strong {
   color: #55525c;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .security-toggle-row small {
   color: #aaa7b0;
-  font-size: 6.3px;
+  font-size: 8.2px;
   line-height: 1.45;
 }
 
@@ -16266,7 +16266,7 @@ a.auth-submit-button {
 .password-rule {
   margin: 0;
   color: #9d9aa4;
-  font-size: 6.3px;
+  font-size: 8.2px;
   line-height: 1.45;
 }
 
@@ -16332,12 +16332,12 @@ a.auth-submit-button {
 
 .session-main-copy strong {
   color: #55525c;
-  font-size: 7.8px;
+  font-size: 10.1px;
 }
 
 .session-main-copy small {
   color: #aaa7b0;
-  font-size: 6.3px;
+  font-size: 8.2px;
 }
 
 .current-session-badge {
@@ -16349,7 +16349,7 @@ a.auth-submit-button {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 5.8px;
+  font-size: 7.5px;
   font-weight: 800;
 }
 
@@ -16372,13 +16372,13 @@ a.auth-submit-button {
 
 .active-session-list dt {
   color: #aaa7b0;
-  font-size: 5.8px;
+  font-size: 7.5px;
 }
 
 .active-session-list dd {
   margin: 0;
   color: #67646e;
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 800;
 }
 
@@ -16393,7 +16393,7 @@ a.auth-submit-button {
   align-items: center;
   gap: 6px;
   font: inherit;
-  font-size: 6px;
+  font-size: 7.8px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -16441,7 +16441,7 @@ a.auth-submit-button {
   background: transparent;
   color: #55525c;
   font: inherit;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .activity-list {
@@ -16500,19 +16500,19 @@ a.auth-submit-button {
 
 .activity-copy strong {
   color: #55525c;
-  font-size: 7.8px;
+  font-size: 10.1px;
 }
 
 .activity-copy p {
   margin: 0;
   color: #8f8c96;
-  font-size: 6.5px;
+  font-size: 8.5px;
   line-height: 1.45;
 }
 
 .activity-copy small {
   color: #aaa7b0;
-  font-size: 5.8px;
+  font-size: 7.5px;
 }
 
 .activity-status {
@@ -16521,7 +16521,7 @@ a.auth-submit-button {
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
-  font-size: 5.6px;
+  font-size: 7.3px;
   font-weight: 800;
 }
 
@@ -16542,7 +16542,7 @@ a.auth-submit-button {
 
 .activity-list time {
   color: #8f8c96;
-  font-size: 6.3px;
+  font-size: 8.2px;
   text-align: right;
 }
 
@@ -16553,7 +16553,7 @@ a.auth-submit-button {
   place-items: center;
   align-content: center;
   gap: 9px;
-  font-size: 7px;
+  font-size: 9.1px;
 }
 
 .settings-empty-state svg {
@@ -16642,7 +16642,7 @@ a.auth-submit-button {
 .backup-file-copy strong {
   overflow: hidden;
   color: #55525c;
-  font-size: 7.5px;
+  font-size: 9.8px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -16653,7 +16653,7 @@ a.auth-submit-button {
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
-  font-size: 5.4px;
+  font-size: 7px;
   font-weight: 800;
   flex-shrink: 0;
 }
@@ -16670,7 +16670,7 @@ a.auth-submit-button {
 
 .backup-file-copy small {
   color: #aaa7b0;
-  font-size: 5.8px;
+  font-size: 7.5px;
 }
 
 .backup-status {
@@ -16680,7 +16680,7 @@ a.auth-submit-button {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 5.6px;
+  font-size: 7.3px;
   font-weight: 800;
 }
 
@@ -16793,14 +16793,14 @@ a.auth-submit-button {
 .restore-file-result strong {
   overflow: hidden;
   color: #55525c;
-  font-size: 7px;
+  font-size: 9.1px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .restore-file-result small {
   color: #96939d;
-  font-size: 6px;
+  font-size: 7.8px;
   line-height: 1.4;
 }
 
@@ -16833,13 +16833,13 @@ a.auth-submit-button {
 
 .danger-data-actions strong {
   color: #55525c;
-  font-size: 7.5px;
+  font-size: 9.8px;
 }
 
 .danger-data-actions p {
   margin: 0;
   color: #aaa7b0;
-  font-size: 6.2px;
+  font-size: 8.1px;
   line-height: 1.45;
 }
 
@@ -16856,7 +16856,7 @@ a.auth-submit-button {
   justify-content: center;
   gap: 6px;
   font: inherit;
-  font-size: 6px;
+  font-size: 7.8px;
   font-weight: 800;
   cursor: pointer;
 }
@@ -17205,3 +17205,2105 @@ html[data-theme="dark"] .backup-file-icon {
     flex-wrap: wrap;
   }
 }
+
+/* Fase 15.1 — conexão real com NestJS/PostgreSQL */
+.backend-loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  background: #f6f6f2;
+  color: #20211f;
+  font-size: 14px;
+  font-weight: 650;
+  text-align: center;
+}
+
+.backend-loading-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #20211f;
+  animation: backend-pulse 1s ease-in-out infinite alternate;
+}
+
+.backend-error-screen { color: #8b2f2f; }
+
+.backend-inline-loading {
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-color, #e3e3dd);
+  background: var(--surface-color, #fff);
+  font-size: 14px;
+}
+
+.local-reset-token {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid #deded8;
+  background: #f8f8f4;
+}
+
+.local-reset-token code {
+  max-width: 100%;
+  padding: 10px;
+  overflow-wrap: anywhere;
+  background: #20211f;
+  color: #fff;
+  font-size: 14.3px;
+}
+
+.auth-submit-button:disabled,
+.dashboard-user-dropdown button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+@keyframes backend-pulse {
+  from { opacity: .25; transform: scale(.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.database-sync-status,
+.database-sync-error {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 120;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 11px 14px;
+  border: 1px solid var(--border-color, #e4e4e7);
+  border-radius: 10px;
+  background: var(--surface-color, #ffffff);
+  color: var(--text-primary, #18181b);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 12%);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.database-sync-error {
+  border-color: #fecaca;
+  background: #fff7f7;
+  color: #991b1b;
+}
+
+.overview-empty-state {
+  display: grid;
+  min-height: 104px;
+  place-items: center;
+  padding: 24px;
+  color: var(--muted-foreground, #737373);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Fase 15.2 — carregamento seguro dos documentos financeiros */
+.financial-data-loading,
+.financial-data-load-error {
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-direction: column;
+  text-align: center;
+  color: var(--muted, #667085);
+}
+
+.financial-data-load-error strong {
+  color: var(--foreground, #101828);
+  font-size: 18px;
+}
+
+.financial-data-load-error button {
+  border: 0;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  padding: 10px 16px;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Fase 15.3 — tema escuro sistêmico e legibilidade tipográfica
+   - O tema claro continua preservando a identidade original.
+   - O tema escuro usa superfícies, bordas e hierarquia de texto consistentes.
+   - Fontes originalmente até 11px receberam aumento real de 30%.
+   ========================================================================== */
+:root {
+  --surface-color: #ffffff;
+  --border-color: #ecebf0;
+  --text-primary: #17161f;
+  --muted-foreground: #77757e;
+  --foreground: #17161f;
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  --ink: #f5f3f7;
+  --muted: #aaa6b2;
+  --line: #302e38;
+  --soft: #211f29;
+  --sidebar: #15141c;
+  --panel: #0c0b11;
+  --surface-color: #191821;
+  --border-color: #302e38;
+  --text-primary: #f5f3f7;
+  --muted-foreground: #aaa6b2;
+  --foreground: #f5f3f7;
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .app-shell,
+html[data-theme="dark"] .workspace,
+html[data-theme="dark"] .page-content,
+html[data-theme="dark"] .finance-page-content {
+  background: #0f0e15;
+  color: #f5f3f7;
+}
+
+html[data-theme="dark"] :where(input, select, textarea, button) {
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] :where(input, textarea)::placeholder {
+  color: #817d89;
+  opacity: 1;
+}
+
+html[data-theme="dark"] :where(input, select, textarea):focus-visible {
+  outline-color: #817b8d;
+}
+
+html[data-theme="dark"] :where(.database-sync-status, .database-sync-error, .transaction-feedback, .access-feedback, .settings-feedback) {
+  box-shadow: 0 18px 46px rgb(0 0 0 / 38%);
+}
+
+html[data-theme="dark"] * {
+  scrollbar-color: #4a4655 #15141c;
+}
+html[data-theme="dark"] button:focus-visible,
+html[data-theme="dark"] a:focus-visible {
+  outline: 2px solid #3b3844;
+}
+
+html[data-theme="dark"] .sidebar {
+  border-right: 1px solid #302e38;
+}
+
+html[data-theme="dark"] .icon-button,
+html[data-theme="dark"] .transactions-filter-selects select,
+html[data-theme="dark"] .form-field input,
+html[data-theme="dark"] .form-field select,
+html[data-theme="dark"] .form-field textarea,
+html[data-theme="dark"] .currency-input,
+html[data-theme="dark"] .transaction-type-selector button.active,
+html[data-theme="dark"] .accounts-filter-tabs button.active,
+html[data-theme="dark"] .invoice-period-tabs button.active,
+html[data-theme="dark"] .card-style-options button.active,
+html[data-theme="dark"] .commitment-filter-selects select,
+html[data-theme="dark"] .calendar-view-toggle button.active,
+html[data-theme="dark"] .calendar-day-cell,
+html[data-theme="dark"] .calendar-agenda-group > button,
+html[data-theme="dark"] .budget-view-tabs button.active,
+html[data-theme="dark"] .budget-status-filter select,
+html[data-theme="dark"] .goal-view-tabs button.active,
+html[data-theme="dark"] .debt-view-tabs button.active,
+html[data-theme="dark"] .debt-strategy-tabs button.active,
+html[data-theme="dark"] .debt-filter-field select,
+html[data-theme="dark"] .subscription-view-tabs button.active,
+html[data-theme="dark"] .auth-brand > span,
+html[data-theme="dark"] .profile-large-avatar {
+  background: #191821;
+  color: #f5f3f7;
+}
+
+html[data-theme="dark"] .footer,
+html[data-theme="dark"] .nav-group-label,
+html[data-theme="dark"] .account-copy small,
+html[data-theme="dark"] .topbar-context span,
+html[data-theme="dark"] .page-eyebrow,
+html[data-theme="dark"] .overview-heading p,
+html[data-theme="dark"] .more-button,
+html[data-theme="dark"] .summary-label,
+html[data-theme="dark"] .summary-footer > span,
+html[data-theme="dark"] .card-kicker,
+html[data-theme="dark"] .chart-summary span,
+html[data-theme="dark"] .chart-month,
+html[data-theme="dark"] .goal-row b,
+html[data-theme="dark"] .list-copy span,
+html[data-theme="dark"] .list-value span,
+html[data-theme="dark"] .transaction-value span,
+html[data-theme="dark"] .monthly-insight p,
+html[data-theme="dark"] .module-placeholder-copy p,
+html[data-theme="dark"] .module-placeholder-card p,
+html[data-theme="dark"] .transactions-heading p,
+html[data-theme="dark"] .transaction-summary-card > span,
+html[data-theme="dark"] .transactions-search input::placeholder,
+html[data-theme="dark"] .transactions-filter-selects label > span,
+html[data-theme="dark"] .form-field > span {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .transaction-type-selector legend,
+html[data-theme="dark"] .transactions-count,
+html[data-theme="dark"] .transaction-description-cell span,
+html[data-theme="dark"] .transaction-account-cell span,
+html[data-theme="dark"] .transactions-empty-state p,
+html[data-theme="dark"] .transaction-dialog-header p,
+html[data-theme="dark"] .transaction-mobile-copy span,
+html[data-theme="dark"] .accounts-heading p,
+html[data-theme="dark"] .account-summary-card > span:not(.account-summary-icon),
+html[data-theme="dark"] .accounts-search input::placeholder,
+html[data-theme="dark"] .accounts-section-heading span,
+html[data-theme="dark"] .accounts-panel-heading span,
+html[data-theme="dark"] .accounts-section-heading small,
+html[data-theme="dark"] .accounts-panel-heading small,
+html[data-theme="dark"] .account-card-copy > span,
+html[data-theme="dark"] .account-card-copy p,
+html[data-theme="dark"] .account-card-balance span,
+html[data-theme="dark"] .account-card-footer span,
+html[data-theme="dark"] .accounts-empty-state p,
+html[data-theme="dark"] .account-movement-copy span,
+html[data-theme="dark"] .account-movement-value span,
+html[data-theme="dark"] .account-movements-empty p,
+html[data-theme="dark"] .accounts-distribution-description,
+html[data-theme="dark"] .accounts-distribution-item small {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .accounts-distribution-total span,
+html[data-theme="dark"] .account-source-balance span,
+html[data-theme="dark"] .cards-heading p,
+html[data-theme="dark"] .cards-limit-label,
+html[data-theme="dark"] .card-summary-card > span:nth-child(2),
+html[data-theme="dark"] .card-summary-card > small,
+html[data-theme="dark"] .cards-section-heading > div > span,
+html[data-theme="dark"] .invoice-panel-heading > div > span,
+html[data-theme="dark"] .installments-heading > div > span,
+html[data-theme="dark"] .cards-section-heading > small,
+html[data-theme="dark"] .credit-card-limit-row span,
+html[data-theme="dark"] .credit-card-limit-row small,
+html[data-theme="dark"] .cards-empty-state p,
+html[data-theme="dark"] .invoice-empty-state p,
+html[data-theme="dark"] .installments-empty-state p,
+html[data-theme="dark"] .invoice-panel-heading p,
+html[data-theme="dark"] .installments-heading p,
+html[data-theme="dark"] .invoice-total-block > span,
+html[data-theme="dark"] .invoice-date-block > span,
+html[data-theme="dark"] .invoice-purchases-heading small,
+html[data-theme="dark"] .invoice-purchase-copy span,
+html[data-theme="dark"] .invoice-purchase-installment small,
+html[data-theme="dark"] .installment-item-top span,
+html[data-theme="dark"] .installment-progress-copy {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .card-purchase-preview span,
+html[data-theme="dark"] .financial-management-heading p,
+html[data-theme="dark"] .commitment-summary-card > span,
+html[data-theme="dark"] .commitment-filter-selects label > span,
+html[data-theme="dark"] .commitment-list-header > span,
+html[data-theme="dark"] .commitment-description-cell span,
+html[data-theme="dark"] .commitment-date-cell svg,
+html[data-theme="dark"] .commitment-value-cell span,
+html[data-theme="dark"] .commitment-empty-state p,
+html[data-theme="dark"] .commitment-insight-panel > p,
+html[data-theme="dark"] .commitment-insight-breakdown span,
+html[data-theme="dark"] .commitment-insight-breakdown small,
+html[data-theme="dark"] .commitment-next-item span,
+html[data-theme="dark"] .commitment-next-item small,
+html[data-theme="dark"] .commitment-payment-summary span,
+html[data-theme="dark"] .commitment-mobile-card > header > div span,
+html[data-theme="dark"] .commitment-mobile-values span,
+html[data-theme="dark"] .calendar-summary-card > span:not(.calendar-summary-card-top),
+html[data-theme="dark"] .calendar-summary-card > small,
+html[data-theme="dark"] .calendar-month-navigation > div span,
+html[data-theme="dark"] .calendar-filter-selects label > span,
+html[data-theme="dark"] .calendar-weekday-row span,
+html[data-theme="dark"] .day-agenda-totals span,
+html[data-theme="dark"] .day-agenda-empty p {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .calendar-projection-panel header p,
+html[data-theme="dark"] .calendar-projection-lines span,
+html[data-theme="dark"] .calendar-agenda-list > header > span,
+html[data-theme="dark"] .calendar-agenda-group > button span,
+html[data-theme="dark"] .calendar-agenda-empty p,
+html[data-theme="dark"] .budget-summary-card > span,
+html[data-theme="dark"] .budget-month-navigation span,
+html[data-theme="dark"] .budget-status-filter > span,
+html[data-theme="dark"] .budget-list-header > span,
+html[data-theme="dark"] .budget-category-main span:not(.budget-category-icon),
+html[data-theme="dark"] .budget-category-values span,
+html[data-theme="dark"] .budget-empty-state p,
+html[data-theme="dark"] .budget-allocation-panel header p,
+html[data-theme="dark"] .categories-manager-heading p,
+html[data-theme="dark"] .category-group-card header span,
+html[data-theme="dark"] .category-manager-card > p,
+html[data-theme="dark"] .category-manager-card > footer span,
+html[data-theme="dark"] .form-field small,
+html[data-theme="dark"] .category-tone-selector legend,
+html[data-theme="dark"] .goal-summary-card > span:not(.goal-summary-icon),
+html[data-theme="dark"] .goal-filter-field > span,
+html[data-theme="dark"] .goals-list-header > span,
+html[data-theme="dark"] .goal-card-description,
+html[data-theme="dark"] .goal-card-value-row span {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .goal-card-details span,
+html[data-theme="dark"] .goal-movement-row > div > span,
+html[data-theme="dark"] .goal-monthly-plan-panel > header p,
+html[data-theme="dark"] .goal-plan-total span,
+html[data-theme="dark"] .goal-plan-total small,
+html[data-theme="dark"] .goal-plan-empty,
+html[data-theme="dark"] .goal-movements-header p,
+html[data-theme="dark"] .goal-movements-header > span,
+html[data-theme="dark"] .goal-movement-main > span,
+html[data-theme="dark"] .debt-summary-card > span:not(.debt-summary-icon),
+html[data-theme="dark"] .debt-filter-field > span,
+html[data-theme="dark"] .debts-list-header > span,
+html[data-theme="dark"] .debt-payments-header > span,
+html[data-theme="dark"] .debt-card-header p,
+html[data-theme="dark"] .debt-balance-block > span,
+html[data-theme="dark"] .debt-progress-block span,
+html[data-theme="dark"] .debt-card-details span,
+html[data-theme="dark"] .debt-card-account,
+html[data-theme="dark"] .debt-balance-block > small,
+html[data-theme="dark"] .debts-empty-state p,
+html[data-theme="dark"] .debt-panel-empty p,
+html[data-theme="dark"] .debt-panel-header p,
+html[data-theme="dark"] .debt-detail-metrics > div > span:not(.debt-detail-metric-icon),
+html[data-theme="dark"] .debt-contract-data span {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .debt-timeline-heading span,
+html[data-theme="dark"] .debt-timeline-heading small,
+html[data-theme="dark"] .debt-hidden-installments,
+html[data-theme="dark"] .payoff-simulator-panel > p,
+html[data-theme="dark"] .debt-strategy-panel > p,
+html[data-theme="dark"] .payoff-plan-comparison span,
+html[data-theme="dark"] .payoff-results-grid span,
+html[data-theme="dark"] .debt-strategy-list small,
+html[data-theme="dark"] .debt-payments-table td:nth-child(2) small,
+html[data-theme="dark"] .debt-payment-preview span,
+html[data-theme="dark"] .subscription-summary-card > span,
+html[data-theme="dark"] .subscription-filter-field > span,
+html[data-theme="dark"] .subscriptions-list-header > span,
+html[data-theme="dark"] .subscription-card-identity p,
+html[data-theme="dark"] .subscription-card-value-row > div:first-child span,
+html[data-theme="dark"] .subscription-monthly-equivalent span,
+html[data-theme="dark"] .subscription-card-details span,
+html[data-theme="dark"] .subscription-selected-data strong,
+html[data-theme="dark"] .subscription-selected-note,
+html[data-theme="dark"] .subscription-breakdown-row small,
+html[data-theme="dark"] .subscription-upcoming-list small,
+html[data-theme="dark"] .subscription-opportunity-list small,
+html[data-theme="dark"] .subscription-panel-empty,
+html[data-theme="dark"] .subscriptions-empty-state p {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .subscription-renewal-toggle small,
+html[data-theme="dark"] .subscription-charge-preview span,
+html[data-theme="dark"] .reports-control-field > span,
+html[data-theme="dark"] .reports-control-field small,
+html[data-theme="dark"] .reports-period-caption span,
+html[data-theme="dark"] .reports-summary-card > span:not(.reports-summary-icon),
+html[data-theme="dark"] .projection-summary-card > span:not(.projection-summary-icon),
+html[data-theme="dark"] .reports-summary-card.featured > span:not(.reports-summary-icon),
+html[data-theme="dark"] .projection-summary-card.featured > span:not(.projection-summary-icon),
+html[data-theme="dark"] .reports-summary-card > small,
+html[data-theme="dark"] .report-panel-header p,
+html[data-theme="dark"] .report-total-caption span,
+html[data-theme="dark"] .cash-flow-highlights span,
+html[data-theme="dark"] .financial-health-item span:not(.financial-health-icon),
+html[data-theme="dark"] .financial-health-item small,
+html[data-theme="dark"] .financial-recommendations ul,
+html[data-theme="dark"] .category-report-copy span,
+html[data-theme="dark"] .budget-performance-values,
+html[data-theme="dark"] .account-distribution-row small,
+html[data-theme="dark"] .account-distribution-share span,
+html[data-theme="dark"] .report-empty-state,
+html[data-theme="dark"] .projection-balance-column > small,
+html[data-theme="dark"] .projection-commitment-row > div span,
+html[data-theme="dark"] .data-tools-summary-card > span:not(.data-tools-summary-icon) {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .data-tools-summary-card > small,
+html[data-theme="dark"] .data-tools-summary-card.featured > span:not(.data-tools-summary-icon),
+html[data-theme="dark"] .data-tools-summary-card.featured > small,
+html[data-theme="dark"] .file-drop-zone p,
+html[data-theme="dark"] .file-drop-zone small,
+html[data-theme="dark"] .selected-import-file small,
+html[data-theme="dark"] .data-tool-subheading p,
+html[data-theme="dark"] .import-preview-counts span,
+html[data-theme="dark"] .data-tools-empty-state,
+html[data-theme="dark"] .data-tools-empty-state p,
+html[data-theme="dark"] .data-tools-empty-copy,
+html[data-theme="dark"] .import-preview-actions small,
+html[data-theme="dark"] .export-preview-file small,
+html[data-theme="dark"] .export-preview-details dt,
+html[data-theme="dark"] .rule-priority-control button,
+html[data-theme="dark"] .automation-rule-title-row small,
+html[data-theme="dark"] .automation-rule-definition span,
+html[data-theme="dark"] .rule-test-results p,
+html[data-theme="dark"] .import-history-table td:first-child small,
+html[data-theme="dark"] .workspace-switcher-copy small,
+html[data-theme="dark"] .workspace-switcher-trigger > svg,
+html[data-theme="dark"] .workspace-switcher-menu button small,
+html[data-theme="dark"] .dashboard-user-dropdown header small,
+html[data-theme="dark"] .auth-showcase-copy > p {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .auth-benefits span,
+html[data-theme="dark"] .auth-benefits svg,
+html[data-theme="dark"] .auth-card-heading > span,
+html[data-theme="dark"] .auth-input-wrap svg,
+html[data-theme="dark"] .auth-input-wrap input::placeholder,
+html[data-theme="dark"] .auth-switch-copy,
+html[data-theme="dark"] .auth-demo-note,
+html[data-theme="dark"] .invitation-details dt,
+html[data-theme="dark"] .access-summary-card > span:nth-child(2),
+html[data-theme="dark"] .access-summary-card small,
+html[data-theme="dark"] .access-panel-header p,
+html[data-theme="dark"] .workspace-access-card-top > div > span,
+html[data-theme="dark"] .workspace-access-meta,
+html[data-theme="dark"] .access-search-field svg,
+html[data-theme="dark"] .members-table td:first-child span:not(.member-avatar),
+html[data-theme="dark"] .invitation-main-copy span,
+html[data-theme="dark"] .invitation-date-copy span,
+html[data-theme="dark"] .permission-table td:first-child span,
+html[data-theme="dark"] .access-dialog-workspace small,
+html[data-theme="dark"] .access-role-selector legend,
+html[data-theme="dark"] .access-role-selector small,
+html[data-theme="dark"] .auth-mobile-brand small,
+html[data-theme="dark"] .settings-summary-card > span:nth-child(2),
+html[data-theme="dark"] .settings-summary-card small {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .settings-panel-header p,
+html[data-theme="dark"] .settings-field small,
+html[data-theme="dark"] .settings-subheading p,
+html[data-theme="dark"] .settings-toggle-row small,
+html[data-theme="dark"] .notification-inline-control > span,
+html[data-theme="dark"] .security-toggle-row small,
+html[data-theme="dark"] .password-rule,
+html[data-theme="dark"] .session-main-copy small,
+html[data-theme="dark"] .active-session-list dt,
+html[data-theme="dark"] .settings-search-field svg,
+html[data-theme="dark"] .activity-copy small,
+html[data-theme="dark"] .settings-empty-state,
+html[data-theme="dark"] .backup-file-copy small {
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .footer-checks,
+html[data-theme="dark"] .transaction-actions-menu button,
+html[data-theme="dark"] .account-card-footer > div strong,
+html[data-theme="dark"] .installment-progress-copy strong,
+html[data-theme="dark"] .installment-item-footer strong,
+html[data-theme="dark"] .budget-category-values strong,
+html[data-theme="dark"] .budget-progress-heading > strong,
+html[data-theme="dark"] .budget-allocation-list strong,
+html[data-theme="dark"] .category-manager-card > footer button,
+html[data-theme="dark"] .goal-progress-heading > strong,
+html[data-theme="dark"] .goal-card-details strong,
+html[data-theme="dark"] .goal-plan-list strong,
+html[data-theme="dark"] .goal-movement-main strong,
+html[data-theme="dark"] .goal-movement-row > div > strong,
+html[data-theme="dark"] .debt-progress-block strong,
+html[data-theme="dark"] .debt-card-details strong,
+html[data-theme="dark"] .debt-detail-metrics strong,
+html[data-theme="dark"] .debt-contract-data strong,
+html[data-theme="dark"] .payoff-results-grid strong,
+html[data-theme="dark"] .debt-strategy-list strong,
+html[data-theme="dark"] .debt-strategy-list b,
+html[data-theme="dark"] .debt-payments-table td:nth-child(2) strong,
+html[data-theme="dark"] .debt-payment-preview strong,
+html[data-theme="dark"] .subscription-monthly-equivalent strong {
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .subscription-card-details strong,
+html[data-theme="dark"] .subscription-breakdown-row strong,
+html[data-theme="dark"] .subscription-upcoming-list strong,
+html[data-theme="dark"] .subscription-opportunity-list strong,
+html[data-theme="dark"] .subscription-breakdown-row > b,
+html[data-theme="dark"] .subscription-upcoming-list > div > b,
+html[data-theme="dark"] .subscription-opportunity-list > div > b,
+html[data-theme="dark"] .subscription-charges-table td strong,
+html[data-theme="dark"] .subscription-renewal-toggle strong,
+html[data-theme="dark"] .subscription-charge-preview strong,
+html[data-theme="dark"] .reports-period-caption strong,
+html[data-theme="dark"] .report-total-caption strong,
+html[data-theme="dark"] .cash-flow-column > strong,
+html[data-theme="dark"] .cash-flow-highlights strong,
+html[data-theme="dark"] .financial-health-item strong,
+html[data-theme="dark"] .category-report-copy strong,
+html[data-theme="dark"] .category-report-value,
+html[data-theme="dark"] .budget-performance-title > strong,
+html[data-theme="dark"] .account-distribution-row > div > strong,
+html[data-theme="dark"] .account-distribution-share strong,
+html[data-theme="dark"] .projection-balance-column > strong,
+html[data-theme="dark"] .projection-commitment-row > div strong,
+html[data-theme="dark"] .projection-commitment-row > strong,
+html[data-theme="dark"] .projection-table td strong {
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .data-tools-summary-card > strong,
+html[data-theme="dark"] .data-tool-panel-header h2,
+html[data-theme="dark"] .file-drop-zone strong,
+html[data-theme="dark"] .selected-import-file strong,
+html[data-theme="dark"] .data-tool-subheading h3,
+html[data-theme="dark"] .import-preview-counts strong,
+html[data-theme="dark"] .export-preview-file strong,
+html[data-theme="dark"] .export-preview-details dd,
+html[data-theme="dark"] .automation-rule-title-row strong,
+html[data-theme="dark"] .automation-rule-definition p strong,
+html[data-theme="dark"] .automation-rule-definition p b,
+html[data-theme="dark"] .rule-test-results strong,
+html[data-theme="dark"] .rule-actions-section h3,
+html[data-theme="dark"] .import-history-table td:first-child strong,
+html[data-theme="dark"] .workspace-switcher-trigger,
+html[data-theme="dark"] .workspace-switcher-copy strong,
+html[data-theme="dark"] .workspace-switcher-menu button strong,
+html[data-theme="dark"] .dashboard-user-dropdown header strong,
+html[data-theme="dark"] .auth-input-wrap input,
+html[data-theme="dark"] .auth-form-options > a,
+html[data-theme="dark"] .auth-back-link,
+html[data-theme="dark"] .auth-checkbox b,
+html[data-theme="dark"] .invitation-details dd,
+html[data-theme="dark"] .access-panel-header h2 {
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .workspace-access-card h3,
+html[data-theme="dark"] .access-search-field input,
+html[data-theme="dark"] .members-table td:first-child strong,
+html[data-theme="dark"] .invitation-main-copy strong,
+html[data-theme="dark"] .permission-table td:first-child strong,
+html[data-theme="dark"] .access-dialog-workspace strong,
+html[data-theme="dark"] .access-role-selector strong,
+html[data-theme="dark"] .settings-panel-header h2,
+html[data-theme="dark"] .settings-subheading h3,
+html[data-theme="dark"] .settings-toggle-row strong,
+html[data-theme="dark"] .notification-group-card h3,
+html[data-theme="dark"] .notification-channel-row > span,
+html[data-theme="dark"] .security-toggle-row strong,
+html[data-theme="dark"] .session-main-copy strong,
+html[data-theme="dark"] .settings-search-field input,
+html[data-theme="dark"] .activity-copy strong,
+html[data-theme="dark"] .backup-file-copy strong,
+html[data-theme="dark"] .restore-file-result strong {
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .finance-brand-mark,
+html[data-theme="dark"] .transaction-feedback,
+html[data-theme="dark"] .account-transfer-route i,
+html[data-theme="dark"] .cards-limit-card,
+html[data-theme="dark"] .credit-card-detail-heading small,
+html[data-theme="dark"] .credit-card-detail-heading i,
+html[data-theme="dark"] .calendar-day-number small,
+html[data-theme="dark"] .debt-installment.next,
+html[data-theme="dark"] .payoff-plan-comparison > div.new,
+html[data-theme="dark"] .file-drop-zone > span,
+html[data-theme="dark"] .export-preview-file > span,
+html[data-theme="dark"] .dashboard-user-dropdown header > span,
+html[data-theme="dark"] .auth-mobile-brand > span,
+html[data-theme="dark"] .access-dialog-workspace > span,
+html[data-theme="dark"] .profile-identity-card,
+html[data-theme="dark"] .local-reset-token code {
+  background: #111018;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .finance-side-nav .side-link,
+html[data-theme="dark"] .available-balance-card > div span,
+html[data-theme="dark"] .available-balance-card small,
+html[data-theme="dark"] .summary-trend.neutral,
+html[data-theme="dark"] .chart-legend,
+html[data-theme="dark"] .monthly-label-row,
+html[data-theme="dark"] .monthly-panel-block > small,
+html[data-theme="dark"] .goal-row,
+html[data-theme="dark"] .text-button,
+html[data-theme="dark"] .finance-mobile-menu a,
+html[data-theme="dark"] .featured > span,
+html[data-theme="dark"] .featured > small,
+html[data-theme="dark"] .clear-filters-button,
+html[data-theme="dark"] .transaction-type-selector button,
+html[data-theme="dark"] .currency-input b,
+html[data-theme="dark"] .accounts-total-card-top > span:last-child,
+html[data-theme="dark"] .accounts-total-label,
+html[data-theme="dark"] .accounts-projection-row span,
+html[data-theme="dark"] .accounts-filter-tabs button,
+html[data-theme="dark"] .accounts-distribution-item > div:first-child span,
+html[data-theme="dark"] .cards-limit-topline,
+html[data-theme="dark"] .cards-limit-progress-copy,
+html[data-theme="dark"] .credit-card-dates,
+html[data-theme="dark"] .invoice-period-tabs button {
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .invoice-purchase-installment span,
+html[data-theme="dark"] .card-style-options button,
+html[data-theme="dark"] .invoice-payment-amount span,
+html[data-theme="dark"] .invoice-payment-amount small,
+html[data-theme="dark"] .commitment-summary-card.featured > span,
+html[data-theme="dark"] .commitment-summary-card.featured > small,
+html[data-theme="dark"] .commitment-insight-total span,
+html[data-theme="dark"] .commitment-mobile-meta span,
+html[data-theme="dark"] .calendar-summary-card.featured > span,
+html[data-theme="dark"] .calendar-summary-card.featured > small,
+html[data-theme="dark"] .calendar-view-toggle button,
+html[data-theme="dark"] .calendar-more-events,
+html[data-theme="dark"] .day-agenda-event-copy p,
+html[data-theme="dark"] .calendar-projection-result span,
+html[data-theme="dark"] .calendar-agenda-row > div small,
+html[data-theme="dark"] .budget-summary-card.featured > span,
+html[data-theme="dark"] .budget-summary-card.featured > small,
+html[data-theme="dark"] .budget-view-tabs button,
+html[data-theme="dark"] .budget-insight-panel .section-eyebrow,
+html[data-theme="dark"] .budget-insight-panel > p,
+html[data-theme="dark"] .budget-pace-comparison span,
+html[data-theme="dark"] .budget-insight-stats span,
+html[data-theme="dark"] .budget-pace-message p,
+html[data-theme="dark"] .budget-allocation-list span {
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .goal-summary-card.featured > span:not(.goal-summary-icon),
+html[data-theme="dark"] .goal-summary-card.featured > small,
+html[data-theme="dark"] .goal-view-tabs button,
+html[data-theme="dark"] .goal-card-footer > div button,
+html[data-theme="dark"] .goal-emergency-panel .section-eyebrow,
+html[data-theme="dark"] .goal-emergency-panel > p,
+html[data-theme="dark"] .goal-emergency-value > span,
+html[data-theme="dark"] .goal-emergency-value > small,
+html[data-theme="dark"] .goal-emergency-stats span,
+html[data-theme="dark"] .goal-protection-message p,
+html[data-theme="dark"] .goal-plan-list span,
+html[data-theme="dark"] .debt-summary-card.featured > span:not(.debt-summary-icon),
+html[data-theme="dark"] .debt-summary-card.featured > small,
+html[data-theme="dark"] .debt-view-tabs button,
+html[data-theme="dark"] .debt-strategy-tabs button,
+html[data-theme="dark"] .debt-card-footer > div button,
+html[data-theme="dark"] .debt-detail-balance > span,
+html[data-theme="dark"] .debt-detail-balance > small,
+html[data-theme="dark"] .debt-percentage-input b,
+html[data-theme="dark"] .subscription-summary-card.featured > span,
+html[data-theme="dark"] .subscription-summary-card.featured > small,
+html[data-theme="dark"] .subscription-view-tabs button,
+html[data-theme="dark"] .subscription-renewal-line,
+html[data-theme="dark"] .subscription-text-action {
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .subscription-selected-heading p,
+html[data-theme="dark"] .subscription-selected-value span,
+html[data-theme="dark"] .subscription-selected-data span,
+html[data-theme="dark"] .subscription-insight-panel > header > svg,
+html[data-theme="dark"] .subscription-opportunity-list footer span,
+html[data-theme="dark"] .reports-view-tabs button,
+html[data-theme="dark"] .cash-flow-legend,
+html[data-theme="dark"] .budget-performance-values strong,
+html[data-theme="dark"] .projection-risk-list p,
+html[data-theme="dark"] .data-tools-toolbar button,
+html[data-theme="dark"] .data-tool-panel-header p,
+html[data-theme="dark"] .selected-import-file p,
+html[data-theme="dark"] .column-mapping-grid label > span,
+html[data-theme="dark"] .import-preview-table td:last-child,
+html[data-theme="dark"] .import-preview-footer > span,
+html[data-theme="dark"] .rule-priority-control strong,
+html[data-theme="dark"] .automation-rule-definition p,
+html[data-theme="dark"] .rule-match-count,
+html[data-theme="dark"] .rule-test-results small,
+html[data-theme="dark"] .workspace-switcher-menu button,
+html[data-theme="dark"] .workspace-switcher-menu button > svg,
+html[data-theme="dark"] .dashboard-user-dropdown nav a,
+html[data-theme="dark"] .auth-eyebrow,
+html[data-theme="dark"] .auth-privacy-note {
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .auth-card-heading p,
+html[data-theme="dark"] .auth-form > label > span,
+html[data-theme="dark"] .auth-form-columns label > span,
+html[data-theme="dark"] .auth-checkbox,
+html[data-theme="dark"] .access-summary-card.featured > span:nth-child(2),
+html[data-theme="dark"] .workspace-access-card > p,
+html[data-theme="dark"] .access-overview-panel .access-panel-header p,
+html[data-theme="dark"] .access-overview-list p,
+html[data-theme="dark"] .members-table td:first-child strong small,
+html[data-theme="dark"] .invitation-date-copy strong,
+html[data-theme="dark"] .settings-navigation button,
+html[data-theme="dark"] .settings-field > span,
+html[data-theme="dark"] .profile-identity-card > small,
+html[data-theme="dark"] .profile-identity-card dt,
+html[data-theme="dark"] .settings-subheading > svg,
+html[data-theme="dark"] .notification-inline-control small,
+html[data-theme="dark"] .notification-channel-row svg,
+html[data-theme="dark"] .active-session-list dd,
+html[data-theme="dark"] .activity-copy p,
+html[data-theme="dark"] .activity-list time,
+html[data-theme="dark"] .restore-file-result small {
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .finance-side-nav .side-link:hover {
+  color: #f5f3f7;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+html[data-theme="dark"] .finance-side-nav .side-link.active {
+  color: #f5f3f7;
+  background: #191821;
+}
+
+html[data-theme="dark"] .account-avatar {
+  background: #191821;
+  border: 1px solid #302e38;
+  color: #f5f3f7;
+}
+
+html[data-theme="dark"] .context-dot,
+html[data-theme="dark"] .insight-icon,
+html[data-theme="dark"] .transactions-empty-icon,
+html[data-theme="dark"] .transaction-type-selector > div,
+html[data-theme="dark"] .transaction-actions-menu button:hover,
+html[data-theme="dark"] .accounts-filter-tabs,
+html[data-theme="dark"] .accounts-distribution-track,
+html[data-theme="dark"] .account-transfer-route,
+html[data-theme="dark"] .credit-card-limit-track,
+html[data-theme="dark"] .installment-progress-track,
+html[data-theme="dark"] .invoice-period-tabs,
+html[data-theme="dark"] .card-style-options,
+html[data-theme="dark"] .card-purchase-preview,
+html[data-theme="dark"] .commitment-progress-track,
+html[data-theme="dark"] .commitment-payment-summary,
+html[data-theme="dark"] .commitment-mobile-values,
+html[data-theme="dark"] .calendar-view-toggle,
+html[data-theme="dark"] .calendar-day-cell.selected,
+html[data-theme="dark"] .calendar-projection-progress,
+html[data-theme="dark"] .budget-view-tabs,
+html[data-theme="dark"] .budget-progress-track,
+html[data-theme="dark"] .budget-pace-track,
+html[data-theme="dark"] .budget-allocation-track,
+html[data-theme="dark"] .goal-view-tabs {
+  background: #1e1d26;
+}
+
+html[data-theme="dark"] .goal-card-value-row,
+html[data-theme="dark"] .goal-progress-track,
+html[data-theme="dark"] .goal-coverage-track,
+html[data-theme="dark"] .goal-plan-track,
+html[data-theme="dark"] .goal-plan-total,
+html[data-theme="dark"] .debt-view-tabs,
+html[data-theme="dark"] .debt-strategy-tabs,
+html[data-theme="dark"] .debt-progress-track,
+html[data-theme="dark"] .payoff-plan-comparison > div,
+html[data-theme="dark"] .debt-payment-preview,
+html[data-theme="dark"] .subscription-view-tabs,
+html[data-theme="dark"] .subscription-breakdown-track,
+html[data-theme="dark"] .subscription-charge-preview,
+html[data-theme="dark"] .cash-flow-highlights > div,
+html[data-theme="dark"] .category-report-track,
+html[data-theme="dark"] .budget-performance-track,
+html[data-theme="dark"] .data-tools-empty-state > span,
+html[data-theme="dark"] .import-preview-actions button:hover,
+html[data-theme="dark"] .automation-rule-definition > div,
+html[data-theme="dark"] .automation-rule-actions button:hover,
+html[data-theme="dark"] .workspace-switcher-trigger:hover,
+html[data-theme="dark"] .workspace-switcher-trigger[aria-expanded="true"],
+html[data-theme="dark"] .workspace-switcher-menu button:hover,
+html[data-theme="dark"] .workspace-switcher-menu button.active {
+  background: #1e1d26;
+}
+
+html[data-theme="dark"] .auth-divider::before,
+html[data-theme="dark"] .access-dialog-workspace,
+html[data-theme="dark"] .appearance-preview i {
+  background: #1e1d26;
+}
+
+html[data-theme="dark"] .topbar-context strong,
+html[data-theme="dark"] .transactions-search input,
+html[data-theme="dark"] .transaction-description-cell strong,
+html[data-theme="dark"] .transaction-account-cell strong,
+html[data-theme="dark"] .accounts-search input,
+html[data-theme="dark"] .account-movement-copy strong,
+html[data-theme="dark"] .account-movement-value strong,
+html[data-theme="dark"] .accounts-distribution-item > div:first-child strong,
+html[data-theme="dark"] .account-transfer-route > span,
+html[data-theme="dark"] .commitment-description-cell strong,
+html[data-theme="dark"] .commitment-value-cell strong,
+html[data-theme="dark"] .day-agenda-event-copy strong,
+html[data-theme="dark"] .day-agenda-event > strong,
+html[data-theme="dark"] .calendar-agenda-row > div strong,
+html[data-theme="dark"] .calendar-agenda-row > strong,
+html[data-theme="dark"] .budget-month-navigation strong,
+html[data-theme="dark"] .budget-category-main strong,
+html[data-theme="dark"] .debt-card h3,
+html[data-theme="dark"] .debt-balance-block > strong,
+html[data-theme="dark"] .debt-percentage-input input,
+html[data-theme="dark"] .subscription-card-identity h3,
+html[data-theme="dark"] .reports-summary-card > strong,
+html[data-theme="dark"] .projection-summary-card > strong,
+html[data-theme="dark"] .report-panel-header h2 {
+  color: #f5f3f7;
+}
+
+html[data-theme="dark"] .auth-card-heading h2,
+html[data-theme="dark"] .auth-switch-copy a,
+html[data-theme="dark"] .access-summary-card strong,
+html[data-theme="dark"] .auth-mobile-brand strong,
+html[data-theme="dark"] .settings-summary-card strong {
+  color: #f5f3f7;
+}
+
+html[data-theme="dark"] .new-entry-button,
+html[data-theme="dark"] .mobile-entry-button,
+html[data-theme="dark"] .monthly-insight button,
+html[data-theme="dark"] .placeholder-icon,
+html[data-theme="dark"] .accounts-filter-tabs button.active b,
+html[data-theme="dark"] .account-selected-badge,
+html[data-theme="dark"] .installments-heading-icon,
+html[data-theme="dark"] .commitment-insight-icon,
+html[data-theme="dark"] .goal-add-button,
+html[data-theme="dark"] .debt-pay-button,
+html[data-theme="dark"] .payoff-panel-icon,
+html[data-theme="dark"] .debt-strategy-icon,
+html[data-theme="dark"] .debt-strategy-list button:first-child > span,
+html[data-theme="dark"] .reports-view-tabs button.active,
+html[data-theme="dark"] .selected-import-file-icon,
+html[data-theme="dark"] .automation-rule-icon,
+html[data-theme="dark"] .workspace-switcher-icon,
+html[data-theme="dark"] .workspace-switcher-menu-icon,
+html[data-theme="dark"] .dashboard-user-trigger,
+html[data-theme="dark"] .auth-submit-button,
+html[data-theme="dark"] a.auth-submit-button,
+html[data-theme="dark"] .invitation-main-icon,
+html[data-theme="dark"] .workspace-access-avatar,
+html[data-theme="dark"] .settings-navigation button.active {
+  background: #34313d;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .available-balance-card,
+html[data-theme="dark"] .monthly-panel,
+html[data-theme="dark"] .featured .transaction-summary-icon,
+html[data-theme="dark"] .accounts-total-card,
+html[data-theme="dark"] .cards-limit-icon,
+html[data-theme="dark"] .cards-limit-progress-copy b,
+html[data-theme="dark"] .credit-card-visual,
+html[data-theme="dark"] .featured .commitment-summary-icon,
+html[data-theme="dark"] .calendar-summary-card.featured .calendar-summary-icon,
+html[data-theme="dark"] .budget-insight-icon,
+html[data-theme="dark"] .goal-summary-card.featured .goal-summary-icon,
+html[data-theme="dark"] .debt-summary-card.featured .debt-summary-icon,
+html[data-theme="dark"] .subscription-summary-card.featured .subscription-summary-icon,
+html[data-theme="dark"] .subscription-selected-heading .subscription-card-icon,
+html[data-theme="dark"] .reports-summary-card.featured .reports-summary-icon,
+html[data-theme="dark"] .projection-summary-card.featured .projection-summary-icon,
+html[data-theme="dark"] .reports-summary-card.featured > strong,
+html[data-theme="dark"] .projection-summary-card.featured > strong,
+html[data-theme="dark"] .data-tools-summary-card.featured .data-tools-summary-icon,
+html[data-theme="dark"] .data-tools-summary-card.featured > strong,
+html[data-theme="dark"] .access-summary-card.featured .access-summary-icon,
+html[data-theme="dark"] .access-summary-card.featured strong,
+html[data-theme="dark"] .access-overview-panel .access-panel-header h2,
+html[data-theme="dark"] .access-overview-list article > span {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .access-overview-list strong,
+html[data-theme="dark"] .settings-summary-card.featured .settings-summary-icon,
+html[data-theme="dark"] .settings-summary-card.featured strong,
+html[data-theme="dark"] .profile-identity-card dd {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .summary-card,
+html[data-theme="dark"] .finance-card,
+html[data-theme="dark"] .dark-progress span,
+html[data-theme="dark"] .finance-mobile-menu,
+html[data-theme="dark"] .transaction-summary-card,
+html[data-theme="dark"] .transactions-filters,
+html[data-theme="dark"] .transactions-list-card,
+html[data-theme="dark"] .transactions-table tbody tr:hover,
+html[data-theme="dark"] .transaction-dialog,
+html[data-theme="dark"] .transaction-actions-menu,
+html[data-theme="dark"] .accounts-projection-track span,
+html[data-theme="dark"] .account-summary-card,
+html[data-theme="dark"] .accounts-toolbar,
+html[data-theme="dark"] .accounts-list-section,
+html[data-theme="dark"] .account-card,
+html[data-theme="dark"] .account-activity-card,
+html[data-theme="dark"] .accounts-distribution-card,
+html[data-theme="dark"] .account-source-balance,
+html[data-theme="dark"] .cards-limit-track span,
+html[data-theme="dark"] .card-summary-card,
+html[data-theme="dark"] .credit-cards-section,
+html[data-theme="dark"] .invoice-panel,
+html[data-theme="dark"] .installments-panel,
+html[data-theme="dark"] .invoice-summary-strip {
+  background: #191821;
+}
+
+html[data-theme="dark"] .card-purchase-preview > div,
+html[data-theme="dark"] .commitment-summary-card,
+html[data-theme="dark"] .commitment-filters,
+html[data-theme="dark"] .commitment-list-card,
+html[data-theme="dark"] .commitment-insight-panel,
+html[data-theme="dark"] .commitment-table tbody tr:hover td,
+html[data-theme="dark"] .commitment-payment-summary > div,
+html[data-theme="dark"] .commitment-mobile-values > div,
+html[data-theme="dark"] .calendar-summary-card,
+html[data-theme="dark"] .calendar-toolbar,
+html[data-theme="dark"] .month-calendar-panel,
+html[data-theme="dark"] .calendar-weekday-row,
+html[data-theme="dark"] .calendar-day-cell:hover,
+html[data-theme="dark"] .day-agenda-panel,
+html[data-theme="dark"] .calendar-projection-panel,
+html[data-theme="dark"] .calendar-projection-lines > div,
+html[data-theme="dark"] .calendar-agenda-list,
+html[data-theme="dark"] .budget-summary-card,
+html[data-theme="dark"] .budgets-toolbar,
+html[data-theme="dark"] .budget-list-card,
+html[data-theme="dark"] .budget-allocation-panel,
+html[data-theme="dark"] .categories-manager,
+html[data-theme="dark"] .category-group-card,
+html[data-theme="dark"] .budget-category-row:hover {
+  background: #191821;
+}
+
+html[data-theme="dark"] .category-manager-card,
+html[data-theme="dark"] .category-manager-card.inactive,
+html[data-theme="dark"] .category-tone-selector button,
+html[data-theme="dark"] .goal-summary-card,
+html[data-theme="dark"] .goals-toolbar,
+html[data-theme="dark"] .goals-list-panel,
+html[data-theme="dark"] .goal-monthly-plan-panel,
+html[data-theme="dark"] .goal-movements-panel,
+html[data-theme="dark"] .goal-card,
+html[data-theme="dark"] .debt-summary-card,
+html[data-theme="dark"] .debts-toolbar,
+html[data-theme="dark"] .debts-list-card,
+html[data-theme="dark"] .debt-details-panel,
+html[data-theme="dark"] .payoff-simulator-panel,
+html[data-theme="dark"] .debt-strategy-panel,
+html[data-theme="dark"] .debt-payments-card,
+html[data-theme="dark"] .debt-detail-balance .debt-progress-track span,
+html[data-theme="dark"] .debt-strategy-list button,
+html[data-theme="dark"] .debt-percentage-input,
+html[data-theme="dark"] .debt-payment-preview > div,
+html[data-theme="dark"] .subscription-summary-card,
+html[data-theme="dark"] .subscriptions-toolbar,
+html[data-theme="dark"] .subscriptions-list-card,
+html[data-theme="dark"] .subscription-charges-card {
+  background: #191821;
+}
+
+html[data-theme="dark"] .subscription-insight-panel,
+html[data-theme="dark"] .subscription-renewal-toggle,
+html[data-theme="dark"] .subscription-charge-preview > div,
+html[data-theme="dark"] .reports-toolbar,
+html[data-theme="dark"] .reports-summary-card,
+html[data-theme="dark"] .projection-summary-card,
+html[data-theme="dark"] .report-panel,
+html[data-theme="dark"] .selected-import-file > button:hover,
+html[data-theme="dark"] .import-preview-table tr.duplicate,
+html[data-theme="dark"] .import-preview-footer,
+html[data-theme="dark"] .automation-rule-card.paused,
+html[data-theme="dark"] .auth-page,
+html[data-theme="dark"] .auth-google-button:hover,
+html[data-theme="dark"] .access-summary-card,
+html[data-theme="dark"] .access-panel,
+html[data-theme="dark"] .settings-summary-card,
+html[data-theme="dark"] .settings-navigation,
+html[data-theme="dark"] .settings-panel,
+html[data-theme="dark"] .appearance-preview,
+html[data-theme="dark"] .settings-toggle-row > i::after,
+html[data-theme="dark"] .notification-channel-row > i::after,
+html[data-theme="dark"] .standalone-toggle i::after,
+html[data-theme="dark"] .restore-file-result > span {
+  background: #191821;
+}
+
+html[data-theme="dark"] .summary-card-icon,
+html[data-theme="dark"] .list-icon,
+html[data-theme="dark"] .finance-mobile-menu a.active,
+html[data-theme="dark"] .transaction-summary-icon,
+html[data-theme="dark"] .account-summary-icon,
+html[data-theme="dark"] .account-card-icon.bank,
+html[data-theme="dark"] .commitment-summary-icon,
+html[data-theme="dark"] .goal-summary-icon,
+html[data-theme="dark"] .debt-summary-icon,
+html[data-theme="dark"] .subscription-summary-icon,
+html[data-theme="dark"] .dashboard-user-dropdown nav a:hover,
+html[data-theme="dark"] .dashboard-user-dropdown nav button:hover,
+html[data-theme="dark"] .backend-loading-screen {
+  background: #1e1d26;
+  color: #f5f3f7;
+}
+
+html[data-theme="dark"] .summary-footer,
+html[data-theme="dark"] .list-item,
+html[data-theme="dark"] .account-card-footer,
+html[data-theme="dark"] .invoice-purchase-item,
+html[data-theme="dark"] .installment-item,
+html[data-theme="dark"] .day-agenda-totals .day-agenda-result,
+html[data-theme="dark"] .category-manager-card > footer,
+html[data-theme="dark"] .goal-card-footer,
+html[data-theme="dark"] .debt-card-details,
+html[data-theme="dark"] .subscription-opportunity-list footer,
+html[data-theme="dark"] .data-tool-subheading,
+html[data-theme="dark"] .rule-actions-section,
+html[data-theme="dark"] .dashboard-user-dropdown nav,
+html[data-theme="dark"] .appearance-settings-block,
+html[data-theme="dark"] .settings-toggle-group,
+html[data-theme="dark"] .backup-automatic-section,
+html[data-theme="dark"] .backup-snapshots-section,
+html[data-theme="dark"] .settings-toggle-row + .settings-toggle-row,
+html[data-theme="dark"] .notification-setting-row + .notification-setting-row,
+html[data-theme="dark"] .notification-channel-row + .notification-channel-row,
+html[data-theme="dark"] .active-session-list article + article,
+html[data-theme="dark"] .activity-list article + article,
+html[data-theme="dark"] .backup-snapshot-list article + article {
+  border-top: 1px solid #302e38;
+}
+
+html[data-theme="dark"] .summary-trend.positive,
+html[data-theme="dark"] .transaction-value.income strong,
+html[data-theme="dark"] .transaction-table-value.income,
+html[data-theme="dark"] .account-movement-value strong.income,
+html[data-theme="dark"] .commitment-value-cell.income strong,
+html[data-theme="dark"] .commitment-row-action.income,
+html[data-theme="dark"] .commitment-mobile-action.income,
+html[data-theme="dark"] .day-agenda-completed,
+html[data-theme="dark"] .budget-pace-message.healthy,
+html[data-theme="dark"] .goal-protection-message.healthy,
+html[data-theme="dark"] .goal-movement-amount.deposit strong,
+html[data-theme="dark"] .cash-flow-column > small.positive,
+html[data-theme="dark"] .positive-value,
+html[data-theme="dark"] .cash-flow-highlights small,
+html[data-theme="dark"] .import-preview-table td:last-child.positive {
+  color: #8fd3a6;
+}
+
+html[data-theme="dark"] .summary-trend.warning,
+html[data-theme="dark"] .commitment-attention-box p,
+html[data-theme="dark"] .commitment-attention-box.income p,
+html[data-theme="dark"] .budget-pace-message.warning,
+html[data-theme="dark"] .goal-protection-message.attention,
+html[data-theme="dark"] .payoff-no-savings,
+html[data-theme="dark"] .subscription-price-alert small {
+  color: #e8bd7b;
+}
+
+html[data-theme="dark"] .period-button,
+html[data-theme="dark"] .dialog-close-button,
+html[data-theme="dark"] .invoice-payment-note,
+html[data-theme="dark"] .calendar-filter-selects select,
+html[data-theme="dark"] .budget-month-arrow,
+html[data-theme="dark"] .budget-current-month,
+html[data-theme="dark"] .budget-row-action,
+html[data-theme="dark"] .goal-menu-button,
+html[data-theme="dark"] .debt-menu-button,
+html[data-theme="dark"] .subscription-menu-button {
+  background: #191821;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .chart-grid-lines span {
+  border-top: 1px dashed #302e38;
+}
+
+html[data-theme="dark"] .chart-bar.income,
+html[data-theme="dark"] .chart-legend i.income,
+html[data-theme="dark"] .commitment-summary-card.income-featured,
+html[data-theme="dark"] .receivables-insight-panel .commitment-insight-icon,
+html[data-theme="dark"] .receivables-insight-panel .commitment-insight-total,
+html[data-theme="dark"] .commitment-progress-track.income span,
+html[data-theme="dark"] .receivable-payment-summary > div.featured,
+html[data-theme="dark"] .budget-pace-track.healthy > span,
+html[data-theme="dark"] .goal-card.completed,
+html[data-theme="dark"] .goal-progress-track.completed > span,
+html[data-theme="dark"] .debt-card.paid,
+html[data-theme="dark"] .debt-progress-track.paid span,
+html[data-theme="dark"] .cash-flow-legend i.income,
+html[data-theme="dark"] .cash-flow-bar.income,
+html[data-theme="dark"] .financial-health-item.positive {
+  background: #173022;
+}
+
+html[data-theme="dark"] .chart-bar.expense,
+html[data-theme="dark"] .chart-legend i.expense,
+html[data-theme="dark"] .budget-progress-track.exceeded > span,
+html[data-theme="dark"] .category-tone-selector button.rose span,
+html[data-theme="dark"] .debt-progress-track.overdue span,
+html[data-theme="dark"] .subscription-card.cancelled,
+html[data-theme="dark"] .budget-performance-track > span.exceeded,
+html[data-theme="dark"] .projection-balance-axis > span.negative {
+  background: #351c22;
+}
+
+html[data-theme="dark"] .monthly-symbol.positive,
+html[data-theme="dark"] .transaction-type-icon.income,
+html[data-theme="dark"] .transaction-status.completed,
+html[data-theme="dark"] .account-movement-icon.income,
+html[data-theme="dark"] .invoice-status.paid,
+html[data-theme="dark"] .commitment-row-icon.income,
+html[data-theme="dark"] .commitment-status-badge.paid,
+html[data-theme="dark"] .commitment-status-badge.received,
+html[data-theme="dark"] .commitment-row-action.completed,
+html[data-theme="dark"] .commitment-next-icon.income,
+html[data-theme="dark"] .commitment-mobile-action.completed,
+html[data-theme="dark"] .calendar-status-badge.status-completed,
+html[data-theme="dark"] .budget-status-badge.healthy,
+html[data-theme="dark"] .goal-status-badge.completed,
+html[data-theme="dark"] .debt-status-badge.paid,
+html[data-theme="dark"] .debt-installment.completed,
+html[data-theme="dark"] .subscription-charge-status.paid,
+html[data-theme="dark"] .history-status.completed,
+html[data-theme="dark"] .auth-success-icon,
+html[data-theme="dark"] .auth-success-icon.muted,
+html[data-theme="dark"] .permission-state.allowed,
+html[data-theme="dark"] .activity-status.success {
+  background: #173022;
+  color: #8fd3a6;
+}
+
+html[data-theme="dark"] .transaction-value.expense strong,
+html[data-theme="dark"] .transaction-table-value.expense,
+html[data-theme="dark"] .transaction-form-error,
+html[data-theme="dark"] .transaction-actions-menu button.danger,
+html[data-theme="dark"] .card-purchase-preview .negative strong,
+html[data-theme="dark"] .calendar-summary-card.negative strong,
+html[data-theme="dark"] .budget-category-values .negative strong,
+html[data-theme="dark"] .goal-movement-amount.withdrawal strong,
+html[data-theme="dark"] .subscription-cancel-button,
+html[data-theme="dark"] .subscription-cancelled-label,
+html[data-theme="dark"] .cash-flow-column > small.negative,
+html[data-theme="dark"] .negative-value,
+html[data-theme="dark"] .selected-import-file > button,
+html[data-theme="dark"] .import-preview-table td:last-child.negative,
+html[data-theme="dark"] .import-preview-table td:nth-child(3) small,
+html[data-theme="dark"] .automation-rule-actions button.danger,
+html[data-theme="dark"] .dashboard-user-dropdown nav button,
+html[data-theme="dark"] .member-actions button.danger,
+html[data-theme="dark"] .invitation-actions button.danger,
+html[data-theme="dark"] .password-rule.error,
+html[data-theme="dark"] .danger-data-actions strong,
+html[data-theme="dark"] .danger-data-actions p,
+html[data-theme="dark"] .backend-error-screen {
+  color: #f0a2aa;
+}
+
+html[data-theme="dark"] .placeholder-status,
+html[data-theme="dark"] .account-card-footer button,
+html[data-theme="dark"] .card-summary-icon,
+html[data-theme="dark"] .invoice-purchase-icon,
+html[data-theme="dark"] .installment-card-icon,
+html[data-theme="dark"] .calendar-summary-icon,
+html[data-theme="dark"] .budget-category-icon.graphite,
+html[data-theme="dark"] .goal-monthly-plan-panel > header > span,
+html[data-theme="dark"] .debt-card-icon,
+html[data-theme="dark"] .debt-detail-metric-icon,
+html[data-theme="dark"] .reports-summary-icon,
+html[data-theme="dark"] .projection-summary-icon,
+html[data-theme="dark"] .financial-health-icon,
+html[data-theme="dark"] .account-distribution-icon,
+html[data-theme="dark"] .projection-risk-list > div > span,
+html[data-theme="dark"] .data-tools-summary-icon,
+html[data-theme="dark"] .data-tools-toolbar button:hover,
+html[data-theme="dark"] .data-tool-panel-icon,
+html[data-theme="dark"] .rule-test-results > div > span,
+html[data-theme="dark"] .history-file-icon,
+html[data-theme="dark"] .access-summary-icon,
+html[data-theme="dark"] .access-panel-icon,
+html[data-theme="dark"] .member-avatar,
+html[data-theme="dark"] .role-badge.owner {
+  background: #1e1d26;
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .settings-summary-icon,
+html[data-theme="dark"] .settings-navigation button:hover,
+html[data-theme="dark"] .settings-panel-icon {
+  background: #1e1d26;
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .mobile-header,
+html[data-theme="dark"] .day-agenda-event-icon,
+html[data-theme="dark"] .calendar-agenda-icon {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+html[data-theme="dark"] .primary-action-button,
+html[data-theme="dark"] .invoice-pay-button,
+html[data-theme="dark"] .subscription-charge-button {
+  border: 1px solid #46424f;
+  background: #34313d;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .secondary-action-button,
+html[data-theme="dark"] .account-checkbox-field,
+html[data-theme="dark"] .credit-card-details > button,
+html[data-theme="dark"] .commitment-row-action,
+html[data-theme="dark"] .commitment-mobile-action,
+html[data-theme="dark"] .calendar-month-navigation > button:not(.calendar-today-button),
+html[data-theme="dark"] .calendar-today-button,
+html[data-theme="dark"] .goal-filter-field select,
+html[data-theme="dark"] .subscription-filter-field select {
+  background: #191821;
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .transaction-summary-card.featured,
+html[data-theme="dark"] .commitment-summary-card.featured,
+html[data-theme="dark"] .calendar-summary-card.featured,
+html[data-theme="dark"] .budget-summary-card.featured,
+html[data-theme="dark"] .goal-summary-card.featured,
+html[data-theme="dark"] .debt-summary-card.featured,
+html[data-theme="dark"] .subscription-summary-card.featured,
+html[data-theme="dark"] .reports-summary-card.featured,
+html[data-theme="dark"] .projection-summary-card.featured,
+html[data-theme="dark"] .access-summary-card.featured,
+html[data-theme="dark"] .settings-summary-card.featured {
+  border-color: #46424f;
+  background: #0c0b11;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .pending-count,
+html[data-theme="dark"] .transaction-status.pending,
+html[data-theme="dark"] .commitment-status-badge.pending,
+html[data-theme="dark"] .commitment-attention-box,
+html[data-theme="dark"] .commitment-attention-box.income,
+html[data-theme="dark"] .budget-attention-count,
+html[data-theme="dark"] .budget-status-badge.attention,
+html[data-theme="dark"] .goal-status-badge.attention,
+html[data-theme="dark"] .subscription-charge-status.scheduled,
+html[data-theme="dark"] .report-status.attention,
+html[data-theme="dark"] .import-row-status.review,
+html[data-theme="dark"] .invitation-status.pending,
+html[data-theme="dark"] .activity-type-icon.attention,
+html[data-theme="dark"] .activity-status.attention {
+  background: #352718;
+  color: #e8bd7b;
+}
+
+html[data-theme="dark"] .transaction-summary-card > small,
+html[data-theme="dark"] .account-summary-card > small,
+html[data-theme="dark"] .commitment-summary-card > small,
+html[data-theme="dark"] .budget-summary-card > small,
+html[data-theme="dark"] .goal-summary-card > small,
+html[data-theme="dark"] .debt-summary-card > small,
+html[data-theme="dark"] .subscription-summary-card > small {
+  border-top: 1px solid #302e38;
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .transactions-search,
+html[data-theme="dark"] .transactions-table th,
+html[data-theme="dark"] .accounts-search,
+html[data-theme="dark"] .commitment-table th,
+html[data-theme="dark"] .calendar-day-cell.outside-month,
+html[data-theme="dark"] .debt-payments-table th,
+html[data-theme="dark"] .auth-divider span {
+  background: #191821;
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .transactions-filter-selects select:focus,
+html[data-theme="dark"] .form-field input:focus,
+html[data-theme="dark"] .form-field select:focus,
+html[data-theme="dark"] .form-field textarea:focus,
+html[data-theme="dark"] .currency-input:focus-within,
+html[data-theme="dark"] .commitment-filter-selects select:focus,
+html[data-theme="dark"] .category-tone-selector button.active,
+html[data-theme="dark"] .goal-card.selected,
+html[data-theme="dark"] .debt-filter-field select:focus,
+html[data-theme="dark"] .debt-percentage-input:focus-within,
+html[data-theme="dark"] .subscription-card:hover,
+html[data-theme="dark"] .subscription-card.selected,
+html[data-theme="dark"] .column-mapping-grid select:focus,
+html[data-theme="dark"] .import-preview-table input:focus,
+html[data-theme="dark"] .import-preview-table select:focus,
+html[data-theme="dark"] .export-form-grid input:focus,
+html[data-theme="dark"] .export-form-grid select:focus,
+html[data-theme="dark"] .auth-input-wrap:focus-within {
+  border-color: #3b3844;
+}
+
+html[data-theme="dark"] .transactions-table td,
+html[data-theme="dark"] .commitment-table td,
+html[data-theme="dark"] .debt-payments-table td,
+html[data-theme="dark"] .subscription-charges-table td,
+html[data-theme="dark"] .projection-table td,
+html[data-theme="dark"] .import-history-table td,
+html[data-theme="dark"] .members-table td {
+  border-bottom: 1px solid #302e38;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .transaction-type-icon.expense,
+html[data-theme="dark"] .transaction-status.overdue,
+html[data-theme="dark"] .account-movement-icon.expense,
+html[data-theme="dark"] .commitment-status-badge.overdue,
+html[data-theme="dark"] .calendar-status-badge.status-overdue,
+html[data-theme="dark"] .debt-status-badge.overdue,
+html[data-theme="dark"] .debt-installment.overdue,
+html[data-theme="dark"] .subscription-status-badge.cancelled,
+html[data-theme="dark"] .subscription-due-badge.overdue,
+html[data-theme="dark"] .subscription-upcoming-date.overdue,
+html[data-theme="dark"] .subscription-charge-status.overdue,
+html[data-theme="dark"] .data-tools-error,
+html[data-theme="dark"] .auth-form-error,
+html[data-theme="dark"] .settings-panel-icon.danger,
+html[data-theme="dark"] .activity-type-icon.blocked,
+html[data-theme="dark"] .activity-status.blocked,
+html[data-theme="dark"] .backup-status.failed,
+html[data-theme="dark"] .financial-data-load-error button {
+  background: #351c22;
+  color: #f0a2aa;
+}
+
+html[data-theme="dark"] .transaction-type-icon.transfer,
+html[data-theme="dark"] .account-movement-icon.transfer,
+html[data-theme="dark"] .commitment-status-badge.partial,
+html[data-theme="dark"] .budget-category-icon.violet,
+html[data-theme="dark"] .budget-category-icon.blue,
+html[data-theme="dark"] .goal-icon.tone-violet,
+html[data-theme="dark"] .goal-icon.tone-blue,
+html[data-theme="dark"] .subscription-card-icon.streaming,
+html[data-theme="dark"] .subscription-mini-icon.streaming,
+html[data-theme="dark"] .subscription-card-icon.software,
+html[data-theme="dark"] .subscription-mini-icon.software,
+html[data-theme="dark"] .role-badge.editor,
+html[data-theme="dark"] .backup-file-copy span.automatic,
+html[data-theme="dark"] .backup-status.processing {
+  background: #1e1d26;
+  color: #91c2ed;
+}
+
+html[data-theme="dark"] .transaction-table-value.transfer {
+  color: #91c2ed;
+}
+
+html[data-theme="dark"] .transactions-empty-icon span,
+html[data-theme="dark"] .card-style-options .stone i,
+html[data-theme="dark"] .budget-empty-state .transactions-empty-icon i,
+html[data-theme="dark"] .category-tone-selector button.violet span,
+html[data-theme="dark"] .goal-coverage-track > span,
+html[data-theme="dark"] .goal-progress-track.paused > span,
+html[data-theme="dark"] .tone-3,
+html[data-theme="dark"] .tone-4 {
+  background: #2c2935;
+}
+
+html[data-theme="dark"] .transaction-mobile-meta {
+  border-top: 1px solid #302e38;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .accounts-filter-tabs button b,
+html[data-theme="dark"] .invoice-status,
+html[data-theme="dark"] .automation-rule-card.paused .automation-rule-icon {
+  background: #25232d;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .account-card:hover,
+html[data-theme="dark"] .credit-card-item:hover,
+html[data-theme="dark"] .credit-card-item.selected,
+html[data-theme="dark"] .goal-card:hover,
+html[data-theme="dark"] .debt-card:hover {
+  border-color: #302e38;
+}
+
+html[data-theme="dark"] .account-card.selected,
+html[data-theme="dark"] .debt-card.selected,
+html[data-theme="dark"] .workspace-access-card.selected,
+html[data-theme="dark"] .appearance-options button.active {
+  border-color: #46424f;
+}
+
+html[data-theme="dark"] .account-card-icon.wallet,
+html[data-theme="dark"] .invoice-status.open,
+html[data-theme="dark"] .budget-category-icon.sand,
+html[data-theme="dark"] .goal-icon.tone-sand,
+html[data-theme="dark"] .goal-priority-badge.medium,
+html[data-theme="dark"] .debt-card-icon.financing,
+html[data-theme="dark"] .debt-status-badge.renegotiated,
+html[data-theme="dark"] .debt-priority-badge.medium,
+html[data-theme="dark"] .subscription-summary-alert,
+html[data-theme="dark"] .subscription-card-icon.education,
+html[data-theme="dark"] .subscription-mini-icon.education,
+html[data-theme="dark"] .subscription-status-badge.paused,
+html[data-theme="dark"] .role-badge.viewer {
+  background: #1e1d26;
+  color: #e8bd7b;
+}
+
+html[data-theme="dark"] .account-card-icon.reserve,
+html[data-theme="dark"] .budget-category-icon.sage,
+html[data-theme="dark"] .category-active-badge.active,
+html[data-theme="dark"] .goal-status-badge.on-track,
+html[data-theme="dark"] .goal-movement-icon.deposit,
+html[data-theme="dark"] .debt-card-icon.family-debt,
+html[data-theme="dark"] .debt-status-badge.active,
+html[data-theme="dark"] .subscription-card-icon.health,
+html[data-theme="dark"] .subscription-mini-icon.health,
+html[data-theme="dark"] .subscription-card-icon.insurance,
+html[data-theme="dark"] .subscription-mini-icon.insurance,
+html[data-theme="dark"] .subscription-status-badge.active,
+html[data-theme="dark"] .import-row-status.ready,
+html[data-theme="dark"] .automation-rule-title-row span.active,
+html[data-theme="dark"] .workspace-selected-badge,
+html[data-theme="dark"] .invitation-status.accepted,
+html[data-theme="dark"] .current-session-badge,
+html[data-theme="dark"] .backup-status.available {
+  background: #1e1d26;
+  color: #8fd3a6;
+}
+
+html[data-theme="dark"] .account-primary-badge,
+html[data-theme="dark"] .accounts-empty-state > span,
+html[data-theme="dark"] .credit-card-detail-heading span,
+html[data-theme="dark"] .cards-empty-state > span,
+html[data-theme="dark"] .invoice-empty-state > span,
+html[data-theme="dark"] .installments-empty-state > span,
+html[data-theme="dark"] .commitment-empty-icon,
+html[data-theme="dark"] .category-active-badge.inactive,
+html[data-theme="dark"] .goal-icon.tone-sage,
+html[data-theme="dark"] .goal-kind-badge.goal,
+html[data-theme="dark"] .goal-priority-badge.low,
+html[data-theme="dark"] .goal-status-badge.paused,
+html[data-theme="dark"] .debt-priority-badge.low,
+html[data-theme="dark"] .debts-empty-state > span,
+html[data-theme="dark"] .debt-panel-empty > span,
+html[data-theme="dark"] .debt-notes,
+html[data-theme="dark"] .debt-strategy-list button > span,
+html[data-theme="dark"] .subscription-card-icon.utilities,
+html[data-theme="dark"] .subscription-mini-icon.utilities,
+html[data-theme="dark"] .subscription-upcoming-date,
+html[data-theme="dark"] .subscriptions-empty-state > span,
+html[data-theme="dark"] .subscription-charge-status.skipped,
+html[data-theme="dark"] .category-rank,
+html[data-theme="dark"] .report-status {
+  background: #1e1d26;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .export-period-note,
+html[data-theme="dark"] .automation-rule-title-row span.paused,
+html[data-theme="dark"] .read-only-button,
+html[data-theme="dark"] .dashboard-user-demo,
+html[data-theme="dark"] .invitation-email-icon,
+html[data-theme="dark"] .invitation-status.expired,
+html[data-theme="dark"] .settings-inline-note,
+html[data-theme="dark"] .security-toggle-icon,
+html[data-theme="dark"] .session-device-icon,
+html[data-theme="dark"] .activity-type-icon,
+html[data-theme="dark"] .backup-file-icon,
+html[data-theme="dark"] .backup-file-copy span.manual {
+  background: #1e1d26;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .account-movement-item,
+html[data-theme="dark"] .invoice-purchases-heading,
+html[data-theme="dark"] .budget-category-row,
+html[data-theme="dark"] .goal-movement-row,
+html[data-theme="dark"] .subscription-upcoming-list > div,
+html[data-theme="dark"] .cash-flow-bars,
+html[data-theme="dark"] .category-report-row,
+html[data-theme="dark"] .budget-performance-row,
+html[data-theme="dark"] .account-distribution-row,
+html[data-theme="dark"] .projection-balance-axis,
+html[data-theme="dark"] .projection-commitment-row,
+html[data-theme="dark"] .data-tool-panel-header,
+html[data-theme="dark"] .import-preview-actions,
+html[data-theme="dark"] .import-preview-table td,
+html[data-theme="dark"] .export-preview-details > div,
+html[data-theme="dark"] .invitation-details > div,
+html[data-theme="dark"] .access-panel-header,
+html[data-theme="dark"] .permission-table td,
+html[data-theme="dark"] .settings-panel-header,
+html[data-theme="dark"] .notification-group-card > header,
+html[data-theme="dark"] .activity-filters {
+  border-bottom: 1px solid #302e38;
+}
+
+html[data-theme="dark"] .accounts-distribution-track span,
+html[data-theme="dark"] .credit-card-limit-track span,
+html[data-theme="dark"] .installment-progress-track span,
+html[data-theme="dark"] .commitment-progress-track span,
+html[data-theme="dark"] .budget-progress-track > span,
+html[data-theme="dark"] .budget-pace-track > span,
+html[data-theme="dark"] .budget-allocation-track > span,
+html[data-theme="dark"] .category-tone-selector button.graphite span,
+html[data-theme="dark"] .category-tone-selector button.sage span,
+html[data-theme="dark"] .goal-progress-track > span,
+html[data-theme="dark"] .goal-plan-track > span,
+html[data-theme="dark"] .goal-progress-track.on-track > span,
+html[data-theme="dark"] .debt-progress-track span,
+html[data-theme="dark"] .category-report-track > span,
+html[data-theme="dark"] .budget-performance-track > span,
+html[data-theme="dark"] .projection-balance-axis > span,
+html[data-theme="dark"] .projection-commitment-dot,
+html[data-theme="dark"] .tone-1,
+html[data-theme="dark"] .tone-2,
+html[data-theme="dark"] .backend-loading-dot {
+  background: #d9d5df;
+}
+
+html[data-theme="dark"] .credit-card-item,
+html[data-theme="dark"] .debt-card,
+html[data-theme="dark"] .subscription-card,
+html[data-theme="dark"] .reports-view-tabs,
+html[data-theme="dark"] .data-tools-summary-card,
+html[data-theme="dark"] .data-tools-toolbar,
+html[data-theme="dark"] .data-tool-panel,
+html[data-theme="dark"] .export-preview-file,
+html[data-theme="dark"] .workspace-switcher-menu,
+html[data-theme="dark"] .dashboard-user-dropdown,
+html[data-theme="dark"] .invitation-details,
+html[data-theme="dark"] .workspace-access-card,
+html[data-theme="dark"] .phase-thirteen-mobile-menu .workspace-switcher-trigger {
+  border: 1px solid #302e38;
+  background: #191821;
+}
+
+html[data-theme="dark"] .credit-card-visual.graphite {
+  background: linear-gradient(145deg, #111018 0%, #111018 100%);
+}
+
+html[data-theme="dark"] .credit-card-visual.stone {
+  background: linear-gradient(145deg, #25232d 0%, #2c2935 100%);
+  color: #f5f3f7;
+}
+
+html[data-theme="dark"] .credit-card-visual.plum {
+  background: linear-gradient(145deg, #111018 0%, #2b2038 100%);
+}
+
+html[data-theme="dark"] .invoice-pay-button.paid,
+html[data-theme="dark"] .invoice-pay-button:disabled {
+  border-color: #315940;
+  background: #173022;
+  color: #8fd3a6;
+}
+
+html[data-theme="dark"] .installment-item-footer span,
+html[data-theme="dark"] .day-agenda-empty > span,
+html[data-theme="dark"] .debt-installment,
+html[data-theme="dark"] .workspace-access-card > button:disabled,
+html[data-theme="dark"] .permission-state.denied,
+html[data-theme="dark"] .settings-field select:disabled,
+html[data-theme="dark"] .notification-inline-control select:disabled,
+html[data-theme="dark"] .notification-inline-control input:disabled {
+  background: #1e1d26;
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .card-style-options .graphite i,
+html[data-theme="dark"] .calendar-projection-progress span,
+html[data-theme="dark"] .subscription-breakdown-track i,
+html[data-theme="dark"] .appearance-preview.dark,
+html[data-theme="dark"] .appearance-preview.dark::before,
+html[data-theme="dark"] .appearance-preview.dark i {
+  background: #111018;
+}
+
+html[data-theme="dark"] .card-style-options .plum i {
+  background: #2b2038;
+}
+
+html[data-theme="dark"] .invoice-payment-amount,
+html[data-theme="dark"] .commitment-insight-total,
+html[data-theme="dark"] .commitment-payment-summary > div.featured,
+html[data-theme="dark"] .calendar-projection-result,
+html[data-theme="dark"] .debt-detail-balance,
+html[data-theme="dark"] .financial-recommendations,
+html[data-theme="dark"] .auth-showcase {
+  background: #0c0b11;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .installment-item:nth-child(2) {
+  border-left: 1px solid #302e38;
+  border-top: 1px solid #302e38;
+}
+
+html[data-theme="dark"] .commitment-alert-badge,
+html[data-theme="dark"] .commitment-row-icon,
+html[data-theme="dark"] .commitment-next-icon,
+html[data-theme="dark"] .budget-category-icon.rose,
+html[data-theme="dark"] .budget-status-badge.exceeded,
+html[data-theme="dark"] .goal-icon.tone-rose,
+html[data-theme="dark"] .goal-priority-badge.high,
+html[data-theme="dark"] .goal-movement-icon.withdrawal,
+html[data-theme="dark"] .debt-summary-alert,
+html[data-theme="dark"] .debt-card-icon.credit-card-installment,
+html[data-theme="dark"] .debt-card-icon.overdraft,
+html[data-theme="dark"] .debt-priority-badge.high,
+html[data-theme="dark"] .subscription-card-icon.membership,
+html[data-theme="dark"] .subscription-mini-icon.membership {
+  background: #1e1d26;
+  color: #f0a2aa;
+}
+
+html[data-theme="dark"] .commitment-row-action:hover:not(:disabled) {
+  border-color: #3b3844;
+  background: #191821;
+}
+
+html[data-theme="dark"] .positive {
+  color: #8fd3a6 !important;
+}
+
+html[data-theme="dark"] .negative {
+  color: #f0a2aa !important;
+}
+
+html[data-theme="dark"] .calendar-status-badge.status-scheduled {
+  background: rgba(255, 255, 255, 0.07);
+  color: #e8bd7b;
+}
+
+html[data-theme="dark"] .day-agenda-event > button {
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.07);
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .calendar-agenda-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  background: #191821;
+}
+
+html[data-theme="dark"] .budget-insight-panel,
+html[data-theme="dark"] .subscription-selected-panel {
+  background: #0c0b11;
+  border-color: #46424f;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .budget-progress-track.attention > span,
+html[data-theme="dark"] .budget-pace-track.warning > span,
+html[data-theme="dark"] .category-tone-selector button.sand span,
+html[data-theme="dark"] .goal-progress-track.attention > span,
+html[data-theme="dark"] .budget-performance-track > span.attention,
+html[data-theme="dark"] .import-preview-table tr.review {
+  background: #352718;
+}
+
+html[data-theme="dark"] .category-tone-selector button.blue span {
+  background: #172a39;
+}
+
+html[data-theme="dark"] .goal-emergency-panel {
+  background: #111018;
+  border-color: #46424f;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .goal-icon.tone-graphite,
+html[data-theme="dark"] .goal-kind-badge.reserve {
+  background: #25232d;
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .debt-summary-card.alert {
+  background: #191821;
+  border-color: #302e38;
+}
+
+html[data-theme="dark"] .debt-payment-total {
+  color: #f5f3f7 !important;
+}
+
+html[data-theme="dark"] .subscription-summary-card.alert,
+html[data-theme="dark"] .reports-summary-card.alert,
+html[data-theme="dark"] .projection-summary-card.alert,
+html[data-theme="dark"] .financial-health-item.critical,
+html[data-theme="dark"] .projection-risk-list > div.critical,
+html[data-theme="dark"] .restore-file-result.valid,
+html[data-theme="dark"] .restore-file-result.invalid {
+  border-color: #302e38;
+  background: #191821;
+}
+
+html[data-theme="dark"] .subscription-card-icon,
+html[data-theme="dark"] .subscription-mini-icon {
+  color: #d7d2dc;
+  background: #1e1d26;
+}
+
+html[data-theme="dark"] .subscription-status-badge.trial,
+html[data-theme="dark"] .subscription-due-badge.trial {
+  background: #1e1d26;
+  color: #c5a6ec;
+}
+
+html[data-theme="dark"] .subscription-card-value-row {
+  border-top: 1px solid #302e38;
+  border-bottom: 1px solid #302e38;
+}
+
+html[data-theme="dark"] .subscription-price-alert {
+  border: 1px solid #302e38;
+  background: #191821;
+  color: #e8bd7b;
+}
+
+html[data-theme="dark"] .subscription-charges-table th,
+html[data-theme="dark"] .projection-table th {
+  border-bottom: 1px solid #302e38;
+  color: #9c97a4;
+  background: #191821;
+}
+
+html[data-theme="dark"] .reports-control-field select,
+html[data-theme="dark"] .column-mapping-grid select,
+html[data-theme="dark"] .import-preview-table input,
+html[data-theme="dark"] .import-preview-table select,
+html[data-theme="dark"] .export-form-grid input,
+html[data-theme="dark"] .export-form-grid select,
+html[data-theme="dark"] .auth-google-button {
+  border: 1px solid #302e38;
+  background: #191821;
+  color: #d7d2dc;
+}
+
+html[data-theme="dark"] .reports-period-caption {
+  border-left: 3px solid #46424f;
+  background: #191821;
+}
+
+html[data-theme="dark"] .cash-flow-legend i,
+html[data-theme="dark"] .cash-flow-bar,
+html[data-theme="dark"] .tone-5,
+html[data-theme="dark"] .appearance-preview::before,
+html[data-theme="dark"] .settings-toggle-row > i,
+html[data-theme="dark"] .notification-channel-row > i,
+html[data-theme="dark"] .standalone-toggle i {
+  background: #25232d;
+}
+
+html[data-theme="dark"] .financial-health-item,
+html[data-theme="dark"] .projection-risk-list > div,
+html[data-theme="dark"] .selected-import-file,
+html[data-theme="dark"] .automation-rule-card,
+html[data-theme="dark"] .rule-test-results > div,
+html[data-theme="dark"] .auth-input-wrap,
+html[data-theme="dark"] .access-search-field,
+html[data-theme="dark"] .invitation-access-list article,
+html[data-theme="dark"] .notification-setting-list,
+html[data-theme="dark"] .notification-group-card,
+html[data-theme="dark"] .security-toggle-row,
+html[data-theme="dark"] .settings-search-field,
+html[data-theme="dark"] .restore-file-result {
+  border: 1px solid #302e38;
+}
+
+html[data-theme="dark"] .financial-health-item.attention {
+  border-color: #604a2a;
+  background: #352718;
+}
+
+html[data-theme="dark"] .report-status.exceeded,
+html[data-theme="dark"] .projection-risk-list > div.critical > span,
+html[data-theme="dark"] .import-row-status.duplicate {
+  background: #191821;
+  color: #f0a2aa;
+}
+
+html[data-theme="dark"] .data-tools-summary-card.featured {
+  background: #0c0b11;
+  border-color: #46424f;
+}
+
+html[data-theme="dark"] .data-tools-toolbar button.active {
+  background: #34313d;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .file-drop-zone {
+  border: 1px dashed #302e38;
+  background: #191821;
+}
+
+html[data-theme="dark"] .file-drop-zone.dragging {
+  border-color: #46424f;
+  background: #1e1d26;
+}
+
+html[data-theme="dark"] .import-privacy-note {
+  border-top: 1px solid #302e38;
+  background: #191821;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .import-preview-actions button,
+html[data-theme="dark"] .automation-rule-actions button,
+html[data-theme="dark"] .workspace-access-card > button,
+html[data-theme="dark"] .member-actions button,
+html[data-theme="dark"] .invitation-actions button,
+html[data-theme="dark"] .access-role-selector button,
+html[data-theme="dark"] .appearance-options button,
+html[data-theme="dark"] .active-session-list article > button,
+html[data-theme="dark"] .backup-actions button {
+  border: 1px solid #302e38;
+  background: #191821;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .import-preview-table th,
+html[data-theme="dark"] .import-history-table th,
+html[data-theme="dark"] .members-table th,
+html[data-theme="dark"] .permission-table th {
+  border-bottom: 1px solid #302e38;
+  background: #191821;
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .export-checkbox-field,
+html[data-theme="dark"] .rule-active-field {
+  border: 1px solid #302e38;
+  color: #b9b4c0;
+}
+
+html[data-theme="dark"] .history-status.partial {
+  background: #191821;
+  color: #e8bd7b;
+}
+
+html[data-theme="dark"] .workspace-access-card > button:hover:not(:disabled),
+html[data-theme="dark"] .backup-actions button:hover {
+  border-color: #46424f;
+  background: #34313d;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .access-overview-panel {
+  border-color: #46424f;
+  background: #111018;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .access-empty-state {
+  border: 1px dashed #302e38;
+  color: #9c97a4;
+}
+
+html[data-theme="dark"] .access-role-selector button.active {
+  border-color: #46424f;
+  background: #191821;
+}
+
+html[data-theme="dark"] .settings-field input,
+html[data-theme="dark"] .settings-field select,
+html[data-theme="dark"] .activity-filters select,
+html[data-theme="dark"] .notification-inline-control select,
+html[data-theme="dark"] .notification-inline-control input,
+html[data-theme="dark"] .delete-account-action input,
+html[data-theme="dark"] .danger-data-actions article > button {
+  border: 1px solid #60323a;
+  background: #351c22;
+  color: #f0a2aa;
+}
+
+html[data-theme="dark"] .settings-field input:focus,
+html[data-theme="dark"] .settings-field select:focus,
+html[data-theme="dark"] .activity-filters select:focus,
+html[data-theme="dark"] .notification-inline-control select:focus,
+html[data-theme="dark"] .notification-inline-control input:focus,
+html[data-theme="dark"] .delete-account-action input:focus {
+  border-color: #60323a;
+}
+
+html[data-theme="dark"] .appearance-preview.system {
+  background: linear-gradient(135deg, #191821 0 50%, #111018 50% 100%);
+}
+
+html[data-theme="dark"] .settings-toggle-row input:checked + i,
+html[data-theme="dark"] .notification-channel-row > input:checked + i,
+html[data-theme="dark"] .standalone-toggle input:checked + i {
+  background: #34313d;
+}
+
+html[data-theme="dark"] .danger-data-actions article + article {
+  border-top: 1px solid #60323a;
+}
+
+html[data-theme="dark"] .delete-account-action button {
+  color: #f0a2aa !important;
+  border-color: #60323a !important;
+}
+
+html[data-theme="dark"] .backend-inline-loading {
+  border: 1px solid var(--border-color, #302e38);
+  background: var(--surface-color, #191821);
+}
+
+html[data-theme="dark"] .local-reset-token {
+  border: 1px solid #302e38;
+  background: #1e1d26;
+}
+
+html[data-theme="dark"] .database-sync-status {
+  border: 1px solid var(--border-color, #60323a);
+  background: var(--surface-color, #351c22);
+  color: var(--text-primary, #f0a2aa);
+}
+
+html[data-theme="dark"] .database-sync-error {
+  border: 1px solid var(--border-color, #60323a);
+  background: #351c22;
+  color: #f0a2aa;
+  border-color: #60323a;
+}
+
+html[data-theme="dark"] .overview-empty-state {
+  color: var(--muted-foreground, #b9b4c0);
+}
+
+html[data-theme="dark"] .financial-data-loading,
+html[data-theme="dark"] .financial-data-load-error {
+  color: var(--muted, #f0a2aa);
+}
+
+html[data-theme="dark"] .financial-data-load-error strong {
+  color: var(--foreground, #f0a2aa);
+}
+
+
+/* Contrastes funcionais deliberados para gráficos, ações e superfícies inversas. */
+html[data-theme="dark"] :where(
+  .chart-bar.income,
+  .chart-legend i.income,
+  .cash-flow-bar.income,
+  .cash-flow-legend i.income,
+  .projection-chart-bar.positive,
+  .projection-balance-axis > span,
+  .dark-progress span
+) {
+  background: #e3dfe7;
+}
+
+html[data-theme="dark"] :where(
+  .chart-bar.expense,
+  .chart-legend i.expense,
+  .cash-flow-bar.expense,
+  .cash-flow-legend i.expense
+) {
+  background: #625e6b;
+}
+
+html[data-theme="dark"] :where(
+  .available-balance-card,
+  .monthly-panel,
+  .transaction-summary-card.featured,
+  .cards-limit-card,
+  .commitment-summary-card.featured,
+  .calendar-summary-card.featured,
+  .budget-summary-card.featured,
+  .goal-summary-card.featured,
+  .debt-summary-card.featured,
+  .subscription-summary-card.featured,
+  .reports-summary-card.featured,
+  .projection-summary-card.featured,
+  .access-summary-card.featured,
+  .settings-summary-card.featured,
+  .profile-identity-card,
+  .auth-showcase
+) {
+  background: #0b0a10;
+  border-color: #302e38;
+}
+
+html[data-theme="dark"] :where(
+  .new-entry-button,
+  .mobile-entry-button,
+  .primary-action-button,
+  .auth-submit-button,
+  a.auth-submit-button,
+  .invoice-pay-button,
+  .debt-pay-button,
+  .monthly-insight button
+) {
+  background: #34313d;
+  border-color: #46424f;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] :where(
+  .transaction-dialog-backdrop,
+  .access-dialog-backdrop,
+  .restore-backup-backdrop
+) {
+  background: rgb(5 4 8 / 72%);
+}
+
+html[data-theme="dark"] :where(
+  .chart-grid-lines span,
+  .cash-flow-grid-lines span,
+  .projection-chart-grid span
+) {
+  border-color: #302e38;
+}
+
+html[data-theme="dark"] :where(svg) {
+  color: inherit;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .app-shell,
+html[data-theme="dark"] .workspace,
+html[data-theme="dark"] .page-content,
+html[data-theme="dark"] .finance-page-content {
+  background: #0f0e15;
+  color: #f5f3f7;
+}
+
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .mobile-header,
+html[data-theme="dark"] .footer {
+  background: #15141c;
+  border-color: #2f2c37;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+

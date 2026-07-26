@@ -10,8 +10,12 @@ import { TransactionsHeading } from "@/components/lancamentos/transactions-headi
 import { TransactionsList } from "@/components/lancamentos/transactions-list";
 import { TransactionsSummary } from "@/components/lancamentos/transactions-summary";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { transactionsContent } from "@/content/lancamentos";
 import { transactionsData } from "@/data/lancamentos";
+import { initialAccounts } from "@/data/contas";
+import { getReferenceDate, getReferenceMonth } from "@/lib/reference-date";
+import type { FinancialAccount } from "@/types/contas";
 import type {
   FinancialTransaction,
   NewTransactionInput,
@@ -27,7 +31,8 @@ const defaultFilters: TransactionsFilterState = {
 
 export default function LancamentosView() {
   const [transactions, setTransactions] =
-    useState<FinancialTransaction[]>(transactionsData);
+    useFinanceDataState<FinancialTransaction[]>("transactions", transactionsData);
+  const [financialAccounts] = useFinanceDataState<FinancialAccount[]>("accounts", initialAccounts);
   const [filters, setFilters] = useState(defaultFilters);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
@@ -41,7 +46,7 @@ export default function LancamentosView() {
 
   const summary = useMemo(() => {
     const currentMonthTransactions = transactions.filter((transaction) =>
-      transaction.date.startsWith("2026-07"),
+      transaction.date.startsWith(getReferenceMonth()),
     );
     const completed = currentMonthTransactions.filter(
       (transaction) => transaction.status === "completed",
@@ -68,24 +73,26 @@ export default function LancamentosView() {
     };
   }, [transactions]);
 
-  const accounts = useMemo(
-    () =>
-      Array.from(
-        new Set(
-          transactions.flatMap((transaction) => [
-            transaction.account,
-            ...(transaction.destinationAccount
-              ? [transaction.destinationAccount]
-              : []),
-          ]),
-        ),
-      ).sort((a, b) => a.localeCompare(b, "pt-BR")),
-    [transactions],
+  const accountOptions = useMemo(
+    () => financialAccounts.map((account) => account.name),
+    [financialAccounts],
+  );
+  const filterAccounts = useMemo(
+    () => Array.from(new Set([
+      ...accountOptions,
+      ...transactions.flatMap((transaction) => [
+        transaction.account,
+        ...(transaction.destinationAccount ? [transaction.destinationAccount] : []),
+      ]),
+    ])).sort((a, b) => a.localeCompare(b, "pt-BR")),
+    [accountOptions, transactions],
   );
 
   const filteredTransactions = useMemo(() => {
     const normalizedQuery = filters.query.trim().toLocaleLowerCase("pt-BR");
-    const lastThirtyDaysStart = "2026-06-25";
+    const referenceDate = new Date(`${getReferenceDate()}T12:00:00-03:00`);
+    referenceDate.setDate(referenceDate.getDate() - 30);
+    const lastThirtyDaysStart = getReferenceDate(referenceDate);
 
     return transactions
       .filter((transaction) => {
@@ -122,7 +129,7 @@ export default function LancamentosView() {
 
         if (
           filters.period === "current-month" &&
-          !transaction.date.startsWith("2026-07")
+          !transaction.date.startsWith(getReferenceMonth())
         ) {
           return false;
         }
@@ -223,7 +230,7 @@ export default function LancamentosView() {
       <TransactionsSummary values={summary} />
       <TransactionsFilters
         filters={filters}
-        accounts={accounts}
+        accounts={filterAccounts}
         onChange={setFilters}
         onClear={() => setFilters(defaultFilters)}
       />
@@ -236,6 +243,7 @@ export default function LancamentosView() {
       <NewTransactionDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
+        accounts={accountOptions}
         onCreate={createTransaction}
       />
 

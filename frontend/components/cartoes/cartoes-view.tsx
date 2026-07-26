@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CardsHeading } from "@/components/cartoes/cards-heading";
 import { CardsSummary } from "@/components/cartoes/cards-summary";
 import { CreditCardsSection } from "@/components/cartoes/credit-cards-section";
@@ -10,6 +10,7 @@ import { NewCardDialog } from "@/components/cartoes/new-card-dialog";
 import { NewPurchaseDialog } from "@/components/cartoes/new-purchase-dialog";
 import { PayInvoiceDialog } from "@/components/cartoes/pay-invoice-dialog";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { cardsContent } from "@/content/cartoes";
 import { initialAccounts } from "@/data/contas";
 import {
@@ -71,20 +72,32 @@ function findFirstOpenInvoice(invoices: CardInvoice[], cardId: string): CardInvo
 }
 
 export default function CartoesView() {
-  const [cards, setCards] = useState<CreditCard[]>(initialCreditCards);
-  const [invoices, setInvoices] = useState<CardInvoice[]>(initialCardInvoices);
-  const [purchases, setPurchases] = useState<CardPurchase[]>(initialCardPurchases);
-  const [installmentPlans, setInstallmentPlans] = useState<InstallmentPlan[]>(
+  const [accounts] = useFinanceDataState("accounts", initialAccounts);
+  const [cards, setCards] = useFinanceDataState<CreditCard[]>("credit-cards", initialCreditCards);
+  const [invoices, setInvoices] = useFinanceDataState<CardInvoice[]>("card-invoices", initialCardInvoices);
+  const [purchases, setPurchases] = useFinanceDataState<CardPurchase[]>("card-purchases", initialCardPurchases);
+  const [installmentPlans, setInstallmentPlans] = useFinanceDataState<InstallmentPlan[]>(
+    "installment-plans",
     initialInstallmentPlans,
   );
-  const [selectedCardId, setSelectedCardId] = useState(initialCreditCards[0]?.id ?? "");
-  const [selectedInvoiceId, setSelectedInvoiceId] = useState(
-    findFirstOpenInvoice(initialCardInvoices, initialCreditCards[0]?.id ?? "")?.id ?? "",
-  );
+  const [selectedCardId, setSelectedCardId] = useState("");
+  const [selectedInvoiceId, setSelectedInvoiceId] = useState("");
   const [newCardOpen, setNewCardOpen] = useState(false);
   const [newPurchaseOpen, setNewPurchaseOpen] = useState(false);
   const [paymentInvoiceId, setPaymentInvoiceId] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
+
+  useEffect(() => {
+    const nextCardId = cards.some((card) => card.id === selectedCardId)
+      ? selectedCardId
+      : cards[0]?.id ?? "";
+    if (nextCardId !== selectedCardId) setSelectedCardId(nextCardId);
+
+    const cardInvoices = invoices.filter((invoice) => invoice.cardId === nextCardId);
+    if (!cardInvoices.some((invoice) => invoice.id === selectedInvoiceId)) {
+      setSelectedInvoiceId(findFirstOpenInvoice(invoices, nextCardId)?.id ?? cardInvoices[0]?.id ?? "");
+    }
+  }, [cards, invoices, selectedCardId, selectedInvoiceId]);
 
   const selectedCard = cards.find((card) => card.id === selectedCardId);
   const selectedInvoice = invoices.find((invoice) => invoice.id === paymentInvoiceId);
@@ -312,7 +325,7 @@ export default function CartoesView() {
 
       <NewCardDialog
         open={newCardOpen}
-        accounts={initialAccounts}
+        accounts={accounts}
         existingCards={cards}
         onClose={() => setNewCardOpen(false)}
         onCreate={createCard}
@@ -328,7 +341,7 @@ export default function CartoesView() {
         open={Boolean(paymentInvoiceId)}
         invoice={selectedInvoice}
         defaultAccountId={selectedCard?.paymentAccountId ?? ""}
-        accounts={initialAccounts}
+        accounts={accounts}
         onClose={() => setPaymentInvoiceId("")}
         onPay={payInvoice}
       />

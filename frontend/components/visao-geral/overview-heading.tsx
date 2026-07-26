@@ -1,9 +1,9 @@
 import { WalletIcon } from "@/components/shared/icons";
 import { overviewContent } from "@/content/visao-geral";
-import { overviewData } from "@/data/visao-geral";
+import type { FinancialOverviewData } from "@/lib/use-financial-overview";
 import { formatCurrency } from "@/lib/formatters";
 
-export function OverviewHeading() {
+export function OverviewHeading({ data }: { data: FinancialOverviewData }) {
   return (
     <section className="overview-heading">
       <div>
@@ -18,10 +18,10 @@ export function OverviewHeading() {
         </span>
         <div>
           <span>{overviewContent.availableBalance.label}</span>
-          <strong>{formatCurrency(overviewData.availableAfterCommitments)}</strong>
+          <strong>{formatCurrency(data.availableAfterCommitments)}</strong>
         </div>
         <small>
-          {overviewContent.availableBalance.periodPrefix} {overviewData.currentMonth}
+          {overviewContent.availableBalance.periodPrefix} {data.currentMonth}
         </small>
       </article>
     </section>

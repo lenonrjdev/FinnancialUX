@@ -1,10 +1,10 @@
 import { BillsIcon } from "@/components/shared/icons";
 import { OverviewIcon } from "@/components/visao-geral/overview-icon";
 import { overviewContent } from "@/content/visao-geral";
-import { overviewData } from "@/data/visao-geral";
+import type { FinancialOverviewData } from "@/lib/use-financial-overview";
 import { formatCurrency, formatSignedCurrency } from "@/lib/formatters";
 
-export function FinancialLists() {
+export function FinancialLists({ data }: { data: FinancialOverviewData }) {
   return (
     <section className="overview-lists-grid">
       <article className="finance-card list-card">
@@ -19,7 +19,10 @@ export function FinancialLists() {
         </header>
 
         <div className="item-list">
-          {overviewData.bills.map((bill) => (
+          {data.bills.length === 0 ? (
+            <div className="overview-empty-state">Nenhuma conta a pagar cadastrada.</div>
+          ) : null}
+          {data.bills.map((bill) => (
             <div className="list-item bill-item" key={bill.id}>
               <span className="list-icon" aria-hidden="true"><BillsIcon /></span>
               <div className="list-copy">
@@ -47,7 +50,10 @@ export function FinancialLists() {
         </header>
 
         <div className="item-list">
-          {overviewData.transactions.map((transaction) => (
+          {data.transactions.length === 0 ? (
+            <div className="overview-empty-state">Nenhum lançamento registrado.</div>
+          ) : null}
+          {data.transactions.map((transaction) => (
             <div className="list-item transaction-item" key={transaction.id}>
               <span className="list-icon" aria-hidden="true">
                 <OverviewIcon name={transaction.icon} />

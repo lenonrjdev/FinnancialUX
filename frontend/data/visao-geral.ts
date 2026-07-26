@@ -1,125 +1,26 @@
-import type {
-  OverviewIconName,
-  SummaryCardId,
-  SummaryTone,
-  TransactionKind,
-} from "@/types/overview";
+import type { OverviewIconName, SummaryCardId, SummaryTone, TransactionKind } from "@/types/overview";
 
 export const overviewData = {
-  currentMonth: "julho",
-  availableAfterCommitments: 1770,
+  currentMonth: "",
+  availableAfterCommitments: 0,
   summaryCards: {
-    balance: {
-      value: 8430,
-      helper: "Em todas as contas",
-      trend: "+ R$ 1.240,00 no mês",
-      tone: "positive",
-    },
-    income: {
-      value: 6800,
-      helper: "4 recebimentos",
-      trend: "+8,4% em relação a junho",
-      tone: "positive",
-    },
-    expenses: {
-      value: 4250,
-      helper: "28 lançamentos",
-      trend: "62,5% das receitas",
-      tone: "neutral",
-    },
-    pending: {
-      value: 780,
-      helper: "3 vencimentos próximos",
-      trend: "Próxima conta em 2 dias",
-      tone: "warning",
-    },
-  } satisfies Record<
-    SummaryCardId,
-    {
-      value: number;
-      helper: string;
-      trend: string;
-      tone: SummaryTone;
-    }
-  >,
-  cashFlowSummary: {
-    income: 6800,
-    expense: 4250,
-    result: 2550,
-  },
-  cashFlowChart: [
-    { month: "Fev", income: 58, expense: 45 },
-    { month: "Mar", income: 72, expense: 52 },
-    { month: "Abr", income: 64, expense: 49 },
-    { month: "Mai", income: 82, expense: 61 },
-    { month: "Jun", income: 76, expense: 57 },
-    { month: "Jul", income: 90, expense: 56 },
-  ],
+    balance: { value: 0, helper: "Nenhuma conta cadastrada", trend: "", tone: "neutral" },
+    income: { value: 0, helper: "Nenhuma receita registrada", trend: "", tone: "neutral" },
+    expenses: { value: 0, helper: "Nenhuma despesa registrada", trend: "", tone: "neutral" },
+    pending: { value: 0, helper: "Nenhuma conta pendente", trend: "", tone: "neutral" },
+  } satisfies Record<SummaryCardId, { value: number; helper: string; trend: string; tone: SummaryTone }>,
+  cashFlowSummary: { income: 0, expense: 0, result: 0 },
+  cashFlowChart: [] as Array<{ month: string; income: number; expense: number }>,
   monthlyPanel: {
-    balance: 2550,
-    retainedPercentage: 37.5,
-    budgetUsed: 4250,
-    budgetUsedPercentage: 68,
-    budgetAvailable: 2000,
-    goal: {
-      name: "Reserva de emergência",
-      current: 1500,
-      target: 20000,
-      percentage: 7.5,
-    },
+    balance: 0,
+    retainedPercentage: 0,
+    budgetUsed: 0,
+    budgetUsedPercentage: 0,
+    budgetAvailable: 0,
+    goal: { name: "Nenhuma meta cadastrada", current: 0, target: 0, percentage: 0 },
   },
-  bills: [
-    {
-      id: "internet-residencial",
-      title: "Internet residencial",
-      date: "27 jul",
-      value: 119.9,
-      status: "Em 2 dias",
-    },
-    {
-      id: "cartao-principal",
-      title: "Cartão principal",
-      date: "30 jul",
-      value: 420.1,
-      status: "Em 5 dias",
-    },
-    {
-      id: "energia-eletrica",
-      title: "Energia elétrica",
-      date: "02 ago",
-      value: 240,
-      status: "Em 8 dias",
-    },
-  ],
-  transactions: [
-    {
-      id: "mercado-central",
-      title: "Mercado Central",
-      category: "Alimentação",
-      date: "Hoje, 10:42",
-      value: -248.9,
-      icon: "shopping",
-      kind: "expense",
-    },
-    {
-      id: "recebimento-servico",
-      title: "Recebimento de serviço",
-      category: "Serviços",
-      date: "Ontem, 16:15",
-      value: 1500,
-      icon: "income",
-      kind: "income",
-    },
-    {
-      id: "fatura-cartao",
-      title: "Fatura do cartão",
-      category: "Cartão de crédito",
-      date: "23 jul, 09:30",
-      value: -680,
-      icon: "credit-card",
-      kind: "expense",
-    },
-  ] satisfies Array<{
+  bills: [] as Array<{ id: string; title: string; date: string; value: number; status: string }>,
+  transactions: [] as Array<{
     id: string;
     title: string;
     category: string;

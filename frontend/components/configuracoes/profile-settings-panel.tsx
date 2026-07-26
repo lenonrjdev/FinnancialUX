@@ -23,11 +23,11 @@ export function ProfileSettingsPanel({
 
       <div className="profile-settings-layout">
         <aside className="profile-identity-card">
-          <span className="profile-large-avatar">{createInitials(value.name) || "LA"}</span>
-          <strong>{value.name || "Lenon Alexandre"}</strong>
+          <span className="profile-large-avatar">{createInitials(value.name) || "U"}</span>
+          <strong>{value.name || "Usuário"}</strong>
           <small>{value.email}</small>
           <dl>
-            <div><dt>{settingsContent.profile.initials}</dt><dd>{createInitials(value.name) || "LA"}</dd></div>
+            <div><dt>{settingsContent.profile.initials}</dt><dd>{createInitials(value.name) || "U"}</dd></div>
             <div><dt>{settingsContent.profile.timeZone}</dt><dd>Brasília</dd></div>
           </dl>
         </aside>

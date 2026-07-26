@@ -1,4 +1,4 @@
-import { buildFullBackup, downloadTextFile } from "@/lib/data-tools";
+import { downloadTextFile } from "@/lib/data-tools";
 import type {
   ActivityLogEntry,
   AppearanceMode,
@@ -9,69 +9,13 @@ import type {
   SecuritySettings,
 } from "@/types/configuracoes";
 
-const storageKeys = {
-  profile: "finance-profile-settings",
-  preferences: "finance-financial-preferences",
-  notifications: "finance-notification-settings",
-  security: "finance-security-settings",
-  backups: "finance-backup-settings",
-} as const;
-
-function readStoredValue<T>(key: string, fallback: T): T {
-  if (typeof window === "undefined") return fallback;
-  try {
-    const value = window.localStorage.getItem(key);
-    return value ? { ...fallback, ...JSON.parse(value) } : fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-function writeStoredValue<T>(key: string, value: T, eventName?: string): void {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(key, JSON.stringify(value));
-  if (eventName) window.dispatchEvent(new CustomEvent(eventName, { detail: value }));
-}
-
-export function getStoredProfile(fallback: ProfileSettings): ProfileSettings {
-  return readStoredValue(storageKeys.profile, fallback);
-}
-
-export function persistProfile(value: ProfileSettings): void {
-  writeStoredValue(storageKeys.profile, value, "finance-profile-change");
-}
-
-export function getStoredFinancialPreferences(fallback: FinancialPreferences): FinancialPreferences {
-  return readStoredValue(storageKeys.preferences, fallback);
-}
+const APPEARANCE_STORAGE_KEY = "finance-dashboard-appearance";
 
 export function persistFinancialPreferences(value: FinancialPreferences): void {
-  writeStoredValue(storageKeys.preferences, value, "finance-preferences-change");
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("finance-preferences-change", { detail: value }));
+  }
   applyAppearance(value.appearance);
-}
-
-export function getStoredNotificationSettings(fallback: NotificationSettings): NotificationSettings {
-  return readStoredValue(storageKeys.notifications, fallback);
-}
-
-export function persistNotificationSettings(value: NotificationSettings): void {
-  writeStoredValue(storageKeys.notifications, value);
-}
-
-export function getStoredSecuritySettings(fallback: SecuritySettings): SecuritySettings {
-  return readStoredValue(storageKeys.security, fallback);
-}
-
-export function persistSecuritySettings(value: SecuritySettings): void {
-  writeStoredValue(storageKeys.security, value);
-}
-
-export function getStoredBackupSettings(fallback: BackupSettings): BackupSettings {
-  return readStoredValue(storageKeys.backups, fallback);
-}
-
-export function persistBackupSettings(value: BackupSettings): void {
-  writeStoredValue(storageKeys.backups, value);
 }
 
 export function applyAppearance(mode: AppearanceMode): void {
@@ -80,6 +24,12 @@ export function applyAppearance(mode: AppearanceMode): void {
   const resolved = mode === "system" ? (systemDark ? "dark" : "light") : mode;
   document.documentElement.dataset.theme = resolved;
   document.documentElement.dataset.appearancePreference = mode;
+
+  try {
+    window.localStorage.setItem(APPEARANCE_STORAGE_KEY, mode);
+  } catch {
+    // A preferência continua persistida pelo backend; o cache local é apenas visual.
+  }
 }
 
 export function cycleAppearance(current: AppearanceMode): AppearanceMode {
@@ -113,9 +63,8 @@ export function createSettingsBackup(
   backupSettings: BackupSettings,
 ) {
   return {
-    ...buildFullBackup(),
     generatedAt: new Date().toISOString(),
-    version: "fase-14-demo",
+    version: "fase-15.2-postgresql",
     account: {
       profile,
       preferences,

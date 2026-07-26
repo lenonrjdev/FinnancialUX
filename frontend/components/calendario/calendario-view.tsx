@@ -10,6 +10,7 @@ import { MonthCalendar } from "@/components/calendario/month-calendar";
 import { MonthProjection } from "@/components/calendario/month-projection";
 import { NewCalendarEventDialog } from "@/components/calendario/new-calendar-event-dialog";
 import { CheckIcon } from "@/components/shared/icons";
+import { useFinanceDataState } from "@/components/providers/finance-data-provider";
 import { calendarContent } from "@/content/calendario";
 import { calendarReferenceDate, initialCalendarEvents } from "@/data/calendario";
 import { initialAccounts } from "@/data/contas";
@@ -45,7 +46,7 @@ function isOutflow(event: FinancialCalendarEvent): boolean {
 }
 
 export default function CalendarioView() {
-  const [events, setEvents] = useState<FinancialCalendarEvent[]>(initialCalendarEvents);
+  const [events, setEvents] = useFinanceDataState<FinancialCalendarEvent[]>("calendar-events", initialCalendarEvents);
   const [monthKey, setMonthKey] = useState(getMonthKey(calendarReferenceDate));
   const [selectedDate, setSelectedDate] = useState(calendarReferenceDate);
   const [filters, setFilters] = useState<CalendarFilters>(initialFilters);
@@ -53,7 +54,7 @@ export default function CalendarioView() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
-  const accounts = initialAccounts;
+  const [accounts] = useFinanceDataState("accounts", initialAccounts);
 
   const monthEvents = useMemo(
     () => events.filter((event) => event.date.startsWith(monthKey)),

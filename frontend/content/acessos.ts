@@ -78,6 +78,7 @@ export const accessContent = {
     pending: "Pendente",
     accepted: "Aceito",
     expired: "Expirado",
+    revoked: "Cancelado",
     resend: "Reenviar",
     cancel: "Cancelar",
     empty: "Não existem convites para este espaço.",

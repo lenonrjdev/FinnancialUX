@@ -1,17 +1,17 @@
 import { MoreIcon } from "@/components/shared/icons";
 import { OverviewIcon } from "@/components/visao-geral/overview-icon";
 import { overviewContent } from "@/content/visao-geral";
-import { overviewData } from "@/data/visao-geral";
+import type { FinancialOverviewData } from "@/lib/use-financial-overview";
 import { formatCurrency } from "@/lib/formatters";
 
-export function SummaryCards() {
+export function SummaryCards({ data }: { data: FinancialOverviewData }) {
   return (
     <section
       className="summary-grid"
       aria-label={overviewContent.summary.sectionAriaLabel}
     >
       {overviewContent.summary.cards.map((card) => {
-        const data = overviewData.summaryCards[card.id];
+        const cardData = data.summaryCards[card.id];
 
         return (
           <article className="summary-card" key={card.id}>
@@ -28,10 +28,10 @@ export function SummaryCards() {
               </button>
             </div>
             <span className="summary-label">{card.label}</span>
-            <strong>{formatCurrency(data.value)}</strong>
+            <strong>{formatCurrency(cardData.value)}</strong>
             <div className="summary-footer">
-              <span>{data.helper}</span>
-              <small className={`summary-trend ${data.tone}`}>{data.trend}</small>
+              <span>{cardData.helper}</span>
+              <small className={`summary-trend ${cardData.tone}`}>{cardData.trend}</small>
             </div>
           </article>
         );

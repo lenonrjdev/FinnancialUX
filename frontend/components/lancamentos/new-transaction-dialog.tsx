@@ -8,7 +8,7 @@ import {
   TransactionsIcon,
 } from "@/components/shared/icons";
 import { transactionsContent } from "@/content/lancamentos";
-import { accountOptions } from "@/data/contas";
+import { getReferenceDate } from "@/lib/reference-date";
 import type {
   NewTransactionInput,
   TransactionStatus,
@@ -34,29 +34,33 @@ type TransactionFormState = {
   note: string;
 };
 
-const initialForm: TransactionFormState = {
-  type: "expense" as TransactionType,
-  description: "",
-  amount: "",
-  date: "2026-07-25",
-  category: transactionsContent.options.categories.expense[0],
-  account: accountOptions[0],
-  destinationAccount: accountOptions[1],
-  paymentMethod: transactionsContent.options.paymentMethods[0],
-  status: "completed" as TransactionStatus,
-  note: "",
-};
+function createInitialForm(accounts: string[]): TransactionFormState {
+  return {
+    type: "expense",
+    description: "",
+    amount: "",
+    date: getReferenceDate(),
+    category: transactionsContent.options.categories.expense[0],
+    account: accounts[0] ?? "",
+    destinationAccount: accounts[1] ?? "",
+    paymentMethod: transactionsContent.options.paymentMethods[0],
+    status: "completed",
+    note: "",
+  };
+}
 
 export function NewTransactionDialog({
   open,
+  accounts,
   onClose,
   onCreate,
 }: {
   open: boolean;
+  accounts: string[];
   onClose: () => void;
   onCreate: (transaction: NewTransactionInput) => void;
 }) {
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState<TransactionFormState>(() => createInitialForm(accounts));
   const [error, setError] = useState("");
 
   const categoryOptions = useMemo(
@@ -66,6 +70,15 @@ export function NewTransactionDialog({
 
   useEffect(() => {
     if (!open) return;
+
+    setForm((current) => ({
+      ...current,
+      date: current.date || getReferenceDate(),
+      account: accounts.includes(current.account) ? current.account : accounts[0] ?? "",
+      destinationAccount: accounts.includes(current.destinationAccount)
+        ? current.destinationAccount
+        : accounts[1] ?? accounts[0] ?? "",
+    }));
 
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -78,7 +91,7 @@ export function NewTransactionDialog({
       document.body.style.overflow = "";
       window.removeEventListener("keydown", closeOnEscape);
     };
-  }, [onClose, open]);
+  }, [accounts, onClose, open]);
 
   if (!open) return null;
 
@@ -96,6 +109,11 @@ export function NewTransactionDialog({
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const amount = Number(form.amount.replace(",", "."));
+
+    if (accounts.length === 0) {
+      setError("Cadastre uma conta antes de criar um lançamento.");
+      return;
+    }
 
     if (!form.description.trim() || !form.date || !form.category || !form.account) {
       setError(transactionsContent.validation.required);
@@ -126,7 +144,7 @@ export function NewTransactionDialog({
       note: form.note.trim() || undefined,
     });
 
-    setForm(initialForm);
+    setForm(createInitialForm(accounts));
     setError("");
     onClose();
   }
@@ -243,7 +261,8 @@ export function NewTransactionDialog({
                 value={form.account}
                 onChange={(event) => setForm({ ...form, account: event.target.value })}
               >
-                {accountOptions.map((account) => (
+                {accounts.length === 0 ? <option value="">Cadastre uma conta primeiro</option> : null}
+                {accounts.map((account) => (
                   <option value={account} key={account}>
                     {account}
                   </option>
@@ -260,7 +279,8 @@ export function NewTransactionDialog({
                     setForm({ ...form, destinationAccount: event.target.value })
                   }
                 >
-                  {accountOptions.map((account) => (
+                  {accounts.length === 0 ? <option value="">Cadastre uma conta primeiro</option> : null}
+                  {accounts.map((account) => (
                     <option value={account} key={account}>
                       {account}
                     </option>

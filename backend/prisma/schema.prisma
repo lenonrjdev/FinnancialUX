@@ -1,13 +1,212 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+}
+
+enum WorkspaceType {
+  PERSONAL
+  SHARED
+}
+
+enum WorkspaceRole {
+  OWNER
+  EDITOR
+  VIEWER
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  REVOKED
+}
+
+enum AppearanceMode {
+  SYSTEM
+  LIGHT
+  DARK
+}
+
+model User {
+  id                String               @id @default(uuid()) @db.Uuid
+  name              String               @db.VarChar(120)
+  email             String               @unique @db.VarChar(190)
+  phone             String?              @db.VarChar(30)
+  passwordHash      String               @map("password_hash")
+  status            UserStatus           @default(ACTIVE)
+  locale            String               @default("pt-BR") @db.VarChar(16)
+  timezone          String               @default("America/Sao_Paulo") @db.VarChar(64)
+  emailVerifiedAt   DateTime?             @map("email_verified_at") @db.Timestamptz(3)
+  lastLoginAt       DateTime?             @map("last_login_at") @db.Timestamptz(3)
+  createdAt         DateTime              @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime              @updatedAt @map("updated_at") @db.Timestamptz(3)
+  ownedWorkspaces   Workspace[]           @relation("WorkspaceOwner")
+  memberships       WorkspaceMember[]
+  sessions          UserSession[]
+  resetTokens       PasswordResetToken[]
+  preferences       UserPreferences?
+  sentInvitations   WorkspaceInvitation[] @relation("InvitationSender")
+  acceptedInvites   WorkspaceInvitation[] @relation("InvitationAcceptor")
+  auditLogs         AuditLog[]
+
+  @@map("users")
+}
+
+model UserSession {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String    @map("user_id") @db.Uuid
+  refreshTokenHash String    @map("refresh_token_hash") @db.VarChar(64)
+  userAgent        String?   @map("user_agent") @db.VarChar(500)
+  ipAddress        String?   @map("ip_address") @db.VarChar(64)
+  expiresAt        DateTime  @map("expires_at") @db.Timestamptz(3)
+  revokedAt        DateTime? @map("revoked_at") @db.Timestamptz(3)
+  lastUsedAt       DateTime  @default(now()) @map("last_used_at") @db.Timestamptz(3)
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt])
+  @@index([expiresAt])
+  @@map("user_sessions")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  tokenHash String    @unique @map("token_hash") @db.VarChar(64)
+  expiresAt DateTime  @map("expires_at") @db.Timestamptz(3)
+  usedAt    DateTime? @map("used_at") @db.Timestamptz(3)
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+  @@map("password_reset_tokens")
+}
+
+model Workspace {
+  id                       String                @id @default(uuid()) @db.Uuid
+  ownerUserId              String                @map("owner_user_id") @db.Uuid
+  name                     String                @db.VarChar(120)
+  slug                     String                @unique @db.VarChar(150)
+  description              String?               @db.VarChar(500)
+  type                     WorkspaceType         @default(PERSONAL)
+  currency                 String                @default("BRL") @db.Char(3)
+  locale                   String                @default("pt-BR") @db.VarChar(16)
+  timezone                 String                @default("America/Sao_Paulo") @db.VarChar(64)
+  financialMonthStartsOn   Int                   @default(1) @map("financial_month_starts_on") @db.SmallInt
+  archivedAt               DateTime?             @map("archived_at") @db.Timestamptz(3)
+  createdAt                DateTime              @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt                DateTime              @updatedAt @map("updated_at") @db.Timestamptz(3)
+  owner                    User                  @relation("WorkspaceOwner", fields: [ownerUserId], references: [id], onDelete: Restrict)
+  members                  WorkspaceMember[]
+  invitations              WorkspaceInvitation[]
+  auditLogs                AuditLog[]
+  dataDocuments            WorkspaceDataDocument[]
+
+  @@index([ownerUserId])
+  @@index([archivedAt])
+  @@map("workspaces")
+}
+
+model WorkspaceDataDocument {
+  id          String    @id @default(uuid()) @db.Uuid
+  workspaceId String    @map("workspace_id") @db.Uuid
+  module      String    @db.VarChar(64)
+  data        Json
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, module])
+  @@index([workspaceId, updatedAt(sort: Desc)])
+  @@map("workspace_data_documents")
+}
+
+model WorkspaceMember {
+  id           String        @id @default(uuid()) @db.Uuid
+  workspaceId  String        @map("workspace_id") @db.Uuid
+  userId       String        @map("user_id") @db.Uuid
+  role         WorkspaceRole @default(VIEWER)
+  joinedAt     DateTime      @default(now()) @map("joined_at") @db.Timestamptz(3)
+  lastAccessAt DateTime?     @map("last_access_at") @db.Timestamptz(3)
+  workspace    Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+  @@index([userId, role])
+  @@map("workspace_members")
+}
+
+model WorkspaceInvitation {
+  id               String           @id @default(uuid()) @db.Uuid
+  workspaceId      String           @map("workspace_id") @db.Uuid
+  email            String           @db.VarChar(190)
+  role             WorkspaceRole
+  tokenHash        String           @unique @map("token_hash") @db.VarChar(64)
+  status           InvitationStatus @default(PENDING)
+  invitedByUserId  String           @map("invited_by_user_id") @db.Uuid
+  acceptedByUserId String?          @map("accepted_by_user_id") @db.Uuid
+  expiresAt        DateTime         @map("expires_at") @db.Timestamptz(3)
+  acceptedAt       DateTime?        @map("accepted_at") @db.Timestamptz(3)
+  createdAt        DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  workspace        Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  invitedBy        User             @relation("InvitationSender", fields: [invitedByUserId], references: [id], onDelete: Restrict)
+  acceptedBy       User?            @relation("InvitationAcceptor", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([workspaceId, status])
+  @@index([email, status])
+  @@map("workspace_invitations")
+}
+
+model UserPreferences {
+  id                         String         @id @default(uuid()) @db.Uuid
+  userId                     String         @unique @map("user_id") @db.Uuid
+  appearance                 AppearanceMode @default(SYSTEM)
+  defaultWorkspaceId         String?        @map("default_workspace_id") @db.Uuid
+  defaultAccountId           String?        @map("default_account_id") @db.Uuid
+  hideBalancesOnOpen         Boolean        @default(false) @map("hide_balances_on_open")
+  compactLargeValues         Boolean        @default(false) @map("compact_large_values")
+  notifyUpcomingBills        Boolean        @default(true) @map("notify_upcoming_bills")
+  notifyExpectedIncome       Boolean        @default(true) @map("notify_expected_income")
+  notifyBudgetAlerts         Boolean        @default(true) @map("notify_budget_alerts")
+  notifyLowBalance           Boolean        @default(true) @map("notify_low_balance")
+  notifyWeeklySummary        Boolean        @default(true) @map("notify_weekly_summary")
+  notifyMonthlyClosing       Boolean        @default(true) @map("notify_monthly_closing")
+  notifySecurityAlerts       Boolean        @default(true) @map("notify_security_alerts")
+  billReminderDays           Int            @default(3) @map("bill_reminder_days") @db.SmallInt
+  lowBalanceThreshold        Decimal        @default(500) @map("low_balance_threshold") @db.Decimal(14, 2)
+  createdAt                  DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt                  DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+  user                       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+model AuditLog {
+  id          String     @id @default(uuid()) @db.Uuid
+  workspaceId String?    @map("workspace_id") @db.Uuid
+  userId      String?    @map("user_id") @db.Uuid
+  action      String     @db.VarChar(100)
+  entity      String     @db.VarChar(100)
+  entityId    String?    @map("entity_id") @db.VarChar(100)
+  metadata    Json?
+  ipAddress   String?    @map("ip_address") @db.VarChar(64)
+  userAgent   String?    @map("user_agent") @db.VarChar(500)
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
+  user        User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([workspaceId, createdAt(sort: Desc)])
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([entity, entityId])
+  @@map("audit_logs")
 }

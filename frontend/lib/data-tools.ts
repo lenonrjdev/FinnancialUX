@@ -1,13 +1,13 @@
 import { dataToolsContent } from "@/content/dados-e-automacoes";
-import { initialSubscriptions, initialSubscriptionCharges } from "@/data/assinaturas";
-import { initialCreditCards, initialCardInvoices, initialCardPurchases } from "@/data/cartoes";
-import { initialPayables } from "@/data/contas-a-pagar";
-import { initialAccounts } from "@/data/contas";
-import { initialDebts, initialDebtPayments } from "@/data/dividas";
-import { transactionsData } from "@/data/lancamentos";
-import { initialGoals, initialGoalContributions } from "@/data/metas";
-import { initialCategories, initialMonthlyBudgets } from "@/data/orcamentos";
-import { initialReceivables } from "@/data/recebimentos";
+import type { PersonalSubscription, SubscriptionCharge } from "@/types/assinaturas";
+import type { CardInvoice, CardPurchase, CreditCard } from "@/types/cartoes";
+import type { Payable } from "@/types/contas-a-pagar";
+import type { FinancialAccount } from "@/types/contas";
+import type { DebtPayment, FinancialDebt } from "@/types/dividas";
+import type { FinancialTransaction } from "@/types/lancamentos";
+import type { FinancialGoal, GoalContribution } from "@/types/metas";
+import type { FinancialCategory, MonthlyBudget } from "@/types/orcamentos";
+import type { Receivable } from "@/types/recebimentos";
 import type {
   AutomationRule,
   CsvField,
@@ -20,6 +20,24 @@ import type {
   RawImportRecord,
   RuleTestResult,
 } from "@/types/dados-e-automacoes";
+
+export type FinancialExportData = {
+  transactions: FinancialTransaction[];
+  accounts: FinancialAccount[];
+  cards: CreditCard[];
+  cardInvoices: CardInvoice[];
+  cardPurchases: CardPurchase[];
+  payables: Payable[];
+  receivables: Receivable[];
+  categories: FinancialCategory[];
+  monthlyBudgets: MonthlyBudget[];
+  goals: FinancialGoal[];
+  goalContributions: GoalContribution[];
+  debts: FinancialDebt[];
+  debtPayments: DebtPayment[];
+  subscriptions: PersonalSubscription[];
+  subscriptionCharges: SubscriptionCharge[];
+};
 
 function splitDelimitedLine(line: string, separator: string): string[] {
   const values: string[] = [];
@@ -156,20 +174,20 @@ export function applyAutomationRules(row: ImportTransactionRow, rules: Automatio
   };
 }
 
-function isKnownDuplicate(row: Pick<ImportTransactionRow, "date" | "description" | "amount">): boolean {
+function isKnownDuplicate(row: Pick<ImportTransactionRow, "date" | "description" | "amount">, existingTransactions: FinancialTransaction[]): boolean {
   const description = normalizeHeader(row.description);
-  return transactionsData.some((transaction) =>
+  return existingTransactions.some((transaction) =>
     transaction.date === row.date
     && normalizeHeader(transaction.description) === description
     && Math.abs(transaction.amount - Math.abs(row.amount)) < 0.01);
 }
 
-export function reviewImportRow(row: ImportTransactionRow): ImportTransactionRow {
+export function reviewImportRow(row: ImportTransactionRow, existingTransactions: FinancialTransaction[] = []): ImportTransactionRow {
   const issues: string[] = [];
   if (!row.date) issues.push(dataToolsContent.preview.issues.missingDate);
   if (!row.description.trim()) issues.push(dataToolsContent.preview.issues.missingDescription);
   if (!row.amount) issues.push(dataToolsContent.preview.issues.zeroAmount);
-  const duplicate = isKnownDuplicate(row);
+  const duplicate = isKnownDuplicate(row, existingTransactions);
   if (duplicate) issues.push(dataToolsContent.preview.issues.duplicate);
   return {
     ...row,
@@ -179,7 +197,7 @@ export function reviewImportRow(row: ImportTransactionRow): ImportTransactionRow
   };
 }
 
-export function buildImportRows(records: RawImportRecord[], mapping: CsvMapping, rules: AutomationRule[]): ImportTransactionRow[] {
+export function buildImportRows(records: RawImportRecord[], mapping: CsvMapping, rules: AutomationRule[], existingTransactions: FinancialTransaction[] = []): ImportTransactionRow[] {
   return records.map((record, index) => {
     const rawAmount = parseMoney(valueByField(record, mapping, "amount"));
     const date = normalizeDate(valueByField(record, mapping, "date"));
@@ -199,13 +217,13 @@ export function buildImportRows(records: RawImportRecord[], mapping: CsvMapping,
       original: record,
     };
     const automated = applyAutomationRules(initial, rules);
-    return reviewImportRow(automated);
+    return reviewImportRow(automated, existingTransactions);
   });
 }
 
-export function testAutomationRules(rules: AutomationRule[], importedRows: ImportTransactionRow[] = []): RuleTestResult[] {
+export function testAutomationRules(rules: AutomationRule[], importedRows: ImportTransactionRow[] = [], existingTransactions: FinancialTransaction[] = []): RuleTestResult[] {
   const examples = [
-    ...transactionsData.map((transaction) => ({
+    ...existingTransactions.map((transaction) => ({
       description: transaction.description,
       category: transaction.category,
       account: transaction.account,
@@ -226,68 +244,68 @@ function inDateRange(value: string | undefined, startDate: string, endDate: stri
   return true;
 }
 
-export function buildExportTable(dataset: Exclude<ExportDataset, "full-backup">, startDate = "", endDate = ""): ExportTable {
+export function buildExportTable(dataset: Exclude<ExportDataset, "full-backup">, startDate: string, endDate: string, data: FinancialExportData): ExportTable {
   const headers = dataToolsContent.export.headers[dataset];
   if (dataset === "transactions") {
     return {
       headers,
       fileBase: "lancamentos-financeiros",
-      rows: transactionsData.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => [item.id, item.date, item.description, item.category, item.account, item.destinationAccount ?? "", item.paymentMethod, item.type, item.status, item.amount, item.note ?? ""]),
+      rows: data.transactions.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => [item.id, item.date, item.description, item.category, item.account, item.destinationAccount ?? "", item.paymentMethod, item.type, item.status, item.amount, item.note ?? ""]),
     };
   }
   if (dataset === "accounts") {
-    return { headers, fileBase: "contas-e-carteiras", rows: initialAccounts.map((item) => [item.id, item.name, item.institution, item.type, item.group, item.balance, item.projectedBalance, Boolean(item.isPrimary), item.includeInTotal, item.createdAt]) };
+    return { headers, fileBase: "contas-e-carteiras", rows: data.accounts.map((item) => [item.id, item.name, item.institution, item.type, item.group, item.balance, item.projectedBalance, Boolean(item.isPrimary), item.includeInTotal, item.createdAt]) };
   }
   if (dataset === "cards") {
-    const cardNames = Object.fromEntries(initialCreditCards.map((card) => [card.id, `${card.name} •••• ${card.lastFourDigits}`]));
-    const cardRows = initialCreditCards.map((item) => ["Cartão", item.id, item.name, item.institution, "", item.createdAt, item.status, item.limit, `Limite utilizado: ${item.usedLimit}`]);
-    const invoiceRows = initialCardInvoices.filter((item) => inDateRange(item.dueDate, startDate, endDate)).map((item) => ["Fatura", item.id, cardNames[item.cardId] ?? item.cardId, "", item.referenceLabel, item.dueDate, item.status, item.amount, `Fechamento: ${item.closingDate}`]);
-    const purchaseRows = initialCardPurchases.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => ["Compra", item.id, cardNames[item.cardId] ?? item.cardId, "", `${item.currentInstallment}/${item.installments}`, item.date, "registrada", item.totalAmount, item.description]);
+    const cardNames = Object.fromEntries(data.cards.map((card) => [card.id, `${card.name} •••• ${card.lastFourDigits}`]));
+    const cardRows = data.cards.map((item) => ["Cartão", item.id, item.name, item.institution, "", item.createdAt, item.status, item.limit, `Limite utilizado: ${item.usedLimit}`]);
+    const invoiceRows = data.cardInvoices.filter((item) => inDateRange(item.dueDate, startDate, endDate)).map((item) => ["Fatura", item.id, cardNames[item.cardId] ?? item.cardId, "", item.referenceLabel, item.dueDate, item.status, item.amount, `Fechamento: ${item.closingDate}`]);
+    const purchaseRows = data.cardPurchases.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => ["Compra", item.id, cardNames[item.cardId] ?? item.cardId, "", `${item.currentInstallment}/${item.installments}`, item.date, "registrada", item.totalAmount, item.description]);
     return { headers, fileBase: "cartoes-faturas-compras", rows: [...cardRows, ...invoiceRows, ...purchaseRows] };
   }
   if (dataset === "payables") {
-    return { headers, fileBase: "contas-a-pagar", rows: initialPayables.filter((item) => inDateRange(item.dueDate, startDate, endDate)).map((item) => [item.id, item.dueDate, item.description, item.category, item.accountId, item.status, item.recurrence, item.amount, item.paidAmount, item.notes ?? ""]) };
+    return { headers, fileBase: "contas-a-pagar", rows: data.payables.filter((item) => inDateRange(item.dueDate, startDate, endDate)).map((item) => [item.id, item.dueDate, item.description, item.category, item.accountId, item.status, item.recurrence, item.amount, item.paidAmount, item.notes ?? ""]) };
   }
   if (dataset === "receivables") {
-    return { headers, fileBase: "recebimentos", rows: initialReceivables.filter((item) => inDateRange(item.expectedDate, startDate, endDate)).map((item) => [item.id, item.expectedDate, item.description, item.source, item.payer ?? "", item.category, item.accountId, item.status, item.recurrence, item.amount, item.receivedAmount, item.notes ?? ""]) };
+    return { headers, fileBase: "recebimentos", rows: data.receivables.filter((item) => inDateRange(item.expectedDate, startDate, endDate)).map((item) => [item.id, item.expectedDate, item.description, item.source, item.payer ?? "", item.category, item.accountId, item.status, item.recurrence, item.amount, item.receivedAmount, item.notes ?? ""]) };
   }
   if (dataset === "budgets") {
-    const categoryRows = initialCategories.map((item) => ["Categoria", item.id, item.name, item.type, "", "", "", item.active, item.description]);
-    const categoryNames = Object.fromEntries(initialCategories.map((item) => [item.id, item.name]));
-    const budgetRows = initialMonthlyBudgets.map((item) => ["Orçamento", item.id, categoryNames[item.categoryId] ?? item.categoryId, "expense", item.month, item.limit, item.alertThreshold, true, ""]);
+    const categoryRows = data.categories.map((item) => ["Categoria", item.id, item.name, item.type, "", "", "", item.active, item.description]);
+    const categoryNames = Object.fromEntries(data.categories.map((item) => [item.id, item.name]));
+    const budgetRows = data.monthlyBudgets.map((item) => ["Orçamento", item.id, categoryNames[item.categoryId] ?? item.categoryId, "expense", item.month, item.limit, item.alertThreshold, true, ""]);
     return { headers, fileBase: "categorias-e-orcamentos", rows: [...categoryRows, ...budgetRows] };
   }
   if (dataset === "goals") {
-    const goalNames = Object.fromEntries(initialGoals.map((goal) => [goal.id, goal.name]));
-    const goalRows = initialGoals.filter((item) => inDateRange(item.targetDate, startDate, endDate)).map((item) => ["Meta", item.id, item.name, item.kind, item.category, item.accountId, item.targetDate, item.status, item.targetAmount, item.currentAmount, item.monthlyContribution, item.description]);
-    const contributionRows = initialGoalContributions.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => ["Movimentação", item.id, goalNames[item.goalId] ?? item.goalId, item.type, "", item.accountId, item.date, "concluída", item.amount, "", "", item.note]);
+    const goalNames = Object.fromEntries(data.goals.map((goal) => [goal.id, goal.name]));
+    const goalRows = data.goals.filter((item) => inDateRange(item.targetDate, startDate, endDate)).map((item) => ["Meta", item.id, item.name, item.kind, item.category, item.accountId, item.targetDate, item.status, item.targetAmount, item.currentAmount, item.monthlyContribution, item.description]);
+    const contributionRows = data.goalContributions.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => ["Movimentação", item.id, goalNames[item.goalId] ?? item.goalId, item.type, "", item.accountId, item.date, "concluída", item.amount, "", "", item.note]);
     return { headers, fileBase: "metas-e-reservas", rows: [...goalRows, ...contributionRows] };
   }
   if (dataset === "debts") {
-    const debtNames = Object.fromEntries(initialDebts.map((debt) => [debt.id, debt.name]));
-    const debtRows = initialDebts.filter((item) => inDateRange(item.nextDueDate, startDate, endDate)).map((item) => ["Dívida", item.id, item.name, item.creditor, item.type, item.accountId, item.nextDueDate, item.status, item.originalAmount, item.currentBalance, item.annualInterestRate, item.installmentAmount, item.notes]);
-    const paymentRows = initialDebtPayments.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => ["Pagamento", item.id, debtNames[item.debtId] ?? item.debtId, "", "", item.accountId, item.date, "pago", item.amount, item.principal, item.interest, "", item.note]);
+    const debtNames = Object.fromEntries(data.debts.map((debt) => [debt.id, debt.name]));
+    const debtRows = data.debts.filter((item) => inDateRange(item.nextDueDate, startDate, endDate)).map((item) => ["Dívida", item.id, item.name, item.creditor, item.type, item.accountId, item.nextDueDate, item.status, item.originalAmount, item.currentBalance, item.annualInterestRate, item.installmentAmount, item.notes]);
+    const paymentRows = data.debtPayments.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => ["Pagamento", item.id, debtNames[item.debtId] ?? item.debtId, "", "", item.accountId, item.date, "pago", item.amount, item.principal, item.interest, "", item.note]);
     return { headers, fileBase: "dividas-e-pagamentos", rows: [...debtRows, ...paymentRows] };
   }
-  const subscriptionNames = Object.fromEntries(initialSubscriptions.map((item) => [item.id, item.name]));
-  const subscriptionRows = initialSubscriptions.filter((item) => inDateRange(item.nextChargeDate, startDate, endDate)).map((item) => ["Assinatura", item.id, item.name, item.provider, item.category, item.accountId, item.nextChargeDate, item.status, item.billingCycle, item.amount, item.notes]);
-  const chargeRows = initialSubscriptionCharges.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => ["Cobrança", item.id, subscriptionNames[item.subscriptionId] ?? item.subscriptionId, "", "", item.accountId, item.date, item.status, "", item.amount, item.note]);
+  const subscriptionNames = Object.fromEntries(data.subscriptions.map((item) => [item.id, item.name]));
+  const subscriptionRows = data.subscriptions.filter((item) => inDateRange(item.nextChargeDate, startDate, endDate)).map((item) => ["Assinatura", item.id, item.name, item.provider, item.category, item.accountId, item.nextChargeDate, item.status, item.billingCycle, item.amount, item.notes]);
+  const chargeRows = data.subscriptionCharges.filter((item) => inDateRange(item.date, startDate, endDate)).map((item) => ["Cobrança", item.id, subscriptionNames[item.subscriptionId] ?? item.subscriptionId, "", "", item.accountId, item.date, item.status, "", item.amount, item.note]);
   return { headers, fileBase: "assinaturas-e-cobrancas", rows: [...subscriptionRows, ...chargeRows] };
 }
 
-export function buildFullBackup() {
+export function buildFullBackup(data: FinancialExportData) {
   return {
     generatedAt: new Date().toISOString(),
-    version: "fase-12-demo",
-    transactions: transactionsData,
-    accounts: initialAccounts,
-    cards: { cards: initialCreditCards, invoices: initialCardInvoices, purchases: initialCardPurchases },
-    payables: initialPayables,
-    receivables: initialReceivables,
-    budgets: { categories: initialCategories, monthlyBudgets: initialMonthlyBudgets },
-    goals: { goals: initialGoals, contributions: initialGoalContributions },
-    debts: { debts: initialDebts, payments: initialDebtPayments },
-    subscriptions: { subscriptions: initialSubscriptions, charges: initialSubscriptionCharges },
+    version: "fase-15.2-postgresql",
+    transactions: data.transactions,
+    accounts: data.accounts,
+    cards: { cards: data.cards, invoices: data.cardInvoices, purchases: data.cardPurchases },
+    payables: data.payables,
+    receivables: data.receivables,
+    budgets: { categories: data.categories, monthlyBudgets: data.monthlyBudgets },
+    goals: { goals: data.goals, contributions: data.goalContributions },
+    debts: { debts: data.debts, payments: data.debtPayments },
+    subscriptions: { subscriptions: data.subscriptions, charges: data.subscriptionCharges },
   };
 }
 

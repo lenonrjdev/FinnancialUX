@@ -1,21 +1,21 @@
 import { ArrowDownIcon } from "@/components/shared/icons";
 import { overviewContent } from "@/content/visao-geral";
-import { overviewData } from "@/data/visao-geral";
+import type { FinancialOverviewData } from "@/lib/use-financial-overview";
 import { formatCurrency } from "@/lib/formatters";
 
-export function CashFlowCard() {
+export function CashFlowCard({ data }: { data: FinancialOverviewData }) {
   const summaries = [
     {
       label: overviewContent.cashFlow.summaryLabels.income,
-      value: overviewData.cashFlowSummary.income,
+      value: data.cashFlowSummary.income,
     },
     {
       label: overviewContent.cashFlow.summaryLabels.expense,
-      value: overviewData.cashFlowSummary.expense,
+      value: data.cashFlowSummary.expense,
     },
     {
       label: overviewContent.cashFlow.summaryLabels.result,
-      value: overviewData.cashFlowSummary.result,
+      value: data.cashFlowSummary.result,
     },
   ];
 
@@ -48,7 +48,7 @@ export function CashFlowCard() {
           <span />
           <span />
         </div>
-        {overviewData.cashFlowChart.map((item) => (
+        {data.cashFlowChart.map((item) => (
           <div className="chart-column" key={item.month}>
             <div className="chart-bars">
               <span
