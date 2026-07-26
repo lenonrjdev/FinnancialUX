@@ -8,6 +8,7 @@ import {
   CalendarIcon,
   CreditCardIcon,
   DashboardIcon,
+  DatabaseIcon,
   DebtIcon,
   IncomeIcon,
   ReportsIcon,
@@ -30,6 +31,7 @@ const icons: Record<NavigationIconName, ComponentType<IconProps>> = {
   debt: DebtIcon,
   subscription: SubscriptionIcon,
   reports: ReportsIcon,
+  "data-tools": DatabaseIcon,
   settings: SettingsIcon,
 };
 

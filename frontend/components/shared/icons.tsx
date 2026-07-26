@@ -184,3 +184,27 @@ export function HomeIcon(props: IconProps) {
 export function BookIcon(props: IconProps) {
   return <svg {...base} {...props}><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v18H7.5A3.5 3.5 0 0 0 4 23V5.5Z"/><path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H13v18h3.5A3.5 3.5 0 0 1 20 23V5.5Z"/></svg>;
 }
+
+export function UploadIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M12 21V7"/><path d="m7 12 5-5 5 5"/><path d="M5 3h14"/></svg>;
+}
+
+export function DatabaseIcon(props: IconProps) {
+  return <svg {...base} {...props}><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>;
+}
+
+export function FileIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M6 3h8l4 4v14H6V3Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>;
+}
+
+export function MagicWandIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="m4 20 10-10"/><path d="m12 8 4 4"/><path d="M18 3v4M16 5h4M6 4v3M4.5 5.5h3M19 15v3M17.5 16.5h3"/></svg>;
+}
+
+export function WarningIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5M12 17h.01"/></svg>;
+}
+
+export function EditIcon(props: IconProps) {
+  return <svg {...base} {...props}><path d="M4 20h4l11-11-4-4L4 16v4Z"/><path d="m13 7 4 4"/></svg>;
+}

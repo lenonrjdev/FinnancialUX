@@ -15,6 +15,7 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - Fase 9: Dívidas, empréstimos e parcelamentos
 - Fase 10: Assinaturas e cobranças recorrentes
 - Fase 11: Relatórios e projeção financeira
+- Fase 12: Importação, exportação avançada e regras automáticas
 
 ## Rotas implementadas
 
@@ -30,25 +31,24 @@ Projeto em Next.js, React, TypeScript e Tailwind CSS com organização por módu
 - `/dividas`
 - `/assinaturas`
 - `/relatorios`
+- `/dados-e-automacoes`
 
 A rota de configurações continua preparada como página temporária até sua respectiva fase.
 
-## Fase 11
+## Fase 12
 
-O módulo de relatórios inclui:
+O módulo de dados e automações inclui:
 
-- comparação de receitas, despesas e resultado por período;
-- evolução mensal do fluxo financeiro;
-- despesas agrupadas por categoria;
-- comparação entre orçamento planejado e realizado;
-- distribuição do saldo entre contas;
-- leitura simplificada da saúde financeira;
-- projeção dos próximos 12 meses;
-- cenários conservador, realista e otimista;
-- composição dos compromissos mensais;
-- alertas de saldo e meses deficitários;
-- exportação dos dados em CSV;
-- visualização preparada para impressão.
+- importação de extratos CSV e OFX diretamente no navegador;
+- detecção automática de colunas e ajuste manual do mapeamento;
+- prévia editável antes da confirmação;
+- identificação de linhas incompletas e possíveis duplicidades;
+- aplicação de regras automáticas durante a importação;
+- exportação em CSV ou JSON por módulo e período;
+- backup completo dos dados demonstrativos;
+- criação, edição, pausa, exclusão e ordenação de regras;
+- teste das regras nos lançamentos atuais;
+- histórico das importações realizadas na sessão.
 
 ## Organização
 

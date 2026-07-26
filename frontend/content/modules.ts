@@ -43,6 +43,10 @@ export const moduleContent = {
     title: "Relatórios",
     description: "Analise receitas, despesas, categorias e evolução do saldo.",
   },
+  "dados-e-automacoes": {
+    title: "Dados e automações",
+    description: "Importe extratos, exporte informações e crie regras automáticas.",
+  },
   configuracoes: {
     title: "Configurações",
     description: "Personalize categorias, preferências, privacidade e dados da conta.",

@@ -11,6 +11,7 @@ export type NavigationIconName =
   | "debt"
   | "subscription"
   | "reports"
+  | "data-tools"
   | "settings";
 
 export type NavigationItem = {
